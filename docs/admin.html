@@ -403,6 +403,29 @@
 
   </div>
 
+  <!-- ─────────────────────── SYNC PCLOUD ─────────────────────── -->
+  <div class="card">
+    <div class="card-title">⟳ Synchroniser depuis pCloud</div>
+    <p class="help" style="margin-bottom:14px">
+      Scanne <code>{pcloud-path}/GPX/</code> et <code>{pcloud-path}/Sources/</code> pour détecter
+      les fichiers déposés directement depuis iPhone ou un autre appareil (sans passer par les zones de dépôt).
+      Les nouveaux GPX sont parsés et committés sur GitHub ; les nouvelles photos sont ajoutées à
+      <code>photos.json</code> et le workflow GitHub Actions est déclenché pour générer les vignettes et les 2500 px.
+    </p>
+    <div class="btn-row">
+      <button class="btn primary" id="btn-sync-pcloud">⟳ Scanner et synchroniser</button>
+    </div>
+    <div class="progress-wrap" id="sync-progress-wrap" style="display:none;margin-top:10px">
+      <div class="progress-bar" id="sync-progress-bar"></div>
+    </div>
+    <div class="status" id="sync-status" style="margin-top:8px"></div>
+    <div class="stat-row" id="sync-stats" style="display:none;margin-top:10px">
+      <div class="stat"><div class="val" id="stat-sync-gpx">0</div><div class="lbl">GPX traités</div></div>
+      <div class="stat"><div class="val" id="stat-sync-entries">0</div><div class="lbl">Entrées GPS +</div></div>
+      <div class="stat"><div class="val" id="stat-sync-photos">0</div><div class="lbl">Photos nouvelles</div></div>
+    </div>
+  </div>
+
   <!-- ─────────────────────── MAP PREVIEW ─────────────────────── -->
   <div class="card">
     <div class="card-title">Prévisualisation carte</div>
@@ -654,6 +677,13 @@ function buildUrl(filename, type) {
   const name = encodeURIComponent(filename);
   const folder = sub ? `/${encodeURIComponent(sub)}` : '';
   return `${base}/${type}${folder}/${name}`;
+}
+
+// Variante avec subfolder explicite (utilisée par la sync pCloud)
+function buildUrlWith(filename, type, subfolder) {
+  const base = ($('cdn-base').value || '').replace(/\/$/, '');
+  const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
+  return `${base}/${type}${folder}/${encodeURIComponent(filename)}`;
 }
 
 // ── Match photos → travel entries ─────────────────────────────────────
@@ -1102,6 +1132,37 @@ function loadSettings() {
 }
 loadSettings();
 
+// ── Commit photos.json → GitHub ─────────────────────────────────────
+async function commitPhotosJson() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
+  const owner = 'tanais-arts', repo = 'VELOROUTE', path = 'docs/photos.json';
+  const content = JSON.stringify(photoEntries, null, 2);
+  const b64 = btoa(unescape(encodeURIComponent(content)));
+  const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+    headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
+  });
+  const getJ = await getR.json();
+  const sha = Array.isArray(getJ) ? undefined : getJ.sha;
+  const putR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${ghToken}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/vnd.github+json'
+    },
+    body: JSON.stringify({
+      message: `admin: photos.json — ${photoEntries.length} entrées`,
+      content: b64,
+      sha
+    })
+  });
+  if (!putR.ok) {
+    const e = await putR.json().catch(() => ({}));
+    throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
+  }
+}
+
 async function pcloudEnsureFolder(folderPath) {
   const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(folderPath)}&access_token=${pcloudToken}`;
   const r = await fetch(url);
@@ -1165,9 +1226,9 @@ async function uploadToPCloud() {
 }
 
 // ── GitHub Actions trigger ────────────────────────────────────────────────────
-async function triggerGitHubActions() {
-  const ghToken   = $('gh-token').value.trim();
-  const subfolder = $('photo-subfolder').value.trim();
+async function triggerGitHubActions(subfolder) {
+  const ghToken = $('gh-token').value.trim();
+  if (subfolder === undefined) subfolder = $('photo-subfolder').value.trim();
   if (!ghToken) { setStatus('actions-status', 'Token GitHub requis.', 'error'); return; }
 
   setStatus('actions-status', 'Déclenchement du workflow…');
@@ -1198,6 +1259,184 @@ async function triggerGitHubActions() {
 }
 
 // ── Download buttons ──────────────────────────────────────────────────
+
+// ── pCloud Sync helpers ────────────────────────────────────────────────
+async function pcloudListFolder(folderPath) {
+  const url = `${pcloudBase()}/listfolder?path=${encodeURIComponent(folderPath)}&access_token=${pcloudToken}`;
+  const r = await fetch(url);
+  const j = await r.json();
+  if (j.result === 2005 || j.result === 2009) return []; // dossier absent
+  if (j.result !== 0) throw new Error(`listfolder ${folderPath}: ${j.error}`);
+  return j.metadata.contents || [];
+}
+
+async function pcloudGetFileLink(fileId) {
+  const url = `${pcloudBase()}/getfilelink?fileid=${fileId}&access_token=${pcloudToken}&forcedownload=1`;
+  const r = await fetch(url);
+  const j = await r.json();
+  if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
+  return `https://${j.hosts[0]}${j.path}`;
+}
+
+// ── Sync pCloud → GitHub ───────────────────────────────────────────────
+async function syncFromPcloud() {
+  if (!pcloudToken) { setStatus('sync-status', 'Non connecté à pCloud.', 'error'); return; }
+  const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+  if (!base) { setStatus('sync-status', 'Chemin pCloud requis dans ⚙ Réglages.', 'error'); return; }
+
+  const progWrap = $('sync-progress-wrap');
+  const progBar  = $('sync-progress-bar');
+  progWrap.style.display = 'block';
+  progBar.style.width = '0%';
+  $('sync-stats').style.display = 'none';
+
+  let newGpxCount = 0, newEntryCount = 0, newPhotoCount = 0;
+
+  // ── 1. Scan GPX ─────────────────────────────────────────────────────
+  setStatus('sync-status', 'Scan GPX…');
+  let gpxFiles = [];
+  try {
+    const contents = await pcloudListFolder(`${base}/GPX`);
+    gpxFiles = contents.filter(f => !f.isfolder && /\.gpx$/i.test(f.name));
+  } catch (err) { console.warn('GPX folder:', err); }
+
+  for (let i = 0; i < gpxFiles.length; i++) {
+    const gf = gpxFiles[i];
+    setStatus('sync-status', `GPX ${i + 1}/${gpxFiles.length} : ${gf.name}…`);
+    try {
+      const dlUrl = await pcloudGetFileLink(gf.fileid);
+      const resp  = await fetch(dlUrl);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const text   = await resp.text();
+      const raw    = parseGPX(text);
+      const sampled = sampleByMinute(raw);
+      const entries = pointsToTravelEntries(sampled);
+      const fresh   = deduplicateTravel(entries);
+      if (fresh.length) {
+        travelEntries = [...travelEntries, ...fresh].sort((a, b) => entryToMs(a) - entryToMs(b));
+        travelEntries.forEach((e, idx) => e.id = idx + 1);
+        newEntryCount += fresh.length;
+        newGpxCount++;
+      }
+    } catch (err) { console.warn(`GPX sync ${gf.name}:`, err); }
+    progBar.style.width = `${(i + 1) / gpxFiles.length * 30}%`;
+  }
+
+  if (newEntryCount > 0) {
+    setStatus('sync-status', `+${newEntryCount} entrées GPS — commit travel.json…`);
+    try {
+      await autoCommitTravel();
+      if (routeLine) map.removeLayer(routeLine);
+      const latlngs = travelEntries.map(e => [e.lat, e.lon]);
+      routeLine = L.polyline(latlngs, { color: '#f0c060', weight: 3, opacity: 0.8 }).addTo(map);
+      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+    } catch (err) {
+      setStatus('sync-status', `⚠ Commit travel.json : ${err.message}`, 'warn');
+    }
+  }
+  progBar.style.width = '30%';
+
+  // ── 2. Scan Sources (top-level + un niveau de sous-dossiers) ─────────
+  setStatus('sync-status', 'Scan Sources…');
+  const photoFiles = [];
+  try {
+    const top = await pcloudListFolder(`${base}/Sources`);
+    for (const item of top) {
+      if (!item.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(item.name)) {
+        photoFiles.push({ name: item.name, fileid: item.fileid, subfolder: '' });
+      } else if (item.isfolder) {
+        try {
+          const sub = await pcloudListFolder(`${base}/Sources/${item.name}`);
+          sub.forEach(f => {
+            if (!f.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(f.name))
+              photoFiles.push({ name: f.name, fileid: f.fileid, subfolder: item.name });
+          });
+        } catch {}
+      }
+    }
+  } catch (err) { console.warn('Sources scan:', err); }
+  progBar.style.width = '40%';
+
+  const newPhotos = photoFiles.filter(f => !existingPhotoFilenames.has(f.name));
+  const syncEntries = [];
+  const subfoldersSeen = new Set();
+
+  for (let i = 0; i < newPhotos.length; i++) {
+    const pf = newPhotos[i];
+    setStatus('sync-status', `Photo ${i + 1}/${newPhotos.length} : ${pf.name}…`);
+    const isVideo = /\.(mov|mp4|m4v)$/i.test(pf.name);
+    try {
+      if (isVideo) {
+        syncEntries.push({
+          src:      buildUrlWith(pf.name, 'Sources', pf.subfolder),
+          thumb:    buildUrlWith(pf.name.replace(/\.[^.]+$/, '.jpg'), 'Thumbs', pf.subfolder),
+          src_orig: buildUrlWith(pf.name, 'Sources', pf.subfolder),
+          type:     'video',
+          entryIdx: 0,
+          caption:  '',
+        });
+      } else {
+        const dlUrl = await pcloudGetFileLink(pf.fileid);
+        const resp  = await fetch(dlUrl);
+        const buf   = await resp.arrayBuffer();
+        let photoMs = null, captionDate = '', entryIdx = 0;
+        try {
+          const exif = await Exifr.parse(buf, {
+            tiff: true, exif: true, gps: true, iptc: false, jfif: false,
+            reviveValues: true, translateKeys: true, mergeOutput: true,
+          });
+          const dateVal = exif?.DateTimeOriginal || exif?.DateTime || exif?.CreateDate;
+          photoMs = exifDateToMs(dateVal);
+          if (photoMs != null) {
+            const d = new Date(photoMs);
+            captionDate = `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+            entryIdx = nearestEntryIdx(photoMs);
+          }
+        } catch {}
+        syncEntries.push({
+          src:      buildUrlWith(pf.name, 'Photos', pf.subfolder),
+          thumb:    buildUrlWith(pf.name, 'Thumbs', pf.subfolder),
+          src_orig: buildUrlWith(pf.name, 'Sources', pf.subfolder),
+          entryIdx,
+          caption: captionDate,
+        });
+      }
+      existingPhotoFilenames.add(pf.name);
+      if (pf.subfolder) subfoldersSeen.add(pf.subfolder);
+      newPhotoCount++;
+    } catch (err) { console.warn(`Photo sync ${pf.name}:`, err); }
+    progBar.style.width = `${40 + (i + 1) / newPhotos.length * 45}%`;
+  }
+
+  if (syncEntries.length) {
+    photoEntries = [...photoEntries, ...syncEntries];
+    setStatus('sync-status', `Commit photos.json (${newPhotoCount} nouvelles)…`);
+    try { await commitPhotosJson(); } catch (err) {
+      setStatus('sync-status', `⚠ Commit photos.json : ${err.message}`, 'warn');
+    }
+    const triggers = subfoldersSeen.size > 0 ? [...subfoldersSeen] : [''];
+    for (const sf of triggers) {
+      setStatus('actions-status', `Déclenchement Actions${sf ? ' (' + sf + ')' : ''}…`);
+      await triggerGitHubActions(sf);
+    }
+  }
+
+  progBar.style.width = '100%';
+  progWrap.style.display = 'none';
+  $('stat-sync-gpx').textContent     = newGpxCount;
+  $('stat-sync-entries').textContent = newEntryCount;
+  $('stat-sync-photos').textContent  = newPhotoCount;
+  $('sync-stats').style.display = 'flex';
+
+  const total = newGpxCount + newPhotoCount;
+  setStatus('sync-status',
+    total === 0
+      ? '✓ Déjà à jour — aucun nouveau fichier détecté sur pCloud.'
+      : `✓ Sync terminée : +${newGpxCount} GPX (${newEntryCount} pts), +${newPhotoCount} photos`,
+    'ok');
+}
+
+$('btn-sync-pcloud').addEventListener('click', syncFromPcloud);
 
 // ── Wire drop zones ───────────────────────────────────────────────────
 setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
