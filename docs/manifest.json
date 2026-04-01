@@ -1,0 +1,13 @@
+{
+  "name": "VÉLOROUTE",
+  "short_name": "VÉLOROUTE",
+  "description": "Journal de voyage — Japon",
+  "start_url": "/VELOROUTE/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#08121c",
+  "theme_color": "#08121c",
+  "icons": [
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

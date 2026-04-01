@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VÉLOROUTE">
+  <meta name="theme-color" content="#08121c">
+  <link rel="manifest" href="manifest.json">
+  <title>VÉLOROUTE</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── ROTATE OVERLAY ── -->
+  <div id="rotate-overlay">
+    <div id="rotate-content">
+      <div id="rotate-title">VÉLOROUTE</div>
+      <div id="rotate-dates"></div>
+      <div id="rotate-icon">📱</div>
+      <div id="rotate-msg">Tournez votre écran</div>
+      <div id="rotate-sub">ou vivez l'expérience complète sur ordinateur</div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <!-- ── SOUND TOGGLE ── -->
+  <button id="sound-toggle" title="Activer le son" aria-label="Activer/couper le son"></button>
+
+  <!-- ── PHOTO BAR ── -->
+  <div id="photo-bar">
+    <button class="carousel-arrow" id="carousel-prev">&#8249;</button>
+    <div id="photo-carousel"></div>
+    <button class="carousel-arrow" id="carousel-next">&#8249;</button>
+  </div>
+
+  <header id="title-bar">
+    <div id="title-main">VÉLOROUTE</div>
+    <div id="title-sub"></div>
+  </header>
+
+  <!-- ── LIGHTBOX ── -->
+  <div id="lightbox" hidden>
+    <div id="lightbox-backdrop"></div>
+    <button id="lightbox-close">✕</button>
+    <div id="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div id="lb-toolbar">
+      <button id="lightbox-prev">&#10094;</button>
+      <span id="lb-counter" hidden></span>
+      <button id="lb-download" title="Télécharger l'original">&#8681;</button>
+      <button id="lightbox-next">&#10095;</button>
+    </div>
+    <div id="lb-progress"><div id="lb-progress-bar"></div></div>
+  </div>
+
+  <!-- ── TIMELINE ── -->
+  <div id="bottom-bar">
+    <div id="panel-date">
+      <span id="date-day"></span>
+      <span id="date-month"></span>
+      <span id="date-year"></span>
+      <span id="date-time"></span>
+    </div>
+    <div id="mobile-teaser">
+      <div id="teaser-title">VÉLOROUTE</div>
+      <div id="teaser-sub"></div>
+    </div>
+    <div id="timeline-bar">
+      <button id="tl-prev" title="Entrée précédente">&#8249;</button>
+      <span class="tl-edge-label" id="tl-label-start"></span>
+      <div id="timeline-wrap">
+        <div id="timeline-cities-row"></div>
+        <div id="timeline-slider-wrap">
+          <input id="timeline-input" type="range" min="0" max="1" step="1" value="0" autocomplete="off">
+          <div id="timeline-thumb-label"></div>
+        </div>
+      </div>
+      <span class="tl-edge-label" id="tl-label-end"></span>
+      <button id="tl-next" title="Entrée suivante">&#8250;</button>
+    </div>
+  </div>
+
+  <audio id="amb-a" preload="none" loop></audio>
+  <audio id="amb-b" preload="none" loop></audio>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script>
+  <script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
