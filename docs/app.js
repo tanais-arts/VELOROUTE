@@ -21,6 +21,8 @@ const state = {
   entries:        [],
   photos:         [],
   cities:         [],
+  visited:        [],
+  escales:        [],
   activeIdx:      null,
   ringMarker:     null,
   markers:        [],
@@ -383,6 +385,62 @@ const P_DAY = {
   terminator.setStyle({ fillOpacity: 0.85, fillColor: '#001026' });
 })();
 
+// ── Location helpers (lightbox) ─────────────────────────────────────
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function nearestNamedPlace(lat, lon) {
+  const pool = [
+    ...(state.cities  || []),
+    ...(state.visited || []),
+    ...(state.escales || []),
+  ].filter(c => (c.city || c.name) && c.lat != null && c.lon != null)
+   .map(c => ({ name: c.city || c.name, lat: c.lat, lon: c.lon }));
+  if (!pool.length) return null;
+  let best = null, bestD = Infinity;
+  pool.forEach(c => {
+    const d = haversineKm(lat, lon, c.lat, c.lon);
+    if (d < bestD) { bestD = d; best = { name: c.name, km: Math.round(d) }; }
+  });
+  return bestD < 150 ? best : null;
+}
+
+const lbLocCache = {};
+let lbLocReqId = 0;
+
+async function updateLbLocation(item) {
+  const counter = document.getElementById('lb-counter');
+  if (!counter) return;
+  counter.removeAttribute('hidden');
+  if (item.entryIdx == null || !state.entries || !state.entries.length) {
+    counter.textContent = '';
+    return;
+  }
+  const entry = state.entries[item.entryIdx];
+  if (!entry || entry.lat == null || entry.lon == null) { counter.textContent = ''; return; }
+  const { lat, lon } = entry;
+  const key = `${Math.round(lat * 100) / 100},${Math.round(lon * 100) / 100}`;
+  if (lbLocCache[key]) { counter.textContent = `\u{1F4CD} ${lbLocCache[key]}`; return; }
+  const local = nearestNamedPlace(lat, lon);
+  if (local) counter.textContent = `\u{1F4CD} ${local.name}`;
+  const reqId = ++lbLocReqId;
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+    const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+    if (reqId !== lbLocReqId) return;
+    const data = await r.json();
+    const place = data.address?.city || data.address?.town || data.address?.village ||
+                  data.address?.county || (data.display_name || '').split(',')[0].trim();
+    if (place) {
+      lbLocCache[key] = place;
+      if (reqId === lbLocReqId) counter.textContent = `\u{1F4CD} ${place}`;
+    }
+  } catch { /* keep local result */ }
+}
+
 // ── Ring marker ───────────────────────────────────────────────────────
 function showRing(latlng) {
   if (state.ringMarker) map.removeLayer(state.ringMarker);
@@ -417,6 +475,7 @@ function lbShowCurrent() {
   tryNext();
   document.getElementById('lightbox-prev').style.visibility = state.lbIdx > 0 ? '' : 'hidden';
   document.getElementById('lightbox-next').style.visibility = state.lbIdx < state.lbPhotos.length - 1 ? '' : 'hidden';
+  updateLbLocation(item);
   const dlBtn = document.getElementById('lb-download');
   const srcUrl = item.src_orig || (item.src || item.thumb).replace('/Photos/', '/Sources/');
   dlBtn.onclick = () => {
@@ -742,6 +801,8 @@ async function init() {
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
   state.photos  = photos.filter(p => !p.hidden); // hidden photos not shown in carousel
   state.cities  = cities;
+  state.visited = visited;
+  state.escales = escales || [];
 
   const year = entries[0]?.year || new Date().getFullYear();
   travelYear = year;
