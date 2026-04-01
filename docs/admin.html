@@ -1106,6 +1106,13 @@ function pcloudSuccess(j, email) {
   $('btn-logout-header').style.display = 'inline-block';
   $('header-user').textContent = `· ${j.email || email}`;
   setStatus('login-status', '');
+  try {
+    const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
+    _s.pcloudToken  = j.auth;
+    _s.pcloudEmail  = j.email || email;
+    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'eapi';
+    localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
+  } catch {}
   loadExistingData();
 }
 
@@ -1165,6 +1172,11 @@ function pcloudLogout() {
   $('site-header').style.display   = 'none';
   $('main-content').style.display  = 'none';
   setStatus('login-status', '');
+  try {
+    const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
+    delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
+    localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
+  } catch {}
 }
 
 $('btn-pcloud-login-overlay').addEventListener('click', pcloudLogin);
@@ -1192,6 +1204,19 @@ function loadSettings() {
     if (data.ghToken)    $('gh-token').value    = data.ghToken;
     if (data.cdnBase)    $('cdn-base').value    = data.cdnBase;
     if (data.pcloudPath) $('pcloud-path').value = data.pcloudPath;
+    if (data.pcloudToken) {
+      pcloudToken = data.pcloudToken;
+      if (data.pcloudRegion) {
+        const ri = document.querySelector(`input[name="pcloud-region"][value="${data.pcloudRegion}"]`);
+        if (ri) ri.checked = true;
+      }
+      $('login-overlay').style.display = 'none';
+      $('site-header').style.display   = 'flex';
+      $('main-content').style.display  = 'flex';
+      $('btn-logout-header').style.display = 'inline-block';
+      $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
+      loadExistingData();
+    }
   } catch {}
 }
 loadSettings();
