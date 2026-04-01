@@ -497,7 +497,7 @@
 import Exifr from 'https://cdn.jsdelivr.net/npm/exifr@7/dist/full.esm.js';
 
 // ── Constants ────────────────────────────────────────────────────────
-const TZ_OFFSET  = 2; // CEST = UTC+2
+// TZ_OFFSET supprimé — conversion UTC→heure locale via le navigateur (gère DST auto)
 const MONTHS_FR  = ['','janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 
 // ── State ────────────────────────────────────────────────────────────
@@ -565,10 +565,9 @@ function parseGPXTime(raw) {
   if (hasZone) {
     const utcMs = Date.parse(raw);
     if (isNaN(utcMs)) return null;
-    const jstMs = utcMs + TZ_OFFSET * 3600_000;
-    const d = new Date(jstMs);
-    const Y = d.getUTCFullYear(), M = d.getUTCMonth() + 1, D = d.getUTCDate();
-    const h = d.getUTCHours(),    m = d.getUTCMinutes();
+    const d = new Date(utcMs); // navigateur gère DST automatiquement
+    const Y = d.getFullYear(), M = d.getMonth() + 1, D = d.getDate();
+    const h = d.getHours(),    m = d.getMinutes();
     return { year: Y, month: M, day: D, hour: h, minute: m,
              jstMs: Date.UTC(Y, M - 1, D, h, m) };
   } else {
@@ -700,8 +699,9 @@ function exifDateToMs(val) {
   if (!val) return null;
   // exifr can return Date objects (created with Date.UTC internally)
   if (val instanceof Date) {
-    return Date.UTC(val.getUTCFullYear(), val.getUTCMonth(), val.getUTCDate(),
-                    val.getUTCHours(), val.getUTCMinutes(), val.getUTCSeconds());
+    // exifr crée les Date avec new Date(y,m,d,h,...) = heure locale → utiliser getHours() pas getUTCHours()
+    return Date.UTC(val.getFullYear(), val.getMonth(), val.getDate(),
+                    val.getHours(), val.getMinutes(), val.getSeconds());
   }
   // Or a string: "YYYY:MM:DD HH:MM:SS"
   if (typeof val === 'string') {
