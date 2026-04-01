@@ -170,6 +170,32 @@
     }
     @media (max-width: 860px) { #settings-grid { grid-template-columns: 1fr 1fr; } }
 
+    /* ── Manage section ── */
+    .manage-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 16px; }
+    .mtab { background: none; border: none; border-bottom: 2px solid transparent; color: rgba(255,255,255,.4); font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 8px 18px; cursor: pointer; margin-bottom: -1px; transition: color .15s, border-color .15s; }
+    .mtab.active { color: #f0c060; border-bottom-color: #f0c060; }
+    .mtab:hover:not(.active) { color: rgba(255,255,255,.7); }
+    .segment-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 5px; margin-bottom: 4px; border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02); cursor: pointer; transition: background .15s, border-color .15s; }
+    .segment-row:hover    { background: rgba(240,192,96,.05); border-color: rgba(240,192,96,.22); }
+    .segment-row.selected { background: rgba(240,192,96,.09); border-color: rgba(240,192,96,.4); }
+    .segment-row.hidden-seg { opacity: .42; }
+    .seg-check { width: 15px; height: 15px; accent-color: #f0c060; cursor: pointer; flex-shrink: 0; }
+    .seg-info  { flex: 1; min-width: 0; }
+    .seg-date  { font-size: .8rem; color: #f0c060; font-weight: 600; }
+    .seg-meta  { font-size: .68rem; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .seg-dist  { font-size: .72rem; color: rgba(255,255,255,.6); font-weight: 600; margin-left: auto; white-space: nowrap; padding: 0 8px; }
+    .seg-focus { background: none; border: 1px solid rgba(255,255,255,.14); border-radius: 3px; color: rgba(255,255,255,.4); font-size: .72rem; padding: 3px 9px; cursor: pointer; flex-shrink: 0; }
+    .seg-focus:hover { border-color: #f0c060; color: #f0c060; }
+    .manage-photo-grid { display: flex; flex-wrap: wrap; gap: 6px; max-height: 360px; overflow-y: auto; margin-top: 10px; }
+    .manage-thumb-wrap { position: relative; width: 80px; height: 60px; border-radius: 3px; overflow: hidden; cursor: pointer; }
+    .manage-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .manage-thumb-wrap input[type=checkbox] { position: absolute; top: 4px; left: 4px; width: 14px; height: 14px; accent-color: #f0c060; cursor: pointer; }
+    .manage-thumb-wrap.selected::after { content: ''; position: absolute; inset: 0; border: 2px solid #f0c060; border-radius: 3px; pointer-events: none; }
+    .manage-thumb-wrap.hidden-ph { outline: 1px dashed rgba(255,200,60,.35); }
+    .manage-thumb-wrap.hidden-ph img { opacity: .25; filter: grayscale(.5); }
+    .btn.danger { border-color: rgba(255,100,80,.5); color: rgba(255,140,120,.9); }
+    .btn.danger:hover:not(:disabled) { background: rgba(255,70,50,.15); border-color: rgba(255,100,80,.8); }
+
     /* Leaflet override */
     .leaflet-control-attribution { font-size: 9px !important; opacity: 0.4; }
 
@@ -424,6 +450,36 @@
       <div class="stat"><div class="val" id="stat-sync-entries">0</div><div class="lbl">Entrées GPS +</div></div>
       <div class="stat"><div class="val" id="stat-sync-photos">0</div><div class="lbl">Photos nouvelles</div></div>
     </div>
+  </div>
+
+  <!-- ─────────────────────── GÉRER ────────────────────────────── -->
+  <div class="card" id="manage-card" style="display:none">
+    <div class="card-title">⚑ Gérer les données — masquer ou supprimer</div>
+    <div class="manage-tabs">
+      <button class="mtab active" id="mtab-segments">Segments GPS <span id="mtab-seg-count" style="opacity:.55">(0)</span></button>
+      <button class="mtab" id="mtab-photos">Photos &amp; vidéos <span id="mtab-ph-count" style="opacity:.55">(0)</span></button>
+    </div>
+    <!-- Segments panel -->
+    <div id="manage-segments-panel">
+      <div class="btn-row" style="margin-bottom:12px">
+        <button class="btn" id="btn-seg-select-all">Tout sélectionner</button>
+        <button class="btn" id="btn-seg-hide">👁 Masquer</button>
+        <button class="btn danger" id="btn-seg-delete">🗑 Supprimer</button>
+        <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="seg-selection-count"></span>
+      </div>
+      <div id="segments-list" style="max-height:420px;overflow-y:auto;padding-right:4px"></div>
+    </div>
+    <!-- Photos panel -->
+    <div id="manage-photos-panel" style="display:none">
+      <div class="btn-row" style="margin-bottom:12px">
+        <button class="btn" id="btn-ph-select-all">Tout sélectionner</button>
+        <button class="btn" id="btn-ph-hide">👁 Masquer</button>
+        <button class="btn danger" id="btn-ph-delete">🗑 Supprimer</button>
+        <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
+      </div>
+      <div class="manage-photo-grid" id="manage-photo-grid"></div>
+    </div>
+    <div class="status" id="manage-status" style="margin-top:12px"></div>
   </div>
 
   <!-- ─────────────────────── MAP PREVIEW ─────────────────────── -->
@@ -958,6 +1014,7 @@ async function loadExistingData() {
       ? `✓ ${tCount} entrées GPS · ${pCount} photos · ${vCount} villes`
       : 'Aucune donnée existante — premier lancement',
     tCount + pCount + vCount > 0 ? 'ok' : '');
+  refreshManagePanel();
 }
 
 // ── Déduplication ─────────────────────────────────────────────────────
@@ -1137,7 +1194,9 @@ async function commitPhotosJson() {
   const ghToken = $('gh-token').value.trim();
   if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
   const owner = 'tanais-arts', repo = 'VELOROUTE', path = 'docs/photos.json';
-  const content = JSON.stringify(photoEntries, null, 2);
+  // Strip _selected ephemeral flag before committing
+  const toCommit = photoEntries.map(({ _selected, ...rest }) => rest);
+  const content = JSON.stringify(toCommit, null, 2);
   const b64 = btoa(unescape(encodeURIComponent(content)));
   const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
     headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
@@ -1152,7 +1211,7 @@ async function commitPhotosJson() {
       Accept: 'application/vnd.github+json'
     },
     body: JSON.stringify({
-      message: `admin: photos.json — ${photoEntries.length} entrées`,
+      message: `admin: photos.json — ${toCommit.length} entrées`,
       content: b64,
       sha
     })
@@ -1437,6 +1496,199 @@ async function syncFromPcloud() {
 }
 
 $('btn-sync-pcloud').addEventListener('click', syncFromPcloud);
+
+// ── Gestion des données (segments GPS + photos) ───────────────────────
+let manageSegments = [];  // segments calculés depuis travelEntries
+let highlightPoly  = null;
+
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2
+    + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+function computeSegments() {
+  const GAP_MS = 60 * 60 * 1000;
+  const segs = [];
+  if (!travelEntries.length) { manageSegments = []; return; }
+  let start = 0;
+  for (let i = 1; i <= travelEntries.length; i++) {
+    const isLast = i === travelEntries.length;
+    const gap = isLast ? Infinity : entryToMs(travelEntries[i]) - entryToMs(travelEntries[i - 1]);
+    if (gap > GAP_MS || isLast) {
+      const seg = travelEntries.slice(start, i);
+      let dist = 0;
+      for (let j = 1; j < seg.length; j++)
+        dist += haversineKm(seg[j-1].lat, seg[j-1].lon, seg[j].lat, seg[j].lon);
+      segs.push({
+        idx: segs.length, startGlobal: start, endGlobal: i - 1,
+        entries: seg, latlngs: seg.map(e => [e.lat, e.lon]),
+        first: seg[0], last: seg[seg.length - 1],
+        dist: Math.round(dist), selected: false,
+        hidden: seg.every(e => e.hidden === true),
+      });
+      start = i;
+    }
+  }
+  manageSegments = segs;
+}
+
+function fmtSegDate(e) {
+  const m = MONTHS_FR[e.month] || '';
+  return `${String(e.day).padStart(2, '0')} ${m} ${e.year}`;
+}
+function fmtSegTime(e) {
+  return `${String(e.hour).padStart(2, '0')}:${String(e.minute).padStart(2, '0')}`;
+}
+
+function focusSegment(seg) {
+  if (highlightPoly) { map.removeLayer(highlightPoly); highlightPoly = null; }
+  if (!seg.latlngs.length) return;
+  map.fitBounds(L.latLngBounds(seg.latlngs), { padding: [50, 50], maxZoom: 14 });
+  highlightPoly = L.polyline(seg.latlngs, { color: '#ff5533', weight: 5, opacity: 0.85 }).addTo(map);
+  setTimeout(() => { if (highlightPoly) { map.removeLayer(highlightPoly); highlightPoly = null; } }, 3000);
+}
+
+function updateSegSelCount() {
+  const n = manageSegments.filter(s => s.selected).length;
+  $('seg-selection-count').textContent = n > 0 ? `${n} sélectionné${n > 1 ? 's' : ''}` : '';
+}
+
+function renderSegments() {
+  computeSegments();
+  const list = $('segments-list');
+  list.innerHTML = '';
+  $('mtab-seg-count').textContent = `(${manageSegments.length})`;
+  if (!manageSegments.length) {
+    list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:12px 0">Aucun tracé GPS chargé.</p>';
+    return;
+  }
+  manageSegments.forEach(seg => {
+    const row = document.createElement('div');
+    row.className = 'segment-row'
+      + (seg.selected ? ' selected' : '') + (seg.hidden ? ' hidden-seg' : '');
+    const sameDay = fmtSegDate(seg.first) === fmtSegDate(seg.last);
+    row.innerHTML = `
+      <input type="checkbox" class="seg-check"${seg.selected ? ' checked' : ''}>
+      <div class="seg-info">
+        <div class="seg-date">${seg.hidden ? '🚫 ' : ''}${fmtSegDate(seg.first)}${sameDay ? '' : ` → ${fmtSegDate(seg.last)}`}</div>
+        <div class="seg-meta">${fmtSegTime(seg.first)} → ${fmtSegTime(seg.last)} · ${seg.entries.length} pts${seg.hidden ? ' · <span style="color:rgba(255,200,60,.65)">masqué</span>' : ''}</div>
+      </div>
+      <span class="seg-dist">~${seg.dist} km</span>
+      <button class="seg-focus" title="Centrer la carte sur ce segment">⌖</button>
+    `;
+    const cb = row.querySelector('.seg-check');
+    cb.addEventListener('change', e => { e.stopPropagation(); seg.selected = cb.checked; row.classList.toggle('selected', seg.selected); updateSegSelCount(); });
+    row.querySelector('.seg-focus').addEventListener('click', e => { e.stopPropagation(); focusSegment(seg); });
+    row.addEventListener('click', e => {
+      if (e.target === cb || e.target.classList.contains('seg-focus')) return;
+      seg.selected = !seg.selected; cb.checked = seg.selected;
+      row.classList.toggle('selected', seg.selected); updateSegSelCount(); focusSegment(seg);
+    });
+    list.appendChild(row);
+  });
+  updateSegSelCount();
+}
+
+$('btn-seg-select-all').addEventListener('click', () => {
+  const allSel = manageSegments.length > 0 && manageSegments.every(s => s.selected);
+  manageSegments.forEach(s => s.selected = !allSel); renderSegments();
+});
+$('btn-seg-hide').addEventListener('click', async () => {
+  const sel = manageSegments.filter(s => s.selected);
+  if (!sel.length) { setStatus('manage-status', 'Aucun segment sélectionné.', 'warn'); return; }
+  const allHidden = sel.every(s => s.hidden);
+  sel.forEach(seg => { seg.entries.forEach(e => { if (allHidden) delete e.hidden; else e.hidden = true; }); seg.hidden = !allHidden; });
+  setStatus('manage-status', 'Commit travel.json…');
+  try { await autoCommitTravel(); renderSegments(); setStatus('manage-status', `✓ ${sel.length} segment(s) ${allHidden ? 'démasqué(s)' : 'masqué(s)'}`, 'ok'); }
+  catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+});
+$('btn-seg-delete').addEventListener('click', async () => {
+  const sel = manageSegments.filter(s => s.selected);
+  if (!sel.length) { setStatus('manage-status', 'Aucun segment sélectionné.', 'warn'); return; }
+  const total = sel.reduce((acc, s) => acc + s.entries.length, 0);
+  if (!confirm(`Supprimer définitivement ${sel.length} segment(s) — ${total} points GPS ?\n\n⚠ Les positions des photos liées peuvent être affectées.`)) return;
+  const toRemove = new Set(); sel.forEach(s => s.entries.forEach(e => toRemove.add(e)));
+  travelEntries = travelEntries.filter(e => !toRemove.has(e)); travelEntries.forEach((e, i) => e.id = i + 1);
+  if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
+  if (travelEntries.length > 1) {
+    routeLine = L.polyline(travelEntries.map(e => [e.lat, e.lon]), { color: '#f0c060', weight: 3, opacity: 0.8 }).addTo(map);
+    map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+  }
+  setStatus('manage-status', 'Commit travel.json…');
+  try { await autoCommitTravel(); renderSegments(); setStatus('manage-status', `✓ ${total} points supprimés — ${travelEntries.length} restants`, 'ok'); }
+  catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+});
+
+// ── Gestion photos ────────────────────────────────────────────────────
+function updateManagePhotoWrap(wrap, p) {
+  wrap.classList.toggle('selected', !!p._selected); wrap.classList.toggle('hidden-ph', !!p.hidden);
+}
+function updatePhSelCount() {
+  const n = photoEntries.filter(p => p._selected).length;
+  $('ph-selection-count').textContent = n > 0 ? `${n} sélectionnée${n > 1 ? 's' : ''}` : '';
+}
+function renderManagePhotos() {
+  const grid = $('manage-photo-grid'); grid.innerHTML = '';
+  $('mtab-ph-count').textContent = `(${photoEntries.length})`;
+  if (!photoEntries.length) { grid.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune photo dans photos.json.</p>'; return; }
+  photoEntries.forEach(p => {
+    const wrap = document.createElement('div');
+    wrap.className = 'manage-thumb-wrap' + (p._selected ? ' selected' : '') + (p.hidden ? ' hidden-ph' : '');
+    wrap.title = `${decodeURIComponent(p.src.split('/').pop())}${p.hidden ? ' · masqué' : ''}`;
+    const img = document.createElement('img'); img.src = p.thumb || p.src; img.alt = ''; img.loading = 'lazy';
+    if (p.type === 'video') img.style.outline = '1.5px solid rgba(240,192,96,.5)';
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!p._selected;
+    cb.addEventListener('change', e => { e.stopPropagation(); p._selected = cb.checked; updateManagePhotoWrap(wrap, p); updatePhSelCount(); });
+    wrap.appendChild(img); wrap.appendChild(cb);
+    wrap.addEventListener('click', e => { if (e.target === cb) return; p._selected = !p._selected; cb.checked = !!p._selected; updateManagePhotoWrap(wrap, p); updatePhSelCount(); });
+    grid.appendChild(wrap);
+  });
+  updatePhSelCount();
+}
+$('btn-ph-select-all').addEventListener('click', () => {
+  const allSel = photoEntries.length > 0 && photoEntries.every(p => p._selected);
+  photoEntries.forEach(p => p._selected = !allSel); renderManagePhotos();
+});
+$('btn-ph-hide').addEventListener('click', async () => {
+  const sel = photoEntries.filter(p => p._selected);
+  if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
+  const allHidden = sel.every(p => p.hidden);
+  sel.forEach(p => { if (allHidden) delete p.hidden; else p.hidden = true; p._selected = false; });
+  setStatus('manage-status', 'Commit photos.json…');
+  try { await commitPhotosJson(); renderManagePhotos(); setStatus('manage-status', `✓ ${sel.length} photo(s) ${allHidden ? 'démasquée(s)' : 'masquée(s)'}`, 'ok'); }
+  catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+});
+$('btn-ph-delete').addEventListener('click', async () => {
+  const sel = photoEntries.filter(p => p._selected);
+  if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
+  if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur pCloud ne sont PAS supprimés.`)) return;
+  sel.forEach(p => { try { existingPhotoFilenames.delete(decodeURIComponent(p.src.split('/').pop())); } catch {} });
+  photoEntries = photoEntries.filter(p => !p._selected);
+  setStatus('manage-status', 'Commit photos.json…');
+  try { await commitPhotosJson(); renderManagePhotos(); setStatus('manage-status', `✓ ${sel.length} photo(s) supprimée(s) — ${photoEntries.length} restante(s)`, 'ok'); }
+  catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+});
+
+// ── Tab switching & refresh panel ─────────────────────────────────────
+function switchManageTab(tab) {
+  $('mtab-segments').classList.toggle('active', tab === 'segments');
+  $('mtab-photos').classList.toggle('active',   tab === 'photos');
+  $('manage-segments-panel').style.display = tab === 'segments' ? 'block' : 'none';
+  $('manage-photos-panel').style.display   = tab === 'photos'   ? 'block' : 'none';
+  if (tab === 'photos') renderManagePhotos();
+}
+function refreshManagePanel() {
+  const card = $('manage-card');
+  if (!travelEntries.length && !photoEntries.length) { card.style.display = 'none'; return; }
+  card.style.display = 'block'; renderSegments();
+  $('mtab-ph-count').textContent = `(${photoEntries.length})`;
+}
+$('mtab-segments').addEventListener('click', () => switchManageTab('segments'));
+$('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
 
 // ── Wire drop zones ───────────────────────────────────────────────────
 setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);

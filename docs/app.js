@@ -739,8 +739,8 @@ async function init() {
     renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
   }, 0);
 
-  state.entries = entries;
-  state.photos  = photos;
+  state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
+  state.photos  = photos.filter(p => !p.hidden); // hidden photos not shown in carousel
   state.cities  = cities;
 
   const year = entries[0]?.year || new Date().getFullYear();
