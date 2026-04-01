@@ -1353,12 +1353,10 @@ async function triggerGitHubActions(subfolder) {
 
 // ── pCloud Sync helpers ────────────────────────────────────────────────
 async function pcloudListFolder(folderPath) {
-  const url = `${pcloudBase()}/listfolder?path=${encodeURIComponent(folderPath)}&access_token=${pcloudToken}`;
-  const r = await fetch(url);
-  const j = await r.json();
+  const j = await pcloudPost('listfolder', { path: folderPath, access_token: pcloudToken });
   console.log(`pcloudListFolder(${folderPath}) → result=${j.result}`, j.error || '');
-  if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; } // dossier absent
-  if (j.result === 1000 || j.result === 2094) { // token expiré
+  if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; }
+  if (j.result === 1000 || j.result === 2094) {
     const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
@@ -1373,9 +1371,7 @@ async function pcloudListFolder(folderPath) {
 }
 
 async function pcloudGetFileLink(fileId) {
-  const url = `${pcloudBase()}/getfilelink?fileid=${fileId}&access_token=${pcloudToken}&forcedownload=1`;
-  const r = await fetch(url);
-  const j = await r.json();
+  const j = await pcloudPost('getfilelink', { fileid: fileId, access_token: pcloudToken, forcedownload: '1' });
   if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
   return `https://${j.hosts[0]}${j.path}`;
 }
