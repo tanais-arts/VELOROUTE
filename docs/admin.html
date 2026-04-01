@@ -285,10 +285,10 @@
       <label>Région serveur</label>
       <div style="display:flex;gap:16px;margin-top:6px">
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="eapi"> Europe
+          <input type="radio" name="pcloud-region" value="eapi" checked> Europe
         </label>
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="api" checked> USA
+          <input type="radio" name="pcloud-region" value="api"> USA
         </label>
       </div>
     </div>
@@ -1111,7 +1111,7 @@ function pcloudSuccess(j, email) {
     const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
     _s.pcloudToken  = j.auth;
     _s.pcloudEmail  = j.email || email;
-    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'api';
+    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'eapi';
     localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
   } catch {}
   loadExistingData();
