@@ -348,9 +348,9 @@
       <div class="card-title"><span class="step-num">1</span> Tracé GPS — fichier GPX</div>
 
       <div class="drop-zone" id="gpx-drop">
-        <input type="file" id="gpx-input" accept=".gpx">
+        <input type="file" id="gpx-input" accept=".gpx" multiple>
         <span class="dz-icon">🗺️</span>
-        Glissez un fichier <strong>.gpx</strong> ici<br>
+        Glissez un ou plusieurs fichiers <strong>.gpx</strong> ici<br>
         <small style="font-size:.7rem;opacity:.7">ou cliquez pour choisir</small>
       </div>
 
@@ -683,14 +683,21 @@ async function uploadGPXToPCloud(file) {
 }
 
 function handleGPX(files) {
-  const file = files[0];
-  setStatus('gpx-status', `Chargement de ${file.name}…`);
-  const reader = new FileReader();
-  reader.onload = e => {
-    processGPXText(e.target.result, file.name);
-    uploadGPXToPCloud(file);
-  };
-  reader.readAsText(file);
+  const list = Array.from(files).filter(f => f.name.toLowerCase().endsWith('.gpx'));
+  if (!list.length) return;
+  setStatus('gpx-status', `Chargement de ${list.length} fichier(s) GPX…`);
+  let done = 0;
+  list.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      processGPXText(e.target.result, file.name);
+      uploadGPXToPCloud(file);
+      done++;
+      if (done === list.length && list.length > 1)
+        setStatus('gpx-status', `✓ ${list.length} fichiers GPX traités`);
+    };
+    reader.readAsText(file);
+  });
 }
 
 // ── EXIF date parsing ─────────────────────────────────────────────────
