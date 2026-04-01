@@ -1352,21 +1352,27 @@ async function triggerGitHubActions(subfolder) {
 // ── Download buttons ──────────────────────────────────────────────────
 
 // ── pCloud Sync helpers ────────────────────────────────────────────────
+function pcloudHandleAuthError(j) {
+  // Détecte tous les cas d'auth invalide pCloud (quel que soit le code)
+  const isAuthErr = j.result === 1000 || j.result === 2094 || j.result === 2000
+    || (j.error && /access_token|log in|invalid.*token/i.test(j.error));
+  if (!isAuthErr) return false;
+  console.warn(`pCloud auth error result=${j.result}:`, j.error);
+  const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+  delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
+  pcloudToken = null;
+  $('login-overlay').style.display = 'flex';
+  $('site-header').style.display   = 'none';
+  $('main-content').style.display  = 'none';
+  return true;
+}
 async function pcloudListFolder(folderPath) {
   const j = await pcloudPost('listfolder', { path: folderPath, access_token: pcloudToken });
   console.log(`pcloudListFolder(${folderPath}) → result=${j.result}`, j.error || '');
   if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; }
-  if (j.result === 1000 || j.result === 2094) {
-    const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-    delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
-    pcloudToken = null;
-    $('login-overlay').style.display = 'flex';
-    $('site-header').style.display   = 'none';
-    $('main-content').style.display  = 'none';
-    throw new Error('Session pCloud expirée — reconnecte-toi.');
-  }
-  if (j.result !== 0) throw new Error(`listfolder ${folderPath}: ${j.error}`);
+  if (pcloudHandleAuthError(j)) throw new Error('Session pCloud expirée — reconnecte-toi.');
+  if (j.result !== 0) throw new Error(`listfolder ${folderPath} (code ${j.result}): ${j.error}`);
   return j.metadata.contents || [];
 }
 
