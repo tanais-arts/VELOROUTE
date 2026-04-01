@@ -695,6 +695,31 @@ body.immersive #sound-toggle { display: none; }
 }
 
 #timeline-slider-wrap { position: relative; }
+
+/* Non-linear segment track */
+#tl-segment-layer {
+  position: absolute; top: 50%; left: 7px; right: 7px;
+  height: 3px; transform: translateY(-50%);
+  pointer-events: none; display: flex; z-index: 1;
+}
+.tl-seg-active {
+  height: 3px;
+  background: var(--tltrack);
+}
+.tl-seg-gap {
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(240,192,96,0.30) 0px,
+    rgba(240,192,96,0.30) 3px,
+    transparent 3px,
+    transparent 8px
+  );
+}
+#timeline-slider-wrap.tl-segmented #timeline-input {
+  background: transparent !important;
+}
+
 #timeline-input {
   -webkit-appearance: none; appearance: none;
   width: 100%; height: 3px; border-radius: 2px;

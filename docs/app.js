@@ -496,7 +496,11 @@ document.getElementById('lightbox-next').addEventListener('click', () => { if (s
 // ── Timeline ───────────────────────────────────────────────────────────
 function updateTimelineThumb(idx) {
   let pct = 0;
-  if (state.entryTimes && state.entryTimes.length > 1) {
+  if (state.segMap) {
+    pct = state.segMap.totalUnits > 1
+      ? indexToVisualUnits(idx, state.segMap) / (state.segMap.totalUnits - 1)
+      : 0;
+  } else if (state.entryTimes && state.entryTimes.length > 1) {
     const t = state.entryTimes[idx];
     const span = state.entryTimeMax - state.entryTimeMin;
     if (span > 0) pct = (t - state.entryTimeMin) / span;
@@ -513,6 +517,9 @@ function updateTimelineThumb(idx) {
 }
 
 function updateTimelineThumbForTime(t) {
+  if (state.segMap) {
+    return updateTimelineThumb(timeToIndex(t));
+  }
   if (!state.entryTimes || state.entryTimes.length < 2) {
     return updateTimelineThumb(0);
   }
@@ -544,7 +551,11 @@ function buildTimelineCities(cities, totalEntries) {
     const cname = (c.name || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
     if (escaleCities.includes(cname)) return;
     let pct = 0;
-    if (state.entryTimes && state.entryTimes.length > 1) {
+    if (state.segMap) {
+      pct = state.segMap.totalUnits > 1
+        ? indexToVisualUnits(c.entryIdx, state.segMap) / (state.segMap.totalUnits - 1) * 100
+        : 0;
+    } else if (state.entryTimes && state.entryTimes.length > 1) {
       const t = state.entryTimes[c.entryIdx];
       const span = state.entryTimeMax - state.entryTimeMin;
       pct = span > 0 ? ((t - state.entryTimeMin) / span) * 100 : (c.entryIdx / (totalEntries - 1)) * 100;
@@ -582,6 +593,73 @@ function buildTimelineCities(cities, totalEntries) {
       tlCitiesRow.appendChild(div);
     });
   }
+}
+
+// ── Non-linear segment timeline ──────────────────────────────────────
+const SEG_GAP_THRESHOLD_MS  = 7 * 24 * 3600 * 1000; // 1 week
+const SEG_GAP_VISUAL_UNITS  = 30;                   // width of a gap in units
+
+function buildSegmentMap(entries, times) {
+  if (!entries || entries.length === 0 || !times || times.length < 2) return null;
+  const segments = [];
+  let segStart = 0;
+  for (let i = 1; i < entries.length; i++) {
+    if (times[i] - times[i - 1] > SEG_GAP_THRESHOLD_MS) {
+      segments.push({ startIdx: segStart, endIdx: i - 1, points: i - segStart, isGap: false });
+      segments.push({ startIdx: i - 1,   endIdx: i,     points: 0,             isGap: true  });
+      segStart = i;
+    }
+  }
+  segments.push({ startIdx: segStart, endIdx: entries.length - 1, points: entries.length - segStart, isGap: false });
+  let cumul = 0;
+  segments.forEach(seg => {
+    seg.cumulStart = cumul;
+    cumul += seg.isGap ? SEG_GAP_VISUAL_UNITS : seg.points;
+    seg.cumulEnd = cumul;
+  });
+  return { segments, totalUnits: cumul };
+}
+
+function indexToVisualUnits(idx, segMap) {
+  for (const seg of segMap.segments) {
+    if (seg.isGap) continue;
+    if (idx >= seg.startIdx && idx <= seg.endIdx)
+      return seg.cumulStart + (idx - seg.startIdx);
+  }
+  return segMap.totalUnits - 1;
+}
+
+function visualUnitsToIndex(units, segMap) {
+  for (const seg of segMap.segments) {
+    if (seg.isGap) {
+      if (units >= seg.cumulStart && units < seg.cumulEnd) return seg.endIdx;
+      continue;
+    }
+    if (units >= seg.cumulStart && units <= seg.cumulEnd)
+      return Math.min(seg.endIdx, seg.startIdx + Math.round(units - seg.cumulStart));
+  }
+  return state.entries.length - 1;
+}
+
+function buildSegmentTrack(segMap) {
+  const wrap = document.getElementById('timeline-slider-wrap');
+  if (!wrap || !segMap) return;
+  wrap.classList.add('tl-segmented');
+  let layer = wrap.querySelector('#tl-segment-layer');
+  if (!layer) {
+    layer = document.createElement('div');
+    layer.id = 'tl-segment-layer';
+    wrap.appendChild(layer);
+  }
+  layer.innerHTML = '';
+  const total = segMap.totalUnits - 1 || 1;
+  segMap.segments.forEach(seg => {
+    const units = seg.isGap ? SEG_GAP_VISUAL_UNITS : seg.points;
+    const div   = document.createElement('div');
+    div.style.width = `${(units / (segMap.totalUnits) * 100).toFixed(3)}%`;
+    div.className   = seg.isGap ? 'tl-seg-gap' : 'tl-seg-active';
+    layer.appendChild(div);
+  });
 }
 
 // ── Carousel ───────────────────────────────────────────────────────────
@@ -1000,7 +1078,14 @@ async function init() {
   }
 
   // ── Timeline setup ──
-  if (state.entryTimes && state.entryTimes.length > 1) {
+  state.segMap = buildSegmentMap(entries, state.entryTimes);
+  if (state.segMap) {
+    buildSegmentTrack(state.segMap);
+    tlInput.min   = 0;
+    tlInput.max   = state.segMap.totalUnits - 1;
+    tlInput.step  = 1;
+    tlInput.value = 0;
+  } else if (state.entryTimes && state.entryTimes.length > 1) {
     tlInput.min   = state.entryTimeMin;
     tlInput.max   = state.entryTimeMax;
     tlInput.step  = 60000;
@@ -1017,7 +1102,9 @@ async function init() {
   const startIdx = photoEntryIndices.length > 0
     ? photoEntryIndices[Math.floor(Math.random() * photoEntryIndices.length)]
     : 0;
-  if (state.entryTimes && state.entryTimes.length > 1) {
+  if (state.segMap) {
+    tlInput.value = indexToVisualUnits(startIdx, state.segMap);
+  } else if (state.entryTimes && state.entryTimes.length > 1) {
     tlInput.value = state.entryTimes[startIdx];
   } else {
     tlInput.value = startIdx;
@@ -1047,7 +1134,11 @@ async function init() {
 
   tlInput.addEventListener('input', () => {
     cancelAutoSlide();
-    if (state.entryTimes && state.entryTimes.length > 1) {
+    if (state.segMap) {
+      const idx = visualUnitsToIndex(Number(tlInput.value), state.segMap);
+      updateTimelineThumb(idx);
+      selectEntry(idx);
+    } else if (state.entryTimes && state.entryTimes.length > 1) {
       const t = Number(tlInput.value);
       previewAtTime(t);
       updateTimelineThumbForTime(t);
