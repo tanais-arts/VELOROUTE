@@ -1356,7 +1356,8 @@ async function pcloudListFolder(folderPath) {
   const url = `${pcloudBase()}/listfolder?path=${encodeURIComponent(folderPath)}&access_token=${pcloudToken}`;
   const r = await fetch(url);
   const j = await r.json();
-  if (j.result === 2005 || j.result === 2009) return []; // dossier absent
+  console.log(`pcloudListFolder(${folderPath}) → result=${j.result}`, j.error || '');
+  if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; } // dossier absent
   if (j.result !== 0) throw new Error(`listfolder ${folderPath}: ${j.error}`);
   return j.metadata.contents || [];
 }
@@ -1388,8 +1389,9 @@ async function syncFromPcloud() {
   let gpxFiles = [];
   try {
     const contents = await pcloudListFolder(`${base}/GPX`);
-    gpxFiles = contents.filter(f => !f.isfolder && /\.gpx$/i.test(f.name));
-  } catch (err) { console.warn('GPX folder:', err); }
+    if (contents === null) { setStatus('sync-status', `⚠ Dossier introuvable : ${base}/GPX — vérifiez le chemin pCloud dans ⚙`, 'warn'); }
+    else { gpxFiles = contents.filter(f => !f.isfolder && /\.gpx$/i.test(f.name)); setStatus('sync-status', `GPX/ : ${gpxFiles.length} fichier(s) trouvé(s)`); }
+  } catch (err) { setStatus('sync-status', `⚠ GPX scan : ${err.message}`, 'warn'); console.warn('GPX folder:', err); }
 
   for (let i = 0; i < gpxFiles.length; i++) {
     const gf = gpxFiles[i];
@@ -1432,20 +1434,25 @@ async function syncFromPcloud() {
   const photoFiles = [];
   try {
     const top = await pcloudListFolder(`${base}/Sources`);
-    for (const item of top) {
-      if (!item.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(item.name)) {
-        photoFiles.push({ name: item.name, fileid: item.fileid, subfolder: '' });
-      } else if (item.isfolder) {
-        try {
-          const sub = await pcloudListFolder(`${base}/Sources/${item.name}`);
-          sub.forEach(f => {
-            if (!f.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(f.name))
-              photoFiles.push({ name: f.name, fileid: f.fileid, subfolder: item.name });
-          });
-        } catch {}
+    if (top === null) {
+      setStatus('sync-status', `⚠ Dossier introuvable : ${base}/Sources — vérifiez le chemin pCloud dans ⚙`, 'warn');
+    } else {
+      setStatus('sync-status', `Sources/ : ${top.length} éléments trouvés`);
+      for (const item of top) {
+        if (!item.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(item.name)) {
+          photoFiles.push({ name: item.name, fileid: item.fileid, subfolder: '' });
+        } else if (item.isfolder) {
+          try {
+            const sub = await pcloudListFolder(`${base}/Sources/${item.name}`);
+            if (sub) sub.forEach(f => {
+              if (!f.isfolder && /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(f.name))
+                photoFiles.push({ name: f.name, fileid: f.fileid, subfolder: item.name });
+            });
+          } catch {}
+        }
       }
     }
-  } catch (err) { console.warn('Sources scan:', err); }
+  } catch (err) { setStatus('sync-status', `⚠ Sources scan : ${err.message}`, 'warn'); console.warn('Sources scan:', err); }
   progBar.style.width = '40%';
 
   const newPhotos = photoFiles.filter(f => !existingPhotoFilenames.has(f.name));
