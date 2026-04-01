@@ -802,9 +802,22 @@ async function init() {
     }
     img.className = 'photo-thumb';
     img.draggable = false;
-    img.addEventListener('click', () => openLightbox(photos, i));
     img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
-    fragment.appendChild(img);
+
+    if (p.type === 'video') {
+      const wrap = document.createElement('div');
+      wrap.className = 'video-thumb-wrap';
+      wrap.addEventListener('click', () => openLightbox(photos, i));
+      const badge = document.createElement('div');
+      badge.className = 'play-badge';
+      badge.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(img);
+      wrap.appendChild(badge);
+      fragment.appendChild(wrap);
+    } else {
+      img.addEventListener('click', () => openLightbox(photos, i));
+      fragment.appendChild(img);
+    }
   });
   if (carousel) {
     carousel.appendChild(fragment);

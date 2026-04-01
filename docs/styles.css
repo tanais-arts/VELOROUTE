@@ -222,6 +222,42 @@ html, body {
 .photo-thumb.active { opacity: 1; outline: 2px solid #f0c060; outline-offset: 2px; }
 .photo-thumb:hover  { opacity: 0.55; }
 
+/* ── Vignette vidéo avec badge PLAY ── */
+.video-thumb-wrap {
+  flex-shrink: 0;
+  position: relative;
+  width: 120px; height: 80px;
+  cursor: pointer;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.video-thumb-wrap .photo-thumb {
+  width: 100%; height: 100%;
+  flex-shrink: unset;
+  border-radius: 0;
+}
+.video-thumb-wrap.active .photo-thumb,
+.video-thumb-wrap:has(.photo-thumb.active) .photo-thumb { opacity: 1; outline: 2px solid #f0c060; outline-offset: 2px; }
+.video-thumb-wrap:hover .photo-thumb { opacity: 0.55; }
+.play-badge {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.88);
+  pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.play-badge::after {
+  content: '';
+  display: block;
+  margin-left: 3px;
+  border-style: solid;
+  border-width: 7px 0 7px 13px;
+  border-color: transparent transparent transparent rgba(10,10,20,0.85);
+}
+
 .carousel-arrow {
   position: absolute; top: 0; bottom: 0; z-index: 2;
   width: 64px; display: flex; align-items: center; justify-content: center;
