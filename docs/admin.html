@@ -285,10 +285,10 @@
       <label>Région serveur</label>
       <div style="display:flex;gap:16px;margin-top:6px">
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="eapi" checked> Europe
+          <input type="radio" name="pcloud-region" value="eapi"> Europe
         </label>
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="api"> USA
+          <input type="radio" name="pcloud-region" value="api" checked> USA
         </label>
       </div>
     </div>
@@ -1077,6 +1077,7 @@ async function uploadAndProcess() {
 let pcloudToken    = null;  // token final après login réussi
 let pcloudTfaEmail = null;  // email conservé pour l'étape 2FA
 let pcloudTfaPass  = null;  // mot de passe conservé pour l'étape 2FA
+let pendingSyncAfterLogin = false;
 
 function pcloudBase() {
   const region = document.querySelector('input[name="pcloud-region"]:checked').value;
@@ -1110,10 +1111,14 @@ function pcloudSuccess(j, email) {
     const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
     _s.pcloudToken  = j.auth;
     _s.pcloudEmail  = j.email || email;
-    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'eapi';
+    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'api';
     localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
   } catch {}
   loadExistingData();
+  if (pendingSyncAfterLogin) {
+    pendingSyncAfterLogin = false;
+    setTimeout(() => $('btn-sync-pcloud')?.click(), 1500);
+  }
 }
 
 async function pcloudLogin() {
@@ -1359,9 +1364,11 @@ function pcloudHandleAuthError(j) {
   if (!isAuthErr) return false;
   console.warn(`pCloud auth error result=${j.result}:`, j.error);
   const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-  delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
+  delete _s.pcloudToken; delete _s.pcloudEmail;
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   pcloudToken = null;
+  pendingSyncAfterLogin = true;
+  $('login-status').textContent = '⚠ Session expirée — reconnecte-toi pour relancer la sync.';
   $('login-overlay').style.display = 'flex';
   $('site-header').style.display   = 'none';
   $('main-content').style.display  = 'none';
