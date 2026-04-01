@@ -405,7 +405,7 @@ function nearestNamedPlace(lat, lon) {
     const d = haversineKm(lat, lon, c.lat, c.lon);
     if (d < bestD) { bestD = d; best = { name: c.name, km: Math.round(d) }; }
   });
-  return bestD < 150 ? best : null;
+  return bestD < 10 ? best : null;
 }
 
 const lbLocCache = {};
