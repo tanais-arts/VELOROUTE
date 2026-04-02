@@ -842,7 +842,7 @@ async function generateVideoThumbnail(file) {
 }
 
 // ── Photos handler ─────────────────────────────────────────────────────
-async function handlePhotos(files) {
+async function handlePhotos(files, clearGrid = true) {
   if (!files.length) return;
 
   // Déduplication : ignorer fichiers déjà uploadés
@@ -864,7 +864,7 @@ async function handlePhotos(files) {
 
   rawPhotos = [];
   const grid = $('photo-grid');
-  grid.innerHTML = '';
+  if (clearGrid) grid.innerHTML = '';
 
   let done = 0;
   for (const file of files) {
@@ -1838,22 +1838,33 @@ setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
   dropEl.addEventListener('drop', async e => {
     e.preventDefault(); dropEl.classList.remove('drag-over');
     const items = Array.from(e.dataTransfer.items || []);
-    // Check for a folder
+
+    // Collecter tous les dossiers droppés
+    const dirEntries = [];
+    const looseFiles = [];
     for (const item of items) {
       if (item.kind !== 'file') continue;
       const entry = item.webkitGetAsEntry ? item.webkitGetAsEntry() : null;
-      if (entry && entry.isDirectory) {
-        $('photo-subfolder').value = entry.name;
-        setStatus('photos-status', `Lecture du dossier « ${entry.name} »…`);
-        const files = await readDirEntry(entry);
-        if (files.length) handlePhotos(files);
-        return;
-      }
+      if (entry && entry.isDirectory) dirEntries.push(entry);
+      else looseFiles.push(item.getAsFile());
     }
-    // Regular files
-    const files = Array.from(e.dataTransfer.files)
-      .filter(f => f.type.startsWith('image/') || f.type.startsWith('video/')
-        || /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(f.name));
+
+    if (dirEntries.length > 0) {
+      // Traitement séquentiel dossier par dossier
+      for (const dirEntry of dirEntries) {
+        $('photo-subfolder').value = dirEntry.name;
+        setStatus('photos-status', `Lecture du dossier « ${dirEntry.name} »… (${dirEntries.indexOf(dirEntry)+1}/${dirEntries.length})`);
+        const files = await readDirEntry(dirEntry);
+        const isFirst = dirEntries.indexOf(dirEntry) === 0;
+        if (files.length) await handlePhotos(files, isFirst);
+      }
+      return;
+    }
+
+    // Fichiers libres (pas de dossier)
+    const files = looseFiles
+      .filter(f => f && (f.type.startsWith('image/') || f.type.startsWith('video/')
+        || /\.(jpg|jpeg|heic|heif|png|tiff?|mov|mp4|m4v)$/i.test(f.name)));
     if (files.length) handlePhotos(files);
   });
 })();
