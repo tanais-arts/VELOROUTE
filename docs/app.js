@@ -777,17 +777,29 @@ function selectEntry(idx) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────
+const _GH_API = 'https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs';
+async function fetchRepoJson(filename, fallback) {
+  try {
+    const r = await fetch(`${_GH_API}/${filename}`, { headers: { Accept: 'application/vnd.github+json' } });
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    return JSON.parse(atob(j.content.replace(/\n/g, '')));
+  } catch {
+    if (fallback !== undefined) return fallback;
+    throw new Error(`Impossible de charger ${filename}`);
+  }
+}
+
 async function init() {
   let entries, photos, cities, visited, escales, gapRoutes;
-  const cb = `?_=${Date.now()}`;
   try {
     [entries, photos, cities, visited, escales, gapRoutes] = await Promise.all([
-      fetch('travel.json'    + cb).then(r => r.json()),
-      fetch('photos.json'    + cb).then(r => r.json()).catch(() => []),
-      fetch('cities.json'    + cb).then(r => r.json()).catch(() => []),
-      fetch('visited.json'   + cb).then(r => r.json()).catch(() => []),
-      fetch('escales.json'   + cb).then(r => r.json()).catch(() => []),
-      fetch('gap_routes.json'+ cb).then(r => r.json()).catch(() => []),
+      fetchRepoJson('travel.json'),
+      fetchRepoJson('photos.json',    []),
+      fetchRepoJson('cities.json',    []),
+      fetchRepoJson('visited.json',   []),
+      fetchRepoJson('escales.json',   []),
+      fetchRepoJson('gap_routes.json',[]),
     ]);
     window.escales = escales;
   } catch (err) {
@@ -1148,10 +1160,10 @@ async function init() {
       updateTimelineThumb(idx);
       selectEntry(idx);
     }
+  });
+
+  window.addEventListener('resize', () => {
     renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
-    window.addEventListener('resize', () => {
-      renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
-    });
   });
 
   tlInput.addEventListener('change', () => {
