@@ -1088,6 +1088,7 @@ async function pcloudPost(endpoint, params) {
   const body = new URLSearchParams(params);
   const r = await fetch(`${pcloudBase()}/${endpoint}`, {
     method: 'POST',
+    referrerPolicy: 'no-referrer',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body.toString()
   });
@@ -1401,19 +1402,14 @@ async function pcloudGetFileLink(fileId) {
   return `https://${j.hosts[0]}${j.path}`;
 }
 
-// Lit le contenu d'un fichier pCloud via file_open/file_read (sans CDN, sans vérif. referer)
+// Lit le contenu d'un fichier pCloud via file_open/file_read/file_close (sans CDN, sans vérif. referer)
 async function pcloudReadFile(fileId, mode = 'text') {
-  const openJ = await pcloudPost('file_open', { flags: '0', fileid: fileId });
-  if (openJ.result !== 0) throw new Error(`file_open ${fileId}: ${openJ.error}`);
-  const fd = openJ.fd;
-  try {
-    const url = `${pcloudBase()}/file_read?fd=${fd}&count=52428800&auth=${encodeURIComponent(pcloudToken)}`;
-    const r = await fetch(url, { referrerPolicy: 'no-referrer' });
-    if (!r.ok) throw new Error(`file_read HTTP ${r.status}`);
-    return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
-  } finally {
-    pcloudPost('file_close', { fd }).catch(() => {});
-  }
+  const j = await pcloudPost('getfilelink', { fileid: fileId, auth: pcloudToken, forcedownload: '1' });
+  if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
+  const url = `https://${j.hosts[0]}${j.path}`;
+  const r = await fetch(url, { referrerPolicy: 'no-referrer' });
+  if (!r.ok) throw new Error(`download HTTP ${r.status}`);
+  return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
 }
 
 // ── Sync pCloud → GitHub ───────────────────────────────────────────────
