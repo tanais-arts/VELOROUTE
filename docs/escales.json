@@ -1,6 +1,6 @@
 [
   {
-    "city": "Englesqueville-la-PerceÌe",
+    "city": "Englesqueville-la-PerceÃÂe",
     "start": "2025-05-02T16:17",
     "end": "2025-05-02T16:19",
     "duration_h": 0,
@@ -14,5 +14,13 @@
     "duration_h": 0,
     "lat": 49.33789,
     "lon": -0.65245
+  },
+  {
+    "city": "Bricqueville-sur-Mer",
+    "start": "2025-05-04T15:44",
+    "end": "2025-05-04T15:45",
+    "duration_h": 0,
+    "lat": 48.83773,
+    "lon": -1.58926
   }
 ]
