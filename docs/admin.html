@@ -425,6 +425,7 @@
     <div class="manage-tabs">
       <button class="mtab active" id="mtab-segments">Segments GPS <span id="mtab-seg-count" style="opacity:.55">(0)</span></button>
       <button class="mtab" id="mtab-photos">Photos &amp; vidéos <span id="mtab-ph-count" style="opacity:.55">(0)</span></button>
+      <button class="mtab" id="mtab-escales">Étapes <span id="mtab-esc-count" style="opacity:.55">(0)</span></button>
     </div>
     <!-- Segments panel -->
     <div id="manage-segments-panel">
@@ -445,6 +446,10 @@
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
       </div>
       <div class="manage-photo-grid" id="manage-photo-grid"></div>
+    </div>
+    <!-- Étapes panel -->
+    <div id="manage-escales-panel" style="display:none">
+      <div id="escales-list" style="margin-top:6px"></div>
     </div>
     <div class="status" id="manage-status" style="margin-top:12px"></div>
   </div>
@@ -1645,22 +1650,73 @@ $('btn-ph-delete').addEventListener('click', async () => {
   catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
 
+// ── Étapes (escales) editor ──────────────────────────────────────────
+function renderEscales() {
+  const list = $('escales-list'); list.innerHTML = '';
+  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
+  if (!escaleEntries.length) {
+    list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune étape enregistrée.</p>';
+    return;
+  }
+  escaleEntries.forEach((e, idx) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)';
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.value = e.city;
+    inp.style.cssText = 'flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;font-size:.8rem';
+    const meta = document.createElement('span');
+    meta.style.cssText = 'font-size:.68rem;color:rgba(255,255,255,.35);white-space:nowrap';
+    meta.textContent = `${e.start?.slice(0,10) || ''} · ${e.duration_h || 0}h`;
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn'; saveBtn.textContent = '✓';
+    saveBtn.style.cssText = 'padding:3px 10px;font-size:.75rem';
+    saveBtn.title = 'Renommer';
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn danger'; delBtn.textContent = '🗑';
+    delBtn.style.cssText = 'padding:3px 9px;font-size:.75rem';
+    delBtn.title = 'Supprimer cette étape';
+    saveBtn.addEventListener('click', async () => {
+      const newName = inp.value.trim();
+      if (!newName || newName === e.city) return;
+      e.city = newName;
+      setStatus('manage-status', 'Commit escales.json…');
+      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape renommée en « ${newName} »`, 'ok'); }
+      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+    });
+    inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') saveBtn.click(); });
+    delBtn.addEventListener('click', async () => {
+      if (!confirm(`Supprimer l'étape « ${e.city} » de escales.json ?\n(Les fichiers pCloud ne sont pas supprimés.)`)) return;
+      escaleEntries.splice(idx, 1);
+      setStatus('manage-status', 'Commit escales.json…');
+      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape supprimée`, 'ok'); }
+      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+    });
+    row.append(inp, meta, saveBtn, delBtn);
+    list.appendChild(row);
+  });
+}
+
 // ── Tab switching & refresh panel ─────────────────────────────────────
 function switchManageTab(tab) {
   $('mtab-segments').classList.toggle('active', tab === 'segments');
   $('mtab-photos').classList.toggle('active',   tab === 'photos');
+  $('mtab-escales').classList.toggle('active',  tab === 'escales');
   $('manage-segments-panel').style.display = tab === 'segments' ? 'block' : 'none';
   $('manage-photos-panel').style.display   = tab === 'photos'   ? 'block' : 'none';
-  if (tab === 'photos') renderManagePhotos();
+  $('manage-escales-panel').style.display  = tab === 'escales'  ? 'block' : 'none';
+  if (tab === 'photos')  renderManagePhotos();
+  if (tab === 'escales') renderEscales();
 }
 function refreshManagePanel() {
   const card = $('manage-card');
   if (!travelEntries.length && !photoEntries.length) { card.style.display = 'none'; return; }
   card.style.display = 'block'; renderSegments();
-  $('mtab-ph-count').textContent = `(${photoEntries.length})`;
+  $('mtab-ph-count').textContent  = `(${photoEntries.length})`;
+  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
 }
 $('mtab-segments').addEventListener('click', () => switchManageTab('segments'));
 $('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
+$('mtab-escales').addEventListener('click',  () => switchManageTab('escales'));
 
 $('btn-refresh-manage').addEventListener('click', async () => {
   setStatus('manage-status', 'Actualisation…');
