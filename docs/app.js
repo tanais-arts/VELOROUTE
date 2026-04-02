@@ -859,28 +859,8 @@ async function init() {
       const bar = document.createElement('div');
       bar.className = 'tl-escale-bar';
       bar.title = `${e.city} — ${e.duration_h}h`;
-      bar.style.cssText = `position:absolute;left:${pct0*100}%;width:${(pct1-pct0)*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);border-radius:3px;z-index:2;box-shadow:0 0 2px 0 rgba(240,192,96,0.10);cursor:pointer`;
-      bar.onclick = () => {
-        if (!entryTimes || entryTimes.length === 0) return;
-        let idx = 0;
-        let minDt = Infinity;
-        const tRef = t1;
-        for (let i = 0; i < entryTimes.length; i++) {
-          const dt = entryTimes[i] - tRef;
-          if (dt < 0) continue;
-          if (dt < minDt) { minDt = dt; idx = i; }
-        }
-        if (minDt === Infinity) {
-          let bestPast = null, bestPastDt = Infinity;
-          for (let i = 0; i < entryTimes.length; i++) {
-            const dt = tRef - entryTimes[i];
-            if (dt < 0) continue;
-            if (dt < bestPastDt) { bestPastDt = dt; bestPast = i; }
-          }
-          if (bestPast !== null) idx = bestPast;
-        }
-        selectEntry(idx);
-      };
+      bar.style.cssText = `position:absolute;left:${pct0*100}%;width:${(pct1-pct0)*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);border-radius:3px;z-index:2;box-shadow:0 0 2px 0 rgba(240,192,96,0.10);pointer-events:none`;
+      bar.dataset.t1 = t1;
       wrap.appendChild(bar);
     });
   }
@@ -889,6 +869,10 @@ async function init() {
     renderTimelineBaseLine();
     renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
   }, 0);
+
+  // Expose pour rappel externe (ex: après commit escales depuis admin)
+  window._refreshTimelineEscales = () =>
+    renderTimelineEscales(state.escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
 
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
   state.photos  = photos.filter(p => !p.hidden); // hidden photos not shown in carousel
@@ -960,7 +944,7 @@ async function init() {
     if (p.type === 'video') {
       const wrap = document.createElement('div');
       wrap.className = 'video-thumb-wrap';
-      wrap.addEventListener('click', () => openLightbox(photos, i));
+      wrap.addEventListener('click', () => { if (p.entryIdx != null) selectEntry(p.entryIdx); openLightbox(photos, i); });
       const badge = document.createElement('div');
       badge.className = 'play-badge';
       badge.setAttribute('aria-hidden', 'true');
@@ -968,7 +952,7 @@ async function init() {
       wrap.appendChild(badge);
       fragment.appendChild(wrap);
     } else {
-      img.addEventListener('click', () => openLightbox(photos, i));
+      img.addEventListener('click', () => { if (p.entryIdx != null) selectEntry(p.entryIdx); openLightbox(photos, i); });
       fragment.appendChild(img);
     }
   });
