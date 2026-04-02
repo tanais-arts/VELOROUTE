@@ -1215,7 +1215,7 @@ async function loadSettings() {
       const ri = document.querySelector(`input[name="pcloud-region"][value="${region}"]`);
       if (ri) ri.checked = true;
       try {
-        const vr = await fetch(`https://${region}.pcloud.com/userinfo?getauth=0&access_token=${encodeURIComponent(data.pcloudToken)}`);
+        const vr = await fetch(`https://${region}.pcloud.com/userinfo?getauth=0&auth=${encodeURIComponent(data.pcloudToken)}`);
         const vj = await vr.json();
         if (vj.result === 0) {
           pcloudToken = data.pcloudToken;
@@ -1272,7 +1272,7 @@ async function commitPhotosJson() {
 }
 
 async function pcloudEnsureFolder(folderPath) {
-  const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(folderPath)}&access_token=${pcloudToken}`;
+  const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(folderPath)}&auth=${pcloudToken}`;
   const r = await fetch(url);
   const j = await r.json();
   if (j.result !== 0) throw new Error(`createfolder ${folderPath}: ${j.error}`);
@@ -1283,7 +1283,7 @@ async function pcloudUploadFile(folderId, filename, blob) {
   const form = new FormData();
   form.append('folderid', folderId);
   form.append('filename', filename);
-  form.append('access_token', pcloudToken);
+  form.append('auth', pcloudToken);
   form.append('file', blob, filename);
   const r = await fetch(`${pcloudBase()}/uploadfile`, { method: 'POST', body: form });
   const j = await r.json();
@@ -1387,7 +1387,7 @@ function pcloudHandleAuthError(j) {
   return true;
 }
 async function pcloudListFolder(folderPath) {
-  const j = await pcloudPost('listfolder', { path: folderPath, access_token: pcloudToken });
+  const j = await pcloudPost('listfolder', { path: folderPath, auth: pcloudToken });
   console.log(`pcloudListFolder(${folderPath}) → result=${j.result}`, j.error || '');
   if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; }
   if (pcloudHandleAuthError(j)) throw new Error('Session pCloud expirée — reconnecte-toi.');
@@ -1396,7 +1396,7 @@ async function pcloudListFolder(folderPath) {
 }
 
 async function pcloudGetFileLink(fileId) {
-  const j = await pcloudPost('getfilelink', { fileid: fileId, access_token: pcloudToken, forcedownload: '1' });
+  const j = await pcloudPost('getfilelink', { fileid: fileId, auth: pcloudToken, forcedownload: '1' });
   if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
   return `https://${j.hosts[0]}${j.path}`;
 }
