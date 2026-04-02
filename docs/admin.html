@@ -454,7 +454,10 @@
 
   <!-- ─────────────────────── GÉRER ────────────────────────────── -->
   <div class="card" id="manage-card" style="display:none">
-    <div class="card-title">⚑ Gérer les données — masquer ou supprimer</div>
+    <div class="card-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>⚑ Gérer les données — masquer ou supprimer</span>
+      <button id="btn-refresh-manage" style="font-size:.7rem;padding:5px 14px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.35);border-radius:4px;color:#f0c060;cursor:pointer;letter-spacing:.06em">⟳ Actualiser</button>
+    </div>
     <div class="manage-tabs">
       <button class="mtab active" id="mtab-segments">Segments GPS <span id="mtab-seg-count" style="opacity:.55">(0)</span></button>
       <button class="mtab" id="mtab-photos">Photos &amp; vidéos <span id="mtab-ph-count" style="opacity:.55">(0)</span></button>
@@ -1747,6 +1750,21 @@ function refreshManagePanel() {
 }
 $('mtab-segments').addEventListener('click', () => switchManageTab('segments'));
 $('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
+
+$('btn-refresh-manage').addEventListener('click', async () => {
+  setStatus('manage-status', 'Actualisation…');
+  await loadExistingData();
+  renderSegments();
+  renderManagePhotos();
+  // Rafraîchir la carte
+  if (routeLine) map.removeLayer(routeLine);
+  if (travelEntries.length > 1) {
+    const latlngs = travelEntries.map(e => [e.lat, e.lon]);
+    routeLine = L.polyline(latlngs, { color: '#f0c060', weight: 3, opacity: 0.8 }).addTo(map);
+    map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+  }
+  setStatus('manage-status', '✓ Données rechargées depuis GitHub', 'ok');
+});
 
 // ── Wire drop zones ───────────────────────────────────────────────────
 setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
