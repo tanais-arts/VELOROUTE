@@ -118,5 +118,13 @@
     "duration_h": 1,
     "lat": 47.23255,
     "lon": 4.90452
+  },
+  {
+    "city": "Port-en-Bessin-Huppain",
+    "start": "2025-05-02T12:23",
+    "end": "2025-05-02T15:59",
+    "duration_h": 4,
+    "lat": 49.34906,
+    "lon": -0.90312
   }
 ]
