@@ -597,6 +597,7 @@ function pointsToTravelEntries(points, gpxFile) {
     minute: p.minute,
     frame:  4,
     year:   p.year,
+    jstMs:  p.jstMs,
     ...(gpxFile ? { gpxFile } : {}),
   }));
 }
@@ -697,6 +698,9 @@ function exifDateToMs(val) {
 }
 
 function entryToMs(e) {
+  // jstMs = timestamp UTC exact stocké lors du parse GPX (gère DST)
+  if (e.jstMs != null) return e.jstMs;
+  // Fallback : heure locale brute (EXIF sans TZ)
   return Date.UTC(e.year, e.month - 1, e.day, e.hour, e.minute);
 }
 
@@ -756,14 +760,24 @@ async function resizeImage(file, maxSide, quality = 0.88) {
 
 // ── Match photos → travel entries ─────────────────────────────────────
 function matchPhotosToTravel() {
+  let maxDiffMin = 0;
   rawPhotos.forEach(p => {
     if (p.photoMs != null) {
       p.entryIdx = nearestEntryIdx(p.photoMs);
+      const diff = Math.abs(entryToMs(travelEntries[p.entryIdx]) - p.photoMs);
+      if (diff > maxDiffMin) maxDiffMin = diff;
     }
   });
   buildPhotoEntries();
   renderPhotoMarkers();
   updateExport();
+  const maxMin = Math.round(maxDiffMin / 60000);
+  if (maxMin > 0) {
+    const warn = maxMin > 120
+      ? `⚠ Écart max photo↔GPS : ${maxMin} min — vérifier le fuseau horaire des photos`
+      : `✓ Match photo↔GPS — écart max ${maxMin} min`;
+    setStatus('photos-status', warn, maxMin > 120 ? 'warn' : 'ok');
+  }
 }
 
 function buildPhotoEntries() {
