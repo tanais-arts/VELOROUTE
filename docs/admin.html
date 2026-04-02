@@ -471,6 +471,7 @@ const MONTHS_FR  = ['','janv.','févr.','mars','avr.','mai','juin','juil.','aoû
 let travelEntries = [];  // final travel.json objects
 let photoEntries  = [];  // final photos.json objects
 let visitedCities = [];  // final visited.json objects
+let escaleEntries = [];  // final escales.json objects
 let rawPhotos     = [];  // { file, photoMs, lat, lon, captionDate, entryIdx, thumb }
 let existingPhotoFilenames = new Set(); // filenames déjà dans photos.json
 
@@ -899,6 +900,39 @@ async function handlePhotos(files) {
   // Enregistrer les nouveaux noms pour éviter re-upload
   rawPhotos.forEach(p => existingPhotoFilenames.add(p.file.name));
 
+  // ── Escale : tagger l'étape dans escales.json ──────────────────────
+  const cityName = $('photo-subfolder').value.trim();
+  const datedPhotos = rawPhotos.filter(p => p.photoMs != null);
+  if (cityName && datedPhotos.length) {
+    const times  = datedPhotos.map(p => p.photoMs);
+    const minMs  = Math.min(...times);
+    const maxMs  = Math.max(...times);
+    const TZ_OFF = 2; // CEST
+    function toLocalStr(ms) {
+      const d = new Date(ms + TZ_OFF * 3600000);
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
+    }
+    const duration_h = Math.round((maxMs - minMs) / 3600000);
+    const matched = datedPhotos
+      .filter(p => p.entryIdx != null)
+      .map(p => travelEntries[p.entryIdx])
+      .filter(Boolean);
+    const avgLat = matched.length ? matched.reduce((s, e) => s + e.lat, 0) / matched.length : null;
+    const avgLon = matched.length ? matched.reduce((s, e) => s + e.lon, 0) / matched.length : null;
+    const normCity = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+    const newEscale = { city: cityName, start: toLocalStr(minMs), end: toLocalStr(maxMs), duration_h,
+      ...(avgLat != null ? { lat: +avgLat.toFixed(5), lon: +avgLon.toFixed(5) } : {}) };
+    const idx = escaleEntries.findIndex(e => normCity(e.city) === normCity(cityName));
+    if (idx >= 0) escaleEntries[idx] = newEscale; else escaleEntries.push(newEscale);
+    try {
+      await commitEscalesJson();
+      setStatus('photos-status', `✓ Étape « ${cityName} » enregistrée dans escales.json`, 'ok');
+    } catch (err) {
+      console.warn('Erreur commit escales.json:', err);
+    }
+  }
+
   // Upload et traitement automatiques
   if (pcloudToken) {
     setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers pCloud…`);
@@ -989,6 +1023,10 @@ async function loadExistingData(useApi = false) {
       visitedCities = await r.json();
       vCount = visitedCities.length;
     }
+  } catch {}
+  try {
+    const r = await fetch(`${raw}/escales.json?_=${Date.now()}`);
+    if (r.ok) escaleEntries = await r.json();
   } catch {}
   setStatus('gpx-status',
     tCount + pCount + vCount > 0
@@ -1224,6 +1262,17 @@ async function commitPhotosJson() {
     'docs/photos.json',
     JSON.stringify(toCommit, null, 2),
     `admin: photos.json — ${toCommit.length} entrées`,
+    ghToken
+  );
+}
+
+async function commitEscalesJson() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
+  await githubPutFile(
+    'docs/escales.json',
+    JSON.stringify(escaleEntries, null, 2),
+    `admin: escales.json — ${escaleEntries.length} étape(s)`,
     ghToken
   );
 }

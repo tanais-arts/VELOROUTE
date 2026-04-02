@@ -782,10 +782,10 @@ async function init() {
   try {
     [entries, photos, cities, visited, escales, gapRoutes] = await Promise.all([
       fetch('travel.json').then(r => r.json()),
-      fetch('photos.json').then(r => r.json()),
-      fetch('cities.json').then(r => r.json()),
-      fetch('visited.json').then(r => r.json()),
-      fetch('escales.json').then(r => r.json()),
+      fetch('photos.json').then(r => r.json()).catch(() => []),
+      fetch('cities.json').then(r => r.json()).catch(() => []),
+      fetch('visited.json').then(r => r.json()).catch(() => []),
+      fetch('escales.json').then(r => r.json()).catch(() => []),
       fetch('gap_routes.json').then(r => r.json()).catch(() => []),
     ]);
     window.escales = escales;
