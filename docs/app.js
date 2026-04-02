@@ -840,21 +840,37 @@ async function init() {
     const wrap = document.getElementById('timeline-slider-wrap');
     if (!wrap || !escales || !entryTimes || entryTimes.length < 2) return;
     Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
-    const span = entryTimeMax - entryTimeMin;
-    escales.forEach(e => {
-      function parseLocalToUTC(str) {
-        const d = new Date(str + 'Z');
-        d.setUTCHours(d.getUTCHours() - TZ_OFFSET);
-        return d.getTime();
+
+    function parseLocalToUTC(str) {
+      const d = new Date(str + 'Z');
+      d.setUTCHours(d.getUTCHours() - TZ_OFFSET);
+      return d.getTime();
+    }
+
+    // Convertit un timestamp UTC → pourcentage sur le slider,
+    // en tenant compte du segMap non-linéaire si actif
+    function tsToPct(ts) {
+      if (state.segMap) {
+        // trouver l'entryIdx le plus proche par dichotomie sur entryTimes
+        let lo = 0, hi = entryTimes.length - 1;
+        while (lo < hi) {
+          const mid = (lo + hi) >> 1;
+          if (entryTimes[mid] < ts) lo = mid + 1; else hi = mid;
+        }
+        if (lo > 0 && Math.abs(entryTimes[lo-1] - ts) < Math.abs(entryTimes[lo] - ts)) lo--;
+        return indexToVisualUnits(lo, state.segMap) / (state.segMap.totalUnits - 1);
       }
+      const span = entryTimeMax - entryTimeMin;
+      return span > 0 ? (ts - entryTimeMin) / span : 0;
+    }
+
+    escales.forEach(e => {
       const t0 = parseLocalToUTC(e.start);
       const t1 = parseLocalToUTC(e.end);
       if (isNaN(t0) || isNaN(t1)) return;
-      let pct0 = (t0 - entryTimeMin) / span;
-      let pct1 = (t1 - entryTimeMin) / span;
-      pct0 = Math.max(0, Math.min(1, pct0));
-      pct1 = Math.max(0, Math.min(1, pct1));
-      if (pct1 <= pct0) return;
+      let pct0 = Math.max(0, Math.min(1, tsToPct(t0)));
+      let pct1 = Math.max(0, Math.min(1, tsToPct(t1)));
+      if (pct1 <= pct0) pct1 = pct0 + 0.002; // barre minimale visible
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
