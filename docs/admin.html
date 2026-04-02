@@ -385,6 +385,9 @@
           <button type="button"
             style="padding:4px 12px;font-size:.7rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:4px;color:rgba(255,255,255,.6);cursor:pointer"
             id="photos-pick-folder">📂 Dossier</button>
+          <button type="button"
+            style="padding:4px 12px;font-size:.7rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,80,80,.35);border-radius:4px;color:rgba(255,160,160,.8);cursor:pointer"
+            id="photos-reset" title="Vider la liste et autoriser le re-drop des mêmes fichiers">↺ Réinit</button>
         </div>
       </div>
 
@@ -1767,6 +1770,15 @@ $('btn-refresh-manage').addEventListener('click', async () => {
 });
 
 // ── Wire drop zones ───────────────────────────────────────────────────
+$('photos-reset').addEventListener('click', () => {
+  rawPhotos = [];
+  existingPhotoFilenames.clear();
+  $('photo-grid').innerHTML = '';
+  $('photos-stats').style.display = 'none';
+  $('unmatched-warning').style.display = 'none';
+  setStatus('photos-status', 'Réinitialisé — vous pouvez redéposer les mêmes photos');
+  setStatus('pcloud-status', '');
+});
 setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
 
 // Photos drop zone — supporte fichiers individuels ET dossiers
