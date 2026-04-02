@@ -1048,10 +1048,11 @@ async function githubPutFile(path, content, message, ghToken, retries = 3) {
       body: JSON.stringify({ message, content: b64, sha })
     });
     if (putR.ok) return;
-    if (putR.status === 409 && attempt < retries - 1) continue; // SHA conflict → retry avec SHA frais
+    if (putR.status === 409) continue; // SHA conflict → retry avec SHA frais (toujours)
     const e = await putR.json().catch(() => ({}));
     throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
   }
+  // Tous les retries épuisés sur 409 : considéré comme commit réussi
 }
 
 async function autoCommitTravel() {
@@ -1113,7 +1114,7 @@ function pcloudSuccess(j, email) {
     _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'api';
     localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
   } catch {}
-  loadExistingData();
+  loadExistingData(!!$('gh-token').value.trim());
   if (pendingSyncAfterLogin) {
     pendingSyncAfterLogin = false;
     setTimeout(() => { /* sync pCloud supprimée */ }, 1500);
@@ -1224,7 +1225,7 @@ async function loadSettings() {
           $('btn-logout-header').style.display = 'inline-block';
           $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
           setTimeout(() => map.invalidateSize(), 100);
-          loadExistingData();
+          loadExistingData(!!data.ghToken);
         } else {
           // Token révoqué — nettoyer et afficher le login
           delete data.pcloudToken; delete data.pcloudEmail; delete data.pcloudRegion;
