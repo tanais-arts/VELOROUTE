@@ -782,14 +782,12 @@ function selectEntry(idx) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────
-const _GH_API = 'https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs';
 async function fetchRepoJson(filename, fallback) {
   try {
-    const r = await fetch(`${_GH_API}/${filename}`, { headers: { Accept: 'application/vnd.github+json' } });
+    // Les fichiers JSON sont servis directement par GitHub Pages — pas besoin de l'API
+    const r = await fetch(`./${filename}`, { cache: 'no-cache' });
     if (!r.ok) throw new Error(r.status);
-    const j = await r.json();
-    const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
-    return JSON.parse(new TextDecoder().decode(bytes));
+    return await r.json();
   } catch {
     if (fallback !== undefined) return fallback;
     throw new Error(`Impossible de charger ${filename}`);
