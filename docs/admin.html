@@ -331,7 +331,7 @@
     </div>
   </div>
   <div style="padding:10px 0 4px;text-align:right">
-    <button onclick="saveSettings()" style="font-size:.7rem;padding:6px 16px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.4);border-radius:4px;color:#f0c060;cursor:pointer;letter-spacing:.08em">
+    <button id="btn-save-settings" style="font-size:.7rem;padding:6px 16px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.4);border-radius:4px;color:#f0c060;cursor:pointer;letter-spacing:.08em">
       💾 Sauvegarder les réglages
     </button>
     <span id="settings-saved" style="font-size:.68rem;color:rgba(80,210,120,.8);margin-left:10px;display:none">✓ sauvegardé</span>
@@ -1566,6 +1566,7 @@ async function syncFromPcloud() {
 }
 
 $('btn-sync-pcloud').addEventListener('click', syncFromPcloud);
+$('btn-save-settings').addEventListener('click', saveSettings);
 
 // ── Gestion des données (segments GPS + photos) ───────────────────────
 let manageSegments = [];  // segments calculés depuis travelEntries
