@@ -222,5 +222,13 @@
     "duration_h": 1,
     "lat": 47.23066,
     "lon": 4.95445
+  },
+  {
+    "city": "Englesqueville-la-Percée",
+    "start": "2025-05-02T16:17",
+    "end": "2025-05-02T16:19",
+    "duration_h": 0,
+    "lat": 49.34439,
+    "lon": -1.09021
   }
 ]
