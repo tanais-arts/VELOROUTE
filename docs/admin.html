@@ -1024,7 +1024,8 @@ async function loadExistingData(useApi = false) {
       });
       if (!r.ok) throw new Error(`API ${r.status}`);
       const j = await r.json();
-      return JSON.parse(atob(j.content.replace(/\n/g, '')));
+      const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+      return JSON.parse(new TextDecoder().decode(bytes));
     }
     const r = await fetch(`${raw}/${filename}?_=${Date.now()}`);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -1078,7 +1079,8 @@ async function loadRepoJsonDirect(filename) {
   });
   if (!r.ok) throw new Error(`GitHub ${r.status}`);
   const j = await r.json();
-  return JSON.parse(atob(j.content.replace(/\n/g, '')));
+  const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
 }
 
 async function commitPhotosJsonMerged() {

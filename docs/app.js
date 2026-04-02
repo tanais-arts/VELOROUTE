@@ -783,7 +783,8 @@ async function fetchRepoJson(filename, fallback) {
     const r = await fetch(`${_GH_API}/${filename}`, { headers: { Accept: 'application/vnd.github+json' } });
     if (!r.ok) throw new Error(r.status);
     const j = await r.json();
-    return JSON.parse(atob(j.content.replace(/\n/g, '')));
+    const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
   } catch {
     if (fallback !== undefined) return fallback;
     throw new Error(`Impossible de charger ${filename}`);
