@@ -285,10 +285,10 @@
       <label>Région serveur</label>
       <div style="display:flex;gap:16px;margin-top:6px">
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="eapi" checked> Europe
+          <input type="radio" name="pcloud-region" value="eapi"> Europe
         </label>
         <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="api"> USA
+          <input type="radio" name="pcloud-region" value="api" checked> USA
         </label>
       </div>
     </div>
@@ -1111,7 +1111,7 @@ function pcloudSuccess(j, email) {
     const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
     _s.pcloudToken  = j.auth;
     _s.pcloudEmail  = j.email || email;
-    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'eapi';
+    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'api';
     localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
   } catch {}
   loadExistingData();
@@ -1203,24 +1203,36 @@ function saveSettings() {
   saved.style.display = 'inline';
   setTimeout(() => { saved.style.display = 'none'; }, 2000);
 }
-function loadSettings() {
+async function loadSettings() {
   try {
     const data = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     if (data.ghToken)    $('gh-token').value    = data.ghToken;
     if (data.cdnBase)    $('cdn-base').value    = data.cdnBase;
     if (data.pcloudPath) $('pcloud-path').value = data.pcloudPath;
     if (data.pcloudToken) {
-      pcloudToken = data.pcloudToken;
-      if (data.pcloudRegion) {
-        const ri = document.querySelector(`input[name="pcloud-region"][value="${data.pcloudRegion}"]`);
-        if (ri) ri.checked = true;
+      // Valider le token sauvegardé avant de l'utiliser
+      const region = data.pcloudRegion || 'api';
+      const ri = document.querySelector(`input[name="pcloud-region"][value="${region}"]`);
+      if (ri) ri.checked = true;
+      try {
+        const vr = await fetch(`https://${region}.pcloud.com/userinfo?getauth=0&access_token=${encodeURIComponent(data.pcloudToken)}`);
+        const vj = await vr.json();
+        if (vj.result === 0) {
+          pcloudToken = data.pcloudToken;
+          $('login-overlay').style.display = 'none';
+          $('site-header').style.display   = 'flex';
+          $('main-content').style.display  = 'flex';
+          $('btn-logout-header').style.display = 'inline-block';
+          $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
+          loadExistingData();
+        } else {
+          // Token révoqué — nettoyer et afficher le login
+          delete data.pcloudToken; delete data.pcloudEmail; delete data.pcloudRegion;
+          localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
+        }
+      } catch {
+        // Erreur réseau — on laisse le login s'afficher
       }
-      $('login-overlay').style.display = 'none';
-      $('site-header').style.display   = 'flex';
-      $('main-content').style.display  = 'flex';
-      $('btn-logout-header').style.display = 'inline-block';
-      $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
-      loadExistingData();
     }
   } catch {}
 }
