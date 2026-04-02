@@ -413,24 +413,23 @@ function buildTimelineCities(cities, totalEntries) {
     div.innerHTML = `<div class="tick-line"></div><div class="tick-name">${c.name}</div>`;
     tlCitiesRow.appendChild(div);
   });
-  if (window.escales && Array.isArray(window.escales) && state.entryTimes && state.entryTimes.length > 1) {
-    const span = state.entryTimeMax - state.entryTimeMin;
+  if (window.escales && Array.isArray(window.escales)) {
     window.escales.forEach(e => {
+      if (e.entryIdx == null) return;
       const escaleNameNorm = (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
       if (escaleTicked.has(escaleNameNorm)) return;
       escaleTicked.add(escaleNameNorm);
-      function parseLocalToUTC(str) {
-        const d = new Date(str + 'Z');
-        d.setUTCHours(d.getUTCHours() - TZ_OFFSET);
-        return d.getTime();
+      let pct;
+      if (state.segMap) {
+        pct = indexToVisualUnits(e.entryIdx, state.segMap) / (state.segMap.totalUnits - 1) * 100;
+      } else if (state.entryTimes && state.entryTimes.length > 1) {
+        const t = state.entryTimes[e.entryIdx];
+        const span = state.entryTimeMax - state.entryTimeMin;
+        pct = span > 0 ? ((t - state.entryTimeMin) / span) * 100 : (e.entryIdx / (totalEntries - 1)) * 100;
+      } else {
+        pct = (e.entryIdx / (totalEntries - 1)) * 100;
       }
-      const t0 = parseLocalToUTC(e.start);
-      const t1 = parseLocalToUTC(e.end);
-      let pct0 = span > 0 ? ((t0 - state.entryTimeMin) / span) : 0;
-      let pct1 = span > 0 ? ((t1 - state.entryTimeMin) / span) : 0;
-      pct0 = Math.max(0, Math.min(1, pct0));
-      pct1 = Math.max(0, Math.min(1, pct1));
-      const pct = ((pct0 + pct1) / 2) * 100;
+      pct = Math.max(0, Math.min(100, pct));
       const div = document.createElement('div');
       div.className = 'tl-city-tick tl-escale-city-tick';
       div.style.left = `${pct}%`;
@@ -638,7 +637,6 @@ async function init() {
       fetchRepoJson('escales.json',   []),
       fetchRepoJson('gap_routes.json',[]),
     ]);
-    window.escales = escales;
   } catch (err) {
     console.error('Impossible de charger les données', err);
     return;
@@ -782,6 +780,7 @@ async function init() {
   assignEntryIdx(cities);
   assignEntryIdx(visited);
   assignEntryIdx(escales.filter(e => e.lat != null && e.lon != null));
+  window.escales = escales; // exposé après assignEntryIdx (entryIdx disponibles)
 
   // ── Route polylines ──
   const findNearestEntry = (latlng) => {
