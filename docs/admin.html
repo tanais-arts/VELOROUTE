@@ -1401,6 +1401,21 @@ async function pcloudGetFileLink(fileId) {
   return `https://${j.hosts[0]}${j.path}`;
 }
 
+// Lit le contenu d'un fichier pCloud via file_open/file_read (sans CDN, sans vérif. referer)
+async function pcloudReadFile(fileId, mode = 'text') {
+  const openJ = await pcloudPost('file_open', { flags: '0', fileid: fileId });
+  if (openJ.result !== 0) throw new Error(`file_open ${fileId}: ${openJ.error}`);
+  const fd = openJ.fd;
+  try {
+    const url = `${pcloudBase()}/file_read?fd=${fd}&count=52428800&auth=${encodeURIComponent(pcloudToken)}`;
+    const r = await fetch(url, { referrerPolicy: 'no-referrer' });
+    if (!r.ok) throw new Error(`file_read HTTP ${r.status}`);
+    return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
+  } finally {
+    pcloudPost('file_close', { fd }).catch(() => {});
+  }
+}
+
 // ── Sync pCloud → GitHub ───────────────────────────────────────────────
 async function syncFromPcloud() {
   if (!pcloudToken) { setStatus('sync-status', 'Non connecté à pCloud.', 'error'); return; }
@@ -1428,10 +1443,7 @@ async function syncFromPcloud() {
     const gf = gpxFiles[i];
     setStatus('sync-status', `GPX ${i + 1}/${gpxFiles.length} : ${gf.name}…`);
     try {
-      const dlUrl = await pcloudGetFileLink(gf.fileid);
-      const resp  = await fetch(dlUrl);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const text   = await resp.text();
+      const text   = await pcloudReadFile(gf.fileid, 'text');
       const raw    = parseGPX(text);
       const sampled = sampleByMinute(raw);
       const entries = pointsToTravelEntries(sampled);
@@ -1505,9 +1517,7 @@ async function syncFromPcloud() {
           caption:  '',
         });
       } else {
-        const dlUrl = await pcloudGetFileLink(pf.fileid);
-        const resp  = await fetch(dlUrl);
-        const buf   = await resp.arrayBuffer();
+        const buf   = await pcloudReadFile(pf.fileid, 'buffer');
         let photoMs = null, captionDate = '', entryIdx = 0;
         try {
           const exif = await Exifr.parse(buf, {
