@@ -38,9 +38,6 @@ const state = {
 // Year of travel — set during init from data
 let travelYear = new Date().getFullYear();
 
-// If set, use this fixed terminator opacity for all timeline previews
-let fixedTermOp = null;
-
 // ── Map ──────────────────────────────────────────────────────────────
 const map = L.map('map', { zoomControl: false, attributionControl: true })
   .setView([46.5, 3], 6); // France
@@ -49,79 +46,6 @@ let tileLayer = L.tileLayer(TILE_LIGHT, {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
   maxZoom: 19, subdomains: 'abcd',
 }).addTo(map);
-
-// ── Inline terminator (day/night shadow) ─────────────────────────────
-function _termJulian(date) { return date.valueOf() / 86400000 + 2440587.5; }
-function _termCompute(date) {
-  const pts = [];
-  if (window.SunCalc) {
-    for (let lngDeg = -180; lngDeg <= 180; lngDeg += 2) {
-      let bracketFound = false;
-      let prevLat = -80;
-      let prevAlt = SunCalc.getPosition(date, prevLat, lngDeg).altitude;
-      for (let lat = -72; lat <= 80; lat += 8) {
-        const alt = SunCalc.getPosition(date, lat, lngDeg).altitude;
-        if (prevAlt === 0) { pts.push([prevLat, lngDeg]); bracketFound = true; break; }
-        if (prevAlt * alt <= 0) {
-          let found = false;
-          for (let rlat = prevLat; rlat <= lat; rlat += 1) {
-            const ralt = SunCalc.getPosition(date, rlat, lngDeg).altitude;
-            if (ralt === 0) { pts.push([rlat, lngDeg]); found = true; break; }
-            if (ralt * prevAlt <= 0) {
-              const t = Math.abs(prevAlt) / (Math.abs(prevAlt) + Math.abs(ralt));
-              const root = prevLat + t * (rlat - prevLat);
-              pts.push([root, lngDeg]);
-              found = true; break;
-            }
-            prevAlt = ralt; prevLat = rlat;
-          }
-          if (!found) pts.push([prevLat, lngDeg]);
-          bracketFound = true; break;
-        }
-        prevAlt = alt; prevLat = lat;
-      }
-      if (!bracketFound) {
-        pts.push([prevAlt > 0 ? 80 : -80, lngDeg]);
-      }
-    }
-    const northAlt = SunCalc.getPosition(date, 90, 0).altitude;
-    const pole = northAlt > 0 ? -90 : 90;
-    return [[pole, -180], ...pts, [pole, 180]];
-  }
-  const jd = _termJulian(date), D = jd - 2451545.0;
-  const g  = (357.529 + 0.98560028 * D) * Math.PI / 180;
-  const q  = 280.459 + 0.98564736 * D;
-  const Lr = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * Math.PI / 180;
-  const e  = (23.439 - 0.0000004 * D) * Math.PI / 180;
-  const dec = Math.asin(Math.sin(e) * Math.sin(Lr));
-  const RA  = Math.atan2(Math.cos(e) * Math.sin(Lr), Math.cos(Lr));
-  const GMST = ((6.697375 + 0.0657098242 * D + (D % 1) * 24) % 24 + 24) % 24;
-  const lngSun = (-(GMST / 24 * 360) * Math.PI / 180 + RA);
-  for (let lngDeg = -180; lngDeg <= 180; lngDeg += 2) {
-    const lhr = lngDeg * Math.PI / 180 - lngSun;
-    const lat = Math.atan(-Math.cos(lhr) / Math.tan(dec)) * 180 / Math.PI;
-    pts.push([lat, lngDeg]);
-  }
-  const pole = dec > 0 ? -90 : 90;
-  return [[pole, -180], ...pts, [pole, 180]];
-}
-
-let _termDate = null;
-let terminator = null;
-
-let _termPendingDate = null;
-let _termRafId = null;
-function scheduleTerminatorUpdate(date) {
-  _termPendingDate = date;
-  if (_termRafId) return;
-  _termRafId = requestAnimationFrame(() => {
-    if (_termPendingDate) {
-      terminator.setTime(_termPendingDate);
-    }
-    _termPendingDate = null;
-    _termRafId = null;
-  });
-}
 
 L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
@@ -132,47 +56,11 @@ map.getPane('shadePane').style.mixBlendMode = 'multiply';
 map.createPane('labelsPane');
 map.getPane('labelsPane').style.zIndex = 700;
 map.getPane('labelsPane').style.pointerEvents = 'none';
-map.createPane('terminatorPane');
-map.getPane('terminatorPane').style.zIndex = 680;
-map.getPane('terminatorPane').style.pointerEvents = 'none';
-map.getPane('terminatorPane').style.mixBlendMode = 'multiply';
 map.createPane('routePane');
 map.getPane('routePane').style.zIndex = 690;
 map.createPane('ringPane');
 map.getPane('ringPane').style.zIndex = 710;
 map.getPane('ringPane').style.pointerEvents = 'none';
-
-function ensureTerminatorFilter() {
-  if (document.getElementById('nk-blur-defs')) return;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('width', '0'); svg.setAttribute('height', '0');
-  svg.setAttribute('aria-hidden', 'true'); svg.style.position = 'absolute';
-  svg.style.left = '0'; svg.style.top = '0'; svg.id = 'nk-blur-defs';
-  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-  const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-  filter.setAttribute('id', 'nk-blur'); filter.setAttribute('x', '-50%'); filter.setAttribute('y', '-50%');
-  filter.setAttribute('width', '200%'); filter.setAttribute('height', '200%');
-  const fe = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur');
-  fe.setAttribute('stdDeviation', '14'); fe.setAttribute('result', 'b');
-  filter.appendChild(fe);
-  defs.appendChild(filter);
-  svg.appendChild(defs);
-  document.body.appendChild(svg);
-}
-
-terminator = L.polygon([[0,0],[0,0.01],[0.01,0.01],[0.01,0]], {
-  pane: 'terminatorPane',
-  fillColor: '#001026', fillOpacity: 0.7,
-  stroke: true, color: 'rgba(40,110,200,0.6)', weight: 1,
-  interactive: false,
-}).addTo(map);
-try { ensureTerminatorFilter(); const el = terminator.getElement && terminator.getElement(); if (el) el.classList.add('nk-terminator'); } catch (e) { /* ignore */ }
-terminator.bringToFront();
-terminator.setTime = function(date) {
-  if (_termDate && Math.abs(date - _termDate) < 30000) return;
-  _termDate = date;
-  this.setLatLngs(_termCompute(date));
-};
 
 const hillshade = L.tileLayer(
   'https://server.arcgisonline.com/ArcGIS/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}',
@@ -307,48 +195,6 @@ syncAllSoundBtns();
   };
 }
 
-// ── Daylight theme ─────────────────────────────────────────────────────
-function sunElevationDeg(lat, lon, day, month, hour, minute) {
-  const utcMin = ((hour - TZ_OFFSET + 24) % 24) * 60 + minute;
-  const days = [0,31,28,31,30,31,30,31,31,30,31,30,31];
-  let doy = day;
-  for (let m = 1; m < month; m++) doy += days[m];
-  const decl = -23.45 * Math.cos(2 * Math.PI * (doy + 10) / 365) * Math.PI / 180;
-  const solarNoon = 720 - 4 * lon;
-  const H = (utcMin - solarNoon) * (Math.PI / 720);
-  const φ = lat * Math.PI / 180;
-  return Math.asin(Math.sin(φ)*Math.sin(decl) + Math.cos(φ)*Math.cos(decl)*Math.cos(H)) * 180/Math.PI;
-}
-
-function applyDaylight(elev) {
-  const NO_DARK_thresh = -3;
-  const FULL_NIGHT_thresh = -12;
-  const computeTermOpacity = (e) => {
-    let tt;
-    if (e >= NO_DARK_thresh) tt = 0;
-    else if (e <= FULL_NIGHT_thresh) tt = 1;
-    else tt = (NO_DARK_thresh - e) / (NO_DARK_thresh - FULL_NIGHT_thresh);
-    tt = tt * tt * (3 - 2 * tt);
-    return Math.max(0, Math.min(0.8, 0.20 + tt * 0.60));
-  };
-  const termOp = (fixedTermOp !== null) ? fixedTermOp : computeTermOpacity(elev);
-  if (terminator) {
-    terminator.setStyle({ fillOpacity: termOp, fillColor: '#000412' });
-    try { terminator.bringToFront(); } catch (e) { /* ignore */ }
-  }
-}
-
-const P_NIGHT = {
-  bg:       [8,12,20,1],      chrome:   [4,6,14,0.92],    panel:    [6,9,18,0.97],
-  border:   [255,255,255,0.07], borderF: [255,255,255,0.05],
-  text1:    [240,240,240,1],  text2:    [255,255,255,0.70],
-  text3:    [255,255,255,0.45], text4:  [255,255,255,0.35],
-  text5:    [255,255,255,0.30], accentT:[240,192,96,1],
-  tlTrack:  [255,255,255,0.12], tlEdge: [255,255,255,0.30],
-  cityC:    [255,255,255,0.85], tickC:  [255,255,255,0.60],
-  zoomBg:   [8,12,20,0.85],   zoomC:   [170,170,170,1],
-  route:    [240,192,96,1],   routeOp: 0.65,
-};
 const P_DAY = {
   bg:       [230,245,255,1],  chrome:   [220,240,250,0.93], panel:  [255,255,255,0.98],
   border:   [6,30,40,0.08],   borderF:  [6,30,40,0.05],
@@ -382,7 +228,6 @@ const P_DAY = {
   root.style.setProperty('--zoombg',  toRgba(P_DAY.zoomBg));
   root.style.setProperty('--zoomc',   toRgba(P_DAY.zoomC));
   tileLayer.setUrl(TILE_LIGHT);
-  terminator.setStyle({ fillOpacity: 0.85, fillColor: '#001026' });
 })();
 
 // ── Location helpers (lightbox) ─────────────────────────────────────
@@ -721,16 +566,6 @@ function previewAtTime(t) {
   const ip = interpolatePosition(t);
   if (!ip) return;
   try { showRing([ip.lat, ip.lon]); } catch (e) { /* ignore */ }
-  scheduleTerminatorUpdate(new Date(t));
-  let elev = 0;
-  if (window.SunCalc) {
-    const pos = SunCalc.getPosition(new Date(t), ip.lat, ip.lon);
-    elev = pos.altitude * 180 / Math.PI;
-  } else {
-    const localDate = new Date(t + TZ_OFFSET * 3600000);
-    elev = sunElevationDeg(ip.lat, ip.lon, localDate.getUTCDate(), localDate.getUTCMonth() + 1, localDate.getUTCHours(), localDate.getUTCMinutes());
-  }
-  applyDaylight(elev);
   updateTimelineThumbForTime(t);
 }
 
@@ -760,8 +595,6 @@ function selectEntry(idx) {
   state.activeIdx = idx;
 
   showRing([e.lat, e.lon]);
-  scheduleTerminatorUpdate(new Date(Date.UTC(travelYear, e.month - 1, e.day, e.hour - TZ_OFFSET, e.minute)));
-  applyDaylight(sunElevationDeg(e.lat, e.lon, e.day, e.month, e.hour, e.minute));
   scrollCarouselTo(nearestPhotoIdx(idx), true);
   if (!map.getBounds().contains([e.lat, e.lon])) {
     map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
@@ -905,36 +738,6 @@ async function init() {
   state.entryTimes    = entries.map(e => Date.UTC(year, e.month - 1, e.day, (e.hour || 0) - TZ_OFFSET, e.minute || 0));
   state.entryTimeMin  = Math.min(...state.entryTimes);
   state.entryTimeMax  = Math.max(...state.entryTimes);
-
-  const firstT = state.entryTimeMin || Date.now();
-  map.whenReady(() => scheduleTerminatorUpdate(new Date(firstT)));
-
-  // Fixed terminator opacity from first available entry
-  try {
-    const sample = entries.find(e => e.lat && e.lon);
-    if (sample) {
-      let elev = 0;
-      if (window.SunCalc) {
-        const pos = SunCalc.getPosition(
-          new Date(Date.UTC(year, sample.month - 1, sample.day, (sample.hour || 0) - TZ_OFFSET, sample.minute || 0)),
-          sample.lat, sample.lon
-        );
-        elev = pos.altitude * 180 / Math.PI;
-      } else {
-        elev = sunElevationDeg(sample.lat, sample.lon, sample.day, sample.month, sample.hour || 0, sample.minute || 0);
-      }
-      const NO_DARK = -3, FULL_NIGHT = -12;
-      let t;
-      if (elev >= NO_DARK) t = 0;
-      else if (elev <= FULL_NIGHT) t = 1;
-      else t = (NO_DARK - elev) / (NO_DARK - FULL_NIGHT);
-      t = t * t * (3 - 2 * t);
-      fixedTermOp = 0.7; // Force un overlay nuit modéré
-      if (terminator) terminator.setStyle({ fillOpacity: fixedTermOp, fillColor: '#000412' });
-    }
-  } catch (err) {
-    console.warn('Could not compute fixed terminator opacity', err);
-  }
 
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
