@@ -1402,13 +1402,11 @@ async function pcloudGetFileLink(fileId) {
   return `https://${j.hosts[0]}${j.path}`;
 }
 
-// Lit le contenu d'un fichier pCloud via file_open/file_read/file_close (sans CDN, sans vérif. referer)
+// Lit le contenu d'un fichier pCloud via downloadfile (stream direct api.pcloud.com, pas de CDN)
 async function pcloudReadFile(fileId, mode = 'text') {
-  const j = await pcloudPost('getfilelink', { fileid: fileId, auth: pcloudToken, forcedownload: '1' });
-  if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
-  const url = `https://${j.hosts[0]}${j.path}`;
+  const url = `${pcloudBase()}/downloadfile?fileid=${encodeURIComponent(fileId)}&auth=${encodeURIComponent(pcloudToken)}`;
   const r = await fetch(url, { referrerPolicy: 'no-referrer' });
-  if (!r.ok) throw new Error(`download HTTP ${r.status}`);
+  if (!r.ok) throw new Error(`downloadfile HTTP ${r.status}`);
   return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
 }
 
