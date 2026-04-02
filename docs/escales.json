@@ -246,5 +246,13 @@
     "duration_h": 0,
     "lat": 47.13528,
     "lon": 4.94437
+  },
+  {
+    "city": "Formigny La Bataille",
+    "start": "2025-05-02T16:07",
+    "end": "2025-05-02T16:07",
+    "duration_h": 0,
+    "lat": 49.34439,
+    "lon": -1.09021
   }
 ]
