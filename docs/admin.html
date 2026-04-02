@@ -968,10 +968,13 @@ async function handlePhotos(files) {
     }
   }
 
-  // Upload et traitement automatiques
+  // Upload pCloud si connecté
   if (pcloudToken) {
     setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers pCloud…`);
     await uploadAndProcess();
+  } else {
+    // Pas de pCloud : commiter photos.json directement
+    await commitPhotosJsonMerged();
   }
 }
 
@@ -1076,6 +1079,23 @@ async function loadRepoJsonDirect(filename) {
   if (!r.ok) throw new Error(`GitHub ${r.status}`);
   const j = await r.json();
   return JSON.parse(atob(j.content.replace(/\n/g, '')));
+}
+
+async function commitPhotosJsonMerged() {
+  if (!photoEntries.length) return;
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) { setStatus('pcloud-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
+  try {
+    const existing = await loadRepoJsonDirect('photos.json').catch(() => []);
+    const srcSet = new Set(photoEntries.map(p => p.src));
+    const merged = [...existing.filter(p => !srcSet.has(p.src)), ...photoEntries.map(({ _selected, ...r }) => r)];
+    merged.sort((a, b) => (a.src > b.src ? 1 : -1));
+    await githubPutFile('docs/photos.json', JSON.stringify(merged, null, 2), `admin: photos.json — ${merged.length} entrée(s)`, ghToken);
+    photoEntries = merged;
+    setStatus('pcloud-status', `✓ photos.json commité (${merged.length} entrée(s))`, 'ok');
+  } catch (err) {
+    setStatus('pcloud-status', `⚠ Commit photos.json échoué : ${err.message}`, 'warn');
+  }
 }
 
 async function githubPutFile(path, content, message, ghToken, retries = 3) {
@@ -1408,30 +1428,7 @@ async function uploadToPCloud() {
       ? `⚠ ${errors} erreur(s) — ${photos.length - errors} photo(s) traitées`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
     setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
-
-    // ── Commit photos.json avec les nouvelles entrées ──────────────────
-    if (photoEntries.length) {
-      try {
-        setStatus('pcloud-status', (msg) + ' — commit photos.json…');
-        // Fusion : on remplace les entrées déjà présentes (même src) et ajoute les nouvelles
-        const existing = await (async () => {
-          try { return await loadRepoJsonDirect('photos.json'); } catch { return []; }
-        })();
-        const srcSet = new Set(photoEntries.map(p => p.src));
-        const merged = [...existing.filter(p => !srcSet.has(p.src)), ...photoEntries.map(({ _selected, ...r }) => r)];
-        merged.sort((a, b) => (a.src > b.src ? 1 : -1));
-        const ghToken = $('gh-token').value.trim();
-        if (ghToken) {
-          await githubPutFile('docs/photos.json', JSON.stringify(merged, null, 2), `admin: photos.json — ${merged.length} entrée(s)`, ghToken);
-          photoEntries = merged;
-          setStatus('pcloud-status', `✓ ${photos.length} photo(s) uploadées · photos.json commité (${merged.length} entrées)`, 'ok');
-        } else {
-          setStatus('pcloud-status', msg + ' — ⚠ Token GitHub manquant, photos.json non commité', 'warn');
-        }
-      } catch (commitErr) {
-        setStatus('pcloud-status', msg + ` — ⚠ Commit photos.json échoué : ${commitErr.message}`, 'warn');
-      }
-    }
+    await commitPhotosJsonMerged();
   } catch (err) {
     progWrap.style.display = 'none';
     setStatus('pcloud-status', `Erreur : ${err.message}`, 'error');
