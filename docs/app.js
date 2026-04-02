@@ -1184,43 +1184,6 @@ async function init() {
     }
   });
 
-  // ── Carousel arrows ──
-  const carouselEl = document.getElementById('photo-carousel');
-  function previewEntryFromCarouselCenter() {
-    const scrollLeft = carouselEl.scrollLeft;
-    const centerX = scrollLeft + carouselEl.clientWidth / 2;
-    const photoIdx = Math.max(0, Math.min(state.photos.length - 1, Math.round((centerX - THUMB_STEP / 2) / THUMB_STEP)));
-    const p = state.photos[photoIdx];
-    if (!p || p.entryIdx == null) return;
-    const idx = p.entryIdx;
-    const e = state.entries[idx];
-    if (!e) return;
-    showRing([e.lat, e.lon]);
-    applyDaylight(sunElevationDeg(e.lat, e.lon, e.day, e.month, e.hour, e.minute));
-    scheduleTerminatorUpdate(new Date(Date.UTC(year, e.month - 1, e.day, e.hour - TZ_OFFSET, e.minute)));
-    if (!map.getBounds().contains([e.lat, e.lon])) {
-      map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
-    }
-    if (dateDay)   dateDay.textContent   = e.day;
-    if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
-    if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
-  }
-
-  function attachCarouselArrow(btnId, dir) {
-    const btn = document.getElementById(btnId);
-    let intervalId = null;
-    function step() { carouselEl.scrollBy({ left: dir * THUMB_STEP, behavior: 'smooth' }); previewEntryFromCarouselCenter(); }
-    function start() { step(); intervalId = setInterval(step, 300); }
-    function stop()  { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
-    btn.addEventListener('mousedown', start);
-    btn.addEventListener('touchstart', start, { passive: true });
-    btn.addEventListener('mouseup', stop);
-    btn.addEventListener('mouseleave', stop);
-    btn.addEventListener('touchend', stop);
-  }
-  attachCarouselArrow('carousel-prev', -1);
-  attachCarouselArrow('carousel-next',  1);
-
   // ── Nav buttons (navigate between photo-bearing entries) ──
   function debounce(fn, ms) {
     let timer;
@@ -1240,6 +1203,23 @@ async function init() {
     }
     if (state.activeIdx < entries.length - 1) selectEntry(state.activeIdx + 1);
   }
+
+  // ── Carousel arrows — naviguent photo par photo, restent centrées ──
+  const carouselEl = document.getElementById('photo-carousel');
+  function attachCarouselArrow(btnId, fn) {
+    const btn = document.getElementById(btnId);
+    let intervalId = null;
+    function start() { fn(); intervalId = setInterval(() => fn(), 350); }
+    function stop()  { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
+    btn.addEventListener('mousedown', start);
+    btn.addEventListener('touchstart', start, { passive: true });
+    btn.addEventListener('mouseup', stop);
+    btn.addEventListener('mouseleave', stop);
+    btn.addEventListener('touchend', stop);
+  }
+  attachCarouselArrow('carousel-prev', navPrev);
+  attachCarouselArrow('carousel-next', navNext);
+
   document.getElementById('tl-prev').addEventListener('click', debounce(navPrev, 400));
   document.getElementById('tl-next').addEventListener('click', debounce(navNext, 400));
 
