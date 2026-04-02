@@ -1108,6 +1108,7 @@ function pcloudSuccess(j, email) {
   $('btn-logout-header').style.display = 'inline-block';
   $('header-user').textContent = `· ${j.email || email}`;
   setStatus('login-status', '');
+  setTimeout(() => map.invalidateSize(), 100);
   try {
     const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
     _s.pcloudToken  = j.auth;
@@ -1225,6 +1226,7 @@ async function loadSettings() {
           $('main-content').style.display  = 'flex';
           $('btn-logout-header').style.display = 'inline-block';
           $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
+          setTimeout(() => map.invalidateSize(), 100);
           loadExistingData();
         } else {
           // Token révoqué — nettoyer et afficher le login
