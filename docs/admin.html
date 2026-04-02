@@ -320,6 +320,10 @@
       <input type="text" id="pcloud-path" value="/Public Folder/VELOROUTE">
     </div>
     <div class="field" style="margin:0">
+      <label>Code partage pCloud <span style="font-weight:400;opacity:.5">(auto-détecté si vide)</span></label>
+      <input type="text" id="pcloud-share-code" placeholder="lXXXXXXXXXX">
+    </div>
+    <div class="field" style="margin:0">
       <label>GitHub PAT
         <a href="https://github.com/settings/tokens/new?scopes=workflow,contents&amp;description=VELOROUTE+Admin"
           target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">générer</a></label>
@@ -1195,9 +1199,10 @@ $('pcloud-password').addEventListener('keydown', e => { if (e.key === 'Enter') p
 const SETTINGS_KEY = 'veloroute_admin_settings';
 function saveSettings() {
   const data = {
-    ghToken:    $('gh-token').value.trim(),
-    cdnBase:    $('cdn-base').value.trim(),
-    pcloudPath: $('pcloud-path').value.trim(),
+    ghToken:         $('gh-token').value.trim(),
+    cdnBase:         $('cdn-base').value.trim(),
+    pcloudPath:      $('pcloud-path').value.trim(),
+    pcloudShareCode: $('pcloud-share-code').value.trim(),
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
   const saved = $('settings-saved');
@@ -1207,9 +1212,10 @@ function saveSettings() {
 async function loadSettings() {
   try {
     const data = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-    if (data.ghToken)    $('gh-token').value    = data.ghToken;
-    if (data.cdnBase)    $('cdn-base').value    = data.cdnBase;
-    if (data.pcloudPath) $('pcloud-path').value = data.pcloudPath;
+    if (data.ghToken)         $('gh-token').value          = data.ghToken;
+    if (data.cdnBase)         $('cdn-base').value          = data.cdnBase;
+    if (data.pcloudPath)      $('pcloud-path').value       = data.pcloudPath;
+    if (data.pcloudShareCode) { $('pcloud-share-code').value = data.pcloudShareCode; _pcloudShareCode = data.pcloudShareCode; }
     if (data.pcloudToken) {
       // Valider le token sauvegardé avant de l'utiliser
       const region = data.pcloudRegion || 'api';
@@ -1402,21 +1408,42 @@ async function pcloudGetFileLink(fileId) {
   return `https://${j.hosts[0]}${j.path}`;
 }
 
-// Lit le contenu d'un fichier pCloud via downloadfile POST (même CORS que listfolder, pas de CDN)
-async function pcloudReadFile(fileId, mode = 'text') {
-  const body = new URLSearchParams({ fileid: String(fileId), auth: pcloudToken });
-  const r = await fetch(`${pcloudBase()}/downloadfile`, {
-    method: 'POST',
-    referrerPolicy: 'no-referrer',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString()
-  });
-  if (!r.ok) throw new Error(`downloadfile HTTP ${r.status}`);
-  const ct = r.headers.get('content-type') || '';
-  if (ct.includes('application/json')) {
-    const j = await r.json();
-    throw new Error(`downloadfile: ${j.error || 'erreur API'} (code ${j.result})`);
+// ── Lien public pCloud (pas de vérif. Origin/Referer) ─────────────────
+let _pcloudShareCode = null;
+
+async function pcloudEnsureShareCode() {
+  if (_pcloudShareCode) return _pcloudShareCode;
+  const s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+  if (s.pcloudShareCode) { _pcloudShareCode = s.pcloudShareCode; return _pcloudShareCode; }
+
+  // Récupère le folderid du dossier de base
+  const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+  const fj = await pcloudPost('listfolder', { path: base, auth: pcloudToken });
+  if (fj.result !== 0) throw new Error(`listfolder base: ${fj.error}`);
+  const folderid = fj.metadata.folderid;
+
+  // Cherche un lien public existant
+  const lj = await pcloudPost('listpublinks', { auth: pcloudToken });
+  if (lj.result === 0) {
+    const found = (lj.publinks || []).find(l => l.isfolder && l.folderid === folderid);
+    if (found) { _pcloudShareCode = found.code; s.pcloudShareCode = found.code; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); return _pcloudShareCode; }
   }
+
+  // Crée un lien public pour le dossier
+  const cj = await pcloudPost('createpublink', { folderid, auth: pcloudToken });
+  if (cj.result === 0 && cj.code) {
+    _pcloudShareCode = cj.code; s.pcloudShareCode = cj.code; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); return _pcloudShareCode;
+  }
+  throw new Error('Impossible d\'obtenir un lien public pCloud. Partagez le dossier VELOROUTE sur pCloud et copiez le code dans ⚙ Réglages > Code partage pCloud.');
+}
+
+// Lit un fichier via lien public (getpublicfilelink) — aucune restriction Origin/Referer
+async function pcloudReadFile(fileId, mode = 'text') {
+  const code = await pcloudEnsureShareCode();
+  const pj = await pcloudPost('getpublicfilelink', { code, fileid: String(fileId) });
+  if (pj.result !== 0) throw new Error(`getpublicfilelink (${pj.result}): ${pj.error}`);
+  const r = await fetch(`https://${pj.hosts[0]}${pj.path}`);
+  if (!r.ok) throw new Error(`Public download HTTP ${r.status}`);
   return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
 }
 
