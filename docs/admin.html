@@ -995,39 +995,25 @@ async function loadExistingData(useApi = false) {
   let tCount = 0, pCount = 0, vCount = 0;
   setStatus('gpx-status', 'Chargement des données existantes…');
   try {
-    const r = await fetch(`${raw}/travel.json?_=${Date.now()}`);
-    if (r.ok) {
-      travelEntries = await r.json();
-      tCount = travelEntries.length;
-      if (travelEntries.length > 1) {
-        if (routeLine) map.removeLayer(routeLine);
-        const latlngs = travelEntries.map(e => [e.lat, e.lon]);
-        routeLine = L.polyline(latlngs, { color: '#f0c060', weight: 3, opacity: 0.8 }).addTo(map);
-        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
-      }
+    travelEntries = await fetchJson('travel.json');
+    tCount = travelEntries.length;
+    if (travelEntries.length > 1) {
+      if (routeLine) map.removeLayer(routeLine);
+      const latlngs = travelEntries.map(e => [e.lat, e.lon]);
+      routeLine = L.polyline(latlngs, { color: '#f0c060', weight: 3, opacity: 0.8 }).addTo(map);
+      map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
     }
   } catch {}
   try {
-    const r = await fetch(`${raw}/photos.json?_=${Date.now()}`);
-    if (r.ok) {
-      photoEntries = await r.json();
-      pCount = photoEntries.length;
-      existingPhotoFilenames = new Set(
-        photoEntries.map(p => decodeURIComponent(p.src.split('/').pop()))
-      );
-    }
+    photoEntries = await fetchJson('photos.json');
+    pCount = photoEntries.length;
+    existingPhotoFilenames = new Set(photoEntries.map(p => decodeURIComponent(p.src.split('/').pop())));
   } catch {}
   try {
-    const r = await fetch(`${raw}/visited.json?_=${Date.now()}`);
-    if (r.ok) {
-      visitedCities = await r.json();
-      vCount = visitedCities.length;
-    }
+    visitedCities = await fetchJson('visited.json');
+    vCount = visitedCities.length;
   } catch {}
-  try {
-    const r = await fetch(`${raw}/escales.json?_=${Date.now()}`);
-    if (r.ok) escaleEntries = await r.json();
-  } catch {}
+  try { escaleEntries = await fetchJson('escales.json'); } catch {}
   setStatus('gpx-status',
     tCount + pCount + vCount > 0
       ? `✓ ${tCount} entrées GPS · ${pCount} photos · ${vCount} villes`
@@ -1633,7 +1619,7 @@ $('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
 
 $('btn-refresh-manage').addEventListener('click', async () => {
   setStatus('manage-status', 'Actualisation…');
-  await loadExistingData();
+  await loadExistingData(true);
   renderSegments();
   renderManagePhotos();
   // Rafraîchir la carte
