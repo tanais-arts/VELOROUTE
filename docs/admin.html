@@ -1035,36 +1035,36 @@ function deduplicateTravel(newEntries) {
 }
 
 // ── Auto-commit travel.json → GitHub ─────────────────────────────────
-async function autoCommitTravel() {
-  const ghToken = $('gh-token').value.trim();
-  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
-  const owner = 'tanais-arts', repo = 'VELOROUTE', path = 'docs/travel.json';
-  const content = JSON.stringify(travelEntries, null, 2);
+async function githubPutFile(path, content, message, ghToken, retries = 3) {
+  const owner = 'tanais-arts', repo = 'VELOROUTE';
   const b64 = btoa(unescape(encodeURIComponent(content)));
-  // Récupérer le SHA actuel du fichier
-  const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-    headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
-  });
-  const getJ = await getR.json();
-  const sha = Array.isArray(getJ) ? undefined : getJ.sha;
-  // Commit
-  const putR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${ghToken}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/vnd.github+json'
-    },
-    body: JSON.stringify({
-      message: `admin: travel.json — ${travelEntries.length} entrées`,
-      content: b64,
-      sha
-    })
-  });
-  if (!putR.ok) {
+  for (let attempt = 0; attempt < retries; attempt++) {
+    const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
+    });
+    const getJ = await getR.json();
+    const sha = Array.isArray(getJ) ? undefined : getJ.sha;
+    const putR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
+      body: JSON.stringify({ message, content: b64, sha })
+    });
+    if (putR.ok) return;
+    if (putR.status === 409 && attempt < retries - 1) continue; // SHA conflict → retry avec SHA frais
     const e = await putR.json().catch(() => ({}));
     throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
   }
+}
+
+async function autoCommitTravel() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
+  await githubPutFile(
+    'docs/travel.json',
+    JSON.stringify(travelEntries, null, 2),
+    `admin: travel.json — ${travelEntries.length} entrées`,
+    ghToken
+  );
 }
 
 // ── Upload pCloud + Actions (auto-déclenché après drop photos) ────────
@@ -1243,33 +1243,13 @@ loadSettings();
 async function commitPhotosJson() {
   const ghToken = $('gh-token').value.trim();
   if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
-  const owner = 'tanais-arts', repo = 'VELOROUTE', path = 'docs/photos.json';
-  // Strip _selected ephemeral flag before committing
   const toCommit = photoEntries.map(({ _selected, ...rest }) => rest);
-  const content = JSON.stringify(toCommit, null, 2);
-  const b64 = btoa(unescape(encodeURIComponent(content)));
-  const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-    headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
-  });
-  const getJ = await getR.json();
-  const sha = Array.isArray(getJ) ? undefined : getJ.sha;
-  const putR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${ghToken}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/vnd.github+json'
-    },
-    body: JSON.stringify({
-      message: `admin: photos.json — ${toCommit.length} entrées`,
-      content: b64,
-      sha
-    })
-  });
-  if (!putR.ok) {
-    const e = await putR.json().catch(() => ({}));
-    throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
-  }
+  await githubPutFile(
+    'docs/photos.json',
+    JSON.stringify(toCommit, null, 2),
+    `admin: photos.json — ${toCommit.length} entrées`,
+    ghToken
+  );
 }
 
 async function pcloudEnsureFolder(folderPath) {
