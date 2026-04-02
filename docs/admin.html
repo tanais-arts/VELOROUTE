@@ -577,7 +577,7 @@ function sampleByMinute(points) {
   return [...seen.values()];
 }
 
-function pointsToTravelEntries(points) {
+function pointsToTravelEntries(points, gpxFile) {
   return points.map((p, i) => ({
     id:     i + 1,
     lon:    p.lon,
@@ -588,6 +588,7 @@ function pointsToTravelEntries(points) {
     minute: p.minute,
     frame:  4,
     year:   p.year,
+    ...(gpxFile ? { gpxFile } : {}),
   }));
 }
 
@@ -597,7 +598,7 @@ function processGPXText(text, label) {
     const raw = parseGPX(text);
     if (!raw.length) { setStatus('gpx-status', 'Aucun point valide trouvé dans ce GPX.', 'error'); return; }
     const sampled    = sampleByMinute(raw);
-    const newEntries = pointsToTravelEntries(sampled);
+    const newEntries = pointsToTravelEntries(sampled, label);
     const fresh      = deduplicateTravel(newEntries);
 
     if (!fresh.length) {
@@ -898,16 +899,6 @@ async function handlePhotos(files) {
   // Enregistrer les nouveaux noms pour éviter re-upload
   rawPhotos.forEach(p => existingPhotoFilenames.add(p.file.name));
 
-  // Ville depuis nom de dossier (déduplication automatique)
-  const cityName = $('photo-subfolder').value.trim();
-  if (cityName) {
-    const matchedEntries = rawPhotos
-      .filter(p => p.photoMs != null)
-      .map(p => travelEntries[p.entryIdx])
-      .filter(Boolean);
-    await addCityFromPhotos(cityName, matchedEntries);
-  }
-
   // Upload et traitement automatiques
   if (pcloudToken) {
     setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers pCloud…`);
@@ -949,8 +940,24 @@ function renderPhotoMarkers() {
 function updateExport() { /* no-op — tout est auto-commité */ }
 
 // ── Chargement données existantes ──────────────────────────────────────
-async function loadExistingData() {
+async function loadExistingData(useApi = false) {
+  const ghToken = $('gh-token').value.trim();
   const raw = 'https://raw.githubusercontent.com/tanais-arts/VELOROUTE/main/docs';
+  const apiBase = 'https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs';
+
+  async function fetchJson(filename) {
+    if (useApi && ghToken) {
+      const r = await fetch(`${apiBase}/${filename}`, {
+        headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
+      });
+      if (!r.ok) throw new Error(`API ${r.status}`);
+      const j = await r.json();
+      return JSON.parse(atob(j.content.replace(/\n/g, '')));
+    }
+    const r = await fetch(`${raw}/${filename}?_=${Date.now()}`);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  }
   let tCount = 0, pCount = 0, vCount = 0;
   setStatus('gpx-status', 'Chargement des données existantes…');
   try {
@@ -1476,7 +1483,17 @@ $('btn-seg-delete').addEventListener('click', async () => {
   if (!sel.length) { setStatus('manage-status', 'Aucun segment sélectionné.', 'warn'); return; }
   const total = sel.reduce((acc, s) => acc + s.entries.length, 0);
   if (!confirm(`Supprimer définitivement ${sel.length} segment(s) — ${total} points GPS ?\n\n⚠ Les positions des photos liées peuvent être affectées.`)) return;
-  const toRemove = new Set(); sel.forEach(s => s.entries.forEach(e => toRemove.add(e)));
+  const toRemove = new Set(); sel.forEach(s => s.entries.forEach(e => toRemove.has(e) || toRemove.add(e)));
+  // Supprimer les GPX sources sur pCloud
+  if (pcloudToken) {
+    const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+    const gpxFiles = new Set();
+    sel.forEach(s => s.entries.forEach(e => { if (e.gpxFile) gpxFiles.add(e.gpxFile); }));
+    for (const fname of gpxFiles) {
+      try { await pcloudPost('deletefile', { path: `${base}/GPX/${fname}`, auth: pcloudToken }); }
+      catch (err) { console.warn(`pCloud deletefile GPX ${fname}:`, err); }
+    }
+  }
   travelEntries = travelEntries.filter(e => !toRemove.has(e)); travelEntries.forEach((e, i) => e.id = i + 1);
   if (routeLine) { map.removeLayer(routeLine); routeLine = null; }
   if (travelEntries.length > 1) {
@@ -1530,7 +1547,17 @@ $('btn-ph-hide').addEventListener('click', async () => {
 $('btn-ph-delete').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
-  if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur pCloud ne sont PAS supprimés.`)) return;
+  if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur pCloud seront également supprimés.`)) return;
+  // Supprimer les sources sur pCloud
+  if (pcloudToken) {
+    const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+    for (const p of sel) {
+      try {
+        const srcPath = `${base}/Sources/${decodeURIComponent(p.src_orig ? p.src_orig.split('/Sources/')[1] || '' : p.src.split('/Sources/')[1] || '')}`;
+        if (srcPath.length > base.length + 10) await pcloudPost('deletefile', { path: srcPath, auth: pcloudToken });
+      } catch (err) { console.warn(`pCloud deletefile photo:`, err); }
+    }
+  }
   sel.forEach(p => { try { existingPhotoFilenames.delete(decodeURIComponent(p.src.split('/').pop())); } catch {} });
   photoEntries = photoEntries.filter(p => !p._selected);
   setStatus('manage-status', 'Commit photos.json…');
