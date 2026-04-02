@@ -771,8 +771,13 @@ function selectEntry(idx) {
   if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
-  if (state.entryTimes && state.entryTimes[idx] != null) tlInput.value = state.entryTimes[idx];
-  else tlInput.value = idx;
+  if (state.segMap) {
+    tlInput.value = indexToVisualUnits(idx, state.segMap);
+  } else if (state.entryTimes && state.entryTimes[idx] != null) {
+    tlInput.value = state.entryTimes[idx];
+  } else {
+    tlInput.value = idx;
+  }
   updateTimelineThumb(idx);
 }
 
