@@ -1170,27 +1170,26 @@ async function init() {
     if (state.entryTimes && state.entryTimes.length > 1) {
       const t = Number(tlInput.value);
       const tIdx = timeToIndex(t);
+      if (mediaEntries.size === 0) { selectEntry(tIdx); return; }
       let idx = tIdx;
-      if (mediaEntries.size > 0) {
-        let best = null, bestDt = Infinity;
+      let best = null, bestDt = Infinity;
+      for (const i of mediaEntries) {
+        if (i < 0 || i >= state.entryTimes.length) continue;
+        const dt = state.entryTimes[i] - t;
+        if (dt < 0) continue;
+        if (dt < bestDt) { bestDt = dt; best = i; }
+      }
+      if (best === null) {
+        let bestPast = null, bestPastDt = Infinity;
         for (const i of mediaEntries) {
           if (i < 0 || i >= state.entryTimes.length) continue;
-          const dt = state.entryTimes[i] - t;
+          const dt = t - state.entryTimes[i];
           if (dt < 0) continue;
-          if (dt < bestDt) { bestDt = dt; best = i; }
+          if (dt < bestPastDt) { bestPastDt = dt; bestPast = i; }
         }
-        if (best === null) {
-          let bestPast = null, bestPastDt = Infinity;
-          for (const i of mediaEntries) {
-            if (i < 0 || i >= state.entryTimes.length) continue;
-            const dt = t - state.entryTimes[i];
-            if (dt < 0) continue;
-            if (dt < bestPastDt) { bestPastDt = dt; bestPast = i; }
-          }
-          if (bestPast !== null) best = bestPast;
-        }
-        if (best !== null) idx = best;
+        if (bestPast !== null) best = bestPast;
       }
+      if (best !== null) idx = best;
       const target = state.entryTimes[idx];
       if (t === target) { selectEntry(idx); return; }
       animateToTime(t, target, 2000,
