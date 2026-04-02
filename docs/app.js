@@ -777,30 +777,17 @@ function selectEntry(idx) {
 }
 
 // ── Init ───────────────────────────────────────────────────────────────
-const _GH_API = 'https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs';
-const _GH_HDR = { Accept: 'application/vnd.github+json' };
-async function fetchRepoJson(filename, fallback) {
-  try {
-    const r = await fetch(`${_GH_API}/${filename}`, { headers: _GH_HDR });
-    if (!r.ok) throw new Error(r.status);
-    const j = await r.json();
-    return JSON.parse(atob(j.content.replace(/\n/g, '')));
-  } catch {
-    if (fallback !== undefined) return fallback;
-    throw new Error(`Impossible de charger ${filename}`);
-  }
-}
-
 async function init() {
   let entries, photos, cities, visited, escales, gapRoutes;
+  const cb = `?_=${Date.now()}`;
   try {
     [entries, photos, cities, visited, escales, gapRoutes] = await Promise.all([
-      fetchRepoJson('travel.json'),
-      fetchRepoJson('photos.json',    []),
-      fetchRepoJson('cities.json',    []),
-      fetchRepoJson('visited.json',   []),
-      fetchRepoJson('escales.json',   []),
-      fetchRepoJson('gap_routes.json',[]),
+      fetch('travel.json'    + cb).then(r => r.json()),
+      fetch('photos.json'    + cb).then(r => r.json()).catch(() => []),
+      fetch('cities.json'    + cb).then(r => r.json()).catch(() => []),
+      fetch('visited.json'   + cb).then(r => r.json()).catch(() => []),
+      fetch('escales.json'   + cb).then(r => r.json()).catch(() => []),
+      fetch('gap_routes.json'+ cb).then(r => r.json()).catch(() => []),
     ]);
     window.escales = escales;
   } catch (err) {
