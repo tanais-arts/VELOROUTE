@@ -1076,12 +1076,16 @@ async function githubPutFile(path, content, message, ghToken, retries = 3) {
       headers: { Authorization: `Bearer ${ghToken}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json' },
       body: JSON.stringify({ message, content: b64, sha })
     });
-    if (putR.ok) return;
+    if (putR.ok) {
+      try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
+      return;
+    }
     if (putR.status === 409) continue; // SHA conflict → retry avec SHA frais (toujours)
     const e = await putR.json().catch(() => ({}));
     throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
   }
   // Tous les retries épuisés sur 409 : considéré comme commit réussi
+  try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
 }
 
 async function autoCommitTravel() {
@@ -1293,11 +1297,19 @@ async function commitEscalesJson() {
 }
 
 async function pcloudEnsureFolder(folderPath) {
-  const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(folderPath)}&auth=${pcloudToken}`;
-  const r = await fetch(url);
-  const j = await r.json();
-  if (j.result !== 0) throw new Error(`createfolder ${folderPath}: ${j.error}`);
-  return j.metadata.folderid;
+  // Crée récursivement chaque segment du chemin
+  const parts = folderPath.replace(/\/+$/, '').split('/').filter(Boolean);
+  let built = '';
+  let folderId = null;
+  for (const part of parts) {
+    built += '/' + part;
+    const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(built)}&auth=${pcloudToken}`;
+    const r = await fetch(url);
+    const j = await r.json();
+    if (j.result !== 0) throw new Error(`createfolder ${built}: ${j.error}`);
+    folderId = j.metadata.folderid;
+  }
+  return folderId;
 }
 
 async function pcloudUploadFile(folderId, filename, blob) {
