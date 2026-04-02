@@ -667,64 +667,47 @@ async function init() {
   }
 
   // ── Timeline Escale Highlights ──
-  function renderTimelineEscales(escales, entryTimes, entryTimeMin, entryTimeMax) {
+  function renderTimelineEscales(escales) {
     const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !escales || !entryTimes || entryTimes.length < 2) return;
+    if (!wrap || !escales || !escales.length) return;
     Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
 
-    function parseLocalToUTC(str) {
-      const d = new Date(str + 'Z');
-      d.setUTCHours(d.getUTCHours() - TZ_OFFSET);
-      return d.getTime();
-    }
-
-    // Convertit un timestamp UTC → pourcentage sur le slider,
-    // en tenant compte du segMap non-linéaire si actif
-    function tsToPct(ts) {
-      if (state.segMap) {
-        // trouver l'entryIdx le plus proche par dichotomie sur entryTimes
-        let lo = 0, hi = entryTimes.length - 1;
-        while (lo < hi) {
-          const mid = (lo + hi) >> 1;
-          if (entryTimes[mid] < ts) lo = mid + 1; else hi = mid;
-        }
-        if (lo > 0 && Math.abs(entryTimes[lo-1] - ts) < Math.abs(entryTimes[lo] - ts)) lo--;
-        return indexToVisualUnits(lo, state.segMap) / (state.segMap.totalUnits - 1);
-      }
-      const span = entryTimeMax - entryTimeMin;
-      return span > 0 ? (ts - entryTimeMin) / span : 0;
-    }
+    const BAR_W = 0.008; // largeur en fraction du slider
 
     escales.forEach(e => {
-      const t0 = parseLocalToUTC(e.start);
-      const t1 = parseLocalToUTC(e.end);
-      if (isNaN(t0) || isNaN(t1)) return;
-      let pct0 = Math.max(0, Math.min(1, tsToPct(t0)));
-      let pct1 = Math.max(0, Math.min(1, tsToPct(t1)));
-      if (pct1 <= pct0) pct1 = pct0 + 0.002; // barre minimale visible
+      if (e.entryIdx == null) return;
+      let pct;
+      if (state.segMap) {
+        pct = indexToVisualUnits(e.entryIdx, state.segMap) / (state.segMap.totalUnits - 1);
+      } else if (state.entryTimes && state.entryTimes.length > 1) {
+        const span = state.entryTimeMax - state.entryTimeMin;
+        pct = span > 0 ? (state.entryTimes[e.entryIdx] - state.entryTimeMin) / span : 0;
+      } else {
+        pct = state.entries.length > 1 ? e.entryIdx / (state.entries.length - 1) : 0;
+      }
+      pct = Math.max(0, Math.min(1, pct));
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
-      cover.style.cssText = `position:absolute;left:${pct0*100}%;width:${(pct1-pct0)*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);z-index:1;pointer-events:none`;
+      cover.style.cssText = `position:absolute;left:${pct*100}%;width:${BAR_W*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);z-index:1;pointer-events:none`;
       wrap.appendChild(cover);
 
       const bar = document.createElement('div');
       bar.className = 'tl-escale-bar';
-      bar.title = `${e.city} — ${e.duration_h}h`;
-      bar.style.cssText = `position:absolute;left:${pct0*100}%;width:${(pct1-pct0)*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);border-radius:3px;z-index:2;box-shadow:0 0 2px 0 rgba(240,192,96,0.10);pointer-events:none`;
-      bar.dataset.t1 = t1;
+      bar.title = e.city;
+      bar.style.cssText = `position:absolute;left:${pct*100}%;width:${BAR_W*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);border-radius:3px;z-index:2;box-shadow:0 0 2px 0 rgba(240,192,96,0.10);pointer-events:none`;
       wrap.appendChild(bar);
     });
   }
 
   setTimeout(() => {
     renderTimelineBaseLine();
-    renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
+    renderTimelineEscales(escales);
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales depuis admin)
   window._refreshTimelineEscales = () =>
-    renderTimelineEscales(state.escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
+    renderTimelineEscales(state.escales);
 
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
   state.photos  = photos.filter(p => !p.hidden); // hidden photos not shown in carousel
@@ -798,6 +781,7 @@ async function init() {
   });
   assignEntryIdx(cities);
   assignEntryIdx(visited);
+  assignEntryIdx(escales.filter(e => e.lat != null && e.lon != null));
 
   // ── Route polylines ──
   const findNearestEntry = (latlng) => {
@@ -970,7 +954,7 @@ async function init() {
   });
 
   window.addEventListener('resize', () => {
-    renderTimelineEscales(escales, state.entryTimes, state.entryTimeMin, state.entryTimeMax);
+    renderTimelineEscales(escales);
   });
 
   tlInput.addEventListener('change', () => {
