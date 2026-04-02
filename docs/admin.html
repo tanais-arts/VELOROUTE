@@ -1065,10 +1065,9 @@ async function autoCommitTravel() {
   );
 }
 
-// ── Upload pCloud + Actions (auto-déclenché après drop photos) ────────
+// ── Upload pCloud (auto-déclenché après drop photos) ────────────────
 async function uploadAndProcess() {
   await uploadToPCloud();
-  await triggerGitHubActions();
 }
 
 // ── pCloud auth + upload ──────────────────────────────────────────────
@@ -1326,37 +1325,7 @@ async function uploadToPCloud() {
 }
 
 // ── GitHub Actions trigger ────────────────────────────────────────────────────
-async function triggerGitHubActions(subfolder) {
-  const ghToken = $('gh-token').value.trim();
-  if (subfolder === undefined) subfolder = $('photo-subfolder').value.trim();
-  if (!ghToken) { setStatus('actions-status', 'Token GitHub requis.', 'error'); return; }
 
-  setStatus('actions-status', 'Déclenchement du workflow…');
-
-  try {
-    const resp = await fetch(
-      'https://api.github.com/repos/tanais-arts/VELOROUTE/actions/workflows/process_photos.yml/dispatches',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${ghToken}`,
-          'Accept':        'application/vnd.github+json',
-          'Content-Type':  'application/json',
-        },
-        body: JSON.stringify({ ref: 'main', inputs: { subfolder } }),
-      }
-    );
-    if (resp.status === 204) {
-      setStatus('actions-status',
-        '✓ Workflow lancé — suivi sur github.com/tanais-arts/VELOROUTE/actions', 'ok');
-    } else {
-      const j = await resp.json().catch(() => ({}));
-      throw new Error(`HTTP ${resp.status} — ${j.message || resp.statusText}`);
-    }
-  } catch (err) {
-    setStatus('actions-status', `Erreur : ${err.message}`, 'error');
-  }
-}
 
 // ── Download buttons ──────────────────────────────────────────────────
 
@@ -1557,6 +1526,7 @@ function renderManagePhotos() {
     wrap.className = 'manage-thumb-wrap' + (p._selected ? ' selected' : '') + (p.hidden ? ' hidden-ph' : '');
     wrap.title = `${decodeURIComponent(p.src.split('/').pop())}${p.hidden ? ' · masqué' : ''}`;
     const img = document.createElement('img'); img.src = p.thumb || p.src; img.alt = ''; img.loading = 'lazy';
+    img.onerror = () => { img.style.display = 'none'; };
     if (p.type === 'video') img.style.outline = '1.5px solid rgba(240,192,96,.5)';
     const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!p._selected;
     cb.addEventListener('change', e => { e.stopPropagation(); p._selected = cb.checked; updateManagePhotoWrap(wrap, p); updatePhSelCount(); });
