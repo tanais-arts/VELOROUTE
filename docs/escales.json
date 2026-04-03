@@ -294,5 +294,13 @@
     "duration_h": 17,
     "lat": 47.25739,
     "lon": 4.56043
+  },
+  {
+    "city": "Premeaux-Prissey",
+    "start": "2025-06-01T12:46",
+    "end": "2025-06-01T12:46",
+    "duration_h": 0,
+    "lat": 47.07875,
+    "lon": 4.89659
   }
 ]
