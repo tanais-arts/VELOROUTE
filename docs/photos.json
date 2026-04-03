@@ -34,5 +34,41 @@
     "caption": "2025-05-04",
     "lat": 48.90042,
     "lon": -1.56934
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bricqueville-sur-Mer/IMG_2137.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bricqueville-sur-Mer/IMG_2137.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bricqueville-sur-Mer/IMG_2137.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.91477,
+    "lon": -1.54886
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bricqueville-sur-Mer/IMG_2138.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bricqueville-sur-Mer/IMG_2138.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bricqueville-sur-Mer/IMG_2138.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.91506,
+    "lon": -1.56205
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bricqueville-sur-Mer/IMG_2139.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bricqueville-sur-Mer/IMG_2139.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bricqueville-sur-Mer/IMG_2139.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.91505,
+    "lon": -1.56213
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bricqueville-sur-Mer/IMG_2140.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bricqueville-sur-Mer/IMG_2140.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bricqueville-sur-Mer/IMG_2140.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.91504,
+    "lon": -1.56216
   }
 ]
