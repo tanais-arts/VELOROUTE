@@ -809,8 +809,10 @@ async function init() {
     state.thumbEls = [];
   }
 
-  // Nearest entryIdx for each city
-  const assignEntryIdx = arr => arr.forEach(c => {
+  // Nearest entryIdx for each city / escale
+  // Pour les escales : utilise la date (start) pour matcher le point temporellement le plus proche
+  // Pour cities/visited : matcher par position géographique
+  const assignEntryIdxByPos = arr => arr.forEach(c => {
     let best = 0, bestD = Infinity;
     entries.forEach((e, i) => {
       const d = (e.lat - c.lat) ** 2 + (e.lon - c.lon) ** 2;
@@ -818,9 +820,23 @@ async function init() {
     });
     c.entryIdx = best;
   });
-  assignEntryIdx(cities);
-  assignEntryIdx(visited);
-  assignEntryIdx(escales.filter(e => e.lat != null && e.lon != null));
+
+  const assignEntryIdxByTime = arr => {
+    if (!state.entryTimes || state.entryTimes.length === 0) {
+      assignEntryIdxByPos(arr);
+      return;
+    }
+    arr.forEach(c => {
+      if (!c.start) { assignEntryIdxByPos([c]); return; }
+      const t = new Date(c.start).getTime();
+      if (isNaN(t)) { assignEntryIdxByPos([c]); return; }
+      c.entryIdx = timeToIndex(t);
+    });
+  };
+
+  assignEntryIdxByPos(cities);
+  assignEntryIdxByPos(visited);
+  assignEntryIdxByTime(escales.filter(e => e.start != null));
   window.escales = escales; // exposé après assignEntryIdx (entryIdx disponibles)
 
   // ── Route polylines ──
