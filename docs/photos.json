@@ -2431,51 +2431,6 @@
     "lon": 4.93219
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Premeaux/IMG_20250601_104906.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Premeaux/IMG_20250601_104906.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Premeaux/IMG_20250601_104906.jpg",
-    "entryIdx": 1583,
-    "caption": "2025-06-01",
-    "lat": 47.11516,
-    "lon": 4.93127
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Premeaux/IMG_20250601_104909.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Premeaux/IMG_20250601_104909.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Premeaux/IMG_20250601_104909.jpg",
-    "entryIdx": 1583,
-    "caption": "2025-06-01",
-    "lat": 47.11509,
-    "lon": 4.93127
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Premeaux/IMG_20250601_104940.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Premeaux/IMG_20250601_104940.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Premeaux/IMG_20250601_104940.jpg",
-    "entryIdx": 1584,
-    "caption": "2025-06-01",
-    "lat": 47.11512,
-    "lon": 4.9312
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Premeaux/IMG_20250601_104948.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Premeaux/IMG_20250601_104948.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Premeaux/IMG_20250601_104948.jpg",
-    "entryIdx": 1584,
-    "caption": "2025-06-01",
-    "lat": 47.11514,
-    "lon": 4.93122
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Premeaux/IMG_20250601_104953.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Premeaux/IMG_20250601_104953.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Premeaux/IMG_20250601_104953.jpg",
-    "entryIdx": 1584,
-    "caption": "2025-06-01",
-    "lat": 47.11515,
-    "lon": 4.93119
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Aloxe-Corton/IMG_2329.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aloxe-Corton/IMG_2329.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aloxe-Corton/IMG_2329.HEIC",
@@ -3130,6 +3085,42 @@
     "caption": "2025-10-24",
     "lat": 48.63727,
     "lon": 1.80902
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Rambouillet/IMG_20251024_123052.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Rambouillet/IMG_20251024_123052.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Rambouillet/IMG_20251024_123052.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-24",
+    "lat": 48.64829,
+    "lon": 1.81719
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Rambouillet/IMG_20251024_123100.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Rambouillet/IMG_20251024_123100.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Rambouillet/IMG_20251024_123100.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-24",
+    "lat": 48.64749,
+    "lon": 1.81757
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Rambouillet/IMG_20251024_130208.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Rambouillet/IMG_20251024_130208.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Rambouillet/IMG_20251024_130208.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-24",
+    "lat": 48.64629,
+    "lon": 1.80102
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Rambouillet/IMG_20251024_130241.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Rambouillet/IMG_20251024_130241.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Rambouillet/IMG_20251024_130241.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-24",
+    "lat": 48.64626,
+    "lon": 1.80092
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Bourges/IMG_20251110_095459.jpg",
