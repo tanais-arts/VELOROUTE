@@ -120,61 +120,70 @@ while true; do
   node setup_password.js
   echo ""
 
-  # HTTPS / Let's Encrypt
-  read -rp "Configurer HTTPS avec Let's Encrypt ? (o/n) : " DO_LE
-  if [[ "$DO_LE" =~ ^[oO]$ ]]; then
-    if ! command -v certbot >/dev/null 2>&1; then
-      echo "Installation de certbot..."
-      if [[ "$(uname)" == "Darwin" ]]; then
-        if command -v brew >/dev/null 2>&1; then
-          brew install certbot
-        else
-          echo "⚠  Homebrew non trouvé. Installez certbot manuellement : https://certbot.eff.org"
-          read -rp "   Appuyez sur Entrée pour continuer sans HTTPS…"
-          DO_LE="n"
-        fi
+  # HTTPS / Let's Encrypt (challenge DNS — port 80 non requis)
+  echo "──────────────────────────────────────────────────"
+  echo "  HTTPS — Let's Encrypt via challenge DNS"
+  echo "──────────────────────────────────────────────────"
+
+  # Installer certbot si absent
+  if ! command -v certbot >/dev/null 2>&1; then
+    echo "Installation de certbot..."
+    if [[ "$(uname)" == "Darwin" ]]; then
+      if command -v brew >/dev/null 2>&1; then
+        brew install certbot
       else
-        # Linux (Debian/Ubuntu/CentOS)
-        if command -v apt-get >/dev/null 2>&1; then
-          apt-get install -y certbot
-        elif command -v dnf >/dev/null 2>&1; then
-          dnf install -y certbot
-        elif command -v yum >/dev/null 2>&1; then
-          yum install -y certbot
-        else
-          echo "⚠  Gestionnaire de paquets non reconnu. Installez certbot manuellement."
-          read -rp "   Appuyez sur Entrée pour continuer sans HTTPS…"
-          DO_LE="n"
-        fi
+        echo "⚠  Homebrew non trouvé — installez certbot manuellement : https://certbot.eff.org"
       fi
-    fi
-    if [[ "$DO_LE" =~ ^[oO]$ ]]; then
-      echo "Obtention du certificat pour $DOMAIN (port 80 doit être libre)..."
-      certbot certonly --standalone -d "$DOMAIN" \
-        --non-interactive --agree-tos \
-        --email "admin@$DOMAIN" || { echo "⚠  certbot échoué — vérifiez que le port 80 est ouvert et repointez vers $DOMAIN"; }
-      env_set "SSL_CERT" "/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-      env_set "SSL_KEY"  "/etc/letsencrypt/live/$DOMAIN/privkey.pem"
-      echo "✓ Certificats configurés."
+    elif command -v apt-get >/dev/null 2>&1; then
+      apt-get install -y certbot
+    elif command -v dnf >/dev/null 2>&1; then
+      dnf install -y certbot
+    elif command -v yum >/dev/null 2>&1; then
+      yum install -y certbot
+    else
+      echo "⚠  Gestionnaire de paquets non reconnu — installez certbot manuellement."
     fi
   fi
 
-  # Certificat auto-signé (si Let's Encrypt non utilisé)
-  if ! [[ "$DO_LE" =~ ^[oO]$ ]]; then
-    read -rp "Générer un certificat auto-signé (test sans DNS public) ? (o/n) : " DO_SS
-    if [[ "$DO_SS" =~ ^[oO]$ ]]; then
-      if command -v openssl >/dev/null 2>&1; then
-        openssl req -x509 -newkey rsa:4096 -keyout "$SCRIPTDIR/key.pem" -out "$SCRIPTDIR/cert.pem" \
-          -days 365 -nodes -subj "/CN=$DOMAIN" 2>/dev/null
-        env_set "SSL_CERT" "$SCRIPTDIR/cert.pem"
-        env_set "SSL_KEY"  "$SCRIPTDIR/key.pem"
-        echo "✓ Certificat auto-signé généré (cert.pem / key.pem)."
-        echo "  → Avant d'utiliser l'admin, ouvrez https://$DOMAIN:$PORT/ping dans"
-        echo "    votre navigateur et acceptez l'exception de sécurité."
-      else
-        echo "⚠  openssl non trouvé — certificat auto-signé non généré."
-      fi
-    fi
+  if command -v certbot >/dev/null 2>&1; then
+    echo ""
+    echo "  ┌─────────────────────────────────────────────────────────────┐"
+    echo "  │  Challenge DNS — ajoutez cet enregistrement dans votre DNS  │"
+    echo "  │                                                              │"
+    echo "  │  Nom   : _acme-challenge.$DOMAIN"
+    echo "  │  Type  : TXT                                                 │"
+    echo "  │  Valeur: (certbot vous l'affichera ci-dessous)               │"
+    echo "  │                                                              │"
+    echo "  │  OVH : Espace client → Zone DNS → Ajouter → TXT             │"
+    echo "  │  Attendez ~2 min après ajout avant d'appuyer Entrée.        │"
+    echo "  └─────────────────────────────────────────────────────────────┘"
+    echo ""
+    certbot certonly --manual --preferred-challenges dns \
+      -d "$DOMAIN" --agree-tos --email "admin@$DOMAIN" \
+      && {
+        env_set "SSL_CERT" "/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
+        env_set "SSL_KEY"  "/etc/letsencrypt/live/$DOMAIN/privkey.pem"
+        echo "✓ Certificats Let's Encrypt configurés."
+
+        # Hook renouvellement automatique (copie non nécessaire — server.js lit /etc/letsencrypt directement)
+        RENEW_HOOK="/etc/letsencrypt/renewal-hooks/deploy/vlr-server-restart.sh"
+        if [ -d "/etc/letsencrypt/renewal-hooks/deploy" ]; then
+          cat > "$RENEW_HOOK" << 'HOOK'
+#!/usr/bin/env bash
+# Redémarre VLR-server après renouvellement Let's Encrypt
+if command -v systemctl >/dev/null 2>&1 && systemctl is-active vlr-server >/dev/null 2>&1; then
+  systemctl restart vlr-server
+elif [ -f "$HOME/Library/LaunchAgents/com.vlr-server.plist" ]; then
+  launchctl unload "$HOME/Library/LaunchAgents/com.vlr-server.plist" 2>/dev/null || true
+  launchctl load  "$HOME/Library/LaunchAgents/com.vlr-server.plist"
+fi
+HOOK
+          chmod +x "$RENEW_HOOK" 2>/dev/null || true
+          echo "✓ Hook de renouvellement automatique installé."
+        fi
+      } || echo "⚠  certbot échoué — relancez l'option 1 après avoir configuré le DNS."
+  else
+    echo "⚠  certbot non disponible — HTTPS non configuré."
   fi
   echo ""
 
