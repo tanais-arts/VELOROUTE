@@ -36,6 +36,13 @@
     "lon": -0.26938
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250501_145518.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250501_145518.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250501_145518.jpg",
+    "entryIdx": 58,
+    "caption": "2025-05-01"
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_2104.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_2104.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_2104.HEIC",
@@ -1468,6 +1475,13 @@
     "caption": "2025-05-29",
     "lat": 47.62463,
     "lon": 4.33485
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250529_092409.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250529_092409.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250529_092409.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tonnerre/IMG_2223.jpg",
@@ -3546,6 +3560,13 @@
     "caption": "2025-07-17"
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250717_161050.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250717_161050.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250717_161050.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-17"
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Bonneville/IMG_20250719_112254.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bonneville/IMG_20250719_112254.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bonneville/IMG_20250719_112254.jpg",
@@ -3677,6 +3698,195 @@
     "caption": "2025-07-19",
     "lat": 46.03148,
     "lon": 6.32088
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250804_220227.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250804_220227.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250804_220227.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-04",
+    "lat": 48.77283,
+    "lon": 2.37688
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250822_203249.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250822_203249.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250822_203249.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-22",
+    "lat": 48.77283,
+    "lon": 2.37677
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250822_203304.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250822_203304.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250822_203304.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-22",
+    "lat": 48.77283,
+    "lon": 2.37677
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_155841.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_155841.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_155841.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77285,
+    "lon": 2.3771
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_155846.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_155846.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_155846.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77285,
+    "lon": 2.3771
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_165608.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_165608.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_165608.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77284,
+    "lon": 2.3768
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_165621.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_165621.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_165621.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77284,
+    "lon": 2.3768
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_170333.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_170333.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_170333.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77283,
+    "lon": 2.37669
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_170336.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_170336.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_170336.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77283,
+    "lon": 2.37669
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_170341.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_170341.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_170341.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77283,
+    "lon": 2.37669
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250830_191033.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250830_191033.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250830_191033.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-30",
+    "lat": 48.77275,
+    "lon": 2.37679
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250831_110057.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250831_110057.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250831_110057.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-31",
+    "lat": 48.77284,
+    "lon": 2.3768
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250831_114439.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250831_114439.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250831_114439.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-31",
+    "lat": 48.77284,
+    "lon": 2.3768
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250831_193730.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250831_193730.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250831_193730.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-31",
+    "lat": 48.77283,
+    "lon": 2.37679
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250831_193735.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250831_193735.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250831_193735.jpg",
+    "entryIdx": null,
+    "caption": "2025-08-31",
+    "lat": 48.77283,
+    "lon": 2.37678
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250921_142147.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250921_142147.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250921_142147.jpg",
+    "entryIdx": null,
+    "caption": "2025-09-21",
+    "lat": 48.77277,
+    "lon": 2.37678
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250921_184652.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250921_184652.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250921_184652.jpg",
+    "entryIdx": null,
+    "caption": "2025-09-21",
+    "lat": 48.77277,
+    "lon": 2.37677
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250921_184657.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250921_184657.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250921_184657.jpg",
+    "entryIdx": null,
+    "caption": "2025-09-21",
+    "lat": 48.77277,
+    "lon": 2.37677
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20250921_184701.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20250921_184701.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20250921_184701.jpg",
+    "entryIdx": null,
+    "caption": "2025-09-21",
+    "lat": 48.77277,
+    "lon": 2.37677
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251005_152714.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251005_152714.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251005_152714.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-05",
+    "lat": 48.77278,
+    "lon": 2.37689
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251005_184110.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251005_184110.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251005_184110.jpg",
+    "entryIdx": null,
+    "caption": "2025-10-05",
+    "lat": 48.77279,
+    "lon": 2.3769
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Gazeran/IMG_20251024_135434.jpg",
@@ -3940,6 +4150,33 @@
     "lon": 2.37716
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251123_120754.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251123_120754.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251123_120754.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-23",
+    "lat": 48.79306,
+    "lon": 2.38829
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251123_145449.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251123_145449.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251123_145449.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-23",
+    "lat": 48.7728,
+    "lon": 2.37681
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251123_145505.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251123_145505.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251123_145505.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-23",
+    "lat": 48.7728,
+    "lon": 2.37681
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251130_092810.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251130_092810.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251130_092810.jpg",
@@ -3963,6 +4200,33 @@
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Sixt/IMG_20251130_142942.jpg",
     "entryIdx": null,
     "caption": "2025-11-30"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251130_141020.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251130_141020.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251130_141020.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-30",
+    "lat": 48.77282,
+    "lon": 2.37675
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251130_143327.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251130_143327.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251130_143327.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-30",
+    "lat": 48.77281,
+    "lon": 2.37679
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20251130_143336.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20251130_143336.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20251130_143336.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-30",
+    "lat": 48.77281,
+    "lon": 2.37679
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251206_133128.jpg",
@@ -4026,6 +4290,15 @@
     "caption": "2026-01-31",
     "lat": 48.76546,
     "lon": 2.36423
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20260203_210053.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20260203_210053.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20260203_210053.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-03",
+    "lat": 48.77281,
+    "lon": 2.37684
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20260204_205438.jpg",
@@ -4114,6 +4387,24 @@
     "caption": "2026-02-20",
     "lat": 48.855,
     "lon": 2.40123
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20260222_215903.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20260222_215903.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20260222_215903.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-22",
+    "lat": 48.77279,
+    "lon": 2.37674
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vitry-sur-Seine/IMG_20260222_215923.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vitry-sur-Seine/IMG_20260222_215923.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vitry-sur-Seine/IMG_20260222_215923.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-22",
+    "lat": 48.77279,
+    "lon": 2.37674
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260304_141628.jpg",
