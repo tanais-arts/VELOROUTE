@@ -670,5 +670,13 @@
     "duration_h": 1,
     "lat": 46.90749,
     "lon": 4.74978
+  },
+  {
+    "city": "Regnéville-sur-Mer",
+    "start": "2025-05-04T14:37",
+    "end": "2025-05-04T14:50",
+    "duration_h": 0,
+    "lat": 48.83991,
+    "lon": 2.31941
   }
 ]
