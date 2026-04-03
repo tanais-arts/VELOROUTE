@@ -1025,5 +1025,23 @@
     "caption": "2025-06-01",
     "lat": 46.97166,
     "lon": 4.76503
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Pommard/IMG_2333.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Pommard/IMG_2333.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Pommard/IMG_2333.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 47.00653,
+    "lon": 4.78984
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Pommard/IMG_2334.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Pommard/IMG_2334.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Pommard/IMG_2334.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 47.00654,
+    "lon": 4.78974
   }
 ]
