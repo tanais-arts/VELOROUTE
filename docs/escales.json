@@ -94,5 +94,13 @@
     "duration_h": 0,
     "lat": 47.43209,
     "lon": 4.41476
+  },
+  {
+    "city": "Chassignelles",
+    "start": "2025-05-29T18:13",
+    "end": "2025-05-29T18:13",
+    "duration_h": 0,
+    "lat": 47.7247,
+    "lon": 4.22364
   }
 ]
