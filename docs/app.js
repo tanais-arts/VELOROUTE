@@ -1008,12 +1008,22 @@ async function init() {
       currentIdx = Number(tlInput.value);
     }
 
-    // Cherche la photo la plus proche (avant ou après)
+    // Cherche la prochaine photo APRÈS la position, sinon la dernière avant
     if (mediaEntries.size === 0) { selectEntry(currentIdx); return; }
     let bestIdx = null, bestDist = Infinity;
+    // D'abord chercher en avant
     for (const i of mediaEntries) {
-      const d = Math.abs(i - currentIdx);
-      if (d < bestDist) { bestDist = d; bestIdx = i; }
+      if (i >= currentIdx && (i - currentIdx) < bestDist) {
+        bestDist = i - currentIdx; bestIdx = i;
+      }
+    }
+    // Si rien devant, chercher en arrière
+    if (bestIdx === null) {
+      for (const i of mediaEntries) {
+        if (i < currentIdx && (currentIdx - i) < bestDist) {
+          bestDist = currentIdx - i; bestIdx = i;
+        }
+      }
     }
     if (bestIdx === null) { selectEntry(currentIdx); return; }
 
