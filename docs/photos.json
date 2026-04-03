@@ -334,5 +334,23 @@
     "caption": "2025-05-04",
     "lat": 48.91504,
     "lon": -1.56216
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Aloxe-Corton/IMG_2329.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aloxe-Corton/IMG_2329.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aloxe-Corton/IMG_2329.HEIC",
+    "entryIdx": 1628,
+    "caption": "2025-06-01",
+    "lat": 47.0687,
+    "lon": 4.86316
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Aloxe-Corton/IMG_2330.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aloxe-Corton/IMG_2330.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aloxe-Corton/IMG_2330.HEIC",
+    "entryIdx": 1629,
+    "caption": "2025-06-01",
+    "lat": 47.06718,
+    "lon": 4.86137
   }
 ]
