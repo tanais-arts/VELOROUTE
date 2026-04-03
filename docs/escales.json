@@ -646,5 +646,13 @@
     "duration_h": 356,
     "lat": 46.90749,
     "lon": 4.74978
+  },
+  {
+    "city": "Perrigny-sur-Armançon",
+    "start": "2025-05-29T19:14",
+    "end": "2025-05-29T19:14",
+    "duration_h": 0,
+    "lat": 47.62418,
+    "lon": 4.32805
   }
 ]
