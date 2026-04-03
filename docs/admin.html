@@ -288,6 +288,7 @@
     </div>
 
     <button id="btn-pcloud-login-overlay">🔑 Se connecter</button>
+    <button id="btn-pcloud-oauth" style="margin-top:8px;background:rgba(72,162,255,0.12);border:1px solid rgba(72,162,255,0.25);color:#48a2ff">🌐 Se connecter avec pCloud (OAuth)</button>
     <div class="status" id="login-status"></div>
   </div>
 </div>
@@ -318,6 +319,11 @@
         <a href="https://github.com/settings/tokens/new?scopes=workflow,contents&amp;description=VELOROUTE+Admin"
           target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">générer</a></label>
       <input type="password" id="gh-token" placeholder="ghp_…">
+    </div>
+    <div class="field" style="margin:0">
+      <label>pCloud App Client ID
+        <a href="https://docs.pcloud.com/methods/oauth_2.0/" target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">docs</a></label>
+      <input type="text" id="pcloud-client-id" placeholder="Votre client_id pCloud">
     </div>
     <div class="field" style="margin:0">
       <label>Étape (sous-dossier)</label>
@@ -1289,6 +1295,45 @@ function pcloudLogout() {
 
 $('btn-pcloud-login-overlay').addEventListener('click', pcloudLogin);
 $('btn-logout-header').addEventListener('click', pcloudLogout);
+// OAuth flow: open popup, receive token via postMessage from oauth_callback.html
+async function pcloudStartOAuth() {
+  const clientId = $('pcloud-client-id').value.trim();
+  if (!clientId) { setStatus('login-status', 'Veuillez renseigner le pCloud Client ID dans les réglages.', 'error'); return; }
+  const redirect = `${location.origin}${location.pathname.replace(/\/[^/]*$/, '')}/oauth_callback.html`;
+  const url = `https://my.pcloud.com/oauth2/authorize?client_id=${encodeURIComponent(clientId)}&response_type=token&redirect_uri=${encodeURIComponent(redirect)}`;
+  const w = window.open(url, 'pcloud_oauth', 'width=600,height=700');
+  if (!w) { setStatus('login-status', 'Popup bloquée — autorisez les popups.', 'error'); }
+}
+window.addEventListener('message', async (e) => {
+  if (e.origin !== window.location.origin) return;
+  const d = e.data || {};
+  if (d.type === 'pcloud_oauth' && d.access_token) {
+    setStatus('login-status', 'Validation du token pCloud…');
+    // prefer hostname from callback if provided
+    const hostname = d.hostname || (d.locationid === '2' ? 'eapi.pcloud.com' : 'api.pcloud.com');
+    try {
+      const vr = await fetch(`https://${hostname}/userinfo?getauth=0&auth=${encodeURIComponent(d.access_token)}`);
+      const vj = await vr.json();
+      if (vj.result === 0) {
+        pcloudToken = d.access_token;
+        try {
+          const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
+          _s.pcloudToken = pcloudToken;
+          _s.pcloudEmail = vj.email || '';
+          _s.pcloudRegion = hostname.includes('eapi') ? 'eapi' : 'api';
+          localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
+        } catch {}
+        pcloudSuccess({ auth: pcloudToken, email: vj.email }, vj.email);
+        setStatus('login-status', 'Connexion pCloud (OAuth) réussie.', 'ok');
+      } else {
+        setStatus('login-status', `Token invalide (code ${vj.result})`, 'error');
+      }
+    } catch (err) {
+      setStatus('login-status', `Erreur validation token: ${err.message}`, 'error');
+    }
+  }
+});
+$('btn-pcloud-oauth').addEventListener('click', pcloudStartOAuth);
 // Permettre Enter dans les champs
 $('pcloud-password').addEventListener('keydown', e => { if (e.key === 'Enter') pcloudLogin(); });
 

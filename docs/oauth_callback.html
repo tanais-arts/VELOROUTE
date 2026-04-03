@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>pCloud OAuth callback</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:24px}</style>
+</head>
+<body>
+  <h3>pCloud OAuth callback</h3>
+  <p id="msg">Processing…</p>
+  <script>
+    (function(){
+      try {
+        const h = location.hash.replace(/^#/, '');
+        const params = Object.fromEntries(h.split('&').filter(Boolean).map(p => { const kv=p.split('='); return [kv[0], decodeURIComponent(kv[1]||'')]; }));
+        // params may contain access_token, token_type, uid, locationid, hostname
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage(Object.assign({ type: 'pcloud_oauth' }, params), window.location.origin);
+          document.getElementById('msg').textContent = 'Token envoyé à la fenêtre parent. Vous pouvez fermer cette fenêtre.';
+          setTimeout(() => window.close(), 700);
+        } else {
+          document.getElementById('msg').textContent = 'No opener window found. Copy the token from URL fragment.';
+        }
+      } catch (e) {
+        document.getElementById('msg').textContent = 'Erreur: ' + e.message;
+      }
+    })();
+  </script>
+</body>
+</html>
