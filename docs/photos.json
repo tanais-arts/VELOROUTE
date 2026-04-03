@@ -1169,5 +1169,41 @@
     "caption": "2025-06-01",
     "lat": 47.00654,
     "lon": 4.78974
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Santenay/IMG_2339.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Santenay/IMG_2339.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Santenay/IMG_2339.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.91579,
+    "lon": 4.72066
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Santenay/IMG_2340.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Santenay/IMG_2340.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Santenay/IMG_2340.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.91578,
+    "lon": 4.72064
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Santenay/IMG_2341.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Santenay/IMG_2341.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Santenay/IMG_2341.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.91413,
+    "lon": 4.70868
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Santenay/IMG_2342.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Santenay/IMG_2342.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Santenay/IMG_2342.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.91407,
+    "lon": 4.70868
   }
 ]
