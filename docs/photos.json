@@ -3231,6 +3231,51 @@
     "lon": 6.2986
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20250719_105134.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20250719_105134.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20250719_105134.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19",
+    "lat": 46.01857,
+    "lon": 6.33603
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20250719_105141.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20250719_105141.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20250719_105141.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19",
+    "lat": 46.01862,
+    "lon": 6.33612
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20250719_105152.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20250719_105152.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20250719_105152.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19",
+    "lat": 46.01874,
+    "lon": 6.33603
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20250719_111005.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20250719_111005.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20250719_111005.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19",
+    "lat": 46.01965,
+    "lon": 6.34136
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20250719_113143.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20250719_113143.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20250719_113143.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19",
+    "lat": 46.02033,
+    "lon": 6.34194
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Gazeran/IMG_20251024_135434.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Gazeran/IMG_20251024_135434.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Gazeran/IMG_20251024_135434.jpg",
@@ -3526,6 +3571,13 @@
     "caption": "2026-01-31",
     "lat": 48.76546,
     "lon": 2.36423
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent/IMG_20260204_205438.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent/IMG_20260204_205438.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent/IMG_20260204_205438.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-04"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20260208_202715.jpg",
