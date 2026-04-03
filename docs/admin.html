@@ -229,7 +229,7 @@
       font-size: 0.9rem; outline: none; transition: border-color .15s;
     }
     #login-card input:focus { border-color: rgba(240,192,96,0.55); }
-    #btn-pcloud-login-overlay {
+    #btn-server-login {
       width: 100%; margin-top: 20px; padding: 12px;
       background: rgba(240,192,96,0.15); border: 1px solid rgba(240,192,96,0.55);
       color: #f0c060; font-size: 0.8rem; font-weight: 700;
@@ -237,11 +237,11 @@
       border-radius: 5px; cursor: pointer;
       transition: background .15s, box-shadow .15s;
     }
-    #btn-pcloud-login-overlay:hover:not(:disabled) {
+    #btn-server-login:hover:not(:disabled) {
       background: rgba(240,192,96,0.28);
       box-shadow: 0 0 16px rgba(240,192,96,0.2);
     }
-    #btn-pcloud-login-overlay:disabled { opacity: 0.35; cursor: not-allowed; }
+    #btn-server-login:disabled { opacity: 0.35; cursor: not-allowed; }
     #login-status { margin-top: 12px; text-align: center; }
     #login-connected-as {
       display: none; color: rgba(80,210,120,0.9);
@@ -264,31 +264,18 @@
 <div id="login-overlay">
   <div id="login-card">
     <div id="login-logo">VÉLOROUTE</div>
-    <div id="login-sub">· administration · connexion pCloud</div>
+    <div id="login-sub">· administration · VLR-server</div>
 
     <div class="field">
-      <label>E-mail pCloud</label>
-      <input type="email" id="pcloud-email" placeholder="vous@email.com" autocomplete="username">
+      <label>URL serveur</label>
+      <input type="url" id="server-url" value="https://hub.studios-voa.com:1666" autocomplete="off">
     </div>
     <div class="field">
       <label>Mot de passe</label>
-      <input type="password" id="pcloud-password" placeholder="••••••••" autocomplete="current-password">
-    </div>
-    <!-- TOTP field removed (not used) -->
-    <div class="field" style="margin-top:16px;margin-bottom:0">
-      <label>Région serveur</label>
-      <div style="display:flex;gap:16px;margin-top:6px">
-        <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="eapi"> Europe
-        </label>
-        <label style="font-size:.82rem;color:rgba(255,255,255,.6);cursor:pointer">
-          <input type="radio" name="pcloud-region" value="api" checked> USA
-        </label>
-      </div>
+      <input type="password" id="server-password" placeholder="••••••••" autocomplete="current-password">
     </div>
 
-    <button id="btn-pcloud-login-overlay">🔑 Se connecter</button>
-    <button id="btn-pcloud-oauth" style="margin-top:8px;background:rgba(72,162,255,0.12);border:1px solid rgba(72,162,255,0.25);color:#48a2ff">🌐 Se connecter avec pCloud (OAuth)</button>
+    <button id="btn-server-login">🔑 Se connecter</button>
     <div class="status" id="login-status"></div>
   </div>
 </div>
@@ -308,22 +295,13 @@
   <div id="settings-grid">
     <div class="field" style="margin:0">
       <label>Base URL CDN</label>
-      <input type="text" id="cdn-base" value="https://filedn.com/lkWW0YSMhAbFD13RbGDalo0/VELOROUTE">
-    </div>
-    <div class="field" style="margin:0">
-      <label>Chemin pCloud</label>
-      <input type="text" id="pcloud-path" value="/Public Folder/VELOROUTE">
+      <input type="text" id="cdn-base" value="https://hub.studios-voa.com:1666/files">
     </div>
     <div class="field" style="margin:0">
       <label>GitHub PAT
         <a href="https://github.com/settings/tokens/new?scopes=workflow,contents&amp;description=VELOROUTE+Admin"
           target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">générer</a></label>
       <input type="password" id="gh-token" placeholder="ghp_…">
-    </div>
-    <div class="field" style="margin:0">
-      <label>pCloud App Client ID
-        <a href="https://docs.pcloud.com/methods/oauth_2.0/" target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">docs</a></label>
-      <input type="text" id="pcloud-client-id" placeholder="Votre client_id pCloud">
     </div>
     <div class="field" style="margin:0">
       <label>Étape (sous-dossier)</label>
@@ -494,10 +472,6 @@ let photoMarkers = [];
 
 // ── Helpers ──────────────────────────────────────────────────────────
 function $(id) { return document.getElementById(id); }
-// Global error handler to aid debugging in browsers
-window.addEventListener('error', e => {
-  console.error('Global error caught:', e.message, e.filename, e.lineno, e.colno, e.error);
-});
 
 function setStatus(id, msg, cls = '') {
   const el = $(id);
@@ -652,15 +626,12 @@ function processGPXText(text, label) {
   }
 }
 
-async function uploadGPXToPCloud(file) {
-  if (!pcloudToken) return;
-  const base = $('pcloud-path').value.trim().replace(/\/$/, '');
-  if (!base) return;
+async function uploadGPXToServer(file) {
+  if (!serverToken) return;
   try {
-    const folderId = await pcloudEnsureFolder(`${base}/GPX`);
-    await pcloudUploadFile(folderId, file.name, file);
+    await serverUploadFile(`GPX/${file.name}`, file, file.name);
   } catch (err) {
-    console.warn('GPX pCloud upload:', err);
+    console.warn('GPX server upload:', err);
   }
 }
 
@@ -673,7 +644,7 @@ function handleGPX(files) {
     const reader = new FileReader();
     reader.onload = e => {
       processGPXText(e.target.result, file.name);
-      uploadGPXToPCloud(file);
+      uploadGPXToServer(file);
       done++;
       if (done === list.length && list.length > 1)
         setStatus('gpx-status', `✓ ${list.length} fichiers GPX traités`);
@@ -727,7 +698,7 @@ function buildUrl(filename, type) {
   return `${base}/${type}${folder}/${name}`;
 }
 
-// Variante avec subfolder explicite (utilisée par la sync pCloud)
+// Variante avec subfolder explicite
 function buildUrlWith(filename, type, subfolder) {
   const base = ($('cdn-base').value || '').replace(/\/$/, '');
   const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
@@ -989,12 +960,11 @@ async function handlePhotos(files, clearGrid = true) {
     }
   }
 
-  // Upload pCloud si connecté
-  if (pcloudToken) {
-    setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers pCloud…`);
+  // Upload vers VLR-server si connecté
+  if (serverToken) {
+    setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers VLR-server…`);
     await uploadAndProcess();
   } else {
-    // Pas de pCloud : commiter photos.json directement
     await commitPhotosJsonMerged();
   }
 }
@@ -1162,215 +1132,91 @@ async function autoCommitTravel() {
   );
 }
 
-// ── Upload pCloud (auto-déclenché après drop photos) ────────────────
+// ── VLR-server auth ──────────────────────────────────────────────────
 async function uploadAndProcess() {
-  await uploadToPCloud();
+  await uploadToServer();
 }
 
-// ── pCloud auth + upload ──────────────────────────────────────────────
-let pcloudToken    = null;  // token final après login réussi
+let serverToken = null;
 let pendingSyncAfterLogin = false;
 
-function pcloudBase() {
-  const region = document.querySelector('input[name="pcloud-region"]:checked').value;
-  return `https://${region}.pcloud.com`;
+function serverBase() {
+  return ($('server-url').value.trim() || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
 }
 
-async function pcloudPost(endpoint, params) {
-  console.log('pcloudPost called', endpoint, params);
-  const body = new URLSearchParams(params);
-  const url = `${pcloudBase()}/${endpoint}`;
-  console.log('pcloudPost ->', url, body.toString());
-  const r = await fetch(url, {
-    method: 'POST',
-    referrerPolicy: 'no-referrer',
-    headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString()
-  });
-  console.log('pcloudPost response status:', r.status);
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  return r.json();
-}
-
-function pcloudSuccess(j, email) {
-  pcloudToken    = j.auth;
-  $('pcloud-password').value = '';
+function serverSuccess(token) {
+  serverToken = token;
+  $('server-password').value = '';
   $('login-overlay').style.display = 'none';
   $('site-header').style.display   = 'flex';
   $('main-content').style.display  = 'flex';
   $('btn-logout-header').style.display = 'inline-block';
-  $('header-user').textContent = `· ${j.email || email}`;
+  $('header-user').textContent = '· VLR-server';
   setStatus('login-status', '');
   setTimeout(() => map.invalidateSize(), 100);
   try {
-    const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
-    _s.pcloudToken  = j.auth;
-    _s.pcloudEmail  = j.email || email;
-    _s.pcloudRegion = document.querySelector('input[name="pcloud-region"]:checked')?.value || 'api';
-    localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
+    const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+    _s.serverToken = token;
+    _s.serverUrl   = serverBase();
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   } catch {}
   loadExistingData(!!$('gh-token').value.trim());
-  if (pendingSyncAfterLogin) {
-    pendingSyncAfterLogin = false;
-    setTimeout(() => { /* sync pCloud supprimée */ }, 1500);
-  }
 }
 
-async function pcloudLogin() {
-  const email    = $('pcloud-email').value.trim();
-  const password = $('pcloud-password').value.trim();
-  console.log('pcloudLogin called', { email: email, password_present: !!password });
-  if (!email || !password) {
-    setStatus('login-status', 'E-mail et mot de passe requis.', 'error'); return;
-  }
-  $('btn-pcloud-login-overlay').disabled = true;
+async function serverLogin() {
+  const password = $('server-password').value.trim();
+  if (!password) { setStatus('login-status', 'Mot de passe requis.', 'error'); return; }
+  $('btn-server-login').disabled = true;
   setStatus('login-status', 'Connexion…');
-
   try {
-
-
-    // Étape 1 : login initial via POST
-    const j = await pcloudPost('userinfo', {
-      getauth: '1', logout: '1', username: email, password: password
+    const r = await fetch(`${serverBase()}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
     });
-    console.log('pCloud login response:', JSON.stringify(j));
-
-    if (j.result === 0 && j.auth) {
-      pcloudSuccess(j, email);
-    } else if (j.result === 1022) {
-      // Missing 'code' — try a few fallbacks before failing.
-      setStatus('login-status', 'pCloud demande un paramètre supplémentaire — tentative de contournement…', 'warn');
-      try {
-        // 1) Retry same region with empty `code` param (some API variants require presence of `code`)
-        const j2 = await pcloudPost('userinfo', { getauth: '1', logout: '1', username: email, password: password, code: '' });
-        console.log('pCloud login retry with empty code response:', JSON.stringify(j2));
-        if (j2.result === 0 && j2.auth) { pcloudSuccess(j2, email); return; }
-      } catch (err) {
-        console.warn('Retry with empty code failed:', err);
-      }
-
-      // 2) Retry on other data-center (api <-> eapi)
-      const selected = document.querySelector('input[name="pcloud-region"]:checked').value;
-      const other = selected === 'api' ? 'eapi' : 'api';
-      try {
-        const body = new URLSearchParams({ getauth: '1', logout: '1', username: email, password: password }).toString();
-        const url2 = `https://${other}.pcloud.com/userinfo`;
-        console.log('pcloud retry ->', url2, body);
-        const rr = await fetch(url2, {
-          method: 'POST',
-          referrerPolicy: 'no-referrer',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
-          body
-        });
-        console.log('pcloud retry response status:', rr.status);
-        if (rr.ok) {
-          const rj = await rr.json();
-          console.log('pCloud login retry on other region response:', JSON.stringify(rj));
-          if (rj.result === 0 && rj.auth) {
-            const ri = document.querySelector(`input[name="pcloud-region"][value="${other}"]`);
-            if (ri) ri.checked = true;
-            pcloudSuccess(rj, email);
-            return;
-          }
-          if (rj.result !== 0) {
-            setStatus('login-status', rj.error ? `${rj.error} (code ${rj.result})` : `Code pCloud ${rj.result}`, 'error');
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn('pCloud region retry failed:', err);
-      }
-      // If all fallbacks fail, show helpful message
-      setStatus('login-status', 'Connexion pCloud échouée — vérifiez vos identifiants ou essayez OAuth.', 'error');
-      throw new Error(j.error ? `${j.error} (code ${j.result})` : `Code pCloud ${j.result}`);
+    const j = await r.json();
+    if (r.ok && j.token) {
+      serverSuccess(j.token);
     } else {
-      throw new Error(j.error ? `${j.error} (code ${j.result})` : `Code pCloud ${j.result}`);
+      setStatus('login-status', j.error || 'Connexion échouée.', 'error');
     }
   } catch (err) {
     setStatus('login-status', `Erreur : ${err.message}`, 'error');
   }
-  $('btn-pcloud-login-overlay').disabled = false;
+  $('btn-server-login').disabled = false;
 }
 
-function pcloudLogout() {
-  pcloudToken    = null;
-  
+async function serverLogout() {
+  if (serverToken) {
+    try {
+      await fetch(`${serverBase()}/auth/logout`, {
+        method: 'POST', headers: { Authorization: `Bearer ${serverToken}` }
+      });
+    } catch {}
+  }
+  serverToken = null;
   $('login-overlay').style.display = 'flex';
   $('site-header').style.display   = 'none';
   $('main-content').style.display  = 'none';
   setStatus('login-status', '');
   try {
-    const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
-    delete _s.pcloudToken; delete _s.pcloudEmail; delete _s.pcloudRegion;
-    localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
+    const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+    delete _s.serverToken;
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   } catch {}
 }
 
-$('btn-pcloud-login-overlay').addEventListener('click', pcloudLogin);
-$('btn-logout-header').addEventListener('click', pcloudLogout);
-// OAuth flow: open popup, receive token via postMessage from oauth_callback.html
-async function pcloudStartOAuth() {
-  const clientId = $('pcloud-client-id').value.trim();
-  if (!clientId) { setStatus('login-status', 'Veuillez renseigner le pCloud Client ID dans les réglages.', 'error'); return; }
-  const redirect = `${location.origin}${location.pathname.replace(/\/[^/]*$/, '')}/oauth_callback.html`;
-  const url = `https://my.pcloud.com/oauth2/authorize?client_id=${encodeURIComponent(clientId)}&response_type=token&redirect_uri=${encodeURIComponent(redirect)}`;
-  const w = window.open(url, 'pcloud_oauth', 'width=600,height=700');
-  if (!w) { setStatus('login-status', 'Popup bloquée — autorisez les popups.', 'error'); }
-}
-window.addEventListener('message', async (e) => {
-  if (e.origin !== window.location.origin) return;
-  const d = e.data || {};
-  if (d.type === 'pcloud_oauth' && d.access_token) {
-    setStatus('login-status', 'Validation du token pCloud…');
-    // prefer hostname from callback if provided
-    const hostname = d.hostname || (d.locationid === '2' ? 'eapi.pcloud.com' : 'api.pcloud.com');
-    try {
-      const vr = await fetch(`https://${hostname}/userinfo?getauth=0&auth=${encodeURIComponent(d.access_token)}`);
-      const vj = await vr.json();
-      if (vj.result === 0) {
-        pcloudToken = d.access_token;
-        try {
-          const _s = JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}');
-          _s.pcloudToken = pcloudToken;
-          _s.pcloudEmail = vj.email || '';
-          _s.pcloudRegion = hostname.includes('eapi') ? 'eapi' : 'api';
-          localStorage.setItem('veloroute_admin_settings', JSON.stringify(_s));
-        } catch {}
-        pcloudSuccess({ auth: pcloudToken, email: vj.email }, vj.email);
-        setStatus('login-status', 'Connexion pCloud (OAuth) réussie.', 'ok');
-      } else {
-        setStatus('login-status', `Token invalide (code ${vj.result})`, 'error');
-      }
-    } catch (err) {
-      setStatus('login-status', `Erreur validation token: ${err.message}`, 'error');
-    }
-  }
-});
-$('btn-pcloud-oauth').addEventListener('click', pcloudStartOAuth);
-// Permettre Enter dans les champs
-$('pcloud-password').addEventListener('keydown', e => { if (e.key === 'Enter') pcloudLogin(); });
-
-// Debug: log button state and capture low-level events if clicks don't fire
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = $('btn-pcloud-login-overlay');
-  if (!btn) { console.warn('pcloud login button not found'); return; }
-  console.log('DEBUG: btn state on load -> disabled=', btn.disabled);
-  btn.addEventListener('pointerdown', e => { console.log('DEBUG: btn pointerdown', e.type); });
-  btn.addEventListener('click', e => { console.log('DEBUG: btn click', e.type); });
-  if (btn.disabled) {
-    console.warn('DEBUG: Enabling login button for debug');
-    btn.disabled = false;
-    btn.style.pointerEvents = 'auto';
-  }
-});
+$('btn-server-login').addEventListener('click', serverLogin);
+$('btn-logout-header').addEventListener('click', serverLogout);
+$('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
 
 // ── Settings persistence ──────────────────────────────────────────────
 const SETTINGS_KEY = 'veloroute_admin_settings';
 function saveSettings() {
   const data = {
-    ghToken:    $('gh-token').value.trim(),
-    cdnBase:    $('cdn-base').value.trim(),
-    pcloudPath: $('pcloud-path').value.trim(),
+    ghToken:   $('gh-token').value.trim(),
+    cdnBase:   $('cdn-base').value.trim(),
+    serverUrl: $('server-url').value.trim(),
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
   const saved = $('settings-saved');
@@ -1380,29 +1226,26 @@ function saveSettings() {
 async function loadSettings() {
   try {
     const data = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-    if (data.ghToken)    $('gh-token').value    = data.ghToken;
-    if (data.cdnBase)    $('cdn-base').value    = data.cdnBase;
-    if (data.pcloudPath) $('pcloud-path').value = data.pcloudPath;
-    if (data.pcloudToken) {
-      // Valider le token sauvegardé avant de l'utiliser
-      const region = data.pcloudRegion || 'api';
-      const ri = document.querySelector(`input[name="pcloud-region"][value="${region}"]`);
-      if (ri) ri.checked = true;
+    if (data.ghToken)   $('gh-token').value   = data.ghToken;
+    if (data.cdnBase)   $('cdn-base').value   = data.cdnBase;
+    if (data.serverUrl) $('server-url').value = data.serverUrl;
+    if (data.serverToken) {
       try {
-        const vr = await fetch(`https://${region}.pcloud.com/userinfo?getauth=0&auth=${encodeURIComponent(data.pcloudToken)}`);
-        const vj = await vr.json();
-        if (vj.result === 0) {
-          pcloudToken = data.pcloudToken;
+        const base = (data.serverUrl || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
+        const r = await fetch(`${base}/ping`, {
+          headers: { Authorization: `Bearer ${data.serverToken}` }
+        });
+        if (r.ok) {
+          serverToken = data.serverToken;
           $('login-overlay').style.display = 'none';
           $('site-header').style.display   = 'flex';
           $('main-content').style.display  = 'flex';
           $('btn-logout-header').style.display = 'inline-block';
-          $('header-user').textContent = `· ${data.pcloudEmail || ''}`;
+          $('header-user').textContent = '· VLR-server';
           setTimeout(() => map.invalidateSize(), 100);
           loadExistingData(!!data.ghToken);
         } else {
-          // Token révoqué — nettoyer et afficher le login
-          delete data.pcloudToken; delete data.pcloudEmail; delete data.pcloudRegion;
+          delete data.serverToken;
           localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
         }
       } catch {
@@ -1437,36 +1280,22 @@ async function commitEscalesJson() {
   );
 }
 
-async function pcloudEnsureFolder(folderPath) {
-  // Crée récursivement chaque segment du chemin
-  const parts = folderPath.replace(/\/+$/, '').split('/').filter(Boolean);
-  let built = '';
-  let folderId = null;
-  for (const part of parts) {
-    built += '/' + part;
-    const url = `${pcloudBase()}/createfolderifnotexists?path=${encodeURIComponent(built)}&auth=${pcloudToken}`;
-    const r = await fetch(url);
-    const j = await r.json();
-    if (j.result !== 0) throw new Error(`createfolder ${built}: ${j.error}`);
-    folderId = j.metadata.folderid;
-  }
-  return folderId;
-}
-
-async function pcloudUploadFile(folderId, filename, blob) {
+async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
-  form.append('folderid', folderId);
-  form.append('filename', filename);
-  form.append('auth', pcloudToken);
+  form.append('path', relPath);
   form.append('file', blob, filename);
-  const r = await fetch(`${pcloudBase()}/uploadfile`, { method: 'POST', body: form });
+  const r = await fetch(`${serverBase()}/upload`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${serverToken}` },
+    body: form
+  });
   const j = await r.json();
-  if (j.result !== 0) throw new Error(`upload ${filename}: ${j.error}`);
+  if (!j.ok) throw new Error(j.error || 'Upload échoué');
+  return j.url;
 }
 
-async function uploadToPCloud() {
-  if (!pcloudToken) { setStatus('pcloud-status', 'Non connecté à pCloud.', 'error'); return; }
-  const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+async function uploadToServer() {
+  if (!serverToken) { setStatus('pcloud-status', 'Non connecté au serveur.', 'error'); return; }
   if (!rawPhotos.length) { setStatus('pcloud-status', 'Aucune photo chargée.', 'error'); return; }
 
   const progWrap = $('pcloud-progress-wrap');
@@ -1477,28 +1306,19 @@ async function uploadToPCloud() {
   const subfolder = $('photo-subfolder').value.trim();
   const sub = subfolder ? `/${subfolder}` : '';
 
+  const photos = rawPhotos.filter(p => p.file);
+  const total = photos.reduce((n, p) => n + (p.type === 'video' ? 2 : 3), 0);
+  let done = 0, errors = 0;
+  const tick = () => { done++; progBar.style.width = `${(done / total) * 100}%`; };
+
   try {
-    setStatus('pcloud-status', 'Création des dossiers…');
-    const [srcId, photoId, thumbId] = await Promise.all([
-      pcloudEnsureFolder(`${base}/Sources${sub}`),
-      pcloudEnsureFolder(`${base}/Photos${sub}`),
-      pcloudEnsureFolder(`${base}/Thumbs${sub}`),
-    ]);
-
-    const photos = rawPhotos.filter(p => p.file);
-    // Chaque photo = 3 uploads (source + 2500px + 400px), vidéo = 1 upload (source uniquement, thumb vidéo)
-    const total = photos.reduce((n, p) => n + (p.type === 'video' ? 2 : 3), 0);
-    let done = 0, errors = 0;
-
-    const tick = () => { done++; progBar.style.width = `${(done / total) * 100}%`; };
-
     for (const p of photos) {
       const isVideo = p.type === 'video';
       const outName = isVideo ? p.file.name : jpgName(p.file.name);
 
       // ① Source originale
       setStatus('pcloud-status', `↑ Source : ${p.file.name}…`);
-      try { await pcloudUploadFile(srcId, p.file.name, p.file); } catch (e) { console.warn(e); errors++; }
+      try { await serverUploadFile(`Sources${sub}/${p.file.name}`, p.file, p.file.name); } catch (e) { console.warn(e); errors++; }
       tick();
 
       if (isVideo) {
@@ -1506,7 +1326,7 @@ async function uploadToPCloud() {
         setStatus('pcloud-status', `↑ Vignette vidéo : ${outName}…`);
         try {
           const thumbBlob = await generateVideoThumbnail(p.file);
-          await pcloudUploadFile(thumbId, outName, thumbBlob);
+          await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
         } catch (e) { console.warn(e); errors++; }
         tick();
       } else {
@@ -1514,7 +1334,7 @@ async function uploadToPCloud() {
         setStatus('pcloud-status', `↑ Photo 2500px : ${outName}…`);
         try {
           const photoBlob = await resizeImage(p.file, 2500, 0.88);
-          await pcloudUploadFile(photoId, outName, photoBlob);
+          await serverUploadFile(`Photos${sub}/${outName}`, photoBlob, outName);
         } catch (e) { console.warn(e); errors++; }
         tick();
 
@@ -1522,7 +1342,7 @@ async function uploadToPCloud() {
         setStatus('pcloud-status', `↑ Vignette : ${outName}…`);
         try {
           const thumbBlob = await resizeImage(p.file, 400, 0.82);
-          await pcloudUploadFile(thumbId, outName, thumbBlob);
+          await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
         } catch (e) { console.warn(e); errors++; }
         tick();
       }
@@ -1545,47 +1365,7 @@ async function uploadToPCloud() {
 
 // ── Download buttons ──────────────────────────────────────────────────
 
-// ── pCloud Sync helpers ────────────────────────────────────────────────
-function pcloudHandleAuthError(j) {
-  // Détecte tous les cas d'auth invalide pCloud (quel que soit le code)
-  const isAuthErr = j.result === 1000 || j.result === 2094 || j.result === 2000
-    || (j.error && /access_token|log in|invalid.*token/i.test(j.error));
-  if (!isAuthErr) return false;
-  console.warn(`pCloud auth error result=${j.result}:`, j.error);
-  const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-  delete _s.pcloudToken; delete _s.pcloudEmail;
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
-  pcloudToken = null;
-  pendingSyncAfterLogin = true;
-  $('login-status').textContent = '⚠ Session expirée — reconnecte-toi pour relancer la sync.';
-  $('login-overlay').style.display = 'flex';
-  $('site-header').style.display   = 'none';
-  $('main-content').style.display  = 'none';
-  return true;
-}
-async function pcloudListFolder(folderPath) {
-  const j = await pcloudPost('listfolder', { path: folderPath, auth: pcloudToken });
-  console.log(`pcloudListFolder(${folderPath}) → result=${j.result}`, j.error || '');
-  if (j.result === 2005 || j.result === 2009) { console.warn(`Dossier introuvable: ${folderPath} (code ${j.result})`); return null; }
-  if (pcloudHandleAuthError(j)) throw new Error('Session pCloud expirée — reconnecte-toi.');
-  if (j.result !== 0) throw new Error(`listfolder ${folderPath} (code ${j.result}): ${j.error}`);
-  return j.metadata.contents || [];
-}
 
-async function pcloudGetFileLink(fileId) {
-  const j = await pcloudPost('getfilelink', { fileid: fileId, auth: pcloudToken, forcedownload: '1' });
-  if (j.result !== 0) throw new Error(`getfilelink ${fileId}: ${j.error}`);
-  return `https://${j.hosts[0]}${j.path}`;
-}
-
-// ── Lecture fichier via CDN public (Public Folder → filedn.com, pas de restriction CORS) ──
-async function pcloudReadFile(fileId, mode, filename, subfolder, type) {
-  // Les fichiers sont dans le Public Folder → directement accessibles via le CDN
-  const url = buildUrlWith(filename, type || 'Sources', subfolder || '');
-  const r = await fetch(url);
-  if (!r.ok) throw new Error(`CDN fetch ${url}: HTTP ${r.status}`);
-  return mode === 'buffer' ? await r.arrayBuffer() : await r.text();
-}
 
 $('btn-save-settings').addEventListener('click', saveSettings);
 
@@ -1704,14 +1484,16 @@ $('btn-seg-delete').addEventListener('click', async () => {
   const total = sel.reduce((acc, s) => acc + s.entries.length, 0);
   if (!confirm(`Supprimer définitivement ${sel.length} segment(s) — ${total} points GPS ?\n\n⚠ Les positions des photos liées peuvent être affectées.`)) return;
   const toRemove = new Set(); sel.forEach(s => s.entries.forEach(e => toRemove.has(e) || toRemove.add(e)));
-  // Supprimer les GPX sources sur pCloud
-  if (pcloudToken) {
-    const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+  // Supprimer les GPX sources sur VLR-server
+  if (serverToken) {
     const gpxFiles = new Set();
     sel.forEach(s => s.entries.forEach(e => { if (e.gpxFile) gpxFiles.add(e.gpxFile); }));
     for (const fname of gpxFiles) {
-      try { await pcloudPost('deletefile', { path: `${base}/GPX/${fname}`, auth: pcloudToken }); }
-      catch (err) { console.warn(`pCloud deletefile GPX ${fname}:`, err); }
+      try {
+        await fetch(`${serverBase()}/files?path=${encodeURIComponent('GPX/' + fname)}`, {
+          method: 'DELETE', headers: { Authorization: `Bearer ${serverToken}` }
+        });
+      } catch (err) { console.warn(`VLR-server delete GPX ${fname}:`, err); }
     }
   }
   travelEntries = travelEntries.filter(e => !toRemove.has(e)); travelEntries.forEach((e, i) => e.id = i + 1);
@@ -1768,15 +1550,18 @@ $('btn-ph-hide').addEventListener('click', async () => {
 $('btn-ph-delete').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
-  if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur pCloud seront également supprimés.`)) return;
-  // Supprimer les sources sur pCloud
-  if (pcloudToken) {
-    const base = $('pcloud-path').value.trim().replace(/\/$/, '');
+  if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur VLR-server seront également supprimés.`)) return;
+  // Supprimer les sources sur VLR-server
+  if (serverToken) {
     for (const p of sel) {
       try {
-        const srcPath = `${base}/Sources/${decodeURIComponent(p.src_orig ? p.src_orig.split('/Sources/')[1] || '' : p.src.split('/Sources/')[1] || '')}`;
-        if (srcPath.length > base.length + 10) await pcloudPost('deletefile', { path: srcPath, auth: pcloudToken });
-      } catch (err) { console.warn(`pCloud deletefile photo:`, err); }
+        const srcName = decodeURIComponent(p.src_orig ? p.src_orig.split('/Sources/')[1] || '' : p.src.split('/Sources/')[1] || '');
+        if (srcName) {
+          await fetch(`${serverBase()}/files?path=${encodeURIComponent('Sources/' + srcName)}`, {
+            method: 'DELETE', headers: { Authorization: `Bearer ${serverToken}` }
+          });
+        }
+      } catch (err) { console.warn(`VLR-server delete photo:`, err); }
     }
   }
   sel.forEach(p => { try { existingPhotoFilenames.delete(decodeURIComponent(p.src.split('/').pop())); } catch {} });
@@ -1821,7 +1606,7 @@ function renderEscales() {
     });
     inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') saveBtn.click(); });
     delBtn.addEventListener('click', async () => {
-      if (!confirm(`Supprimer l'étape « ${e.city} » de escales.json ?\n(Les fichiers pCloud ne sont pas supprimés.)`)) return;
+      if (!confirm(`Supprimer l'étape « ${e.city} » de escales.json ?\n(Les fichiers sur VLR-server ne sont pas supprimés.)`)) return;
       escaleEntries.splice(idx, 1);
       setStatus('manage-status', 'Commit escales.json…');
       try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape supprimée`, 'ok'); }
