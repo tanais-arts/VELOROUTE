@@ -126,5 +126,13 @@
     "duration_h": 14,
     "lat": 47.22977,
     "lon": 4.90669
+  },
+  {
+    "city": "Chambolle-Musigny",
+    "start": "2025-06-01T11:27",
+    "end": "2025-06-01T12:06",
+    "duration_h": 1,
+    "lat": 47.18095,
+    "lon": 4.94982
   }
 ]
