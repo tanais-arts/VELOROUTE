@@ -78,8 +78,8 @@ app.post('/upload', requireAuth, upload.single('file'), (req, res) => {
     }
     fs.mkdirSync(path.dirname(abs), { recursive: true });
     fs.writeFileSync(abs, req.file.buffer);
-    const proto = process.env.DOMAIN ? 'https' : 'http';
-    const host  = process.env.DOMAIN ? `${process.env.DOMAIN}:${PORT}` : req.get('host');
+    const proto = serverProto;
+    const host  = serverProto === 'https' ? `${process.env.DOMAIN}:${PORT}` : req.get('host');
     res.json({ ok: true, url: `${proto}://${host}/files/${rel}` });
   } catch (e) {
     res.status(500).json({ error: e.message });
@@ -127,7 +127,11 @@ const domain   = process.env.DOMAIN || '';
 const certFile = process.env.SSL_CERT || (domain ? `/etc/letsencrypt/live/${domain}/fullchain.pem` : '');
 const keyFile  = process.env.SSL_KEY  || (domain ? `/etc/letsencrypt/live/${domain}/privkey.pem`  : '');
 
+// Track actual protocol so upload URLs are always correct
+let serverProto = 'http';
+
 if (certFile && keyFile && fs.existsSync(certFile) && fs.existsSync(keyFile)) {
+  serverProto = 'https';
   const creds = { cert: fs.readFileSync(certFile), key: fs.readFileSync(keyFile) };
   https.createServer(creds, app).listen(PORT, () =>
     console.log(`[VLR-server] HTTPS :${PORT}  storage=${STORAGE_ROOT}`));

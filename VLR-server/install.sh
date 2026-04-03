@@ -22,6 +22,7 @@ show_menu() {
   echo "  3) Démarrer le serveur"
   echo "  4) Arrêter le serveur"
   echo "  5) Afficher les logs (Ctrl+C pour quitter)"
+  echo "  6) Renouveler le certificat Let's Encrypt"
   echo "  0) Quitter"
   echo ""
   read -rp "Choix (0-5) : " CHOICE
@@ -203,17 +204,24 @@ HOOK
         # If non-root, install a user cron job to run renew and copy certs
         if [ "$(id -u)" -ne 0 ]; then
           RENEW_SCRIPT="$SCRIPTDIR/renew_letsencrypt.sh"
-          cat > "$RENEW_SCRIPT" << 'RS'
+          cat > "$RENEW_SCRIPT" << RS
 #!/usr/bin/env bash
-SCRIPTDIR="$(cd "$(dirname "$0")" && pwd)"
-DOMAIN="$DOMAIN"
-LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
-certbot renew --config-dir "$LOCAL_LE_DIR" --work-dir "$SCRIPTDIR/.letsencrypt-work" --logs-dir "$SCRIPTDIR/.letsencrypt-logs"
-SRC_LIVE="$LOCAL_LE_DIR/live/$DOMAIN"
-if [ -f "$SRC_LIVE/fullchain.pem" ]; then
-  cp "$SRC_LIVE/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
-  cp "$SRC_LIVE/privkey.pem" "$SCRIPTDIR/certs/server.key"
-  chmod 600 "$SCRIPTDIR/certs/server.key" || true
+SCRIPTDIR="\$(cd "\$(dirname "\$0")" && pwd)"
+DOMAIN="${DOMAIN}"
+LOCAL_LE_DIR="\$SCRIPTDIR/.letsencrypt"
+certbot renew --config-dir "\$LOCAL_LE_DIR" --work-dir "\$SCRIPTDIR/.letsencrypt-work" --logs-dir "\$SCRIPTDIR/.letsencrypt-logs"
+SRC_LIVE="\$LOCAL_LE_DIR/live/${DOMAIN}"
+if [ -f "\$SRC_LIVE/fullchain.pem" ]; then
+  cp "\$SRC_LIVE/fullchain.pem" "\$SCRIPTDIR/certs/server.crt"
+  cp "\$SRC_LIVE/privkey.pem" "\$SCRIPTDIR/certs/server.key"
+  chmod 600 "\$SCRIPTDIR/certs/server.key" || true
+  # Redémarrer le serveur pour charger le nouveau certificat
+  if [[ "\$(uname)" == "Darwin" ]] && [ -f "\$HOME/Library/LaunchAgents/com.vlr-server.plist" ]; then
+    launchctl unload "\$HOME/Library/LaunchAgents/com.vlr-server.plist" 2>/dev/null || true
+    launchctl load "\$HOME/Library/LaunchAgents/com.vlr-server.plist"
+  elif command -v systemctl >/dev/null 2>&1 && systemctl is-active vlr-server >/dev/null 2>&1; then
+    systemctl restart vlr-server
+  fi
 fi
 RS
           chmod +x "$RENEW_SCRIPT" || true
@@ -382,6 +390,43 @@ EOF
     echo "Aucun fichier de log trouvé."
     read -rp "   Appuyez sur Entrée pour revenir au menu…"
   fi
+  ;;
+
+# ── 6) Renouveler le certificat ─────────────────────────────────────────
+6)
+  [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && read -rp "Entrée…" && continue
+  # Déterminer le script de renouvellement
+  RENEW_SCRIPT="$SCRIPTDIR/renew_letsencrypt.sh"
+  if [ -f "$RENEW_SCRIPT" ]; then
+    echo "Lancement du renouvellement…"
+    bash "$RENEW_SCRIPT" && echo "✓ Certificat renouvelé et serveur redémarré." || echo "⚠  Renouvellement échoué — vérifiez les logs certbot."
+  else
+    # Renouvellement direct sans script (installation root / system certbot)
+    domain_val="$(grep '^DOMAIN=' "$ENV_FILE" | cut -d= -f2)"
+    if command -v certbot >/dev/null 2>&1 && [ -n "$domain_val" ]; then
+      LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
+      if [ -d "$LOCAL_LE_DIR" ]; then
+        certbot renew --config-dir "$LOCAL_LE_DIR" --work-dir "$SCRIPTDIR/.letsencrypt-work" --logs-dir "$SCRIPTDIR/.letsencrypt-logs"
+      else
+        certbot renew
+      fi
+      # Copier les certs mis à jour
+      SRC_LIVE="/etc/letsencrypt/live/$domain_val"
+      [ -d "$LOCAL_LE_DIR/live/$domain_val" ] && SRC_LIVE="$LOCAL_LE_DIR/live/$domain_val"
+      if [ -f "$SRC_LIVE/fullchain.pem" ]; then
+        mkdir -p "$SCRIPTDIR/certs"
+        cp "$SRC_LIVE/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
+        cp "$SRC_LIVE/privkey.pem" "$SCRIPTDIR/certs/server.key"
+        chmod 600 "$SCRIPTDIR/certs/server.key" || true
+        echo "✓ Certificats copiés."
+        echo "Redémarrage du serveur…"
+        bash "$0" 3 2>/dev/null || true
+      fi
+    else
+      echo "⚠  certbot introuvable ou DOMAIN non configuré."
+    fi
+  fi
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 
 0)

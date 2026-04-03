@@ -707,8 +707,24 @@ async function init() {
   window._refreshTimelineEscales = () =>
     renderTimelineEscales(state.escales);
 
+  // Normalise les URLs photos :
+  //  1. Migre les anciennes URLs pCloud (filedn.com) vers hub.studios-voa.com:1666/files
+  //  2. Upgrade http:// → https:// si la page est en HTTPS (évite le mixed-content)
+  const HUB_BASE = 'https://hub.studios-voa.com:1666/files';
+  function normUrl(u) {
+    if (!u) return u;
+    // Migration pCloud → hub : extraire le chemin après VELOROUTE/
+    const pcloudMatch = u.match(/filedn\.com\/.+?\/VELOROUTE\/(.+)$/);
+    if (pcloudMatch) return `${HUB_BASE}/${pcloudMatch[1]}`;
+    // Mixed-content : http → https si la page est en https
+    if (location.protocol === 'https:' && u.startsWith('http://')) return 'https://' + u.slice(7);
+    return u;
+  }
+
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
-  state.photos  = photos.filter(p => !p.hidden); // hidden photos not shown in carousel
+  state.photos  = photos
+    .filter(p => !p.hidden)
+    .map(p => ({ ...p, src: normUrl(p.src), thumb: normUrl(p.thumb), webp: normUrl(p.webp), src_orig: normUrl(p.src_orig) }));
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
