@@ -774,5 +774,13 @@
     "duration_h": 0,
     "lat": 48.8761,
     "lon": 2.32496
+  },
+  {
+    "city": "Vierville-sur-Mer",
+    "start": "2025-05-02T15:58",
+    "end": "2025-05-02T15:58",
+    "duration_h": 0,
+    "lat": 49.34439,
+    "lon": -1.09021
   }
 ]
