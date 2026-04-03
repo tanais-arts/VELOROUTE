@@ -212,6 +212,33 @@
     "lon": -0.75911
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Aure_sur_Mer/IMG_20250502_104810.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aure_sur_Mer/IMG_20250502_104810.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aure_sur_Mer/IMG_20250502_104810.jpg",
+    "entryIdx": 318,
+    "caption": "2025-05-02",
+    "lat": 49.34953,
+    "lon": -0.79264
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Aure_sur_Mer/IMG_20250502_104813.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aure_sur_Mer/IMG_20250502_104813.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aure_sur_Mer/IMG_20250502_104813.jpg",
+    "entryIdx": 318,
+    "caption": "2025-05-02",
+    "lat": 49.34951,
+    "lon": -0.79257
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Aure_sur_Mer/IMG_20250502_105217.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Aure_sur_Mer/IMG_20250502_105217.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Aure_sur_Mer/IMG_20250502_105217.jpg",
+    "entryIdx": 322,
+    "caption": "2025-05-02",
+    "lat": 49.35318,
+    "lon": -0.79641
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Englesqueville-la-Perce%CC%81e/IMG_2117.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Englesqueville-la-Perce%CC%81e/IMG_2117.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Englesqueville-la-Perce%CC%81e/IMG_2117.HEIC",
