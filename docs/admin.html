@@ -1230,7 +1230,7 @@ async function pcloudLogin() {
       pcloudSuccess(j, email);
     } else if (j.result === 1022) {
       // Missing 'code' — often means wrong data center (api vs eapi).
-      const selected = document.querySelector('input[name="pcloud-region']:checked').value;
+      const selected = document.querySelector('input[name="pcloud-region"]:checked').value;
       const other = selected === 'api' ? 'eapi' : 'api';
       try {
         const body = new URLSearchParams({ getauth: '1', logout: '1', username: email, password: password }).toString();
