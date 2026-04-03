@@ -399,6 +399,33 @@
     "lon": -1.61368
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Carentan-les-Marais/IMG_20250503_120308.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Carentan-les-Marais/IMG_20250503_120308.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Carentan-les-Marais/IMG_20250503_120308.jpg",
+    "entryIdx": 592,
+    "caption": "2025-05-03",
+    "lat": 49.30582,
+    "lon": -1.23884
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Carentan-les-Marais/IMG_20250503_120312.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Carentan-les-Marais/IMG_20250503_120312.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Carentan-les-Marais/IMG_20250503_120312.jpg",
+    "entryIdx": 592,
+    "caption": "2025-05-03",
+    "lat": 49.30582,
+    "lon": -1.23816
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Carentan-les-Marais/IMG_20250503_121206.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Carentan-les-Marais/IMG_20250503_121206.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Carentan-les-Marais/IMG_20250503_121206.jpg",
+    "entryIdx": 592,
+    "caption": "2025-05-03",
+    "lat": 49.30679,
+    "lon": -1.24108
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Granville/IMG_2144.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Granville/IMG_2144.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Granville/IMG_2144.HEIC",
@@ -1649,6 +1676,13 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Bricqueville-sur-Mer/IMG_20250717_160620.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bricqueville-sur-Mer/IMG_20250717_160620.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bricqueville-sur-Mer/IMG_20250717_160620.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-17"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Carentan-les-Marais/IMG_20250717_161144.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Carentan-les-Marais/IMG_20250717_161144.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Carentan-les-Marais/IMG_20250717_161144.jpg",
     "entryIdx": null,
     "caption": "2025-07-17"
   },
