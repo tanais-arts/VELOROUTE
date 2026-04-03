@@ -478,5 +478,13 @@
     "duration_h": 0,
     "lat": 45.75191,
     "lon": 6.17397
+  },
+  {
+    "city": "Faverges-Seythenex",
+    "start": "2025-07-17T18:23",
+    "end": "2025-07-17T18:39",
+    "duration_h": 0,
+    "lat": 45.73409,
+    "lon": 6.30113
   }
 ]
