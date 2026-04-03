@@ -278,5 +278,13 @@
     "duration_h": 0,
     "lat": 47.50685,
     "lon": 4.4595
+  },
+  {
+    "city": "Pouilly-en-Auxois",
+    "start": "2025-05-30T17:52",
+    "end": "2025-05-31T10:23",
+    "duration_h": 17,
+    "lat": 47.26555,
+    "lon": 4.54585
   }
 ]
