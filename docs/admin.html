@@ -222,11 +222,15 @@
     #login-card .field label { font-size: 0.66rem; }
     #login-card input[type="email"],
     #login-card input[type="password"],
-    #login-card input[type="text"] {
+    #login-card input[type="text"],
+    #login-card input[type="url"] {
       width: 100%; background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
       color: rgba(240,240,240,1); padding: 10px 14px;
       font-size: 0.9rem; outline: none; transition: border-color .15s;
+    }
+    #login-card input[type="url"] {
+      font-size: 0.75rem; color: rgba(255,255,255,.55); padding: 7px 12px;
     }
     #login-card input:focus { border-color: rgba(240,192,96,0.55); }
     #btn-server-login {
@@ -266,10 +270,13 @@
     <div id="login-logo">VÉLOROUTE</div>
     <div id="login-sub">· administration · VLR-server</div>
 
-    <div class="field">
-      <label>URL serveur</label>
-      <input type="url" id="server-url" value="https://hub.studios-voa.com:1666" autocomplete="off">
+    <div class="field" style="margin-bottom:6px">
+      <label style="font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.1em">SERVEUR</label>
+      <input type="url" id="server-url" value="https://hub.studios-voa.com:1666" autocomplete="off" spellcheck="false">
     </div>
+
+    <div style="border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px"></div>
+
     <div class="field">
       <label>Mot de passe</label>
       <input type="password" id="server-password" placeholder="••••••••" autocomplete="current-password">
