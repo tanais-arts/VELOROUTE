@@ -446,5 +446,13 @@
     "duration_h": 0,
     "lat": 49.35151,
     "lon": -0.85859
+  },
+  {
+    "city": "Courseulles-sur-Mer",
+    "start": "2025-05-01T18:37",
+    "end": "2025-05-01T18:37",
+    "duration_h": 0,
+    "lat": 49.33497,
+    "lon": -0.45756
   }
 ]
