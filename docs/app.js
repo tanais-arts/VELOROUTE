@@ -468,11 +468,22 @@ function buildSegmentMap(entries, times) {
 
 function indexToVisualUnits(idx, segMap) {
   for (const seg of segMap.segments) {
-    if (seg.isGap) continue;
+    if (seg.isGap) {
+      if (idx >= seg.startIdx && idx <= seg.endIdx)
+        return seg.cumulStart;
+      continue;
+    }
     if (idx >= seg.startIdx && idx <= seg.endIdx)
       return seg.cumulStart + (idx - seg.startIdx);
   }
-  return segMap.totalUnits - 1;
+  // Clamp: find nearest segment
+  let best = 0, bestDist = Infinity;
+  for (const seg of segMap.segments) {
+    if (seg.isGap) continue;
+    const d = Math.min(Math.abs(idx - seg.startIdx), Math.abs(idx - seg.endIdx));
+    if (d < bestDist) { bestDist = d; best = seg.cumulStart + Math.max(0, Math.min(idx - seg.startIdx, seg.points - 1)); }
+  }
+  return best;
 }
 
 function visualUnitsToIndex(units, segMap) {
@@ -599,7 +610,7 @@ function selectPhotoEntry(photo, skipCarousel) {
   if (photo.entryIdx != null) selectEntry(photo.entryIdx, skipCarousel);
 }
 
-function selectEntry(idx, skipCarousel) {
+function selectEntry(idx, skipCarousel, skipSlider) {
   const entries = state.entries;
   if (idx < 0 || idx >= entries.length) return;
   const e = entries[idx];
@@ -615,12 +626,14 @@ function selectEntry(idx, skipCarousel) {
   if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
-  if (state.segMap) {
-    tlInput.value = indexToVisualUnits(idx, state.segMap);
-  } else if (state.entryTimes && state.entryTimes[idx] != null) {
-    tlInput.value = state.entryTimes[idx];
-  } else {
-    tlInput.value = idx;
+  if (!skipSlider) {
+    if (state.segMap) {
+      tlInput.value = indexToVisualUnits(idx, state.segMap);
+    } else if (state.entryTimes && state.entryTimes[idx] != null) {
+      tlInput.value = state.entryTimes[idx];
+    } else {
+      tlInput.value = idx;
+    }
   }
   updateTimelineThumb(idx);
 }
@@ -968,7 +981,7 @@ async function init() {
     if (state.segMap) {
       const idx = visualUnitsToIndex(Number(tlInput.value), state.segMap);
       updateTimelineThumb(idx);
-      selectEntry(idx);
+      selectEntry(idx, false, true);
     } else if (state.entryTimes && state.entryTimes.length > 1) {
       const t = Number(tlInput.value);
       previewAtTime(t);
@@ -976,7 +989,7 @@ async function init() {
     } else {
       const idx = Number(tlInput.value);
       updateTimelineThumb(idx);
-      selectEntry(idx);
+      selectEntry(idx, false, true);
     }
   });
 
