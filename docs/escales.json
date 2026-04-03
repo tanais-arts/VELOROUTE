@@ -462,5 +462,13 @@
     "duration_h": 0,
     "lat": 48.8761,
     "lon": 2.32496
+  },
+  {
+    "city": "Donville-les-Bains",
+    "start": "2025-05-04T18:16",
+    "end": "2025-05-04T18:17",
+    "duration_h": 0,
+    "lat": 48.83991,
+    "lon": 2.31941
   }
 ]
