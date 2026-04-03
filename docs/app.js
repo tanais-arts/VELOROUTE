@@ -1024,18 +1024,20 @@ async function init() {
     return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
   }
   function navPrev() {
-    if (state.activeIdx === null) return;
-    for (let i = state.activeIdx - 1; i >= 0; i--) {
-      if (mediaEntries.has(i)) { selectEntry(i); return; }
+    const pi = state.activePhotoIdx;
+    if (pi > 0) {
+      const p = photos[pi - 1];
+      scrollCarouselTo(pi - 1, true);
+      selectPhotoEntry(p);
     }
-    if (state.activeIdx > 0) selectEntry(state.activeIdx - 1);
   }
   function navNext() {
-    if (state.activeIdx === null) return;
-    for (let i = state.activeIdx + 1; i < entries.length; i++) {
-      if (mediaEntries.has(i)) { selectEntry(i); return; }
+    const pi = state.activePhotoIdx;
+    if (pi < photos.length - 1) {
+      const p = photos[pi + 1];
+      scrollCarouselTo(pi + 1, true);
+      selectPhotoEntry(p);
     }
-    if (state.activeIdx < entries.length - 1) selectEntry(state.activeIdx + 1);
   }
 
   // ── Carousel arrows — naviguent photo par photo, restent centrées ──
