@@ -1173,12 +1173,15 @@ function pcloudBase() {
 async function pcloudPost(endpoint, params) {
   console.log('pcloudPost called', endpoint, params);
   const body = new URLSearchParams(params);
-  const r = await fetch(`${pcloudBase()}/${endpoint}`, {
+  const url = `${pcloudBase()}/${endpoint}`;
+  console.log('pcloudPost ->', url, body.toString());
+  const r = await fetch(url, {
     method: 'POST',
     referrerPolicy: 'no-referrer',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body.toString()
   });
+  console.log('pcloudPost response status:', r.status);
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   return r.json();
 }
@@ -1234,12 +1237,15 @@ async function pcloudLogin() {
       const other = selected === 'api' ? 'eapi' : 'api';
       try {
         const body = new URLSearchParams({ getauth: '1', logout: '1', username: email, password: password }).toString();
-        const rr = await fetch(`https://${other}.pcloud.com/userinfo`, {
+        const url2 = `https://${other}.pcloud.com/userinfo`;
+        console.log('pcloud retry ->', url2, body);
+        const rr = await fetch(url2, {
           method: 'POST',
           referrerPolicy: 'no-referrer',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
           body
         });
+        console.log('pcloud retry response status:', rr.status);
         if (rr.ok) {
           const rj = await rr.json();
           console.log('pCloud login retry on other region response:', JSON.stringify(rj));
