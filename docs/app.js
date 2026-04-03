@@ -513,15 +513,14 @@ const THUMB_STEP = 124;
 
 function nearestPhotoIdx(entryIdx) {
   const photos = state.photos;
-  let lo = 0, hi = photos.length - 1;
-  while (lo < hi) {
-    const mid = (lo + hi) >> 1;
-    if (photos[mid].entryIdx < entryIdx) lo = mid + 1;
-    else hi = mid;
+  if (!photos.length) return 0;
+  let best = 0, bestDist = Infinity;
+  for (let i = 0; i < photos.length; i++) {
+    if (photos[i].entryIdx == null) continue;
+    const d = Math.abs(photos[i].entryIdx - entryIdx);
+    if (d < bestDist) { bestDist = d; best = i; }
   }
-  const a = lo > 0 ? lo - 1 : 0;
-  const b = lo < photos.length ? lo : photos.length - 1;
-  return Math.abs(photos[a].entryIdx - entryIdx) <= Math.abs(photos[b].entryIdx - entryIdx) ? a : b;
+  return best;
 }
 
 function timeToIndex(t) {
@@ -590,24 +589,24 @@ function scrollCarouselTo(pi, smooth = false) {
 
 // ── Select entry ──────────────────────────────────────────────────────
 // Sélection par photo : utilise ses coords GPS propres si dispo, sinon entryIdx GPX
-function selectPhotoEntry(photo) {
+function selectPhotoEntry(photo, skipCarousel) {
   if (photo.lat != null && photo.lon != null) {
     showRing([photo.lat, photo.lon]);
     if (!map.getBounds().contains([photo.lat, photo.lon])) {
       map.panTo([photo.lat, photo.lon], { animate: true, duration: 0.4 });
     }
   }
-  if (photo.entryIdx != null) selectEntry(photo.entryIdx);
+  if (photo.entryIdx != null) selectEntry(photo.entryIdx, skipCarousel);
 }
 
-function selectEntry(idx) {
+function selectEntry(idx, skipCarousel) {
   const entries = state.entries;
   if (idx < 0 || idx >= entries.length) return;
   const e = entries[idx];
   state.activeIdx = idx;
 
   showRing([e.lat, e.lon]);
-  scrollCarouselTo(nearestPhotoIdx(idx), true);
+  if (!skipCarousel) scrollCarouselTo(nearestPhotoIdx(idx), true);
   if (!map.getBounds().contains([e.lat, e.lon])) {
     map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
   }
@@ -1026,17 +1025,15 @@ async function init() {
   function navPrev() {
     const pi = state.activePhotoIdx;
     if (pi > 0) {
-      const p = photos[pi - 1];
       scrollCarouselTo(pi - 1, true);
-      selectPhotoEntry(p);
+      selectPhotoEntry(photos[pi - 1], true);
     }
   }
   function navNext() {
     const pi = state.activePhotoIdx;
     if (pi < photos.length - 1) {
-      const p = photos[pi + 1];
       scrollCarouselTo(pi + 1, true);
-      selectPhotoEntry(p);
+      selectPhotoEntry(photos[pi + 1], true);
     }
   }
 
