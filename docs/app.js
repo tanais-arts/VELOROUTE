@@ -723,9 +723,51 @@ async function init() {
     });
   }
 
+  // ── Date separators on timeline (barres verticales mois/année) ──
+  function renderTimelineDateBars() {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (!wrap || !entries.length) return;
+    wrap.querySelectorAll('.tl-date-bar').forEach(el => el.remove());
+
+    // Détecter les changements de mois dans les entries
+    const MONTHS_SHORT = ['','Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    let lastMonth = -1;
+    const dateBars = [];
+    entries.forEach((e, i) => {
+      const key = e.year * 100 + e.month;
+      if (key !== lastMonth) {
+        lastMonth = key;
+        dateBars.push({ idx: i, label: `${MONTHS_SHORT[e.month]} ${String(e.year).slice(2)}` });
+      }
+    });
+
+    dateBars.forEach(db => {
+      let pct;
+      if (state.segMap) {
+        pct = state.segMap.totalUnits > 1
+          ? indexToVisualUnits(db.idx, state.segMap) / (state.segMap.totalUnits - 1) * 100 : 0;
+      } else if (state.entryTimes && state.entryTimes.length > 1) {
+        const span = state.entryTimeMax - state.entryTimeMin;
+        pct = span > 0 ? (state.entryTimes[db.idx] - state.entryTimeMin) / span * 100 : 0;
+      } else {
+        pct = entries.length > 1 ? db.idx / (entries.length - 1) * 100 : 0;
+      }
+
+      const bar = document.createElement('div');
+      bar.className = 'tl-date-bar';
+      bar.style.cssText = `position:absolute;left:${pct}%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.35);z-index:3;pointer-events:none;transform:translateX(-0.5px)`;
+      const lbl = document.createElement('span');
+      lbl.style.cssText = 'position:absolute;top:-14px;left:2px;font-size:9px;color:rgba(255,255,255,0.6);white-space:nowrap;font-family:inherit';
+      lbl.textContent = db.label;
+      bar.appendChild(lbl);
+      wrap.appendChild(bar);
+    });
+  }
+
   setTimeout(() => {
     renderTimelineBaseLine();
     renderTimelineEscales(escales);
+    renderTimelineDateBars();
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales depuis admin)
@@ -916,7 +958,36 @@ async function init() {
   });
 
   state.markers = [];
-  map.fitBounds(L.latLngBounds(latlngs), { padding: [20, 20] });
+
+  // ── Photo markers on map ──
+  // Montre un point doré pour chaque photo avec GPS, surtout celles sans trace GPX
+  const photoMarkerLayer = L.layerGroup().addTo(map);
+  photos.forEach((p, i) => {
+    if (p.lat == null || p.lon == null) return;
+    const hasTrace = p.entryIdx != null;
+    const marker = L.circleMarker([p.lat, p.lon], {
+      radius: hasTrace ? 4 : 6,
+      color: '#fff',
+      fillColor: hasTrace ? '#f0c060' : '#e07040',
+      fillOpacity: hasTrace ? 0.6 : 0.85,
+      weight: hasTrace ? 1 : 2,
+      pane: 'markerPane',
+    });
+    marker.on('click', () => {
+      scrollCarouselTo(i, true);
+      selectPhotoEntry(p, true);
+      openLightbox(photos, i);
+    });
+    marker.addTo(photoMarkerLayer);
+  });
+
+  // Ajuste le cadrage carte pour inclure les photos hors trace 
+  const allPhotoLatLngs = photos
+    .filter(p => p.lat != null && p.lon != null)
+    .map(p => [p.lat, p.lon]);
+  const allPoints = latlngs.concat(allPhotoLatLngs);
+  if (allPoints.length) map.fitBounds(L.latLngBounds(allPoints), { padding: [20, 20] });
+
 
   // ── Visited city labels ──
   visited.forEach(c => {
