@@ -518,6 +518,42 @@
     "lon": -0.79641
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250502_115508.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250502_115508.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250502_115508.jpg",
+    "entryIdx": 380,
+    "caption": "2025-05-02",
+    "lat": 49.36512,
+    "lon": -0.86291
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250502_115528.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250502_115528.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250502_115528.jpg",
+    "entryIdx": 380,
+    "caption": "2025-05-02",
+    "lat": 49.36512,
+    "lon": -0.86285
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250502_115729.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250502_115729.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250502_115729.jpg",
+    "entryIdx": 382,
+    "caption": "2025-05-02",
+    "lat": 49.36565,
+    "lon": -0.86231
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250502_115742.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250502_115742.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250502_115742.jpg",
+    "entryIdx": 382,
+    "caption": "2025-05-02",
+    "lat": 49.36568,
+    "lon": -0.86223
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Englesqueville-la-Perce%CC%81e/IMG_2117.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Englesqueville-la-Perce%CC%81e/IMG_2117.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Englesqueville-la-Perce%CC%81e/IMG_2117.HEIC",
@@ -631,6 +667,15 @@
     "caption": "2025-05-02",
     "lat": 49.38918,
     "lon": -0.91982
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250502_123513.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250502_123513.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250502_123513.jpg",
+    "entryIdx": 405,
+    "caption": "2025-05-02",
+    "lat": 49.37029,
+    "lon": -0.88101
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Isigny-sur-Mer/IMG_2124.jpg",
@@ -3274,6 +3319,13 @@
     "caption": "2025-07-19",
     "lat": 46.02033,
     "lon": 6.34194
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Saint-Laurent-sur-Mer/IMG_20250719_140018.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Saint-Laurent-sur-Mer/IMG_20250719_140018.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Saint-Laurent-sur-Mer/IMG_20250719_140018.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-19"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Gazeran/IMG_20251024_135434.jpg",
