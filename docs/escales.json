@@ -366,5 +366,13 @@
     "duration_h": 0,
     "lat": 47.63107,
     "lon": 4.33135
+  },
+  {
+    "city": "Arromanches-les-Bains",
+    "start": "2025-05-01T20:05",
+    "end": "2025-05-01T20:13",
+    "duration_h": 0,
+    "lat": 48.8761,
+    "lon": 2.32496
   }
 ]
