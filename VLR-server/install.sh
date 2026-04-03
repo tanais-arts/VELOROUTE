@@ -30,9 +30,18 @@ show_menu() {
 # ── Vérifie Node.js ───────────────────────────────────────────────────
 require_node() {
   if ! command -v node >/dev/null 2>&1; then
-    echo "Node.js non trouvé — tentative d'installation (Debian/Ubuntu)..."
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-    apt-get install -y nodejs
+    echo "Node.js non trouvé — tentative d'installation..."
+    if [[ "$(uname)" == "Darwin" ]]; then
+      brew install node
+    elif command -v apt-get >/dev/null 2>&1; then
+      curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+      apt-get install -y nodejs
+    elif command -v dnf >/dev/null 2>&1; then
+      dnf install -y nodejs
+    else
+      echo "⚠  Impossible d'installer Node.js automatiquement. Installez-le depuis https://nodejs.org"
+      exit 1
+    fi
   fi
   echo "✓ Node.js $(node --version),  npm $(npm --version)"
 }
@@ -109,15 +118,38 @@ while true; do
   if [[ "$DO_LE" =~ ^[oO]$ ]]; then
     if ! command -v certbot >/dev/null 2>&1; then
       echo "Installation de certbot..."
-      apt-get install -y certbot
+      if [[ "$(uname)" == "Darwin" ]]; then
+        if command -v brew >/dev/null 2>&1; then
+          brew install certbot
+        else
+          echo "⚠  Homebrew non trouvé. Installez certbot manuellement : https://certbot.eff.org"
+          read -rp "   Appuyez sur Entrée pour continuer sans HTTPS…"
+          DO_LE="n"
+        fi
+      else
+        # Linux (Debian/Ubuntu/CentOS)
+        if command -v apt-get >/dev/null 2>&1; then
+          apt-get install -y certbot
+        elif command -v dnf >/dev/null 2>&1; then
+          dnf install -y certbot
+        elif command -v yum >/dev/null 2>&1; then
+          yum install -y certbot
+        else
+          echo "⚠  Gestionnaire de paquets non reconnu. Installez certbot manuellement."
+          read -rp "   Appuyez sur Entrée pour continuer sans HTTPS…"
+          DO_LE="n"
+        fi
+      fi
     fi
-    echo "Obtention du certificat pour $DOMAIN (port 80 doit être libre)..."
-    certbot certonly --standalone -d "$DOMAIN" \
-      --non-interactive --agree-tos \
-      --email "admin@$DOMAIN" || { echo "⚠  certbot échoué — vérifiez que le port 80 est ouvert et repointez vers $DOMAIN"; }
-    env_set "SSL_CERT" "/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-    env_set "SSL_KEY"  "/etc/letsencrypt/live/$DOMAIN/privkey.pem"
-    echo "✓ Certificats configurés."
+    if [[ "$DO_LE" =~ ^[oO]$ ]]; then
+      echo "Obtention du certificat pour $DOMAIN (port 80 doit être libre)..."
+      certbot certonly --standalone -d "$DOMAIN" \
+        --non-interactive --agree-tos \
+        --email "admin@$DOMAIN" || { echo "⚠  certbot échoué — vérifiez que le port 80 est ouvert et repointez vers $DOMAIN"; }
+      env_set "SSL_CERT" "/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
+      env_set "SSL_KEY"  "/etc/letsencrypt/live/$DOMAIN/privkey.pem"
+      echo "✓ Certificats configurés."
+    fi
   fi
   echo ""
 
