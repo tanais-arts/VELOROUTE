@@ -406,5 +406,13 @@
     "duration_h": 0,
     "lat": 49.1845,
     "lon": -0.35649
+  },
+  {
+    "city": "Carentan-les-Marais",
+    "start": "2025-05-03T14:03",
+    "end": "2025-07-17T18:11",
+    "duration_h": 1804,
+    "lat": 49.30614,
+    "lon": -1.23936
   }
 ]
