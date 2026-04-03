@@ -1288,13 +1288,6 @@
     "caption": "2025-06-01"
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Beaune/IMG_2332.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Beaune/IMG_2332.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Beaune/IMG_2332.HEIC",
-    "entryIdx": 1381,
-    "caption": "2025-06-01"
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Beaune/IMG_20250601_142558.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Beaune/IMG_20250601_142558.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Beaune/IMG_20250601_142558.jpg",
@@ -1354,6 +1347,13 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Remigny/IMG_20250601_154309.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Remigny/IMG_20250601_154309.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Remigny/IMG_20250601_154309.jpg",
+    "entryIdx": 1381,
+    "caption": "2025-06-01"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Beaune/IMG_2332.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Beaune/IMG_2332.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Beaune/IMG_2332.HEIC",
     "entryIdx": 1381,
     "caption": "2025-06-01"
   },
