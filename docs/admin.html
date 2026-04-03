@@ -398,6 +398,7 @@
       <div class="progress-wrap" id="pcloud-progress-wrap" style="display:none;margin-top:8px">
         <div class="progress-bar" id="pcloud-progress-bar"></div>
       </div>
+      <button id="btn-stop-upload" style="display:none;margin-top:6px" class="small">⏹ Stopper l'upload</button>
       <div class="status" id="pcloud-status" style="margin-top:4px"></div>
       <div class="status" id="actions-status" style="margin-top:2px"></div>
     </div>
@@ -1365,9 +1366,20 @@ async function serverUploadFile(relPath, blob, filename) {
   return j.url;
 }
 
+let uploadAborted = false;
+$('btn-stop-upload').addEventListener('click', () => {
+  uploadAborted = true;
+  $('btn-stop-upload').disabled = true;
+  setStatus('pcloud-status', '⏹ Arrêt demandé… fin du fichier en cours', 'warn');
+});
+
 async function uploadToServer() {
   if (!serverToken) { setStatus('pcloud-status', 'Non connecté au serveur.', 'error'); return; }
   if (!rawPhotos.length) { setStatus('pcloud-status', 'Aucune photo chargée.', 'error'); return; }
+
+  uploadAborted = false;
+  const btnStop = $('btn-stop-upload');
+  btnStop.style.display = ''; btnStop.disabled = false;
 
   const progWrap = $('pcloud-progress-wrap');
   const progBar  = $('pcloud-progress-bar');
@@ -1384,6 +1396,7 @@ async function uploadToServer() {
 
   try {
     for (const p of photos) {
+      if (uploadAborted) break;
       const isVideo = p.type === 'video';
       const outName = isVideo ? p.file.name : jpgName(p.file.name);
 
@@ -1419,13 +1432,21 @@ async function uploadToServer() {
       }
     }
 
+    btnStop.style.display = 'none';
     progWrap.style.display = 'none';
+    if (uploadAborted) {
+      const sent = photos.indexOf(p) >= 0 ? photos.indexOf(p) : done;
+      setStatus('pcloud-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
+      await commitPhotosJsonMerged();
+      return;
+    }
     const msg = errors
       ? `⚠ ${errors} erreur(s) — ${photos.length - errors} photo(s) traitées`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
     setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
     await commitPhotosJsonMerged();
   } catch (err) {
+    btnStop.style.display = 'none';
     progWrap.style.display = 'none';
     setStatus('pcloud-status', `Erreur : ${err.message}`, 'error');
   }
