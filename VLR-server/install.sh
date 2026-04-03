@@ -158,30 +158,75 @@ while true; do
     echo "  │  Attendez ~2 min après ajout avant d'appuyer Entrée.        │"
     echo "  └─────────────────────────────────────────────────────────────┘"
     echo ""
-    certbot certonly --manual --preferred-challenges dns \
-      -d "$DOMAIN" --agree-tos --email "admin@$DOMAIN" \
-      && {
-        env_set "SSL_CERT" "/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
-        env_set "SSL_KEY"  "/etc/letsencrypt/live/$DOMAIN/privkey.pem"
-        echo "✓ Certificats Let's Encrypt configurés."
 
-        # Hook renouvellement automatique (copie non nécessaire — server.js lit /etc/letsencrypt directement)
-        RENEW_HOOK="/etc/letsencrypt/renewal-hooks/deploy/vlr-server-restart.sh"
-        if [ -d "/etc/letsencrypt/renewal-hooks/deploy" ]; then
+    # If not running as root, instruct certbot to use writable local dirs
+    CERTBOT_EXTRA_OPTS=""
+    LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
+    if [ "$(id -u)" -ne 0 ]; then
+      mkdir -p "$LOCAL_LE_DIR"
+      mkdir -p "$SCRIPTDIR/.letsencrypt-work" "$SCRIPTDIR/.letsencrypt-logs"
+      CERTBOT_EXTRA_OPTS="--config-dir $LOCAL_LE_DIR --work-dir $SCRIPTDIR/.letsencrypt-work --logs-dir $SCRIPTDIR/.letsencrypt-logs"
+      echo "Note: exécution sans privilèges — certbot utilisera des répertoires locaux: $LOCAL_LE_DIR"
+    fi
+
+    # Run certbot (manual DNS). If non-root, certs will be created under local config dir.
+    if certbot certonly --manual --preferred-challenges dns -d "$DOMAIN" --agree-tos --email "admin@$DOMAIN" $CERTBOT_EXTRA_OPTS; then
+      # Determine source live dir depending on whether certbot wrote system-wide or local
+      if [ -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ] && [ "$(id -u)" -eq 0 ]; then
+        SRC_LIVE_DIR="/etc/letsencrypt/live/$DOMAIN"
+      else
+        SRC_LIVE_DIR="$LOCAL_LE_DIR/live/$DOMAIN"
+      fi
+
+      if [ -f "$SRC_LIVE_DIR/fullchain.pem" ] && [ -f "$SRC_LIVE_DIR/privkey.pem" ]; then
+        mkdir -p "$SCRIPTDIR/certs"
+        cp "$SRC_LIVE_DIR/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
+        cp "$SRC_LIVE_DIR/privkey.pem" "$SCRIPTDIR/certs/server.key"
+        chmod 600 "$SCRIPTDIR/certs/server.key" || true
+        env_set "SSL_CERT" "$SCRIPTDIR/certs/server.crt"
+        env_set "SSL_KEY"  "$SCRIPTDIR/certs/server.key"
+        echo "✓ Certificats Let's Encrypt configurés et copiés dans $SCRIPTDIR/certs."
+
+        # If running as root and system hooks available, install deploy hook to restart service
+        if [ "$(id -u)" -eq 0 ] && [ -d "/etc/letsencrypt/renewal-hooks/deploy" ]; then
+          RENEW_HOOK="/etc/letsencrypt/renewal-hooks/deploy/vlr-server-restart.sh"
           cat > "$RENEW_HOOK" << 'HOOK'
 #!/usr/bin/env bash
-# Redémarre VLR-server après renouvellement Let's Encrypt
 if command -v systemctl >/dev/null 2>&1 && systemctl is-active vlr-server >/dev/null 2>&1; then
   systemctl restart vlr-server
-elif [ -f "$HOME/Library/LaunchAgents/com.vlr-server.plist" ]; then
-  launchctl unload "$HOME/Library/LaunchAgents/com.vlr-server.plist" 2>/dev/null || true
-  launchctl load  "$HOME/Library/LaunchAgents/com.vlr-server.plist"
 fi
 HOOK
           chmod +x "$RENEW_HOOK" 2>/dev/null || true
-          echo "✓ Hook de renouvellement automatique installé."
+          echo "✓ Hook de renouvellement automatique installé (system-wide)."
         fi
-      } || echo "⚠  certbot échoué — relancez l'option 1 après avoir configuré le DNS."
+
+        # If non-root, install a user cron job to run renew and copy certs
+        if [ "$(id -u)" -ne 0 ]; then
+          RENEW_SCRIPT="$SCRIPTDIR/renew_letsencrypt.sh"
+          cat > "$RENEW_SCRIPT" << 'RS'
+#!/usr/bin/env bash
+SCRIPTDIR="$(cd "$(dirname "$0")" && pwd)"
+DOMAIN="$DOMAIN"
+LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
+certbot renew --config-dir "$LOCAL_LE_DIR" --work-dir "$SCRIPTDIR/.letsencrypt-work" --logs-dir "$SCRIPTDIR/.letsencrypt-logs"
+SRC_LIVE="$LOCAL_LE_DIR/live/$DOMAIN"
+if [ -f "$SRC_LIVE/fullchain.pem" ]; then
+  cp "$SRC_LIVE/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
+  cp "$SRC_LIVE/privkey.pem" "$SCRIPTDIR/certs/server.key"
+  chmod 600 "$SCRIPTDIR/certs/server.key" || true
+fi
+RS
+          chmod +x "$RENEW_SCRIPT" || true
+          # add to user crontab if not present
+          (crontab -l 2>/dev/null | grep -v -F "$RENEW_SCRIPT" || true; echo "0 3 * * * $RENEW_SCRIPT >/dev/null 2>&1") | crontab -
+          echo "✓ Cron de renouvellement installé (user crontab)."
+        fi
+      else
+        echo "⚠  Certificats introuvables après certbot — vérifiez l'emplacement." 
+      fi
+    else
+      echo "⚠  certbot échoué — relancez l'option 1 après avoir configuré le DNS."
+    fi
   else
     echo "⚠  certbot non disponible — HTTPS non configuré."
   fi
