@@ -998,35 +998,49 @@ async function init() {
   });
 
   tlInput.addEventListener('change', () => {
-    if (state.entryTimes && state.entryTimes.length > 1) {
-      const t = Number(tlInput.value);
-      const tIdx = timeToIndex(t);
-      if (mediaEntries.size === 0) { selectEntry(tIdx); return; }
-      let idx = tIdx;
-      let best = null, bestDt = Infinity;
-      for (const i of mediaEntries) {
-        if (i < 0 || i >= state.entryTimes.length) continue;
-        const dt = state.entryTimes[i] - t;
-        if (dt < 0) continue;
-        if (dt < bestDt) { bestDt = dt; best = i; }
-      }
-      if (best === null) {
-        let bestPast = null, bestPastDt = Infinity;
-        for (const i of mediaEntries) {
-          if (i < 0 || i >= state.entryTimes.length) continue;
-          const dt = t - state.entryTimes[i];
-          if (dt < 0) continue;
-          if (dt < bestPastDt) { bestPastDt = dt; bestPast = i; }
-        }
-        if (bestPast !== null) best = bestPast;
-      }
-      if (best !== null) idx = best;
-      const target = state.entryTimes[idx];
-      if (t === target) { selectEntry(idx); return; }
+    // Quand on lâche le slider, snap vers la photo la plus proche avec animation
+    let currentIdx;
+    if (state.segMap) {
+      currentIdx = visualUnitsToIndex(Number(tlInput.value), state.segMap);
+    } else if (state.entryTimes && state.entryTimes.length > 1) {
+      currentIdx = timeToIndex(Number(tlInput.value));
+    } else {
+      currentIdx = Number(tlInput.value);
+    }
+
+    // Cherche la photo la plus proche (avant ou après)
+    if (mediaEntries.size === 0) { selectEntry(currentIdx); return; }
+    let bestIdx = null, bestDist = Infinity;
+    for (const i of mediaEntries) {
+      const d = Math.abs(i - currentIdx);
+      if (d < bestDist) { bestDist = d; bestIdx = i; }
+    }
+    if (bestIdx === null) { selectEntry(currentIdx); return; }
+
+    if (state.segMap) {
+      const from = Number(tlInput.value);
+      const to   = indexToVisualUnits(bestIdx, state.segMap);
+      if (from === to) { selectEntry(bestIdx); return; }
+      animateToTime(from, to, 2000,
+        (val) => {
+          const v = Math.round(val);
+          tlInput.value = v;
+          const idx = visualUnitsToIndex(v, state.segMap);
+          updateTimelineThumb(idx);
+          selectEntry(idx, false, true);
+        },
+        () => selectEntry(bestIdx)
+      );
+    } else if (state.entryTimes && state.entryTimes.length > 1) {
+      const t      = Number(tlInput.value);
+      const target = state.entryTimes[bestIdx];
+      if (t === target) { selectEntry(bestIdx); return; }
       animateToTime(t, target, 2000,
         (val) => { const v = Math.round(val); tlInput.value = v; previewAtTime(v); updateTimelineThumbForTime(v); },
-        () => selectEntry(idx)
+        () => selectEntry(bestIdx)
       );
+    } else {
+      selectEntry(bestIdx);
     }
   });
 
