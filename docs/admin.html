@@ -1238,7 +1238,18 @@ async function pcloudLogin() {
     if (j.result === 0 && j.auth) {
       pcloudSuccess(j, email);
     } else if (j.result === 1022) {
-      // Missing 'code' — often means wrong data center (api vs eapi).
+      // Missing 'code' — try a few fallbacks before failing.
+      setStatus('login-status', 'pCloud demande un paramètre supplémentaire — tentative de contournement…', 'warn');
+      try {
+        // 1) Retry same region with empty `code` param (some API variants require presence of `code`)
+        const j2 = await pcloudPost('userinfo', { getauth: '1', logout: '1', username: email, password: password, code: '' });
+        console.log('pCloud login retry with empty code response:', JSON.stringify(j2));
+        if (j2.result === 0 && j2.auth) { pcloudSuccess(j2, email); return; }
+      } catch (err) {
+        console.warn('Retry with empty code failed:', err);
+      }
+
+      // 2) Retry on other data-center (api <-> eapi)
       const selected = document.querySelector('input[name="pcloud-region"]:checked').value;
       const other = selected === 'api' ? 'eapi' : 'api';
       try {
@@ -1269,6 +1280,8 @@ async function pcloudLogin() {
       } catch (err) {
         console.warn('pCloud region retry failed:', err);
       }
+      // If all fallbacks fail, show helpful message
+      setStatus('login-status', 'Connexion pCloud échouée — vérifiez vos identifiants ou essayez OAuth.', 'error');
       throw new Error(j.error ? `${j.error} (code ${j.result})` : `Code pCloud ${j.result}`);
     } else {
       throw new Error(j.error ? `${j.error} (code ${j.result})` : `Code pCloud ${j.result}`);
