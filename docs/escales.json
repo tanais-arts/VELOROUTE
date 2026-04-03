@@ -46,5 +46,13 @@
     "duration_h": 0,
     "lat": 48.83773,
     "lon": -1.58926
+  },
+  {
+    "city": "Bricqueville-sur-Mer",
+    "start": "2025-05-04T15:44",
+    "end": "2025-05-04T15:45",
+    "duration_h": 0,
+    "lat": 48.83773,
+    "lon": -1.58926
   }
 ]
