@@ -44,13 +44,14 @@ setup_password() {
   node setup_password.js
 }
 
-# ── Met à jour une clé dans .env ──────────────────────────────────────
+# ── Met à jour une clé dans .env (compatible macOS + Linux) ──────────────
 env_set() {
   local key="$1" val="$2"
   if [ -f "$ENV_FILE" ] && grep -q "^${key}=" "$ENV_FILE" 2>/dev/null; then
-    sed -i "s|^${key}=.*|${key}=${val}|" "$ENV_FILE"
+    local tmp; tmp="$(mktemp)"
+    sed "s|^${key}=.*|${key}=${val}|" "$ENV_FILE" > "$tmp" && mv "$tmp" "$ENV_FILE"
   else
-    echo "${key}=${val}" >> "$ENV_FILE"
+    printf '%s=%s\n' "$key" "$val" >> "$ENV_FILE"
   fi
 }
 
@@ -67,14 +68,24 @@ while true; do
   echo "✓ Dépendances installées."
   echo ""
 
-  # Config de base
-  read -rp "Domaine public du serveur (ex: hub.studios-voa.com) : " DOMAIN
-  read -rp "Port d'écoute (défaut : 1666) : " PORT
+  echo "╔══════════════════════════════════════════════════╗"
+  echo "║  Configuration (Entrée = valeur par défaut)      ║"
+  echo "╚══════════════════════════════════════════════════╝"
+  echo ""
+
+  read -rp "  Domaine public      [hub.studios-voa.com] : " DOMAIN
+  DOMAIN="${DOMAIN:-hub.studios-voa.com}"
+
+  read -rp "  Port d'écoute       [1666] : " PORT
   PORT="${PORT:-1666}"
-  read -rp "Dossier de stockage des fichiers (défaut: $SCRIPTDIR/storage, Entrée pour confirmer) : " STORAGE
+
+  read -rp "  Dossier de stockage [$SCRIPTDIR/storage] : " STORAGE
   STORAGE="${STORAGE:-$SCRIPTDIR/storage}"
-  read -rp "Origines CORS autorisées (ex: https://tanais-arts.github.io,http://localhost:8000) : " ORIGINS
-  ORIGINS="${ORIGINS:-*}"
+
+  read -rp "  Origines CORS       [https://tanais-arts.github.io] : " ORIGINS
+  ORIGINS="${ORIGINS:-https://tanais-arts.github.io}"
+
+  echo ""
 
   # Créer/peupler .env
   [ ! -f "$ENV_FILE" ] && cp "$SCRIPTDIR/.env.example" "$ENV_FILE" 2>/dev/null || touch "$ENV_FILE"
@@ -87,7 +98,9 @@ while true; do
   echo ""
 
   # Mot de passe admin
-  echo "→ Création du compte administrateur"
+  echo "──────────────────────────────────────────────────"
+  echo "  Création du mot de passe administrateur"
+  echo "──────────────────────────────────────────────────"
   node setup_password.js
   echo ""
 
