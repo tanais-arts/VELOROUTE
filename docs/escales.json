@@ -702,5 +702,13 @@
     "duration_h": 1874,
     "lat": 49.36637,
     "lon": -0.86626
+  },
+  {
+    "city": "Saint-Martin_de_Bréhal",
+    "start": "2025-05-04T15:56",
+    "end": "2025-05-04T15:56",
+    "duration_h": 0,
+    "lat": 48.90048,
+    "lon": -1.56941
   }
 ]
