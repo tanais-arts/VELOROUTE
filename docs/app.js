@@ -969,7 +969,6 @@ async function init() {
     marker.on('click', () => {
       scrollCarouselTo(i, true);
       selectPhotoEntry(p, true);
-      openLightbox(photos, i);
     });
     marker.addTo(photoMarkerLayer);
   });
