@@ -606,5 +606,13 @@
     "duration_h": 0,
     "lat": 47.32394,
     "lon": 2.25371
+  },
+  {
+    "city": "Nuits-Saint-Georges",
+    "start": "2025-06-01T12:33",
+    "end": "2025-06-01T12:33",
+    "duration_h": 0,
+    "lat": 47.13725,
+    "lon": 4.94384
   }
 ]
