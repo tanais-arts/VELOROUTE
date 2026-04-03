@@ -272,7 +272,7 @@
 
     <div class="field" style="margin-bottom:6px">
       <label style="font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.1em">SERVEUR</label>
-      <input type="url" id="server-url" value="https://hub.studios-voa.com:1666" autocomplete="off" spellcheck="false">
+      <input type="url" id="server-url" autocomplete="off" spellcheck="false">
     </div>
 
     <div style="border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px"></div>
@@ -1150,6 +1150,16 @@ let pendingSyncAfterLogin = false;
 function serverBase() {
   return ($('server-url').value.trim() || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
 }
+
+// Pré-remplir l'URL serveur selon le contexte (local → http, production → https)
+(function initServerUrl() {
+  const saved = (() => { try { return JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}').serverUrl; } catch { return null; } })();
+  if (saved) return; // loadSettings() s'en chargera
+  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  $('server-url').value = isLocal
+    ? 'http://hub.studios-voa.com:1666'
+    : 'https://hub.studios-voa.com:1666';
+})();
 
 function serverSuccess(token) {
   serverToken = token;
