@@ -73,11 +73,11 @@
   },
   {
     "city": "Chambolle-Musigny",
-    "start": "2025-06-01T11:27",
-    "end": "2025-06-01T12:06",
-    "duration_h": 1,
-    "lat": 47.1695,
-    "lon": 4.95247
+    "start": "2025-06-01T12:04",
+    "end": "2025-06-01T12:04",
+    "duration_h": 0,
+    "lat": 47.15282,
+    "lon": 4.94912
   },
   {
     "city": "Chassagne-Montrachet",
