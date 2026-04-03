@@ -9,6 +9,7 @@ ENV_FILE="$SCRIPTDIR/.env"
 SERVICE_NAME="vlr-server"
 LOGFILE="$SCRIPTDIR/server.log"
 PIDFILE="$SCRIPTDIR/server.pid"
+PLIST_PATH="$HOME/Library/LaunchAgents/com.vlr-server.plist"
 
 show_menu() {
   echo ""
@@ -44,6 +45,12 @@ require_node() {
     fi
   fi
   echo "✓ Node.js $(node --version),  npm $(npm --version)"
+  # Sur macOS, bcrypt nécessite les Xcode CLI tools (compilation native)
+  if [[ "$(uname)" == "Darwin" ]] && ! xcode-select -p >/dev/null 2>&1; then
+    echo "→ Installation des Xcode Command Line Tools (requis pour bcrypt)..."
+    xcode-select --install
+    read -rp "   Appuyez sur Entrée une fois l'installation terminée…"
+  fi
 }
 
 # ── Changer/créer mot de passe ────────────────────────────────────────
@@ -153,8 +160,35 @@ while true; do
   fi
   echo ""
 
-  # Service systemd
-  if command -v systemctl >/dev/null 2>&1; then
+  # Service de démarrage automatique au boot
+  if [[ "$(uname)" == "Darwin" ]]; then
+    read -rp "Installer un agent launchd (démarrage auto au boot macOS) ? (o/n) : " DO_LD
+    if [[ "$DO_LD" =~ ^[oO]$ ]]; then
+      NODEBIN="$(which node)"
+      PLIST="$HOME/Library/LaunchAgents/com.vlr-server.plist"
+      mkdir -p "$HOME/Library/LaunchAgents"
+      cat > "$PLIST" << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.vlr-server</string>
+  <key>ProgramArguments</key><array>
+    <string>$NODEBIN</string><string>$SCRIPTDIR/server.js</string>
+  </array>
+  <key>WorkingDirectory</key><string>$SCRIPTDIR</string>
+  <key>EnvironmentVariables</key><dict>
+    <key>PATH</key><string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+  </dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>$SCRIPTDIR/server.log</string>
+  <key>StandardErrorPath</key><string>$SCRIPTDIR/server.log</string>
+</dict></plist>
+EOF
+      launchctl load "$PLIST"
+      echo "✓ Agent launchd installé : $PLIST"
+    fi
+  elif command -v systemctl >/dev/null 2>&1; then
     read -rp "Installer un service systemd (démarrage auto au boot) ? (o/n) : " DO_SD
     if [[ "$DO_SD" =~ ^[oO]$ ]]; then
       NODEBIN="$(which node)"
@@ -204,8 +238,13 @@ EOF
 3)
   [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && read -rp "Entrée…" && continue
 
-  # systemd en priorité
-  if command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
+  # launchd sur macOS en priorité
+  if [[ "$(uname)" == "Darwin" ]] && [ -f "$PLIST_PATH" ]; then
+    launchctl unload "$PLIST_PATH" 2>/dev/null || true
+    launchctl load "$PLIST_PATH"
+    echo "✓ Service launchd démarré / redémarré."
+  # systemd sur Linux
+  elif command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
     systemctl restart "$SERVICE_NAME"
     echo "✓ Service systemd démarré / redémarré."
   # PM2 si disponible
@@ -233,7 +272,10 @@ EOF
 
 # ── 4) Arrêter ──────────────────────────────────────────────────────────
 4)
-  if command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
+  if [[ "$(uname)" == "Darwin" ]] && [ -f "$PLIST_PATH" ]; then
+    launchctl unload "$PLIST_PATH" 2>/dev/null || true
+    echo "✓ Service launchd arrêté."
+  elif command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
     systemctl stop "$SERVICE_NAME"
     echo "✓ Service systemd arrêté."
   elif command -v pm2 >/dev/null 2>&1 && pm2 list | grep -q "$SERVICE_NAME"; then
@@ -250,7 +292,15 @@ EOF
 
 # ── 5) Logs ─────────────────────────────────────────────────────────────
 5)
-  if command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
+  if [[ "$(uname)" == "Darwin" ]] && [ -f "$PLIST_PATH" ]; then
+    # launchd redirige stdout/stderr vers server.log (voir plist)
+    if [ -f "$LOGFILE" ]; then
+      tail -100f "$LOGFILE"
+    else
+      echo "Aucun fichier de log trouvé (le serveur a-t-il été démarré au moins une fois ?)."
+      read -rp "   Appuyez sur Entrée pour revenir au menu…"
+    fi
+  elif command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
     journalctl -u "$SERVICE_NAME" -f --no-pager -n 100
   elif command -v pm2 >/dev/null 2>&1 && pm2 list | grep -q "$SERVICE_NAME"; then
     pm2 logs "$SERVICE_NAME" --lines 100
