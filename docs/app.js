@@ -260,13 +260,15 @@ async function updateLbLocation(item) {
   const counter = document.getElementById('lb-counter');
   if (!counter) return;
   counter.removeAttribute('hidden');
-  if (item.entryIdx == null || !state.entries || !state.entries.length) {
-    counter.textContent = '';
-    return;
+  // Priorité : coordonnées propres de la photo (GPS EXIF), sinon entrée GPX
+  let lat, lon;
+  if (item.lat != null && item.lon != null) {
+    lat = item.lat; lon = item.lon;
+  } else if (item.entryIdx != null && state.entries && state.entries.length) {
+    const entry = state.entries[item.entryIdx];
+    if (entry && entry.lat != null && entry.lon != null) { lat = entry.lat; lon = entry.lon; }
   }
-  const entry = state.entries[item.entryIdx];
-  if (!entry || entry.lat == null || entry.lon == null) { counter.textContent = ''; return; }
-  const { lat, lon } = entry;
+  if (lat == null || lon == null) { counter.textContent = ''; return; }
   const key = `${Math.round(lat * 100) / 100},${Math.round(lon * 100) / 100}`;
   if (lbLocCache[key]) { counter.textContent = `\u{1F4CD} ${lbLocCache[key]}`; return; }
   const local = nearestNamedPlace(lat, lon);
@@ -587,6 +589,17 @@ function scrollCarouselTo(pi, smooth = false) {
 }
 
 // ── Select entry ──────────────────────────────────────────────────────
+// Sélection par photo : utilise ses coords GPS propres si dispo, sinon entryIdx GPX
+function selectPhotoEntry(photo) {
+  if (photo.lat != null && photo.lon != null) {
+    showRing([photo.lat, photo.lon]);
+    if (!map.getBounds().contains([photo.lat, photo.lon])) {
+      map.panTo([photo.lat, photo.lon], { animate: true, duration: 0.4 });
+    }
+  }
+  if (photo.entryIdx != null) selectEntry(photo.entryIdx);
+}
+
 function selectEntry(idx) {
   const entries = state.entries;
   if (idx < 0 || idx >= entries.length) return;
@@ -749,7 +762,7 @@ async function init() {
   }, { root: carousel, rootMargin: '0px 4000px 0px 4000px' });
 
   const fragment = document.createDocumentFragment();
-  photos.forEach((p, i) => {
+  state.photos.forEach((p, i) => {
     const img = document.createElement('img');
     if (i < 10) {
       img.src = p.thumb || p.src;
@@ -763,7 +776,7 @@ async function init() {
     if (p.type === 'video') {
       const wrap = document.createElement('div');
       wrap.className = 'video-thumb-wrap';
-      wrap.addEventListener('click', () => { if (p.entryIdx != null) selectEntry(p.entryIdx); openLightbox(photos, i); });
+      wrap.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
       const badge = document.createElement('div');
       badge.className = 'play-badge';
       badge.setAttribute('aria-hidden', 'true');
@@ -771,7 +784,7 @@ async function init() {
       wrap.appendChild(badge);
       fragment.appendChild(wrap);
     } else {
-      img.addEventListener('click', () => { if (p.entryIdx != null) selectEntry(p.entryIdx); openLightbox(photos, i); });
+      img.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
       fragment.appendChild(img);
     }
   });
