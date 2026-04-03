@@ -302,7 +302,7 @@
   <div id="settings-grid">
     <div class="field" style="margin:0">
       <label>Base URL CDN</label>
-      <input type="text" id="cdn-base" value="https://hub.studios-voa.com:1666/files">
+      <input type="text" id="cdn-base" value="https://hub.studios-voa.com:1666/files" readonly style="opacity:.5;cursor:default">
     </div>
     <div class="field" style="margin:0">
       <label>GitHub PAT
@@ -697,8 +697,9 @@ function nearestEntryIdx(photoMs) {
 }
 
 // ── Photo URL helpers ─────────────────────────────────────────────────
+const CDN_BASE = 'https://hub.studios-voa.com:1666/files';
 function buildUrl(filename, type) {
-  const base = ($('cdn-base').value || '').replace(/\/$/, '');
+  const base = CDN_BASE;
   const sub  = $('photo-subfolder').value.trim();
   const name = encodeURIComponent(filename);
   const folder = sub ? `/${encodeURIComponent(sub)}` : '';
@@ -707,7 +708,7 @@ function buildUrl(filename, type) {
 
 // Variante avec subfolder explicite
 function buildUrlWith(filename, type, subfolder) {
-  const base = ($('cdn-base').value || '').replace(/\/$/, '');
+  const base = CDN_BASE;
   const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
   return `${base}/${type}${folder}/${encodeURIComponent(filename)}`;
 }
@@ -1001,7 +1002,7 @@ function renderPhotoMarkers() {
 }
 
 // ── CDN input changes → rebuild photo URLs ─────────────────────────────
-['cdn-base', 'photo-subfolder'].forEach(id => {
+['photo-subfolder'].forEach(id => {
   $(id).addEventListener('input', () => {
     if (rawPhotos.length) buildPhotoEntries();
   });
@@ -1238,7 +1239,6 @@ const SETTINGS_KEY = 'veloroute_admin_settings';
 function saveSettings() {
   const data = {
     ghToken:   $('gh-token').value.trim(),
-    cdnBase:   $('cdn-base').value.trim(),
     serverUrl: $('server-url').value.trim(),
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
@@ -1250,7 +1250,6 @@ async function loadSettings() {
   try {
     const data = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     if (data.ghToken)   $('gh-token').value   = data.ghToken;
-    if (data.cdnBase)   $('cdn-base').value   = data.cdnBase;
     if (data.serverUrl) $('server-url').value = data.serverUrl;
     if (data.serverToken) {
       try {
