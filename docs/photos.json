@@ -586,5 +586,14 @@
     "caption": "2025-06-01",
     "lat": 47.02322,
     "lon": 4.82418
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chassagne-Montrachet/IMG_2338.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chassagne-Montrachet/IMG_2338.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chassagne-Montrachet/IMG_2338.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.93785,
+    "lon": 4.73255
   }
 ]
