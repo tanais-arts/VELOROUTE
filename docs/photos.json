@@ -106,5 +106,23 @@
     "caption": "2025-05-04",
     "lat": 48.91504,
     "lon": -1.56216
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Granville/IMG_2144.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Granville/IMG_2144.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Granville/IMG_2144.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.84452,
+    "lon": -1.59123
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Granville/IMG_2145.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Granville/IMG_2145.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Granville/IMG_2145.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.84467,
+    "lon": -1.59156
   }
 ]
