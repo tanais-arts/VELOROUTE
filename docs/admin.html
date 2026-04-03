@@ -1244,6 +1244,40 @@ async function pcloudLogin() {
 
     if (j.result === 0 && j.auth) {
       pcloudSuccess(j, email);
+    } else if (j.result === 1022) {
+      // Missing 'code' — often means wrong data center (api vs eapi).
+      const selected = document.querySelector('input[name="pcloud-region']:checked').value;
+      const other = selected === 'api' ? 'eapi' : 'api';
+      try {
+        const body = new URLSearchParams({ getauth: '1', logout: '1', username: email, password: password }).toString();
+        const rr = await fetch(`https://${other}.pcloud.com/userinfo`, {
+          method: 'POST',
+          referrerPolicy: 'no-referrer',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+          body
+        });
+        if (rr.ok) {
+          const rj = await rr.json();
+          console.log('pCloud login retry on other region response:', JSON.stringify(rj));
+          if (rj.result === 0 && rj.auth) {
+            const ri = document.querySelector(`input[name="pcloud-region"][value="${other}"]`);
+            if (ri) ri.checked = true;
+            pcloudSuccess(rj, email);
+            return;
+          }
+          if (rj.result === 2297 || rj.result === 2064) {
+            pcloudTfaEmail = email;
+            pcloudTfaPass  = password;
+            $('pcloud-password').value = '';
+            setStatus('login-status', 'Entrez le code Google Authenticator puis cliquez sur Se connecter.', 'warn');
+            $('pcloud-otp').focus();
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('pCloud region retry failed:', err);
+      }
+      throw new Error(j.error ? `${j.error} (code ${j.result})` : `Code pCloud ${j.result}`);
     } else if (j.result === 2297 || j.result === 2064) {
       // Conserver les credentials pour l'étape TOTP
       pcloudTfaEmail = email;
