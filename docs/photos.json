@@ -2733,6 +2733,33 @@
     "lon": 4.955
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vougeot/IMG_20250601_100830.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vougeot/IMG_20250601_100830.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vougeot/IMG_20250601_100830.jpg",
+    "entryIdx": 1543,
+    "caption": "2025-06-01",
+    "lat": 47.17533,
+    "lon": 4.95438
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vougeot/IMG_20250601_101014.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vougeot/IMG_20250601_101014.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vougeot/IMG_20250601_101014.jpg",
+    "entryIdx": 1544,
+    "caption": "2025-06-01",
+    "lat": 47.17485,
+    "lon": 4.95376
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Vougeot/IMG_20250601_101021.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Vougeot/IMG_20250601_101021.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Vougeot/IMG_20250601_101021.jpg",
+    "entryIdx": 1544,
+    "caption": "2025-06-01",
+    "lat": 47.17481,
+    "lon": 4.95378
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Flagey-Eche%CC%81zeaux/IMG_2325.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Flagey-Eche%CC%81zeaux/IMG_2325.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Flagey-Eche%CC%81zeaux/IMG_2325.HEIC",
