@@ -134,5 +134,13 @@
     "duration_h": 1,
     "lat": 47.18095,
     "lon": 4.94982
+  },
+  {
+    "city": "Chassagne-Montrachet",
+    "start": "2025-06-01T17:33",
+    "end": "2025-06-01T17:33",
+    "duration_h": 0,
+    "lat": 46.93785,
+    "lon": 4.73255
   }
 ]
