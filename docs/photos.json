@@ -7,5 +7,32 @@
     "caption": "2025-05-01",
     "lat": 49.34216,
     "lon": -0.58522
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bre%CC%81hal/IMG_2141.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bre%CC%81hal/IMG_2141.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bre%CC%81hal/IMG_2141.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.90094,
+    "lon": -1.56875
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bre%CC%81hal/IMG_2142.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bre%CC%81hal/IMG_2142.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bre%CC%81hal/IMG_2142.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.90068,
+    "lon": -1.5693
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Bre%CC%81hal/IMG_2143.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Bre%CC%81hal/IMG_2143.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Bre%CC%81hal/IMG_2143.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-04",
+    "lat": 48.90042,
+    "lon": -1.56934
   }
 ]
