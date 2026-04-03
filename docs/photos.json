@@ -1056,6 +1056,96 @@
     "lon": 2.3635
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_211749.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_211749.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_211749.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62702,
+    "lon": 4.33791
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_211810.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_211810.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_211810.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62616,
+    "lon": 4.33607
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_211816.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_211816.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_211816.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62616,
+    "lon": 4.33596
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_212259.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_212259.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_212259.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62917,
+    "lon": 4.33569
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_212429.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_212429.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_212429.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.6267,
+    "lon": 4.33498
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_212456.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_212456.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_212456.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62681,
+    "lon": 4.33507
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_212856.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_212856.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_212856.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62623,
+    "lon": 4.33495
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_212903.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_212903.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_212903.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62623,
+    "lon": 4.33495
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_213436.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_213436.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_213436.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62284,
+    "lon": 4.33192
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250529_213445.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250529_213445.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250529_213445.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 47.62463,
+    "lon": 4.33485
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tonnerre/IMG_2223.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tonnerre/IMG_2223.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tonnerre/IMG_2223.HEIC",
@@ -2817,6 +2907,13 @@
     "caption": "2025-07-17",
     "lat": 45.67303,
     "lon": 6.16018
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Montbard/IMG_20250717_161041.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Montbard/IMG_20250717_161041.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Montbard/IMG_20250717_161041.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-17"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Bonneville/IMG_20250719_112254.jpg",
