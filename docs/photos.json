@@ -1180,6 +1180,15 @@
     "lon": 4.91624
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_151541.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_151541.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_151541.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-31",
+    "lat": 47.3013,
+    "lon": 5.02411
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Pouilly-en-Auxois/IMG_2263.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Pouilly-en-Auxois/IMG_2263.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Pouilly-en-Auxois/IMG_2263.HEIC",
@@ -1432,6 +1441,15 @@
     "lon": 5.04242
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_122152.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_122152.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_122152.jpg",
+    "entryIdx": 1447,
+    "caption": "2025-05-31",
+    "lat": 47.3228,
+    "lon": 5.04286
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_2289.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_2289.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_2289.HEIC",
@@ -1441,6 +1459,24 @@
     "lon": 5.04327
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_123642.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_123642.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_123642.jpg",
+    "entryIdx": 1462,
+    "caption": "2025-05-31",
+    "lat": 47.32269,
+    "lon": 5.04159
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_123653.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_123653.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_123653.jpg",
+    "entryIdx": 1462,
+    "caption": "2025-05-31",
+    "lat": 47.32271,
+    "lon": 5.04152
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_2290.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_2290.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_2290.HEIC",
@@ -1448,6 +1484,42 @@
     "caption": "2025-05-31",
     "lat": 47.3235,
     "lon": 5.03996
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_142404.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_142404.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_142404.jpg",
+    "entryIdx": 1473,
+    "caption": "2025-05-31",
+    "lat": 47.32392,
+    "lon": 5.0332
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_142718.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_142718.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_142718.jpg",
+    "entryIdx": 1473,
+    "caption": "2025-05-31",
+    "lat": 47.3242,
+    "lon": 5.0326
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_142721.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_142721.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_142721.jpg",
+    "entryIdx": 1473,
+    "caption": "2025-05-31",
+    "lat": 47.32421,
+    "lon": 5.0326
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Dijon/IMG_20250531_142729.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Dijon/IMG_20250531_142729.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Dijon/IMG_20250531_142729.jpg",
+    "entryIdx": 1473,
+    "caption": "2025-05-31",
+    "lat": 47.32422,
+    "lon": 5.03253
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Remigny/IMG_2343.jpg",
