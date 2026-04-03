@@ -944,5 +944,32 @@
     "caption": "2025-06-01",
     "lat": 46.93785,
     "lon": 4.73255
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Meursault/IMG_2335.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Meursault/IMG_2335.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Meursault/IMG_2335.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.98594,
+    "lon": 4.77428
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Meursault/IMG_2336.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Meursault/IMG_2336.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Meursault/IMG_2336.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.97171,
+    "lon": 4.76504
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Meursault/IMG_2337.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Meursault/IMG_2337.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Meursault/IMG_2337.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 46.97166,
+    "lon": 4.76503
   }
 ]
