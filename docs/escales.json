@@ -494,5 +494,13 @@
     "duration_h": 0,
     "lat": 48.63727,
     "lon": 1.80902
+  },
+  {
+    "city": "Gevrey-Chambertin",
+    "start": "2025-05-31T18:55",
+    "end": "2025-05-31T19:10",
+    "duration_h": 0,
+    "lat": 47.22757,
+    "lon": 4.96582
   }
 ]
