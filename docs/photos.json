@@ -370,5 +370,23 @@
     "caption": "2025-06-01",
     "lat": 47.06718,
     "lon": 4.86137
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Beaune/IMG_2331.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Beaune/IMG_2331.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Beaune/IMG_2331.HEIC",
+    "entryIdx": 1679,
+    "caption": "2025-06-01",
+    "lat": 47.02273,
+    "lon": 4.83702
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Beaune/IMG_2332.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Beaune/IMG_2332.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Beaune/IMG_2332.HEIC",
+    "entryIdx": 1769,
+    "caption": "2025-06-01",
+    "lat": 47.02322,
+    "lon": 4.82418
   }
 ]
