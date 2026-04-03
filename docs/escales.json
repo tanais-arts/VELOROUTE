@@ -382,5 +382,13 @@
     "duration_h": 0,
     "lat": 49.36605,
     "lon": -0.86795
+  },
+  {
+    "city": "Bellecombe-en-Bauges",
+    "start": "2025-07-16T13:03",
+    "end": "2025-07-16T13:03",
+    "duration_h": 0,
+    "lat": 46.90749,
+    "lon": 4.74978
   }
 ]
