@@ -1,6 +1,2528 @@
 [
   {
     "id": 1,
+    "lon": 2.39867,
+    "lat": 48.82328,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 24,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746087840000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 2,
+    "lon": 2.40207,
+    "lat": 48.823145,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 25,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746087900000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 3,
+    "lon": 2.40534,
+    "lat": 48.82445,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 26,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746087960000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 4,
+    "lon": 2.40676,
+    "lat": 48.82579,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 27,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088020000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 5,
+    "lon": 2.40281,
+    "lat": 48.82859,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 28,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088080000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 6,
+    "lon": 2.39966,
+    "lat": 48.83064,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 29,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088140000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 7,
+    "lon": 2.39701,
+    "lat": 48.83231,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 30,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088200000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 8,
+    "lon": 2.39285,
+    "lat": 48.83532,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 31,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088260000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 9,
+    "lon": 2.38968,
+    "lat": 48.83863,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 32,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088320000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 10,
+    "lon": 2.38739,
+    "lat": 48.84114,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 33,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088380000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 11,
+    "lon": 2.38348,
+    "lat": 48.84342,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 34,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088440000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 12,
+    "lon": 2.37944,
+    "lat": 48.84538,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 35,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088500000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 13,
+    "lon": 2.37478,
+    "lat": 48.8476,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 36,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088560000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 14,
+    "lon": 2.37094,
+    "lat": 48.8495,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 37,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088620000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 15,
+    "lon": 2.36931,
+    "lat": 48.8524,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 38,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088680000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 16,
+    "lon": 2.36574,
+    "lat": 48.85365,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 39,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088740000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 17,
+    "lon": 2.36102,
+    "lat": 48.85523,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 40,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088800000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 18,
+    "lon": 2.35668,
+    "lat": 48.85638,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 41,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088860000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 19,
+    "lon": 2.35155,
+    "lat": 48.85741,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 42,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088920000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 20,
+    "lon": 2.34713,
+    "lat": 48.8593,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 43,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746088980000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 21,
+    "lon": 2.34353,
+    "lat": 48.86127,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 44,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089040000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 22,
+    "lon": 2.3382,
+    "lat": 48.86247,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 45,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089100000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 23,
+    "lon": 2.33392,
+    "lat": 48.86322,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 46,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089160000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 24,
+    "lon": 2.32755,
+    "lat": 48.86522,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 47,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089220000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 25,
+    "lon": 2.32426,
+    "lat": 48.86629,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 48,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089280000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 26,
+    "lon": 2.32011,
+    "lat": 48.86614,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 49,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089340000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 27,
+    "lon": 2.32319,
+    "lat": 48.86828,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 50,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089400000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 28,
+    "lon": 2.32314,
+    "lat": 48.87043,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 51,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089460000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 29,
+    "lon": 2.32456,
+    "lat": 48.87399,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 52,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089520000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 30,
+    "lon": 2.32496,
+    "lat": 48.8761,
+    "day": 1,
+    "month": 5,
+    "hour": 8,
+    "minute": 53,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746089580000,
+    "gpxFile": "Normandie_Section_0.gpx"
+  },
+  {
+    "id": 31,
+    "lon": -0.70228,
+    "lat": 49.33309,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 30,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178200000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 32,
+    "lon": -0.70498,
+    "lat": 49.33209,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 31,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178260000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 33,
+    "lon": -0.70914,
+    "lat": 49.33155,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 32,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178320000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 34,
+    "lon": -0.71466,
+    "lat": 49.33066,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 33,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178380000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 35,
+    "lon": -0.7183,
+    "lat": 49.3303,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 34,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178440000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 36,
+    "lon": -0.72116,
+    "lat": 49.32888,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 35,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178500000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 37,
+    "lon": -0.7256,
+    "lat": 49.32795,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 36,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178560000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 38,
+    "lon": -0.72933,
+    "lat": 49.32748,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 37,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178620000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 39,
+    "lon": -0.73375,
+    "lat": 49.32694,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 38,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178680000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 40,
+    "lon": -0.73852,
+    "lat": 49.32657,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 39,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178740000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 41,
+    "lon": -0.74136,
+    "lat": 49.3253,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 40,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178800000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 42,
+    "lon": -0.7469,
+    "lat": 49.32486,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 41,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178860000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 43,
+    "lon": -0.74987,
+    "lat": 49.3246,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 42,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178920000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 44,
+    "lon": -0.75369,
+    "lat": 49.32441,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 43,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746178980000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 45,
+    "lon": -0.75716,
+    "lat": 49.3271,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 44,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179040000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 46,
+    "lon": -0.75807,
+    "lat": 49.32824,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 45,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179100000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 47,
+    "lon": -0.75655,
+    "lat": 49.33834,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 48,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179280000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 48,
+    "lon": -0.75386,
+    "lat": 49.34039,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 49,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179340000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 49,
+    "lon": -0.75443,
+    "lat": 49.34234,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 50,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179400000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 50,
+    "lon": -0.75394,
+    "lat": 49.34573,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 51,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179460000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 51,
+    "lon": -0.75478,
+    "lat": 49.34709,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 52,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179520000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 52,
+    "lon": -0.75644,
+    "lat": 49.34927,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 53,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179580000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 53,
+    "lon": -0.75766,
+    "lat": 49.34887,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 54,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179640000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 54,
+    "lon": -0.75903,
+    "lat": 49.34885,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 55,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179700000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 55,
+    "lon": -0.75961,
+    "lat": 49.34873,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 56,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179760000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 56,
+    "lon": -0.76065,
+    "lat": 49.34884,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 57,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179820000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 57,
+    "lon": -0.76479,
+    "lat": 49.34756,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 58,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179880000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 58,
+    "lon": -0.76619,
+    "lat": 49.34736,
+    "day": 2,
+    "month": 5,
+    "hour": 9,
+    "minute": 59,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746179940000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 59,
+    "lon": -0.77188,
+    "lat": 49.34852,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 0,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180000000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 60,
+    "lon": -0.77403,
+    "lat": 49.34871,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 1,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180060000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 61,
+    "lon": -0.77845,
+    "lat": 49.34941,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 2,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180120000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 62,
+    "lon": -0.77915,
+    "lat": 49.3516,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 3,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180180000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 63,
+    "lon": -0.78597,
+    "lat": 49.35128,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 4,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180240000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 64,
+    "lon": -0.78695,
+    "lat": 49.35026,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 5,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180300000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 65,
+    "lon": -0.78949,
+    "lat": 49.34988,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 6,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180360000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 66,
+    "lon": -0.79207,
+    "lat": 49.34906,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 7,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180420000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 67,
+    "lon": -0.79229,
+    "lat": 49.35229,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 8,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180480000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 68,
+    "lon": -0.79559,
+    "lat": 49.35307,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 9,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180540000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 69,
+    "lon": -0.79822,
+    "lat": 49.35067,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 10,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180600000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 70,
+    "lon": -0.79805,
+    "lat": 49.34971,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 11,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180660000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 71,
+    "lon": -0.80089,
+    "lat": 49.35047,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 12,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180720000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 72,
+    "lon": -0.80366,
+    "lat": 49.34888,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 13,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180780000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 73,
+    "lon": -0.80573,
+    "lat": 49.34874,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 14,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180840000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 74,
+    "lon": -0.80687,
+    "lat": 49.34916,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 15,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180900000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 75,
+    "lon": -0.81045,
+    "lat": 49.35086,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 16,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746180960000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 76,
+    "lon": -0.81255,
+    "lat": 49.3507,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 17,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181020000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 77,
+    "lon": -0.81485,
+    "lat": 49.34969,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 18,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181080000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 78,
+    "lon": -0.82047,
+    "lat": 49.35129,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 19,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181140000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 79,
+    "lon": -0.82312,
+    "lat": 49.35201,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 20,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181200000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 80,
+    "lon": -0.82634,
+    "lat": 49.35317,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 21,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181260000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 81,
+    "lon": -0.83005,
+    "lat": 49.35443,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 22,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181320000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 82,
+    "lon": -0.83555,
+    "lat": 49.35374,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 23,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181380000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 83,
+    "lon": -0.8394,
+    "lat": 49.35275,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 24,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181440000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 84,
+    "lon": -0.84176,
+    "lat": 49.35191,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 25,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181500000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 85,
+    "lon": -0.84494,
+    "lat": 49.35129,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 26,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181560000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 86,
+    "lon": -0.844,
+    "lat": 49.35035,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 27,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181620000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 87,
+    "lon": -0.84203,
+    "lat": 49.35021,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 28,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181680000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 88,
+    "lon": -0.84083,
+    "lat": 49.34891,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 29,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181740000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 89,
+    "lon": -0.84067,
+    "lat": 49.34735,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 30,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181800000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 90,
+    "lon": -0.84067,
+    "lat": 49.34552,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 31,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181860000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 91,
+    "lon": -0.84087,
+    "lat": 49.34247,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 32,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181920000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 92,
+    "lon": -0.84523,
+    "lat": 49.34289,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 33,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746181980000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 93,
+    "lon": -0.84862,
+    "lat": 49.34401,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 34,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182040000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 94,
+    "lon": -0.85488,
+    "lat": 49.34493,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 35,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182100000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 95,
+    "lon": -0.85688,
+    "lat": 49.34456,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 36,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182160000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 96,
+    "lon": -0.86383,
+    "lat": 49.34399,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 37,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182220000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 97,
+    "lon": -0.86506,
+    "lat": 49.34389,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 38,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182280000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 98,
+    "lon": -0.86798,
+    "lat": 49.34539,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 39,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182340000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 99,
+    "lon": -0.87482,
+    "lat": 49.34728,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 40,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182400000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 100,
+    "lon": -0.87661,
+    "lat": 49.34774,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 41,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182460000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 101,
+    "lon": -0.87497,
+    "lat": 49.35144,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 42,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182520000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 102,
+    "lon": -0.87481,
+    "lat": 49.35482,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 43,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182580000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 103,
+    "lon": -0.87681,
+    "lat": 49.35668,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 44,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182640000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 104,
+    "lon": -0.87513,
+    "lat": 49.359,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 45,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182700000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 105,
+    "lon": -0.87108,
+    "lat": 49.35989,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 46,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182760000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 106,
+    "lon": -0.86771,
+    "lat": 49.36133,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 47,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182820000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 107,
+    "lon": -0.86332,
+    "lat": 49.36466,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 48,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182880000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 108,
+    "lon": -0.8678,
+    "lat": 49.36654,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 49,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746182940000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 109,
+    "lon": -0.8702,
+    "lat": 49.36733,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 50,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183000000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 110,
+    "lon": -0.87651,
+    "lat": 49.36971,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 51,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183060000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 111,
+    "lon": -0.87722,
+    "lat": 49.36882,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 52,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183120000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 112,
+    "lon": -0.87984,
+    "lat": 49.36957,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 53,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183180000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 113,
+    "lon": -0.89495,
+    "lat": 49.37607,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 57,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183420000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 114,
+    "lon": -0.90083,
+    "lat": 49.37856,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 58,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183480000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 115,
+    "lon": -0.90216,
+    "lat": 49.37898,
+    "day": 2,
+    "month": 5,
+    "hour": 10,
+    "minute": 59,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183540000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 116,
+    "lon": -0.90343,
+    "lat": 49.37898,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 0,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183600000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 117,
+    "lon": -0.90359,
+    "lat": 49.37833,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 1,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183660000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 118,
+    "lon": -0.90422,
+    "lat": 49.37746,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 2,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183720000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 119,
+    "lon": -0.90491,
+    "lat": 49.37587,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 3,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183780000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 120,
+    "lon": -0.90723,
+    "lat": 49.37505,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 4,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183840000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 121,
+    "lon": -0.90724,
+    "lat": 49.37596,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 5,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183900000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 122,
+    "lon": -0.9098,
+    "lat": 49.37789,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 6,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746183960000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 123,
+    "lon": -0.90954,
+    "lat": 49.3812,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 7,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184020000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 124,
+    "lon": -0.913,
+    "lat": 49.38444,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 8,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184080000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 125,
+    "lon": -0.91394,
+    "lat": 49.385,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 9,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184140000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 126,
+    "lon": -0.91907,
+    "lat": 49.38686,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 10,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184200000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 127,
+    "lon": -0.91982,
+    "lat": 49.38923,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 11,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184260000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 128,
+    "lon": -0.923,
+    "lat": 49.39102,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 12,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184320000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 129,
+    "lon": -0.9266,
+    "lat": 49.392,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 13,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184380000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 130,
+    "lon": -0.93011,
+    "lat": 49.39254,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 14,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184440000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 131,
+    "lon": -0.93516,
+    "lat": 49.39365,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 15,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184500000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 132,
+    "lon": -0.93931,
+    "lat": 49.3944,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 16,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184560000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 133,
+    "lon": -0.9443,
+    "lat": 49.39506,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 17,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184620000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 134,
+    "lon": -0.94741,
+    "lat": 49.39533,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 18,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184680000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 135,
+    "lon": -0.95025,
+    "lat": 49.39517,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 19,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184740000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 136,
+    "lon": -0.96014,
+    "lat": 49.39575,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 21,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184860000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 137,
+    "lon": -0.9645,
+    "lat": 49.39619,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 22,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184920000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 138,
+    "lon": -0.96889,
+    "lat": 49.39628,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 23,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746184980000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 139,
+    "lon": -0.97174,
+    "lat": 49.39544,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 24,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185040000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 140,
+    "lon": -0.97492,
+    "lat": 49.39493,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 25,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185100000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 141,
+    "lon": -0.97945,
+    "lat": 49.39472,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 26,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185160000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 142,
+    "lon": -0.98387,
+    "lat": 49.39516,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 27,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185220000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 143,
+    "lon": -0.98563,
+    "lat": 49.39306,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 28,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185280000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 144,
+    "lon": -0.99001,
+    "lat": 49.39292,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 29,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185340000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 145,
+    "lon": -0.99271,
+    "lat": 49.39463,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 30,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185400000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 146,
+    "lon": -0.99522,
+    "lat": 49.3943,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 31,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185460000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 147,
+    "lon": -1.00071,
+    "lat": 49.39548,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 32,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185520000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 148,
+    "lon": -1.00452,
+    "lat": 49.39593,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 33,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185580000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 149,
+    "lon": -1.01051,
+    "lat": 49.39488,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 34,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185640000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 150,
+    "lon": -1.01516,
+    "lat": 49.39368,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 35,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185700000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 151,
+    "lon": -1.01852,
+    "lat": 49.39339,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 36,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185760000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 152,
+    "lon": -1.02211,
+    "lat": 49.39271,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 37,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185820000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 153,
+    "lon": -1.02745,
+    "lat": 49.38971,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 39,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746185940000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 154,
+    "lon": -1.02972,
+    "lat": 49.38815,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 40,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186000000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 155,
+    "lon": -1.03381,
+    "lat": 49.38892,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 41,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186060000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 156,
+    "lon": -1.03753,
+    "lat": 49.38856,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 42,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186120000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 157,
+    "lon": -1.04109,
+    "lat": 49.38916,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 43,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186180000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 158,
+    "lon": -1.04707,
+    "lat": 49.38956,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 44,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186240000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 159,
+    "lon": -1.04671,
+    "lat": 49.38774,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 45,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186300000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 160,
+    "lon": -1.04786,
+    "lat": 49.38577,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 46,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186360000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 161,
+    "lon": -1.04758,
+    "lat": 49.38414,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 47,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186420000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 162,
+    "lon": -1.04779,
+    "lat": 49.38302,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 48,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186480000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 163,
+    "lon": -1.05025,
+    "lat": 49.38097,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 49,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186540000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 164,
+    "lon": -1.05396,
+    "lat": 49.38017,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 50,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186600000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 165,
+    "lon": -1.05955,
+    "lat": 49.38177,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 51,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186660000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 166,
+    "lon": -1.06402,
+    "lat": 49.38311,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 52,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186720000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 167,
+    "lon": -1.06667,
+    "lat": 49.38277,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 53,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186780000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 168,
+    "lon": -1.07081,
+    "lat": 49.38186,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 54,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186840000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 169,
+    "lon": -1.07522,
+    "lat": 49.38275,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 55,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186900000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 170,
+    "lon": -1.07754,
+    "lat": 49.38533,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 56,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746186960000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 171,
+    "lon": -1.08344,
+    "lat": 49.38516,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 58,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187080000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 172,
+    "lon": -1.08709,
+    "lat": 49.3816,
+    "day": 2,
+    "month": 5,
+    "hour": 11,
+    "minute": 59,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187140000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 173,
+    "lon": -1.08826,
+    "lat": 49.3822,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 0,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187200000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 174,
+    "lon": -1.0888,
+    "lat": 49.38061,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 1,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187260000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 175,
+    "lon": -1.08512,
+    "lat": 49.37852,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 2,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187320000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 176,
+    "lon": -1.08217,
+    "lat": 49.37665,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 3,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187380000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 177,
+    "lon": -1.08122,
+    "lat": 49.37386,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 4,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187440000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 178,
+    "lon": -1.08107,
+    "lat": 49.37206,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 5,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187500000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 179,
+    "lon": -1.08045,
+    "lat": 49.36965,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 6,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187560000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 180,
+    "lon": -1.08024,
+    "lat": 49.36666,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 7,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187620000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 181,
+    "lon": -1.0815,
+    "lat": 49.36431,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 8,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187680000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 182,
+    "lon": -1.08678,
+    "lat": 49.36292,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 9,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187740000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 183,
+    "lon": -1.08833,
+    "lat": 49.36335,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 10,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187800000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 184,
+    "lon": -1.09316,
+    "lat": 49.3642,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 11,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187860000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 185,
+    "lon": -1.09423,
+    "lat": 49.36186,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 12,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187920000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 186,
+    "lon": -1.0944,
+    "lat": 49.35807,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 13,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746187980000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 187,
+    "lon": -1.09625,
+    "lat": 49.35789,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 14,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188040000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 188,
+    "lon": -1.09719,
+    "lat": 49.35464,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 15,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188100000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 189,
+    "lon": -1.0976,
+    "lat": 49.3521,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 16,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188160000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 190,
+    "lon": -1.09729,
+    "lat": 49.34933,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 17,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188220000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 191,
+    "lon": -1.09833,
+    "lat": 49.34591,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 18,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188280000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 192,
+    "lon": -1.09546,
+    "lat": 49.3454,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 19,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188340000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 193,
+    "lon": -1.09343,
+    "lat": 49.34498,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 20,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188400000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 194,
+    "lon": -1.09021,
+    "lat": 49.34439,
+    "day": 2,
+    "month": 5,
+    "hour": 12,
+    "minute": 21,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746188460000,
+    "gpxFile": "Normandie_Section_2.gpx"
+  },
+  {
+    "id": 195,
     "lon": 2.31941,
     "lat": 48.83991,
     "day": 4,
@@ -13,7 +2535,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 2,
+    "id": 196,
     "lon": 2.32094,
     "lat": 48.84125,
     "day": 4,
@@ -26,7 +2548,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 3,
+    "id": 197,
     "lon": 2.3219,
     "lat": 48.83948,
     "day": 4,
@@ -39,7 +2561,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 4,
+    "id": 198,
     "lon": 2.32255,
     "lat": 48.83782,
     "day": 4,
@@ -52,7 +2574,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 5,
+    "id": 199,
     "lon": 2.32587,
     "lat": 48.83665,
     "day": 4,
@@ -65,7 +2587,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 6,
+    "id": 200,
     "lon": 2.32994,
     "lat": 48.83523,
     "day": 4,
@@ -78,7 +2600,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 7,
+    "id": 201,
     "lon": 2.33262,
     "lat": 48.83438,
     "day": 4,
@@ -91,7 +2613,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 8,
+    "id": 202,
     "lon": 2.33933,
     "lat": 48.83209,
     "day": 4,
@@ -104,7 +2626,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 9,
+    "id": 203,
     "lon": 2.34124,
     "lat": 48.83157,
     "day": 4,
@@ -117,7 +2639,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 10,
+    "id": 204,
     "lon": 2.34547,
     "lat": 48.83039,
     "day": 4,
@@ -130,7 +2652,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 11,
+    "id": 205,
     "lon": 2.34828,
     "lat": 48.82961,
     "day": 4,
@@ -143,7 +2665,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 12,
+    "id": 206,
     "lon": 2.35199,
     "lat": 48.83007,
     "day": 4,
@@ -156,7 +2678,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 13,
+    "id": 207,
     "lon": 2.35319,
     "lat": 48.83045,
     "day": 4,
@@ -169,7 +2691,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 14,
+    "id": 208,
     "lon": 2.3559,
     "lat": 48.83067,
     "day": 4,
@@ -182,7 +2704,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 15,
+    "id": 209,
     "lon": 2.36001,
     "lat": 48.83212,
     "day": 4,
@@ -195,7 +2717,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 16,
+    "id": 210,
     "lon": 2.36493,
     "lat": 48.83373,
     "day": 4,
@@ -208,7 +2730,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 17,
+    "id": 211,
     "lon": 2.36884,
     "lat": 48.83367,
     "day": 4,
@@ -221,7 +2743,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 18,
+    "id": 212,
     "lon": 2.37192,
     "lat": 48.83219,
     "day": 4,
@@ -234,7 +2756,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 19,
+    "id": 213,
     "lon": 2.37451,
     "lat": 48.8326,
     "day": 4,
@@ -247,7 +2769,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 20,
+    "id": 214,
     "lon": 2.37658,
     "lat": 48.83068,
     "day": 4,
@@ -260,7 +2782,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 21,
+    "id": 215,
     "lon": 2.37865,
     "lat": 48.83018,
     "day": 4,
@@ -273,7 +2795,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 22,
+    "id": 216,
     "lon": 2.38101,
     "lat": 48.82869,
     "day": 4,
@@ -286,7 +2808,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 23,
+    "id": 217,
     "lon": 2.38468,
     "lat": 48.82808,
     "day": 4,
@@ -299,7 +2821,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 24,
+    "id": 218,
     "lon": 2.38678,
     "lat": 48.82637,
     "day": 4,
@@ -312,7 +2834,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 25,
+    "id": 219,
     "lon": 2.3896,
     "lat": 48.8244,
     "day": 4,
@@ -325,7 +2847,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 26,
+    "id": 220,
     "lon": 2.39227,
     "lat": 48.82245,
     "day": 4,
@@ -338,7 +2860,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 27,
+    "id": 221,
     "lon": 2.39498,
     "lat": 48.8205,
     "day": 4,
@@ -351,7 +2873,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 28,
+    "id": 222,
     "lon": 2.397636,
     "lat": 48.819518,
     "day": 4,
@@ -364,7 +2886,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 29,
+    "id": 223,
     "lon": 2.39928,
     "lat": 48.82133,
     "day": 4,
@@ -377,7 +2899,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 30,
+    "id": 224,
     "lon": 2.3982,
     "lat": 48.82231,
     "day": 4,
@@ -390,7 +2912,7 @@
     "gpxFile": "Normandie_Section_5.gpx"
   },
   {
-    "id": 31,
+    "id": 225,
     "lon": 3.97332,
     "lat": 47.85937,
     "day": 29,
@@ -403,7 +2925,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 32,
+    "id": 226,
     "lon": 3.97542,
     "lat": 47.8585,
     "day": 29,
@@ -416,7 +2938,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 33,
+    "id": 227,
     "lon": 3.97859,
     "lat": 47.85954,
     "day": 29,
@@ -429,7 +2951,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 34,
+    "id": 228,
     "lon": 3.98095,
     "lat": 47.86189,
     "day": 29,
@@ -442,7 +2964,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 35,
+    "id": 229,
     "lon": 3.98323,
     "lat": 47.86109,
     "day": 29,
@@ -455,7 +2977,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 36,
+    "id": 230,
     "lon": 3.98656,
     "lat": 47.85993,
     "day": 29,
@@ -468,7 +2990,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 37,
+    "id": 231,
     "lon": 3.99029,
     "lat": 47.8604,
     "day": 29,
@@ -481,7 +3003,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 38,
+    "id": 232,
     "lon": 3.99449,
     "lat": 47.86086,
     "day": 29,
@@ -494,7 +3016,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 39,
+    "id": 233,
     "lon": 3.9992,
     "lat": 47.86135,
     "day": 29,
@@ -507,7 +3029,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 40,
+    "id": 234,
     "lon": 4.00555,
     "lat": 47.86203,
     "day": 29,
@@ -520,7 +3042,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 41,
+    "id": 235,
     "lon": 4.00646,
     "lat": 47.86213,
     "day": 29,
@@ -533,7 +3055,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 42,
+    "id": 236,
     "lon": 4.01251,
     "lat": 47.86159,
     "day": 29,
@@ -546,7 +3068,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 43,
+    "id": 237,
     "lon": 4.01566,
     "lat": 47.86117,
     "day": 29,
@@ -559,7 +3081,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 44,
+    "id": 238,
     "lon": 4.01882,
     "lat": 47.86075,
     "day": 29,
@@ -572,7 +3094,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 45,
+    "id": 239,
     "lon": 4.02424,
     "lat": 47.86003,
     "day": 29,
@@ -585,7 +3107,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 46,
+    "id": 240,
     "lon": 4.02662,
     "lat": 47.8594,
     "day": 29,
@@ -598,7 +3120,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 47,
+    "id": 241,
     "lon": 4.02993,
     "lat": 47.85808,
     "day": 29,
@@ -611,7 +3133,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 48,
+    "id": 242,
     "lon": 4.03376,
     "lat": 47.85657,
     "day": 29,
@@ -624,7 +3146,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 49,
+    "id": 243,
     "lon": 4.03902,
     "lat": 47.85523,
     "day": 29,
@@ -637,7 +3159,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 50,
+    "id": 244,
     "lon": 4.04133,
     "lat": 47.8547,
     "day": 29,
@@ -650,7 +3172,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 51,
+    "id": 245,
     "lon": 4.04515,
     "lat": 47.85527,
     "day": 29,
@@ -663,7 +3185,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 52,
+    "id": 246,
     "lon": 4.04812,
     "lat": 47.85683,
     "day": 29,
@@ -676,7 +3198,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 53,
+    "id": 247,
     "lon": 4.0511,
     "lat": 47.85845,
     "day": 29,
@@ -689,7 +3211,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 54,
+    "id": 248,
     "lon": 4.0546,
     "lat": 47.85896,
     "day": 29,
@@ -702,7 +3224,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 55,
+    "id": 249,
     "lon": 4.05895,
     "lat": 47.85833,
     "day": 29,
@@ -715,7 +3237,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 56,
+    "id": 250,
     "lon": 4.06241,
     "lat": 47.85784,
     "day": 29,
@@ -728,7 +3250,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 57,
+    "id": 251,
     "lon": 4.06619,
     "lat": 47.85693,
     "day": 29,
@@ -741,7 +3263,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 58,
+    "id": 252,
     "lon": 4.06874,
     "lat": 47.8554,
     "day": 29,
@@ -754,7 +3276,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 59,
+    "id": 253,
     "lon": 4.07336,
     "lat": 47.85419,
     "day": 29,
@@ -767,7 +3289,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 60,
+    "id": 254,
     "lon": 4.07672,
     "lat": 47.85198,
     "day": 29,
@@ -780,7 +3302,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 61,
+    "id": 255,
     "lon": 4.07852,
     "lat": 47.85045,
     "day": 29,
@@ -793,7 +3315,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 62,
+    "id": 256,
     "lon": 4.08094,
     "lat": 47.84839,
     "day": 29,
@@ -806,7 +3328,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 63,
+    "id": 257,
     "lon": 4.08008,
     "lat": 47.84634,
     "day": 29,
@@ -819,7 +3341,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 64,
+    "id": 258,
     "lon": 4.07906,
     "lat": 47.84472,
     "day": 29,
@@ -832,7 +3354,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 65,
+    "id": 259,
     "lon": 4.07691,
     "lat": 47.8423,
     "day": 29,
@@ -845,7 +3367,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 66,
+    "id": 260,
     "lon": 4.07415,
     "lat": 47.83923,
     "day": 29,
@@ -858,7 +3380,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 67,
+    "id": 261,
     "lon": 4.07026,
     "lat": 47.83486,
     "day": 29,
@@ -871,7 +3393,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 68,
+    "id": 262,
     "lon": 4.06869,
     "lat": 47.83309,
     "day": 29,
@@ -884,7 +3406,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 69,
+    "id": 263,
     "lon": 4.06754,
     "lat": 47.83033,
     "day": 29,
@@ -897,7 +3419,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 70,
+    "id": 264,
     "lon": 4.06829,
     "lat": 47.82807,
     "day": 29,
@@ -910,7 +3432,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 71,
+    "id": 265,
     "lon": 4.07204,
     "lat": 47.82821,
     "day": 29,
@@ -923,7 +3445,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 72,
+    "id": 266,
     "lon": 4.07589,
     "lat": 47.82718,
     "day": 29,
@@ -936,7 +3458,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 73,
+    "id": 267,
     "lon": 4.07952,
     "lat": 47.82581,
     "day": 29,
@@ -949,7 +3471,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 74,
+    "id": 268,
     "lon": 4.08381,
     "lat": 47.82525,
     "day": 29,
@@ -962,7 +3484,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 75,
+    "id": 269,
     "lon": 4.08666,
     "lat": 47.82501,
     "day": 29,
@@ -975,7 +3497,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 76,
+    "id": 270,
     "lon": 4.09206,
     "lat": 47.82276,
     "day": 29,
@@ -988,7 +3510,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 77,
+    "id": 271,
     "lon": 4.09447,
     "lat": 47.82178,
     "day": 29,
@@ -1001,7 +3523,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 78,
+    "id": 272,
     "lon": 4.09811,
     "lat": 47.82162,
     "day": 29,
@@ -1014,7 +3536,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 79,
+    "id": 273,
     "lon": 4.1012,
     "lat": 47.82296,
     "day": 29,
@@ -1027,7 +3549,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 80,
+    "id": 274,
     "lon": 4.10496,
     "lat": 47.82289,
     "day": 29,
@@ -1040,7 +3562,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 81,
+    "id": 275,
     "lon": 4.10938,
     "lat": 47.82065,
     "day": 29,
@@ -1053,7 +3575,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 82,
+    "id": 276,
     "lon": 4.11403,
     "lat": 47.81751,
     "day": 29,
@@ -1066,7 +3588,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 83,
+    "id": 277,
     "lon": 4.11609,
     "lat": 47.81615,
     "day": 29,
@@ -1079,7 +3601,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 84,
+    "id": 278,
     "lon": 4.11856,
     "lat": 47.81378,
     "day": 29,
@@ -1092,7 +3614,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 85,
+    "id": 279,
     "lon": 4.11981,
     "lat": 47.81133,
     "day": 29,
@@ -1105,7 +3627,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 86,
+    "id": 280,
     "lon": 4.12016,
     "lat": 47.80802,
     "day": 29,
@@ -1118,7 +3640,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 87,
+    "id": 281,
     "lon": 4.12021,
     "lat": 47.80569,
     "day": 29,
@@ -1131,7 +3653,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 88,
+    "id": 282,
     "lon": 4.11862,
     "lat": 47.8035,
     "day": 29,
@@ -1144,7 +3666,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 89,
+    "id": 283,
     "lon": 4.11594,
     "lat": 47.80142,
     "day": 29,
@@ -1157,7 +3679,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 90,
+    "id": 284,
     "lon": 4.11026,
     "lat": 47.80096,
     "day": 29,
@@ -1170,7 +3692,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 91,
+    "id": 285,
     "lon": 4.10807,
     "lat": 47.80103,
     "day": 29,
@@ -1183,7 +3705,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 92,
+    "id": 286,
     "lon": 4.10466,
     "lat": 47.79943,
     "day": 29,
@@ -1196,7 +3718,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 93,
+    "id": 287,
     "lon": 4.09728,
     "lat": 47.79816,
     "day": 29,
@@ -1209,7 +3731,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 94,
+    "id": 288,
     "lon": 4.09675,
     "lat": 47.79808,
     "day": 29,
@@ -1222,7 +3744,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 95,
+    "id": 289,
     "lon": 4.09313,
     "lat": 47.79747,
     "day": 29,
@@ -1235,7 +3757,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 96,
+    "id": 290,
     "lon": 4.09052,
     "lat": 47.79645,
     "day": 29,
@@ -1248,7 +3770,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 97,
+    "id": 291,
     "lon": 4.08399,
     "lat": 47.79502,
     "day": 29,
@@ -1261,7 +3783,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 98,
+    "id": 292,
     "lon": 4.08102,
     "lat": 47.79439,
     "day": 29,
@@ -1274,7 +3796,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 99,
+    "id": 293,
     "lon": 4.07864,
     "lat": 47.7936,
     "day": 29,
@@ -1287,7 +3809,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 100,
+    "id": 294,
     "lon": 4.07642,
     "lat": 47.79141,
     "day": 29,
@@ -1300,7 +3822,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 101,
+    "id": 295,
     "lon": 4.07542,
     "lat": 47.78879,
     "day": 29,
@@ -1313,7 +3835,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 102,
+    "id": 296,
     "lon": 4.07585,
     "lat": 47.78642,
     "day": 29,
@@ -1326,7 +3848,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 103,
+    "id": 297,
     "lon": 4.07804,
     "lat": 47.78361,
     "day": 29,
@@ -1339,7 +3861,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 104,
+    "id": 298,
     "lon": 4.08159,
     "lat": 47.78296,
     "day": 29,
@@ -1352,7 +3874,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 105,
+    "id": 299,
     "lon": 4.08589,
     "lat": 47.78354,
     "day": 29,
@@ -1365,7 +3887,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 106,
+    "id": 300,
     "lon": 4.08969,
     "lat": 47.7845,
     "day": 29,
@@ -1378,7 +3900,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 107,
+    "id": 301,
     "lon": 4.09301,
     "lat": 47.78496,
     "day": 29,
@@ -1391,7 +3913,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 108,
+    "id": 302,
     "lon": 4.09682,
     "lat": 47.78501,
     "day": 29,
@@ -1404,7 +3926,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 109,
+    "id": 303,
     "lon": 4.10079,
     "lat": 47.78398,
     "day": 29,
@@ -1417,7 +3939,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 110,
+    "id": 304,
     "lon": 4.10326,
     "lat": 47.78188,
     "day": 29,
@@ -1430,7 +3952,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 111,
+    "id": 305,
     "lon": 4.10654,
     "lat": 47.77885,
     "day": 29,
@@ -1443,7 +3965,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 112,
+    "id": 306,
     "lon": 4.10742,
     "lat": 47.77741,
     "day": 29,
@@ -1456,7 +3978,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 113,
+    "id": 307,
     "lon": 4.10745,
     "lat": 47.77463,
     "day": 29,
@@ -1469,7 +3991,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 114,
+    "id": 308,
     "lon": 4.106,
     "lat": 47.77187,
     "day": 29,
@@ -1482,7 +4004,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 115,
+    "id": 309,
     "lon": 4.1049,
     "lat": 47.76935,
     "day": 29,
@@ -1495,7 +4017,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 116,
+    "id": 310,
     "lon": 4.10568,
     "lat": 47.76686,
     "day": 29,
@@ -1508,7 +4030,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 117,
+    "id": 311,
     "lon": 4.10976,
     "lat": 47.76613,
     "day": 29,
@@ -1521,7 +4043,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 118,
+    "id": 312,
     "lon": 4.1134,
     "lat": 47.76521,
     "day": 29,
@@ -1534,7 +4056,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 119,
+    "id": 313,
     "lon": 4.11589,
     "lat": 47.76516,
     "day": 29,
@@ -1547,7 +4069,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 120,
+    "id": 314,
     "lon": 4.12286,
     "lat": 47.76569,
     "day": 29,
@@ -1560,7 +4082,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 121,
+    "id": 315,
     "lon": 4.12448,
     "lat": 47.76582,
     "day": 29,
@@ -1573,7 +4095,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 122,
+    "id": 316,
     "lon": 4.12827,
     "lat": 47.76611,
     "day": 29,
@@ -1586,7 +4108,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 123,
+    "id": 317,
     "lon": 4.13227,
     "lat": 47.76639,
     "day": 29,
@@ -1599,7 +4121,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 124,
+    "id": 318,
     "lon": 4.1364,
     "lat": 47.76622,
     "day": 29,
@@ -1612,7 +4134,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 125,
+    "id": 319,
     "lon": 4.14133,
     "lat": 47.76711,
     "day": 29,
@@ -1625,7 +4147,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 126,
+    "id": 320,
     "lon": 4.14598,
     "lat": 47.76804,
     "day": 29,
@@ -1638,7 +4160,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 127,
+    "id": 321,
     "lon": 4.15115,
     "lat": 47.76907,
     "day": 29,
@@ -1651,7 +4173,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 128,
+    "id": 322,
     "lon": 4.15333,
     "lat": 47.76952,
     "day": 29,
@@ -1664,7 +4186,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 129,
+    "id": 323,
     "lon": 4.15624,
     "lat": 47.76992,
     "day": 29,
@@ -1677,7 +4199,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 130,
+    "id": 324,
     "lon": 4.16009,
     "lat": 47.76928,
     "day": 29,
@@ -1690,7 +4212,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 131,
+    "id": 325,
     "lon": 4.16605,
     "lat": 47.76818,
     "day": 29,
@@ -1703,7 +4225,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 132,
+    "id": 326,
     "lon": 4.1682,
     "lat": 47.76778,
     "day": 29,
@@ -1716,7 +4238,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 133,
+    "id": 327,
     "lon": 4.17114,
     "lat": 47.76702,
     "day": 29,
@@ -1729,7 +4251,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 134,
+    "id": 328,
     "lon": 4.17325,
     "lat": 47.76415,
     "day": 29,
@@ -1742,7 +4264,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 135,
+    "id": 329,
     "lon": 4.17348,
     "lat": 47.76034,
     "day": 29,
@@ -1755,7 +4277,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 136,
+    "id": 330,
     "lon": 4.17359,
     "lat": 47.75778,
     "day": 29,
@@ -1768,7 +4290,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 137,
+    "id": 331,
     "lon": 4.1733,
     "lat": 47.75616,
     "day": 29,
@@ -1781,7 +4303,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 138,
+    "id": 332,
     "lon": 4.17222,
     "lat": 47.75317,
     "day": 29,
@@ -1794,7 +4316,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 139,
+    "id": 333,
     "lon": 4.17137,
     "lat": 47.75084,
     "day": 29,
@@ -1807,7 +4329,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 140,
+    "id": 334,
     "lon": 4.17139,
     "lat": 47.7476,
     "day": 29,
@@ -1820,7 +4342,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 141,
+    "id": 335,
     "lon": 4.17244,
     "lat": 47.74587,
     "day": 29,
@@ -1833,7 +4355,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 142,
+    "id": 336,
     "lon": 4.1763,
     "lat": 47.74525,
     "day": 29,
@@ -1846,7 +4368,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 143,
+    "id": 337,
     "lon": 4.18042,
     "lat": 47.7457,
     "day": 29,
@@ -1859,7 +4381,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 144,
+    "id": 338,
     "lon": 4.18465,
     "lat": 47.7447,
     "day": 29,
@@ -1872,7 +4394,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 145,
+    "id": 339,
     "lon": 4.18816,
     "lat": 47.74367,
     "day": 29,
@@ -1885,7 +4407,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 146,
+    "id": 340,
     "lon": 4.19419,
     "lat": 47.74465,
     "day": 29,
@@ -1898,7 +4420,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 147,
+    "id": 341,
     "lon": 4.19511,
     "lat": 47.74519,
     "day": 29,
@@ -1911,7 +4433,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 148,
+    "id": 342,
     "lon": 4.19866,
     "lat": 47.74879,
     "day": 29,
@@ -1924,7 +4446,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 149,
+    "id": 343,
     "lon": 4.20387,
     "lat": 47.75119,
     "day": 29,
@@ -1937,7 +4459,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 150,
+    "id": 344,
     "lon": 4.20769,
     "lat": 47.75148,
     "day": 29,
@@ -1950,7 +4472,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 151,
+    "id": 345,
     "lon": 4.21119,
     "lat": 47.75128,
     "day": 29,
@@ -1963,7 +4485,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 152,
+    "id": 346,
     "lon": 4.21466,
     "lat": 47.74924,
     "day": 29,
@@ -1976,7 +4498,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 153,
+    "id": 347,
     "lon": 4.21686,
     "lat": 47.74567,
     "day": 29,
@@ -1989,7 +4511,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 154,
+    "id": 348,
     "lon": 4.21747,
     "lat": 47.74382,
     "day": 29,
@@ -2002,7 +4524,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 155,
+    "id": 349,
     "lon": 4.22016,
     "lat": 47.73974,
     "day": 29,
@@ -2015,7 +4537,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 156,
+    "id": 350,
     "lon": 4.22036,
     "lat": 47.73949,
     "day": 29,
@@ -2028,7 +4550,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 157,
+    "id": 351,
     "lon": 4.22202,
     "lat": 47.73741,
     "day": 29,
@@ -2041,7 +4563,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 158,
+    "id": 352,
     "lon": 4.22358,
     "lat": 47.734,
     "day": 29,
@@ -2054,7 +4576,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 159,
+    "id": 353,
     "lon": 4.22361,
     "lat": 47.73266,
     "day": 29,
@@ -2067,7 +4589,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 160,
+    "id": 354,
     "lon": 4.22364,
     "lat": 47.73013,
     "day": 29,
@@ -2080,7 +4602,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 161,
+    "id": 355,
     "lon": 4.22361,
     "lat": 47.72751,
     "day": 29,
@@ -2093,7 +4615,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 162,
+    "id": 356,
     "lon": 4.22364,
     "lat": 47.7247,
     "day": 29,
@@ -2106,7 +4628,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 163,
+    "id": 357,
     "lon": 4.22203,
     "lat": 47.72211,
     "day": 29,
@@ -2119,7 +4641,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 164,
+    "id": 358,
     "lon": 4.22192,
     "lat": 47.71841,
     "day": 29,
@@ -2132,7 +4654,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 165,
+    "id": 359,
     "lon": 4.2219,
     "lat": 47.71502,
     "day": 29,
@@ -2145,7 +4667,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 166,
+    "id": 360,
     "lon": 4.22194,
     "lat": 47.71407,
     "day": 29,
@@ -2158,7 +4680,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 167,
+    "id": 361,
     "lon": 4.22509,
     "lat": 47.7125,
     "day": 29,
@@ -2171,7 +4693,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 168,
+    "id": 362,
     "lon": 4.22887,
     "lat": 47.71307,
     "day": 29,
@@ -2184,7 +4706,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 169,
+    "id": 363,
     "lon": 4.23213,
     "lat": 47.71491,
     "day": 29,
@@ -2197,7 +4719,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 170,
+    "id": 364,
     "lon": 4.23635,
     "lat": 47.71496,
     "day": 29,
@@ -2210,7 +4732,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 171,
+    "id": 365,
     "lon": 4.23969,
     "lat": 47.71388,
     "day": 29,
@@ -2223,7 +4745,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 172,
+    "id": 366,
     "lon": 4.24124,
     "lat": 47.71187,
     "day": 29,
@@ -2236,7 +4758,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 173,
+    "id": 367,
     "lon": 4.24311,
     "lat": 47.70971,
     "day": 29,
@@ -2249,7 +4771,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 174,
+    "id": 368,
     "lon": 4.24427,
     "lat": 47.70666,
     "day": 29,
@@ -2262,7 +4784,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 175,
+    "id": 369,
     "lon": 4.24474,
     "lat": 47.70443,
     "day": 29,
@@ -2275,7 +4797,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 176,
+    "id": 370,
     "lon": 4.24444,
     "lat": 47.70103,
     "day": 29,
@@ -2288,7 +4810,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 177,
+    "id": 371,
     "lon": 4.24561,
     "lat": 47.69877,
     "day": 29,
@@ -2301,7 +4823,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 178,
+    "id": 372,
     "lon": 4.246,
     "lat": 47.69612,
     "day": 29,
@@ -2314,7 +4836,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 179,
+    "id": 373,
     "lon": 4.24602,
     "lat": 47.69365,
     "day": 29,
@@ -2327,7 +4849,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 180,
+    "id": 374,
     "lon": 4.24534,
     "lat": 47.69072,
     "day": 29,
@@ -2340,7 +4862,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 181,
+    "id": 375,
     "lon": 4.24452,
     "lat": 47.68821,
     "day": 29,
@@ -2353,7 +4875,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 182,
+    "id": 376,
     "lon": 4.24062,
     "lat": 47.68627,
     "day": 29,
@@ -2366,7 +4888,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 183,
+    "id": 377,
     "lon": 4.23766,
     "lat": 47.68513,
     "day": 29,
@@ -2379,7 +4901,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 184,
+    "id": 378,
     "lon": 4.23403,
     "lat": 47.68372,
     "day": 29,
@@ -2392,7 +4914,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 185,
+    "id": 379,
     "lon": 4.2312,
     "lat": 47.68188,
     "day": 29,
@@ -2405,7 +4927,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 186,
+    "id": 380,
     "lon": 4.22822,
     "lat": 47.67974,
     "day": 29,
@@ -2418,7 +4940,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 187,
+    "id": 381,
     "lon": 4.22681,
     "lat": 47.67767,
     "day": 29,
@@ -2431,7 +4953,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 188,
+    "id": 382,
     "lon": 4.22602,
     "lat": 47.67492,
     "day": 29,
@@ -2444,7 +4966,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 189,
+    "id": 383,
     "lon": 4.22598,
     "lat": 47.67265,
     "day": 29,
@@ -2457,7 +4979,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 190,
+    "id": 384,
     "lon": 4.228,
     "lat": 47.66986,
     "day": 29,
@@ -2470,7 +4992,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 191,
+    "id": 385,
     "lon": 4.2309,
     "lat": 47.66852,
     "day": 29,
@@ -2483,7 +5005,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 192,
+    "id": 386,
     "lon": 4.2343,
     "lat": 47.66753,
     "day": 29,
@@ -2496,7 +5018,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 193,
+    "id": 387,
     "lon": 4.23757,
     "lat": 47.66641,
     "day": 29,
@@ -2509,7 +5031,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 194,
+    "id": 388,
     "lon": 4.24197,
     "lat": 47.6643,
     "day": 29,
@@ -2522,7 +5044,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 195,
+    "id": 389,
     "lon": 4.24526,
     "lat": 47.66273,
     "day": 29,
@@ -2535,7 +5057,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 196,
+    "id": 390,
     "lon": 4.2487,
     "lat": 47.66116,
     "day": 29,
@@ -2548,7 +5070,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 197,
+    "id": 391,
     "lon": 4.25068,
     "lat": 47.66022,
     "day": 29,
@@ -2561,7 +5083,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 198,
+    "id": 392,
     "lon": 4.25356,
     "lat": 47.658,
     "day": 29,
@@ -2574,7 +5096,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 199,
+    "id": 393,
     "lon": 4.25426,
     "lat": 47.65544,
     "day": 29,
@@ -2587,7 +5109,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 200,
+    "id": 394,
     "lon": 4.25648,
     "lat": 47.65309,
     "day": 29,
@@ -2600,7 +5122,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 201,
+    "id": 395,
     "lon": 4.25942,
     "lat": 47.65148,
     "day": 29,
@@ -2613,7 +5135,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 202,
+    "id": 396,
     "lon": 4.26144,
     "lat": 47.6503,
     "day": 29,
@@ -2626,7 +5148,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 203,
+    "id": 397,
     "lon": 4.26526,
     "lat": 47.64988,
     "day": 29,
@@ -2639,7 +5161,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 204,
+    "id": 398,
     "lon": 4.26917,
     "lat": 47.64969,
     "day": 29,
@@ -2652,7 +5174,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 205,
+    "id": 399,
     "lon": 4.27346,
     "lat": 47.64882,
     "day": 29,
@@ -2665,7 +5187,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 206,
+    "id": 400,
     "lon": 4.27625,
     "lat": 47.64721,
     "day": 29,
@@ -2678,7 +5200,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 207,
+    "id": 401,
     "lon": 4.27795,
     "lat": 47.64449,
     "day": 29,
@@ -2691,7 +5213,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 208,
+    "id": 402,
     "lon": 4.27971,
     "lat": 47.64228,
     "day": 29,
@@ -2704,7 +5226,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 209,
+    "id": 403,
     "lon": 4.2839,
     "lat": 47.64152,
     "day": 29,
@@ -2717,7 +5239,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 210,
+    "id": 404,
     "lon": 4.28746,
     "lat": 47.64086,
     "day": 29,
@@ -2730,7 +5252,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 211,
+    "id": 405,
     "lon": 4.29218,
     "lat": 47.64046,
     "day": 29,
@@ -2743,7 +5265,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 212,
+    "id": 406,
     "lon": 4.29524,
     "lat": 47.64024,
     "day": 29,
@@ -2756,7 +5278,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 213,
+    "id": 407,
     "lon": 4.29887,
     "lat": 47.63959,
     "day": 29,
@@ -2769,7 +5291,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 214,
+    "id": 408,
     "lon": 4.303,
     "lat": 47.63823,
     "day": 29,
@@ -2782,7 +5304,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 215,
+    "id": 409,
     "lon": 4.30585,
     "lat": 47.63722,
     "day": 29,
@@ -2795,7 +5317,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 216,
+    "id": 410,
     "lon": 4.308,
     "lat": 47.63504,
     "day": 29,
@@ -2808,7 +5330,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 217,
+    "id": 411,
     "lon": 4.31078,
     "lat": 47.63331,
     "day": 29,
@@ -2821,7 +5343,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 218,
+    "id": 412,
     "lon": 4.3132,
     "lat": 47.63121,
     "day": 29,
@@ -2834,7 +5356,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 219,
+    "id": 413,
     "lon": 4.3171,
     "lat": 47.62879,
     "day": 29,
@@ -2847,7 +5369,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 220,
+    "id": 414,
     "lon": 4.319,
     "lat": 47.62749,
     "day": 29,
@@ -2860,7 +5382,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 221,
+    "id": 415,
     "lon": 4.32211,
     "lat": 47.62555,
     "day": 29,
@@ -2873,7 +5395,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 222,
+    "id": 416,
     "lon": 4.32584,
     "lat": 47.62464,
     "day": 29,
@@ -2886,7 +5408,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 223,
+    "id": 417,
     "lon": 4.32916,
     "lat": 47.62395,
     "day": 29,
@@ -2899,7 +5421,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 224,
+    "id": 418,
     "lon": 4.33201,
     "lat": 47.62239,
     "day": 29,
@@ -2912,7 +5434,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 225,
+    "id": 419,
     "lon": 4.33258,
     "lat": 47.62235,
     "day": 29,
@@ -2925,7 +5447,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 226,
+    "id": 420,
     "lon": 4.33034,
     "lat": 47.62397,
     "day": 29,
@@ -2938,7 +5460,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 227,
+    "id": 421,
     "lon": 4.32643,
     "lat": 47.62478,
     "day": 29,
@@ -2951,7 +5473,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 228,
+    "id": 422,
     "lon": 4.32852,
     "lat": 47.62731,
     "day": 29,
@@ -2964,7 +5486,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 229,
+    "id": 423,
     "lon": 4.33014,
     "lat": 47.62906,
     "day": 29,
@@ -2977,7 +5499,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 230,
+    "id": 424,
     "lon": 4.33278,
     "lat": 47.63058,
     "day": 29,
@@ -2990,7 +5512,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 231,
+    "id": 425,
     "lon": 4.33135,
     "lat": 47.63107,
     "day": 29,
