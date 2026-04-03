@@ -694,5 +694,13 @@
     "duration_h": 4810,
     "lat": 46.01918,
     "lon": 6.3383
+  },
+  {
+    "city": "Saint-Laurent-sur-Mer",
+    "start": "2025-05-02T13:55",
+    "end": "2025-07-19T16:00",
+    "duration_h": 1874,
+    "lat": 49.36637,
+    "lon": -0.86626
   }
 ]
