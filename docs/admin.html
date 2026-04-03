@@ -1151,14 +1151,10 @@ function serverBase() {
   return ($('server-url').value.trim() || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
 }
 
-// Pré-remplir l'URL serveur selon le contexte (local → http, production → https)
+// Pré-remplir l'URL serveur si pas encore sauvegardée
 (function initServerUrl() {
   const saved = (() => { try { return JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}').serverUrl; } catch { return null; } })();
-  if (saved) return; // loadSettings() s'en chargera
-  const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  $('server-url').value = isLocal
-    ? 'http://hub.studios-voa.com:1666'
-    : 'https://hub.studios-voa.com:1666';
+  if (!saved) $('server-url').value = 'https://hub.studios-voa.com:1666';
 })();
 
 function serverSuccess(token) {
