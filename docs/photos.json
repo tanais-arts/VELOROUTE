@@ -363,6 +363,13 @@
     "lon": 4.17356
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Clamerey/IMG_2258.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Clamerey/IMG_2258.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Clamerey/IMG_2258.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-30"
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Benoisey/IMG_2239.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Benoisey/IMG_2239.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Benoisey/IMG_2239.HEIC",
@@ -442,6 +449,24 @@
     "caption": "2025-05-30",
     "lat": 47.47606,
     "lon": 4.45574
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Clamerey/IMG_2255.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Clamerey/IMG_2255.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Clamerey/IMG_2255.HEIC",
+    "entryIdx": 1155,
+    "caption": "2025-05-30",
+    "lat": 47.39009,
+    "lon": 4.44092
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Clamerey/IMG_2256.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Clamerey/IMG_2256.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Clamerey/IMG_2256.HEIC",
+    "entryIdx": 1158,
+    "caption": "2025-05-30",
+    "lat": 47.39381,
+    "lon": 4.44301
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Brochon/IMG_2298.jpg",
