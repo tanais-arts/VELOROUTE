@@ -426,6 +426,42 @@
     "lon": 4.11569
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250529_151357.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250529_151357.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250529_151357.jpg",
+    "entryIdx": 871,
+    "caption": "2025-05-29",
+    "lat": 47.80112,
+    "lon": 4.1155
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250529_151405.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250529_151405.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250529_151405.jpg",
+    "entryIdx": 871,
+    "caption": "2025-05-29",
+    "lat": 47.80113,
+    "lon": 4.1155
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250529_151408.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250529_151408.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250529_151408.jpg",
+    "entryIdx": 871,
+    "caption": "2025-05-29",
+    "lat": 47.80112,
+    "lon": 4.11557
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250529_151429.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250529_151429.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250529_151429.jpg",
+    "entryIdx": 872,
+    "caption": "2025-05-29",
+    "lat": 47.80103,
+    "lon": 4.11552
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_2227.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_2227.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_2227.HEIC",
@@ -433,6 +469,15 @@
     "caption": "2025-05-29",
     "lat": 47.80126,
     "lon": 4.11595
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250529_152543.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250529_152543.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250529_152543.jpg",
+    "entryIdx": 883,
+    "caption": "2025-05-29",
+    "lat": 47.80115,
+    "lon": 4.11559
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Chassignelles/IMG_2228.jpg",
@@ -1349,5 +1394,12 @@
     "caption": "2025-06-01",
     "lat": 46.91407,
     "lon": 4.70868
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Ancy-le-Libre/IMG_20250717_160901.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Ancy-le-Libre/IMG_20250717_160901.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Ancy-le-Libre/IMG_20250717_160901.jpg",
+    "entryIdx": null,
+    "caption": "2025-07-17"
   }
 ]
