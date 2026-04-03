@@ -1194,7 +1194,17 @@ async function serverLogin() {
       setStatus('login-status', j.error || 'Connexion échouée.', 'error');
     }
   } catch (err) {
-    setStatus('login-status', `Erreur : ${err.message}`, 'error');
+    const el = $('login-status');
+    el.className = 'status error';
+    if (err.message === 'Failed to fetch') {
+      const url = serverBase();
+      el.innerHTML = `Impossible de joindre le serveur.<br>
+        Si HTTPS est auto-signé, <a href="${url}/ping" target="_blank"
+        style="color:#f0c060">ouvrez d'abord ${url}/ping</a>
+        puis acceptez l'exception de certificat dans le navigateur.`;
+    } else {
+      el.textContent = `Erreur : ${err.message}`;
+    }
   }
   $('btn-server-login').disabled = false;
 }

@@ -158,6 +158,24 @@ while true; do
       echo "✓ Certificats configurés."
     fi
   fi
+
+  # Certificat auto-signé (si Let's Encrypt non utilisé)
+  if ! [[ "$DO_LE" =~ ^[oO]$ ]]; then
+    read -rp "Générer un certificat auto-signé (test sans DNS public) ? (o/n) : " DO_SS
+    if [[ "$DO_SS" =~ ^[oO]$ ]]; then
+      if command -v openssl >/dev/null 2>&1; then
+        openssl req -x509 -newkey rsa:4096 -keyout "$SCRIPTDIR/key.pem" -out "$SCRIPTDIR/cert.pem" \
+          -days 365 -nodes -subj "/CN=$DOMAIN" 2>/dev/null
+        env_set "SSL_CERT" "$SCRIPTDIR/cert.pem"
+        env_set "SSL_KEY"  "$SCRIPTDIR/key.pem"
+        echo "✓ Certificat auto-signé généré (cert.pem / key.pem)."
+        echo "  → Avant d'utiliser l'admin, ouvrez https://$DOMAIN:$PORT/ping dans"
+        echo "    votre navigateur et acceptez l'exception de sécurité."
+      else
+        echo "⚠  openssl non trouvé — certificat auto-signé non généré."
+      fi
+    fi
+  fi
   echo ""
 
   # Service de démarrage automatique au boot
