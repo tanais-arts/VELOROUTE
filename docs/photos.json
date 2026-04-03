@@ -18,6 +18,51 @@
     "lon": -0.31367
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151631.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151631.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151631.jpg",
+    "entryIdx": 80,
+    "caption": "2025-05-01",
+    "lat": 49.30273,
+    "lon": -0.31356
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151641.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151641.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151641.jpg",
+    "entryIdx": 80,
+    "caption": "2025-05-01",
+    "lat": 49.3024,
+    "lon": -0.31386
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151648.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151648.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151648.jpg",
+    "entryIdx": 80,
+    "caption": "2025-05-01",
+    "lat": 49.30239,
+    "lon": -0.31387
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151707.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151707.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151707.jpg",
+    "entryIdx": 80,
+    "caption": "2025-05-01",
+    "lat": 49.30241,
+    "lon": -0.31377
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151720.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151720.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151720.jpg",
+    "entryIdx": 80,
+    "caption": "2025-05-01",
+    "lat": 49.30245,
+    "lon": -0.31373
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_2105.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_2105.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_2105.HEIC",
@@ -25,6 +70,33 @@
     "caption": "2025-05-01",
     "lat": 49.30237,
     "lon": -0.31361
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151800.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151800.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151800.jpg",
+    "entryIdx": 81,
+    "caption": "2025-05-01",
+    "lat": 49.30236,
+    "lon": -0.31366
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151805.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151805.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151805.jpg",
+    "entryIdx": 81,
+    "caption": "2025-05-01",
+    "lat": 49.30238,
+    "lon": -0.31364
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_151816.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_151816.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_151816.jpg",
+    "entryIdx": 81,
+    "caption": "2025-05-01",
+    "lat": 49.30238,
+    "lon": -0.31362
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_2106.jpg",
@@ -43,6 +115,15 @@
     "caption": "2025-05-01",
     "lat": 49.30236,
     "lon": -0.31364
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Lion-sur-Mer/IMG_20250501_153417.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Lion-sur-Mer/IMG_20250501_153417.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Lion-sur-Mer/IMG_20250501_153417.jpg",
+    "entryIdx": 97,
+    "caption": "2025-05-01",
+    "lat": 49.30704,
+    "lon": -0.326
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Courseulles-sur-Mer/IMG_20250501_163757.jpg",
