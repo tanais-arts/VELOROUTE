@@ -624,6 +624,15 @@
     "lon": 4.33449
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20250529_092419.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20250529_092419.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20250529_092419.jpg",
+    "entryIdx": null,
+    "caption": "2025-05-29",
+    "lat": 48.76623,
+    "lon": 2.3635
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tonnerre/IMG_2223.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tonnerre/IMG_2223.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tonnerre/IMG_2223.HEIC",
@@ -1892,5 +1901,86 @@
     "caption": "2025-11-10",
     "lat": 47.08135,
     "lon": 2.40048
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251130_092810.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251130_092810.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251130_092810.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-30",
+    "lat": 48.76548,
+    "lon": 2.3643
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251130_093036.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251130_093036.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251130_093036.jpg",
+    "entryIdx": null,
+    "caption": "2025-11-30",
+    "lat": 48.76548,
+    "lon": 2.36429
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251206_133128.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251206_133128.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251206_133128.jpg",
+    "entryIdx": null,
+    "caption": "2025-12-06",
+    "lat": 48.76547,
+    "lon": 2.36432
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251206_134231.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251206_134231.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251206_134231.jpg",
+    "entryIdx": null,
+    "caption": "2025-12-06",
+    "lat": 48.76548,
+    "lon": 2.36432
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251229_213646.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251229_213646.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251229_213646.jpg",
+    "entryIdx": null,
+    "caption": "2025-12-29",
+    "lat": 48.76547,
+    "lon": 2.36431
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20251229_213756.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20251229_213756.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20251229_213756.jpg",
+    "entryIdx": null,
+    "caption": "2025-12-29",
+    "lat": 48.76547,
+    "lon": 2.36431
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20260131_174149.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20260131_174149.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20260131_174149.jpg",
+    "entryIdx": null,
+    "caption": "2026-01-31",
+    "lat": 48.76546,
+    "lon": 2.36423
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20260208_202715.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20260208_202715.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20260208_202715.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-08",
+    "lat": 48.76547,
+    "lon": 2.36429
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Chevilly-Larue/IMG_20260208_202734.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Chevilly-Larue/IMG_20260208_202734.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Chevilly-Larue/IMG_20260208_202734.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-08",
+    "lat": 48.76547,
+    "lon": 2.36429
   }
 ]
