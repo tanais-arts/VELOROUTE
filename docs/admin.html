@@ -1286,6 +1286,20 @@ $('btn-logout-header').addEventListener('click', pcloudLogout);
 // Permettre Enter dans les champs
 $('pcloud-password').addEventListener('keydown', e => { if (e.key === 'Enter') pcloudLogin(); });
 
+// Debug: log button state and capture low-level events if clicks don't fire
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = $('btn-pcloud-login-overlay');
+  if (!btn) { console.warn('pcloud login button not found'); return; }
+  console.log('DEBUG: btn state on load -> disabled=', btn.disabled);
+  btn.addEventListener('pointerdown', e => { console.log('DEBUG: btn pointerdown', e.type); });
+  btn.addEventListener('click', e => { console.log('DEBUG: btn click', e.type); });
+  if (btn.disabled) {
+    console.warn('DEBUG: Enabling login button for debug');
+    btn.disabled = false;
+    btn.style.pointerEvents = 'auto';
+  }
+});
+
 // ── Settings persistence ──────────────────────────────────────────────
 const SETTINGS_KEY = 'veloroute_admin_settings';
 function saveSettings() {
