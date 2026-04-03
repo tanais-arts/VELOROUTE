@@ -3328,5 +3328,86 @@
     "caption": "2026-02-08",
     "lat": 48.76547,
     "lon": 2.36429
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260217_182106.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260217_182106.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260217_182106.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-17",
+    "lat": 48.85669,
+    "lon": 2.33914
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260217_183530.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260217_183530.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260217_183530.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-17",
+    "lat": 48.85771,
+    "lon": 2.34124
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260217_184631.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260217_184631.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260217_184631.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-17",
+    "lat": 48.85646,
+    "lon": 2.33938
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260217_195923.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260217_195923.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260217_195923.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-17",
+    "lat": 48.85657,
+    "lon": 2.33954
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260217_190338.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260217_190338.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260217_190338.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-17",
+    "lat": 48.85637,
+    "lon": 2.3398
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260220_211456.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260220_211456.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260220_211456.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-20",
+    "lat": 48.855,
+    "lon": 2.40123
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260220_211505.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260220_211505.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260220_211505.jpg",
+    "entryIdx": null,
+    "caption": "2026-02-20",
+    "lat": 48.855,
+    "lon": 2.40123
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260304_141628.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260304_141628.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260304_141628.jpg",
+    "entryIdx": null,
+    "caption": "2026-03-04",
+    "lat": 48.86423,
+    "lon": 2.35924
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/Paris/IMG_20260304_144147.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Paris/IMG_20260304_144147.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Paris/IMG_20260304_144147.jpg",
+    "entryIdx": null,
+    "caption": "2026-03-04",
+    "lat": 48.86482,
+    "lon": 2.35963
   }
 ]
