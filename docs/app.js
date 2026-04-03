@@ -341,104 +341,92 @@ document.getElementById('lightbox-prev').addEventListener('click', () => { if (s
 document.getElementById('lightbox-next').addEventListener('click', () => { if (state.lbIdx < state.lbPhotos.length - 1) { state.lbIdx++; lbShowCurrent(); } });
 
 // ── Timeline ───────────────────────────────────────────────────────────
-function updateTimelineThumb(idx) {
-  let pct = 0;
-  if (state.segMap) {
-    pct = state.segMap.totalUnits > 1
-      ? indexToVisualUnits(idx, state.segMap) / (state.segMap.totalUnits - 1)
-      : 0;
-  } else if (state.entryTimes && state.entryTimes.length > 1) {
-    const t = state.entryTimes[idx];
-    const span = state.entryTimeMax - state.entryTimeMin;
-    if (span > 0) pct = (t - state.entryTimeMin) / span;
-    else pct = state.entries.length > 1 ? idx / (state.entries.length - 1) : 0;
-  } else {
-    const total = state.entries.length - 1;
-    pct = total > 0 ? idx / total : 0;
-  }
+// Timeline basée sur les PHOTOS : slider = index photo 0..N-1
+function photoIdxToPct(pi) {
+  const n = state.photos.length;
+  return n > 1 ? pi / (n - 1) : 0;
+}
+
+function updateTimelineThumbByPhoto(pi) {
+  const photos = state.photos;
+  if (!photos || !photos.length) return;
+  pi = Math.max(0, Math.min(pi, photos.length - 1));
+  const pct = photoIdxToPct(pi);
   const wrapW  = document.getElementById('timeline-slider-wrap').offsetWidth;
   const offset = pct * (wrapW - 14) + 7;
   tlThumbLabel.style.left = `${offset}px`;
-  const e = state.entries[idx];
-  if (e) tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
-}
-
-function updateTimelineThumbForTime(t) {
-  if (state.segMap) {
-    return updateTimelineThumb(timeToIndex(t));
-  }
-  if (!state.entryTimes || state.entryTimes.length < 2) {
-    return updateTimelineThumb(0);
-  }
-  const span = state.entryTimeMax - state.entryTimeMin;
-  const pct  = span > 0 ? (t - state.entryTimeMin) / span : 0;
-  const wrapW  = document.getElementById('timeline-slider-wrap').offsetWidth;
-  const offset = Math.max(7, Math.min(wrapW - 7, pct * (wrapW - 14) + 7));
-  tlThumbLabel.style.left = `${offset}px`;
-  const localDate = new Date(t + TZ_OFFSET * 3600000);
-  const day    = localDate.getUTCDate();
-  const month  = MONTHS_FR[localDate.getUTCMonth() + 1];
-  const hour   = localDate.getUTCHours();
-  const minute = String(localDate.getUTCMinutes()).padStart(2, '0');
-  tlThumbLabel.textContent = `${day} ${month} · ${hour}h${minute}`;
-}
-
-function buildTimelineCities(cities, totalEntries) {
-  if (!tlCitiesRow) {
-    console.warn('buildTimelineCities: `timeline-cities-row` not found in DOM');
-    return;
-  }
-  tlCitiesRow.innerHTML = '';
-  let escaleCities = [];
-  let escaleTicked = new Set();
-  if (window.escales && Array.isArray(window.escales)) {
-    escaleCities = window.escales.map(e => (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, ''));
-  }
-  cities.filter(c => c.entryIdx != null).forEach(c => {
-    const cname = (c.name || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-    if (escaleCities.includes(cname)) return;
-    let pct = 0;
-    if (state.segMap) {
-      pct = state.segMap.totalUnits > 1
-        ? indexToVisualUnits(c.entryIdx, state.segMap) / (state.segMap.totalUnits - 1) * 100
-        : 0;
-    } else if (state.entryTimes && state.entryTimes.length > 1) {
-      const t = state.entryTimes[c.entryIdx];
-      const span = state.entryTimeMax - state.entryTimeMin;
-      pct = span > 0 ? ((t - state.entryTimeMin) / span) * 100 : (c.entryIdx / (totalEntries - 1)) * 100;
-    } else {
-      pct = (c.entryIdx / (totalEntries - 1)) * 100;
+  // Affiche la date de la photo (depuis caption ou entryIdx)
+  const p = photos[pi];
+  if (p) {
+    const cap = p.caption || '';
+    const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (m) {
+      const day = parseInt(m[3]);
+      const month = MONTHS_FR[parseInt(m[2])];
+      tlThumbLabel.textContent = `${day} ${month}`;
+    } else if (p.entryIdx != null && state.entries[p.entryIdx]) {
+      const e = state.entries[p.entryIdx];
+      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
     }
+  }
+}
+
+// Compat wrapper pour les appels existants par entryIdx
+function updateTimelineThumb(idx) {
+  const pi = nearestPhotoIdx(idx);
+  updateTimelineThumbByPhoto(pi);
+}
+
+function buildTimelineCities() {
+  if (!tlCitiesRow) return;
+  tlCitiesRow.innerHTML = '';
+  const photos = state.photos;
+  if (!photos || !photos.length) return;
+
+  // Helper : trouver l'index photo le plus proche d'un entryIdx
+  function photoIdxForEntryIdx(eidx) {
+    let best = 0, bestD = Infinity;
+    photos.forEach((p, i) => {
+      if (p.entryIdx == null) return;
+      const d = Math.abs(p.entryIdx - eidx);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    return best;
+  }
+
+  // Helper : trouver l'index photo le plus proche d'une date (string)
+  function photoIdxForDate(dateStr) {
+    if (!dateStr) return 0;
+    const t = new Date(dateStr).getTime();
+    let best = 0, bestD = Infinity;
+    photos.forEach((p, i) => {
+      const cap = p.caption || '';
+      const m = cap.match(/(\d{4}-\d{2}-\d{2})/);
+      if (!m) return;
+      const pt = new Date(m[1]).getTime();
+      const d = Math.abs(pt - t);
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    return best;
+  }
+
+  const escaleTicked = new Set();
+  const escaleCities = (window.escales || []).map(e =>
+    (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, ''));
+
+  // Escales d'abord (priorité visuelle)
+  (window.escales || []).forEach(e => {
+    const norm = (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+    if (escaleTicked.has(norm)) return;
+    escaleTicked.add(norm);
+    const pi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
+    const pct = Math.max(0, Math.min(100, photoIdxToPct(pi) * 100));
     const div = document.createElement('div');
-    div.className = 'tl-city-tick';
+    div.className = 'tl-city-tick tl-escale-city-tick';
     div.style.left = `${pct}%`;
-    div.innerHTML = `<div class="tick-line"></div><div class="tick-name">${c.name}</div>`;
+    div.innerHTML = `<div class="tick-line"></div><div class="tick-name">${e.city}</div>`;
     tlCitiesRow.appendChild(div);
   });
-  if (window.escales && Array.isArray(window.escales)) {
-    window.escales.forEach(e => {
-      if (e.entryIdx == null) return;
-      const escaleNameNorm = (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-      if (escaleTicked.has(escaleNameNorm)) return;
-      escaleTicked.add(escaleNameNorm);
-      let pct;
-      if (state.segMap) {
-        pct = indexToVisualUnits(e.entryIdx, state.segMap) / (state.segMap.totalUnits - 1) * 100;
-      } else if (state.entryTimes && state.entryTimes.length > 1) {
-        const t = state.entryTimes[e.entryIdx];
-        const span = state.entryTimeMax - state.entryTimeMin;
-        pct = span > 0 ? ((t - state.entryTimeMin) / span) * 100 : (e.entryIdx / (totalEntries - 1)) * 100;
-      } else {
-        pct = (e.entryIdx / (totalEntries - 1)) * 100;
-      }
-      pct = Math.max(0, Math.min(100, pct));
-      const div = document.createElement('div');
-      div.className = 'tl-city-tick tl-escale-city-tick';
-      div.style.left = `${pct}%`;
-      div.innerHTML = `<div class="tick-line"></div><div class="tick-name">${e.city}</div>`;
-      tlCitiesRow.appendChild(div);
-    });
-  }
 }
 
 // ── Non-linear segment timeline ──────────────────────────────────────
@@ -577,7 +565,7 @@ function previewAtTime(t) {
   const ip = interpolatePosition(t);
   if (!ip) return;
   try { showRing([ip.lat, ip.lon]); } catch (e) { /* ignore */ }
-  updateTimelineThumbForTime(t);
+  updateTimelineThumb(ip.idx != null ? ip.idx : timeToIndex(t));
 }
 
 function scrollCarouselTo(pi, smooth = false) {
@@ -606,8 +594,33 @@ function selectPhotoEntry(photo, skipCarousel) {
     if (!map.getBounds().contains([photo.lat, photo.lon])) {
       map.panTo([photo.lat, photo.lon], { animate: true, duration: 0.4 });
     }
+  } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+    const e = state.entries[photo.entryIdx];
+    showRing([e.lat, e.lon]);
+    if (!map.getBounds().contains([e.lat, e.lon])) {
+      map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
+    }
   }
-  if (photo.entryIdx != null) selectEntry(photo.entryIdx, skipCarousel);
+  // Update slider to this photo's index
+  const pi = state.photos.indexOf(photo);
+  if (pi >= 0) {
+    tlInput.value = pi;
+    updateTimelineThumbByPhoto(pi);
+    if (!skipCarousel) scrollCarouselTo(pi, true);
+    // Update date display from photo
+    const cap = photo.caption || '';
+    const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (m) {
+      if (dateDay)   dateDay.textContent   = parseInt(m[3]);
+      if (dateMonth) dateMonth.textContent = MONTHS_FR[parseInt(m[2])];
+      if (dateTime)  dateTime.textContent  = '';
+    } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+      const e = state.entries[photo.entryIdx];
+      if (dateDay)   dateDay.textContent   = e.day;
+      if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
+      if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
+    }
+  }
 }
 
 function selectEntry(idx, skipCarousel, skipSlider) {
@@ -617,7 +630,8 @@ function selectEntry(idx, skipCarousel, skipSlider) {
   state.activeIdx = idx;
 
   showRing([e.lat, e.lon]);
-  if (!skipCarousel) scrollCarouselTo(nearestPhotoIdx(idx), true);
+  const pi = nearestPhotoIdx(idx);
+  if (!skipCarousel) scrollCarouselTo(pi, true);
   if (!map.getBounds().contains([e.lat, e.lon])) {
     map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
   }
@@ -627,15 +641,9 @@ function selectEntry(idx, skipCarousel, skipSlider) {
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
   if (!skipSlider) {
-    if (state.segMap) {
-      tlInput.value = indexToVisualUnits(idx, state.segMap);
-    } else if (state.entryTimes && state.entryTimes[idx] != null) {
-      tlInput.value = state.entryTimes[idx];
-    } else {
-      tlInput.value = idx;
-    }
+    tlInput.value = pi;
   }
-  updateTimelineThumb(idx);
+  updateTimelineThumbByPhoto(pi);
 }
 
 // ── Init ───────────────────────────────────────────────────────────────
@@ -666,7 +674,7 @@ async function init() {
     console.error('Impossible de charger les données', err);
     return;
   }
-  if (!entries.length) return;
+  if (!entries.length && !photos.length) return;
 
   // ── Timeline Base Line ──
   function renderTimelineBaseLine() {
@@ -689,26 +697,18 @@ async function init() {
     base.style.pointerEvents = 'none';
   }
 
-  // ── Timeline Escale Highlights ──
+  // ── Timeline Escale Highlights (photo-index based) ──
   function renderTimelineEscales(escales) {
     const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !escales || !escales.length) return;
+    if (!wrap || !escales || !escales.length || !state.photos.length) return;
     Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
 
     const BAR_W = 0.008; // largeur en fraction du slider
 
     escales.forEach(e => {
-      if (e.entryIdx == null) return;
-      let pct;
-      if (state.segMap) {
-        pct = indexToVisualUnits(e.entryIdx, state.segMap) / (state.segMap.totalUnits - 1);
-      } else if (state.entryTimes && state.entryTimes.length > 1) {
-        const span = state.entryTimeMax - state.entryTimeMin;
-        pct = span > 0 ? (state.entryTimes[e.entryIdx] - state.entryTimeMin) / span : 0;
-      } else {
-        pct = state.entries.length > 1 ? e.entryIdx / (state.entries.length - 1) : 0;
-      }
-      pct = Math.max(0, Math.min(1, pct));
+      const pi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
+      if (pi < 0) return;
+      const pct = Math.max(0, Math.min(1, photoIdxToPct(pi)));
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
@@ -726,32 +726,25 @@ async function init() {
   // ── Date separators on timeline (barres verticales mois/année) ──
   function renderTimelineDateBars() {
     const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !entries.length) return;
+    if (!wrap || !state.photos.length) return;
     wrap.querySelectorAll('.tl-date-bar').forEach(el => el.remove());
 
-    // Détecter les changements de mois dans les entries
+    // Détecter les changements de mois dans les photos (triées par date via caption YYYY-MM-DD)
     const MONTHS_SHORT = ['','Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
     let lastMonth = -1;
     const dateBars = [];
-    entries.forEach((e, i) => {
-      const key = e.year * 100 + e.month;
+    state.photos.forEach((p, i) => {
+      const m = (p.caption || '').match(/^(\d{4})-(\d{2})/);
+      if (!m) return;
+      const key = Number(m[1]) * 100 + Number(m[2]);
       if (key !== lastMonth) {
         lastMonth = key;
-        dateBars.push({ idx: i, label: `${MONTHS_SHORT[e.month]} ${String(e.year).slice(2)}` });
+        dateBars.push({ pi: i, label: `${MONTHS_SHORT[Number(m[2])]} ${m[1].slice(2)}` });
       }
     });
 
     dateBars.forEach(db => {
-      let pct;
-      if (state.segMap) {
-        pct = state.segMap.totalUnits > 1
-          ? indexToVisualUnits(db.idx, state.segMap) / (state.segMap.totalUnits - 1) * 100 : 0;
-      } else if (state.entryTimes && state.entryTimes.length > 1) {
-        const span = state.entryTimeMax - state.entryTimeMin;
-        pct = span > 0 ? (state.entryTimes[db.idx] - state.entryTimeMin) / span * 100 : 0;
-      } else {
-        pct = entries.length > 1 ? db.idx / (entries.length - 1) * 100 : 0;
-      }
+      const pct = Math.max(0, Math.min(100, photoIdxToPct(db.pi) * 100));
 
       const bar = document.createElement('div');
       bar.className = 'tl-date-bar';
@@ -998,51 +991,39 @@ async function init() {
     }).addTo(map);
   });
 
-  // Update timeline edge labels
-  if (entries.length > 0) {
-    const first = entries[0];
-    const last  = entries[entries.length - 1];
+  // Update timeline edge labels from photos
+  if (state.photos.length > 0) {
     const startEl = document.getElementById('tl-label-start');
     const endEl   = document.getElementById('tl-label-end');
-    if (startEl) startEl.textContent = `${first.day} ${MONTHS_FR[first.month]}`;
-    if (endEl)   endEl.textContent   = `${last.day} ${MONTHS_FR[last.month]}`;
+    const labelFromCaption = (cap) => {
+      const m = (cap || '').match(/(\d{4})-(\d{2})-(\d{2})/);
+      return m ? `${parseInt(m[3])} ${MONTHS_FR[parseInt(m[2])]}` : '';
+    };
+    if (startEl) startEl.textContent = labelFromCaption(state.photos[0].caption);
+    if (endEl)   endEl.textContent   = labelFromCaption(state.photos[state.photos.length - 1].caption);
   }
 
-  // ── Timeline setup ──
-  state.segMap = buildSegmentMap(entries, state.entryTimes);
-  if (state.segMap) {
-    buildSegmentTrack(state.segMap);
-    tlInput.min   = 0;
-    tlInput.max   = state.segMap.totalUnits - 1;
-    tlInput.step  = 1;
-    tlInput.value = 0;
-  } else if (state.entryTimes && state.entryTimes.length > 1) {
-    tlInput.min   = state.entryTimeMin;
-    tlInput.max   = state.entryTimeMax;
-    tlInput.step  = 60000;
-    tlInput.value = state.entryTimeMin;
-  } else {
-    tlInput.min   = 0;
-    tlInput.max   = entries.length - 1;
-    tlInput.step  = 1;
-    tlInput.value = 0;
-  }
+  // ── Timeline setup (photo-index based) ──
+  // Keep segMap for visual track display only
+  state.segMap = entries.length ? buildSegmentMap(entries, state.entryTimes) : null;
+  if (state.segMap) buildSegmentTrack(state.segMap);
 
-  // Start on a random entry with photos
-  const photoEntryIndices = [...new Set(photos.map(p => p.entryIdx).filter(i => i != null))];
-  const startIdx = photoEntryIndices.length > 0
-    ? photoEntryIndices[Math.floor(Math.random() * photoEntryIndices.length)]
-    : 0;
-  if (state.segMap) {
-    tlInput.value = indexToVisualUnits(startIdx, state.segMap);
-  } else if (state.entryTimes && state.entryTimes.length > 1) {
-    tlInput.value = state.entryTimes[startIdx];
-  } else {
-    tlInput.value = startIdx;
-  }
-  updateTimelineThumb(startIdx);
-  setTimeout(() => selectEntry(startIdx), 0);
-  buildTimelineCities(visited, entries.length);
+  // Slider = photo index 0 .. N-1
+  const nPhotos = state.photos.length;
+  tlInput.min   = 0;
+  tlInput.max   = Math.max(0, nPhotos - 1);
+  tlInput.step  = 1;
+  tlInput.value = 0;
+
+  // Start on a random photo
+  const startPi = nPhotos > 0 ? Math.floor(Math.random() * nPhotos) : 0;
+  tlInput.value = startPi;
+  updateTimelineThumbByPhoto(startPi);
+  setTimeout(() => {
+    if (nPhotos > 0) selectPhotoEntry(state.photos[startPi], false);
+    else if (entries.length) selectEntry(0);
+  }, 0);
+  buildTimelineCities();
 
   // ── Animation timeline ──
   let autoSlideRAF = null;
@@ -1065,18 +1046,18 @@ async function init() {
 
   tlInput.addEventListener('input', () => {
     cancelAutoSlide();
-    if (state.segMap) {
-      const idx = visualUnitsToIndex(Number(tlInput.value), state.segMap);
-      updateTimelineThumb(idx);
-      selectEntry(idx, false, true);
-    } else if (state.entryTimes && state.entryTimes.length > 1) {
-      const t = Number(tlInput.value);
-      previewAtTime(t);
-      updateTimelineThumbForTime(t);
-    } else {
-      const idx = Number(tlInput.value);
-      updateTimelineThumb(idx);
-      selectEntry(idx, false, true);
+    const pi = Number(tlInput.value);
+    updateTimelineThumbByPhoto(pi);
+    scrollCarouselTo(pi);
+    // Show photo position on map
+    const photo = state.photos[pi];
+    if (photo) {
+      if (photo.lat != null && photo.lon != null) {
+        try { showRing([photo.lat, photo.lon]); } catch(e) {}
+      } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+        const e = state.entries[photo.entryIdx];
+        try { showRing([e.lat, e.lon]); } catch(e2) {}
+      }
     }
   });
 
@@ -1085,60 +1066,10 @@ async function init() {
   });
 
   tlInput.addEventListener('change', () => {
-    // Quand on lâche le slider, snap vers la photo la plus proche avec animation
-    let currentIdx;
-    if (state.segMap) {
-      currentIdx = visualUnitsToIndex(Number(tlInput.value), state.segMap);
-    } else if (state.entryTimes && state.entryTimes.length > 1) {
-      currentIdx = timeToIndex(Number(tlInput.value));
-    } else {
-      currentIdx = Number(tlInput.value);
-    }
-
-    // Cherche la prochaine photo APRÈS la position, sinon la dernière avant
-    if (mediaEntries.size === 0) { selectEntry(currentIdx); return; }
-    let bestIdx = null, bestDist = Infinity;
-    // D'abord chercher en avant
-    for (const i of mediaEntries) {
-      if (i >= currentIdx && (i - currentIdx) < bestDist) {
-        bestDist = i - currentIdx; bestIdx = i;
-      }
-    }
-    // Si rien devant, chercher en arrière
-    if (bestIdx === null) {
-      for (const i of mediaEntries) {
-        if (i < currentIdx && (currentIdx - i) < bestDist) {
-          bestDist = currentIdx - i; bestIdx = i;
-        }
-      }
-    }
-    if (bestIdx === null) { selectEntry(currentIdx); return; }
-
-    if (state.segMap) {
-      const from = Number(tlInput.value);
-      const to   = indexToVisualUnits(bestIdx, state.segMap);
-      if (from === to) { selectEntry(bestIdx); return; }
-      animateToTime(from, to, 2000,
-        (val) => {
-          const v = Math.round(val);
-          tlInput.value = v;
-          const idx = visualUnitsToIndex(v, state.segMap);
-          updateTimelineThumb(idx);
-          selectEntry(idx, false, true);
-        },
-        () => selectEntry(bestIdx)
-      );
-    } else if (state.entryTimes && state.entryTimes.length > 1) {
-      const t      = Number(tlInput.value);
-      const target = state.entryTimes[bestIdx];
-      if (t === target) { selectEntry(bestIdx); return; }
-      animateToTime(t, target, 2000,
-        (val) => { const v = Math.round(val); tlInput.value = v; previewAtTime(v); updateTimelineThumbForTime(v); },
-        () => selectEntry(bestIdx)
-      );
-    } else {
-      selectEntry(bestIdx);
-    }
+    // Slider = photo index, on relâche → sélectionner la photo
+    const pi = Math.round(Number(tlInput.value));
+    const photo = state.photos[pi];
+    if (photo) selectPhotoEntry(photo, false);
   });
 
   // ── Nav buttons (navigate between photo-bearing entries) ──
