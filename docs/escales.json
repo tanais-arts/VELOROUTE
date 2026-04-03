@@ -606,5 +606,13 @@
     "duration_h": 1,
     "lat": 46.90749,
     "lon": 4.74978
+  },
+  {
+    "city": "Neuvy-sur-Barangeon",
+    "start": "2025-11-11T13:19",
+    "end": "2025-11-11T13:19",
+    "duration_h": 0,
+    "lat": 46.90749,
+    "lon": 4.74978
   }
 ]
