@@ -10,19 +10,22 @@ SERVICE_NAME="vlr-server"
 LOGFILE="$SCRIPTDIR/server.log"
 PIDFILE="$SCRIPTDIR/server.pid"
 
-echo ""
-echo "╔══════════════════════════════════════════════════╗"
-echo "║    VLR-server (port 1666)                        ║"
-echo "╚══════════════════════════════════════════════════╝"
-echo ""
-echo "  1) Installer et configurer (première fois)"
-echo "  2) Changer le mot de passe admin"
-echo "  3) Démarrer le serveur"
-echo "  4) Arrêter le serveur"
-echo "  5) Afficher les logs (Ctrl+C pour quitter)"
-echo ""
-read -rp "Choix (1-5) : " CHOICE
-echo ""
+show_menu() {
+  echo ""
+  echo "╔══════════════════════════════════════════════════╗"
+  echo "║    VLR-server (port 1666)                        ║"
+  echo "╚══════════════════════════════════════════════════╝"
+  echo ""
+  echo "  1) Installer et configurer (première fois)"
+  echo "  2) Changer le mot de passe admin"
+  echo "  3) Démarrer le serveur"
+  echo "  4) Arrêter le serveur"
+  echo "  5) Afficher les logs (Ctrl+C pour quitter)"
+  echo "  0) Quitter"
+  echo ""
+  read -rp "Choix (0-5) : " CHOICE
+  echo ""
+}
 
 # ── Vérifie Node.js ───────────────────────────────────────────────────
 require_node() {
@@ -52,7 +55,9 @@ env_set() {
 }
 
 # ═══════════════════════════════════════════════════════════════════════
-case "$CHOICE" in
+while true; do
+  show_menu
+  case "$CHOICE" in
 
 # ── 1) Installation ────────────────────────────────────────────────────
 1)
@@ -134,23 +139,25 @@ EOF
 
   echo ""
   echo "✅ Installation terminée !"
-  echo "   Lancez ce script et choisissez '3' pour démarrer le serveur."
+  echo "   Choisissez '3' pour démarrer le serveur."
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 
 # ── 2) Changer mot de passe ────────────────────────────────────────────
 2)
-  [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && exit 1
+  [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && read -rp "Entrée…" && continue
   setup_password
   echo ""
   echo "Redémarrage du serveur pour prendre en compte le nouveau mot de passe..."
   bash "$0" <<< "4" 2>/dev/null || true
   sleep 1
   bash "$0" <<< "3" 2>/dev/null || true
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 
 # ── 3) Démarrer ─────────────────────────────────────────────────────────
 3)
-  [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && exit 1
+  [ ! -f "$ENV_FILE" ] && echo "⚠  .env introuvable — lancez d'abord l'installation (option 1)." && read -rp "Entrée…" && continue
 
   # systemd en priorité
   if command -v systemctl >/dev/null 2>&1 && systemctl is-enabled "$SERVICE_NAME" 2>/dev/null | grep -q "enabled"; then
@@ -176,6 +183,7 @@ EOF
       echo "⚠  Le serveur ne semble pas s'être lancé. Vérifiez : $LOGFILE"
     fi
   fi
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 
 # ── 4) Arrêter ──────────────────────────────────────────────────────────
@@ -192,6 +200,7 @@ EOF
   else
     echo "Aucun serveur en cours d'exécution trouvé."
   fi
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 
 # ── 5) Logs ─────────────────────────────────────────────────────────────
@@ -204,11 +213,18 @@ EOF
     tail -100f "$LOGFILE"
   else
     echo "Aucun fichier de log trouvé."
+    read -rp "   Appuyez sur Entrée pour revenir au menu…"
   fi
+  ;;
+
+0)
+  echo "Au revoir."
+  exit 0
   ;;
 
 *)
   echo "Choix invalide."
-  exit 1
+  read -rp "   Appuyez sur Entrée pour revenir au menu…"
   ;;
 esac
+done
