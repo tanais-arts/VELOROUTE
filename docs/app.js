@@ -347,6 +347,19 @@ function photoIdxToPct(pi) {
   return n > 1 ? pi / (n - 1) : 0;
 }
 
+// Retourne "HHhMM" depuis photoMs (EXIF) ou entryIdx GPX en fallback
+function photoTimeStr(p) {
+  if (p.photoMs != null) {
+    const d = new Date(p.photoMs);
+    return `${d.getUTCHours()}h${String(d.getUTCMinutes()).padStart(2,'0')}`;
+  }
+  if (p.entryIdx != null && state.entries[p.entryIdx]) {
+    const e = state.entries[p.entryIdx];
+    return `${e.hour}h${String(e.minute).padStart(2,'0')}`;
+  }
+  return '';
+}
+
 function updateTimelineThumbByPhoto(pi) {
   const photos = state.photos;
   if (!photos || !photos.length) return;
@@ -357,24 +370,19 @@ function updateTimelineThumbByPhoto(pi) {
   // Move visible cursor
   const cursor = document.getElementById('tl-cursor');
   if (cursor) cursor.style.left = pctStr;
-  // Affiche la date de la photo (depuis caption ou entryIdx)
+  // Affiche la date + heure de la photo
   const p = photos[pi];
   if (p) {
     const cap = p.caption || '';
     const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
+    const t = photoTimeStr(p);
     if (m) {
       const day = parseInt(m[3]);
       const month = MONTHS_FR[parseInt(m[2])];
-      // Include time from entryIdx if available
-      let timeStr = '';
-      if (p.entryIdx != null && state.entries[p.entryIdx]) {
-        const e = state.entries[p.entryIdx];
-        timeStr = ` · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
-      }
-      tlThumbLabel.textContent = `${day} ${month}${timeStr}`;
+      tlThumbLabel.textContent = t ? `${day} ${month} · ${t}` : `${day} ${month}`;
     } else if (p.entryIdx != null && state.entries[p.entryIdx]) {
       const e = state.entries[p.entryIdx];
-      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
+      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]}${t ? ' · ' + t : ''}`;
     }
   }
 }
@@ -420,10 +428,6 @@ function buildTimelineCities() {
   const photos = state.photos;
   if (!photos || !photos.length) return;
 
-  const dateMin = new Date((photos[0].caption || '').slice(0, 10)).getTime();
-  const dateMax = new Date((photos[photos.length - 1].caption || '').slice(0, 10)).getTime();
-  if (dateMax === dateMin) return;
-
   const escaleTicked = new Set();
 
   (window.escales || []).forEach(e => {
@@ -431,9 +435,8 @@ function buildTimelineCities() {
     if (escaleTicked.has(norm)) return;
     escaleTicked.add(norm);
     if (!e.start) return;
-    const t = new Date(e.start).getTime();
-    if (isNaN(t)) return;
-    const pct = Math.max(0, Math.min(100, (t - dateMin) / (dateMax - dateMin) * 100));
+    const pi = photoIdxForDate(e.start);
+    const pct = photoIdxToPct(pi) * 100;
     const div = document.createElement('div');
     div.className = 'tl-city-tick tl-escale-city-tick';
     div.style.left = `${pct}%`;
@@ -623,21 +626,16 @@ function selectPhotoEntry(photo, skipCarousel) {
     // Update date display from photo
     const cap = photo.caption || '';
     const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
+    const t = photoTimeStr(photo);
     if (m) {
       if (dateDay)   dateDay.textContent   = parseInt(m[3]);
       if (dateMonth) dateMonth.textContent = MONTHS_FR[parseInt(m[2])];
-      // Show time from GPX entry if available
-      if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
-        const e = state.entries[photo.entryIdx];
-        if (dateTime) dateTime.textContent = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
-      } else {
-        if (dateTime) dateTime.textContent = '';
-      }
+      if (dateTime)  dateTime.textContent  = t;
     } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
       const e = state.entries[photo.entryIdx];
       if (dateDay)   dateDay.textContent   = e.day;
       if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
-      if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
+      if (dateTime)  dateTime.textContent  = t;
     }
   }
 }
@@ -723,17 +721,13 @@ async function init() {
     Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
 
     if (!state.photos.length) return;
-    const dateMin = new Date((state.photos[0].caption || '').slice(0, 10)).getTime();
-    const dateMax = new Date((state.photos[state.photos.length - 1].caption || '').slice(0, 10)).getTime();
-    if (dateMax === dateMin) return;
 
     const BAR_W = 0.008;
 
     escales.forEach(e => {
       if (!e.start) return;
-      const t = new Date(e.start).getTime();
-      if (isNaN(t)) return;
-      const pct = Math.max(0, Math.min(1, (t - dateMin) / (dateMax - dateMin)));
+      const pi = photoIdxForDate(e.start);
+      const pct = photoIdxToPct(pi);
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
@@ -827,11 +821,9 @@ async function init() {
     const dm = cap.match(/^(\d{4})-(\d{2})-(\d{2})/);
     let labelText = '';
     if (dm) {
+      const t = photoTimeStr(p);
       labelText = `${parseInt(dm[3])} ${MONTHS_SHORT[parseInt(dm[2])]}`;
-      if (p.entryIdx != null && state.entries[p.entryIdx]) {
-        const e = state.entries[p.entryIdx];
-        labelText += ` ${e.hour}h${String(e.minute).padStart(2,'0')}`;
-      }
+      if (t) labelText += ` ${t}`;
     }
 
     const img = document.createElement('img');
@@ -908,18 +900,6 @@ async function init() {
   assignEntryIdxByPos(visited);
   assignEntryIdxByTime(escales.filter(e => e.start != null));
   window.escales = escales; // exposé après assignEntryIdx (entryIdx disponibles)
-
-  // Pour les photos sans entryIdx mais avec GPS, trouver l'entrée la plus proche par position
-  state.photos.forEach(p => {
-    if (p.entryIdx != null) return;
-    if (p.lat == null || p.lon == null) return;
-    let best = 0, bestD = Infinity;
-    entries.forEach((e, i) => {
-      const d = (e.lat - p.lat) ** 2 + (e.lon - p.lon) ** 2;
-      if (d < bestD) { bestD = d; best = i; }
-    });
-    p.entryIdx = best;
-  });
 
   // ── Route polylines ──
   const findNearestEntry = (latlng) => {

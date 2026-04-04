@@ -782,6 +782,16 @@ function nearestEntryIdx(photoMs) {
   return bestDiff <= MATCH_MAX_MS ? best : null;
 }
 
+function nearestEntryIdxByPos(lat, lon) {
+  if (!travelEntries.length) return null;
+  let best = 0, bestD = Infinity;
+  travelEntries.forEach((e, i) => {
+    const d = (e.lat - lat) ** 2 + (e.lon - lon) ** 2;
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  return best;
+}
+
 // ── Photo URL helpers ─────────────────────────────────────────────────
 const CDN_BASE = 'https://hub.studios-voa.com:1666/files';
 function buildUrl(filename, type) {
@@ -832,12 +842,21 @@ function matchPhotosToTravel() {
   let maxDiffMin = 0;
   let matchedCount = 0;
   rawPhotos.forEach(p => {
-    if (p.photoMs != null) {
+    if (p.lat != null && p.lon != null) {
+      // Photo avec GPS EXIF → match par position (précis, pas besoin de GPX)
+      p.entryIdx = nearestEntryIdxByPos(p.lat, p.lon);
+      if (p.entryIdx != null) matchedCount++;
+    } else if (p.photoMs != null) {
+      // Pas de GPS EXIF → match par temps sur le GPX
       p.entryIdx = nearestEntryIdx(p.photoMs);
       if (p.entryIdx != null) {
         matchedCount++;
         const diff = Math.abs(entryToMs(travelEntries[p.entryIdx]) - p.photoMs);
         if (diff > maxDiffMin) maxDiffMin = diff;
+        // Pas de GPS → on emprunte les coordonnées du point GPX
+        const e = travelEntries[p.entryIdx];
+        p.lat = e.lat;
+        p.lon = e.lon;
       }
     }
   });
@@ -857,7 +876,7 @@ function matchPhotosToTravel() {
 
 function buildPhotoEntries() {
   photoEntries = rawPhotos
-    .filter(p => p.photoMs != null)
+    .filter(p => p.photoMs != null && (p.lat != null || p.entryIdx != null))
     .sort((a, b) => a.photoMs - b.photoMs)
     .map(p => {
       const name = p.type === 'video' ? p.file.name : jpgName(p.file.name);
@@ -867,6 +886,7 @@ function buildPhotoEntries() {
         src_orig: buildUrl(p.file.name, 'Sources'),
         entryIdx: p.entryIdx,
         caption:  p.captionDate || '',
+        photoMs:  p.photoMs,
         ...(p.lat != null && p.lon != null ? { lat: +p.lat.toFixed(5), lon: +p.lon.toFixed(5) } : {}),
         ...(p.type === 'video' ? { type: 'video' } : {}),
       };
