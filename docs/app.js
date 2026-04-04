@@ -341,8 +341,30 @@ document.getElementById('lightbox-prev').addEventListener('click', () => { if (s
 document.getElementById('lightbox-next').addEventListener('click', () => { if (state.lbIdx < state.lbPhotos.length - 1) { state.lbIdx++; lbShowCurrent(); } });
 
 // ── Timeline ───────────────────────────────────────────────────────────
-// Timeline basée sur les PHOTOS : slider = index photo 0..N-1
+// Timeline basée sur le TEMPS : slider = ms UTC, curseur proportionnel au temps réel
+
+function timeToPct(ms) {
+  const tMin = state.tMin, tMax = state.tMax;
+  if (!tMin || tMax === tMin) return 0;
+  return Math.max(0, Math.min(1, (ms - tMin) / (tMax - tMin)));
+}
+
+function timeToPhotoIdx(ms) {
+  const times = state.photoTimes;
+  if (!times || !times.length) return 0;
+  let best = 0, bestD = Infinity;
+  times.forEach((t, i) => {
+    if (t == null) return;
+    const d = Math.abs(t - ms);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  return best;
+}
+
+// Compat : index photo → pourcentage (via temps)
 function photoIdxToPct(pi) {
+  const t = state.photoTimes?.[pi];
+  if (t != null) return timeToPct(t);
   const n = state.photos.length;
   return n > 1 ? pi / (n - 1) : 0;
 }
@@ -364,9 +386,11 @@ function updateTimelineThumbByPhoto(pi) {
   const photos = state.photos;
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
-  const pct = photoIdxToPct(pi);
+  const t = state.photoTimes?.[pi];
+  const pct = t != null ? timeToPct(t) : pi / Math.max(1, photos.length - 1);
   const pctStr = `${pct * 100}%`;
   tlThumbLabel.style.left = pctStr;
+  if (t != null) tlInput.value = t;
   // Move visible cursor
   const cursor = document.getElementById('tl-cursor');
   if (cursor) cursor.style.left = pctStr;
@@ -408,18 +432,7 @@ function photoIdxForEntryIdx(eidx) {
 // Helper : trouver l'index photo le plus proche d'une date (string)
 function photoIdxForDate(dateStr) {
   if (!dateStr) return 0;
-  const photos = state.photos;
-  const t = new Date(dateStr).getTime();
-  let best = 0, bestD = Infinity;
-  photos.forEach((p, i) => {
-    const cap = p.caption || '';
-    const m = cap.match(/(\d{4}-\d{2}-\d{2})/);
-    if (!m) return;
-    const pt = new Date(m[1]).getTime();
-    const d = Math.abs(pt - t);
-    if (d < bestD) { bestD = d; best = i; }
-  });
-  return best;
+  return timeToPhotoIdx(new Date(dateStr).getTime());
 }
 
 function buildTimelineCities() {
@@ -435,8 +448,9 @@ function buildTimelineCities() {
     if (escaleTicked.has(norm)) return;
     escaleTicked.add(norm);
     if (!e.start) return;
-    const pi = photoIdxForDate(e.start);
-    const pct = photoIdxToPct(pi) * 100;
+    const t = new Date(e.start).getTime();
+    if (isNaN(t)) return;
+    const pct = timeToPct(t) * 100;
     const div = document.createElement('div');
     div.className = 'tl-city-tick tl-escale-city-tick';
     div.style.left = `${pct}%`;
@@ -617,10 +631,11 @@ function selectPhotoEntry(photo, skipCarousel) {
       map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
     }
   }
-  // Update slider to this photo's index
+  // Update slider to this photo's ms time
   const pi = state.photos.indexOf(photo);
   if (pi >= 0) {
-    tlInput.value = pi;
+    const photoT = state.photoTimes?.[pi];
+    if (photoT != null) tlInput.value = photoT;
     updateTimelineThumbByPhoto(pi);
     if (!skipCarousel) scrollCarouselTo(pi, true);
     // Update date display from photo
@@ -658,7 +673,8 @@ function selectEntry(idx, skipCarousel, skipSlider) {
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
   if (!skipSlider) {
-    tlInput.value = pi;
+    const photoT = state.photoTimes?.[pi];
+    if (photoT != null) tlInput.value = photoT;
   }
   updateTimelineThumbByPhoto(pi);
 }
@@ -726,8 +742,9 @@ async function init() {
 
     escales.forEach(e => {
       if (!e.start) return;
-      const pi = photoIdxForDate(e.start);
-      const pct = photoIdxToPct(pi);
+      const t = new Date(e.start).getTime();
+      if (isNaN(t)) return;
+      const pct = timeToPct(t);
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
@@ -801,6 +818,16 @@ async function init() {
   state.entryTimeMin  = Math.min(...state.entryTimes);
   state.entryTimeMax  = Math.max(...state.entryTimes);
 
+  // Temps réel de chaque photo (ms UTC) — pour positionnement proportionnel sur la timeline
+  state.photoTimes = state.photos.map(p => {
+    if (p.photoMs != null) return p.photoMs;
+    const m = (p.caption || '').match(/(\d{4})-(\d{2})-(\d{2})/);
+    if (m) return Date.UTC(+m[1], +m[2] - 1, +m[3], 12, 0, 0); // midi UTC si pas de photoMs
+    return null;
+  });
+  state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
+  state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
+
   // ── Carousel scroll → sync slider ──
   let carouselScrollTimer = null;
   carousel.addEventListener('scroll', () => {
@@ -809,7 +836,6 @@ async function init() {
       const pi = Math.round(carousel.scrollLeft / THUMB_STEP);
       const clamped = Math.max(0, Math.min(pi, state.photos.length - 1));
       if (clamped !== state.activePhotoIdx) {
-        tlInput.value = clamped;
         updateTimelineThumbByPhoto(clamped);
         selectPhotoEntry(state.photos[clamped], true);
       }
@@ -1037,21 +1063,21 @@ async function init() {
     if (endEl)   endEl.textContent   = labelFromCaption(state.photos[state.photos.length - 1].caption);
   }
 
-  // ── Timeline setup (photo-index based) ──
-  // Keep segMap for visual track display only
+  // ── Timeline setup (temps réel) ──
   state.segMap = entries.length ? buildSegmentMap(entries, state.entryTimes) : null;
   if (state.segMap) buildSegmentTrack(state.segMap);
 
-  // Slider = photo index 0 .. N-1
+  // Slider = ms UTC (tMin .. tMax)
   const nPhotos = state.photos.length;
-  tlInput.min   = 0;
-  tlInput.max   = Math.max(0, nPhotos - 1);
-  tlInput.step  = 1;
-  tlInput.value = 0;
+  tlInput.min   = state.tMin || 0;
+  tlInput.max   = state.tMax || Math.max(0, nPhotos - 1);
+  tlInput.step  = 60000; // 1 minute
+  tlInput.value = state.tMin || 0;
 
   // Start on a random photo
   const startPi = nPhotos > 0 ? Math.floor(Math.random() * nPhotos) : 0;
-  tlInput.value = startPi;
+  const startT  = state.photoTimes?.[startPi];
+  if (startT != null) tlInput.value = startT;
   updateTimelineThumbByPhoto(startPi);
   setTimeout(() => {
     if (nPhotos > 0) selectPhotoEntry(state.photos[startPi], false);
@@ -1080,10 +1106,15 @@ async function init() {
 
   tlInput.addEventListener('input', () => {
     cancelAutoSlide();
-    const pi = Number(tlInput.value);
+    const t = Number(tlInput.value);
+    const pi = timeToPhotoIdx(t);
+    // Curseur à la position temps (pas photo index)
+    const pct = timeToPct(t) * 100;
+    const cursor = document.getElementById('tl-cursor');
+    if (cursor) cursor.style.left = `${pct}%`;
+    tlThumbLabel.style.left = `${pct}%`;
     updateTimelineThumbByPhoto(pi);
     scrollCarouselTo(pi);
-    // Show photo position on map
     const photo = state.photos[pi];
     if (photo) {
       if (photo.lat != null && photo.lon != null) {
@@ -1099,34 +1130,40 @@ async function init() {
     renderTimelineEscales(escales);
   });
 
-  // Helper: find the photo index of the nearest escale (closest to pi, in either direction)
-  function snapToEscaleRight(pi) {
+  // Helper: trouve le ms de l'escale la plus proche du temps courant
+  function snapToEscaleRight(currentMs) {
     const esc = state.escales || [];
-    if (!esc.length) return pi;
-    let bestPi = -1, bestDist = Infinity;
+    if (!esc.length) return currentMs;
+    let bestMs = null, bestDist = Infinity;
     esc.forEach(e => {
       if (!e.start) return;
-      const epi = photoIdxForDate(e.start);
-      const dist = Math.abs(epi - pi);
-      if (dist < bestDist) { bestDist = dist; bestPi = epi; }
+      const t = new Date(e.start).getTime();
+      if (isNaN(t)) return;
+      const dist = Math.abs(t - currentMs);
+      if (dist < bestDist) { bestDist = dist; bestMs = t; }
     });
-    return bestPi >= 0 ? bestPi : pi;
+    return bestMs != null ? bestMs : currentMs;
   }
 
   tlInput.addEventListener('change', () => {
-    const pi = Math.round(Number(tlInput.value));
-    const snapped = snapToEscaleRight(pi);
+    const currentMs = Number(tlInput.value);
+    const snappedMs = snapToEscaleRight(currentMs);
     const wrap = document.getElementById('timeline-slider-wrap');
     if (wrap) wrap.classList.remove('dragging');
-    animateToTime(pi, snapped, 2000,
+    animateToTime(currentMs, snappedMs, 2000,
       val => {
-        const v = Math.round(val);
-        tlInput.value = v;
-        updateTimelineThumbByPhoto(v);
-        scrollCarouselTo(v);
+        tlInput.value = Math.round(val);
+        const pi = timeToPhotoIdx(val);
+        const pct = timeToPct(val) * 100;
+        const cursor = document.getElementById('tl-cursor');
+        if (cursor) cursor.style.left = `${pct}%`;
+        tlThumbLabel.style.left = `${pct}%`;
+        updateTimelineThumbByPhoto(pi);
+        scrollCarouselTo(pi);
       },
       () => {
-        const photo = state.photos[snapped];
+        const pi = timeToPhotoIdx(snappedMs);
+        const photo = state.photos[pi];
         if (photo) selectPhotoEntry(photo, false);
       }
     );
