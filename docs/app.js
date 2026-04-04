@@ -909,6 +909,18 @@ async function init() {
   assignEntryIdxByTime(escales.filter(e => e.start != null));
   window.escales = escales; // exposé après assignEntryIdx (entryIdx disponibles)
 
+  // Pour les photos sans entryIdx mais avec GPS, trouver l'entrée la plus proche par position
+  state.photos.forEach(p => {
+    if (p.entryIdx != null) return;
+    if (p.lat == null || p.lon == null) return;
+    let best = 0, bestD = Infinity;
+    entries.forEach((e, i) => {
+      const d = (e.lat - p.lat) ** 2 + (e.lon - p.lon) ** 2;
+      if (d < bestD) { bestD = d; best = i; }
+    });
+    p.entryIdx = best;
+  });
+
   // ── Route polylines ──
   const findNearestEntry = (latlng) => {
     let best = 0, bestD = Infinity;
