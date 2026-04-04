@@ -876,7 +876,7 @@ function matchPhotosToTravel() {
 
 function buildPhotoEntries() {
   photoEntries = rawPhotos
-    .filter(p => p.photoMs != null && (p.lat != null || p.entryIdx != null))
+    .filter(p => p.photoMs != null)
     .sort((a, b) => a.photoMs - b.photoMs)
     .map(p => {
       const name = p.type === 'video' ? p.file.name : jpgName(p.file.name);
