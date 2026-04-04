@@ -1084,22 +1084,17 @@ async function init() {
     renderTimelineEscales(escales);
   });
 
-  // Helper: find the photo index of the nearest escale at or after pi
+  // Helper: find the photo index of the nearest escale (closest to pi, in either direction)
   function snapToEscaleRight(pi) {
     const esc = state.escales || [];
     if (!esc.length) return pi;
     let bestPi = -1, bestDist = Infinity;
     esc.forEach(e => {
-      const epi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
-      if (epi >= pi && (epi - pi) < bestDist) { bestDist = epi - pi; bestPi = epi; }
+      if (!e.start) return;
+      const epi = photoIdxForDate(e.start);
+      const dist = Math.abs(epi - pi);
+      if (dist < bestDist) { bestDist = dist; bestPi = epi; }
     });
-    // If nothing to the right, snap to the last escale
-    if (bestPi < 0) {
-      esc.forEach(e => {
-        const epi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
-        if (epi > bestPi) bestPi = epi;
-      });
-    }
     return bestPi >= 0 ? bestPi : pi;
   }
 
