@@ -351,7 +351,7 @@ function timeToPct(ms) {
   return Math.max(0, Math.min(1, (ms - t0) / (t1 - t0)));
 }
 
-// Redessine curseur + escales + labels selon la fenêtre courante
+// Redessine curseur + escales + labels + photo dots selon la fenêtre courante
 function refreshTimeline() {
   // Curseur
   const curMs = Number(tlInput.value);
@@ -362,6 +362,23 @@ function refreshTimeline() {
   // Marqueurs et labels
   buildTimelineCities();
   renderTimelineEscales(state.escales);
+  renderTimelinePhotoDots();
+}
+
+function renderTimelinePhotoDots() {
+  const wrap = document.getElementById('timeline-slider-wrap');
+  if (!wrap) return;
+  Array.from(wrap.querySelectorAll('.tl-photo-dot')).forEach(el => el.remove());
+  const t0 = state.tlWindow?.t0 ?? state.tMin;
+  const t1 = state.tlWindow?.t1 ?? state.tMax;
+  state.photoTimes.forEach(t => {
+    if (t == null || t < t0 || t > t1) return;
+    const pct = timeToPct(t) * 100;
+    const dot = document.createElement('div');
+    dot.className = 'tl-photo-dot';
+    dot.style.left = `${pct}%`;
+    wrap.appendChild(dot);
+  });
 }
 
 function timeToPhotoIdx(ms) {
@@ -1100,9 +1117,9 @@ async function init() {
     else if (entries.length) selectEntry(0);
   }, 0);
   buildTimelineCities();
+  renderTimelinePhotoDots();
 
-  // ── Zoom timeline (wheel + pinch) ──
-  const tlWrap = document.getElementById('timeline-wrap');
+  // ── Zoom timeline (wheel + pinch) ──  const tlWrap = document.getElementById('timeline-wrap');
 
   function applyZoom(pivotMs, factor) {
     const w = state.tlWindow;
@@ -1138,9 +1155,11 @@ async function init() {
   let lastPinchMidMs = null;
   tlWrap.addEventListener('touchstart', (ev) => {
     if (ev.touches.length === 2) {
+      // Annuler tout drag en cours au profit du pinch
+      if (tlDrag) { tlDrag = null; tlSliderWrap.classList.remove('dragging'); }
       const t = ev.touches;
       lastPinchDist = Math.abs(t[0].clientX - t[1].clientX);
-      const rect = tlWrap.getBoundingClientRect();
+      const rect = tlSliderWrap.getBoundingClientRect();
       const midX = (t[0].clientX + t[1].clientX) / 2;
       const frac = Math.max(0, Math.min(1, (midX - rect.left) / rect.width));
       lastPinchMidMs = state.tlWindow.t0 + frac * (state.tlWindow.t1 - state.tlWindow.t0);
@@ -1185,28 +1204,6 @@ async function init() {
     autoSlideRAF = requestAnimationFrame(step);
   }
 
-  tlInput.addEventListener('input', () => {
-    cancelAutoSlide();
-    const t = Number(tlInput.value);
-    const pi = timeToPhotoIdx(t);
-    // Curseur à la position temps (pas photo index)
-    const pct = timeToPct(t) * 100;
-    const cursor = document.getElementById('tl-cursor');
-    if (cursor) cursor.style.left = `${pct}%`;
-    tlThumbLabel.style.left = `${pct}%`;
-    updateTimelineThumbByPhoto(pi);
-    scrollCarouselTo(pi);
-    const photo = state.photos[pi];
-    if (photo) {
-      if (photo.lat != null && photo.lon != null) {
-        try { showRing([photo.lat, photo.lon]); } catch(e) {}
-      } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
-        const e = state.entries[photo.entryIdx];
-        try { showRing([e.lat, e.lon]); } catch(e2) {}
-      }
-    }
-  });
-
   // Helper: trouve le ms de l'escale la plus proche du temps courant
   function snapToEscaleRight(currentMs) {
     const esc = state.escales || [];
@@ -1222,42 +1219,89 @@ async function init() {
     return bestMs != null ? bestMs : currentMs;
   }
 
-  tlInput.addEventListener('change', () => {
-    const currentMs = Number(tlInput.value);
-    const snappedMs = snapToEscaleRight(currentMs);
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.remove('dragging');
-    animateToTime(currentMs, snappedMs, 2000,
-      val => {
-        tlInput.value = Math.round(val);
-        const pi = timeToPhotoIdx(val);
-        const pct = timeToPct(val) * 100;
-        const cursor = document.getElementById('tl-cursor');
-        if (cursor) cursor.style.left = `${pct}%`;
-        tlThumbLabel.style.left = `${pct}%`;
-        updateTimelineThumbByPhoto(pi, true);
-        scrollCarouselTo(pi);
-      },
-      () => {
-        const pi = timeToPhotoIdx(snappedMs);
-        const photo = state.photos[pi];
-        if (photo) selectPhotoEntry(photo, false);
-      }
-    );
+  // ── Interaction timeline : seek + pan (pointer events unifiés) ──
+  const tlSliderWrap = document.getElementById('timeline-slider-wrap');
+
+  function clientXtoMs(clientX) {
+    const rect = tlSliderWrap.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const { t0, t1 } = state.tlWindow;
+    return t0 + frac * (t1 - t0);
+  }
+
+  function updateCursorAt(ms) {
+    const pct = timeToPct(ms) * 100;
+    const cursor = document.getElementById('tl-cursor');
+    if (cursor) cursor.style.left = `${pct}%`;
+    tlThumbLabel.style.left = `${pct}%`;
+  }
+
+  let tlDrag = null; // { startX, startT0, startT1, currentMs, isPan }
+
+  tlSliderWrap.addEventListener('pointerdown', (ev) => {
+    if (ev.button !== 0) return;
+    cancelAutoSlide();
+    tlSliderWrap.setPointerCapture(ev.pointerId);
+    const ms = clientXtoMs(ev.clientX);
+    tlDrag = { startX: ev.clientX, startT0: state.tlWindow.t0, startT1: state.tlWindow.t1, currentMs: ms, isPan: false };
+    tlSliderWrap.classList.add('dragging');
+    updateCursorAt(ms);
+    updateTimelineThumbByPhoto(timeToPhotoIdx(ms), true);
   });
 
-  // Show thumb label during touch drag
-  tlInput.addEventListener('touchstart', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.add('dragging');
-  }, { passive: true });
-  tlInput.addEventListener('mousedown', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.add('dragging');
+  tlSliderWrap.addEventListener('pointermove', (ev) => {
+    if (!tlDrag) return;
+    const dx = ev.clientX - tlDrag.startX;
+    if (!tlDrag.isPan && Math.abs(dx) > 6) tlDrag.isPan = true;
+    if (tlDrag.isPan) {
+      tlSliderWrap.style.cursor = 'grabbing';
+      const rect = tlSliderWrap.getBoundingClientRect();
+      const span = tlDrag.startT1 - tlDrag.startT0;
+      const dMs = -(dx / rect.width) * span;
+      let t0 = tlDrag.startT0 + dMs;
+      let t1 = tlDrag.startT1 + dMs;
+      if (t0 < state.tMin) { t0 = state.tMin; t1 = t0 + span; }
+      if (t1 > state.tMax) { t1 = state.tMax; t0 = t1 - span; }
+      state.tlWindow = { t0, t1 };
+      tlInput.min = t0; tlInput.max = t1;
+      refreshTimeline();
+    } else {
+      const ms = clientXtoMs(ev.clientX);
+      tlDrag.currentMs = ms;
+      updateCursorAt(ms);
+      updateTimelineThumbByPhoto(timeToPhotoIdx(ms), true);
+    }
   });
-  document.addEventListener('mouseup', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.remove('dragging');
+
+  tlSliderWrap.addEventListener('pointerup', (ev) => {
+    if (!tlDrag) return;
+    const { isPan, currentMs } = tlDrag;
+    tlDrag = null;
+    tlSliderWrap.classList.remove('dragging');
+    tlSliderWrap.style.cursor = '';
+    if (!isPan) {
+      tlInput.value = currentMs;
+      const snappedMs = snapToEscaleRight(currentMs);
+      animateToTime(currentMs, snappedMs, 2000,
+        val => {
+          tlInput.value = Math.round(val);
+          const pi = timeToPhotoIdx(val);
+          updateCursorAt(val);
+          updateTimelineThumbByPhoto(pi, true);
+          scrollCarouselTo(pi);
+        },
+        () => {
+          const pi = timeToPhotoIdx(snappedMs);
+          const photo = state.photos[pi];
+          if (photo) selectPhotoEntry(photo, false);
+        }
+      );
+    }
+  });
+
+  tlSliderWrap.addEventListener('pointercancel', () => {
+    tlDrag = null;
+    tlSliderWrap.classList.remove('dragging');
   });
 
   // ── Nav buttons (navigate between photo-bearing entries) ──
