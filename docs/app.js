@@ -387,28 +387,23 @@ function updateTimelineThumbByPhoto(pi) {
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
   const t = state.photoTimes?.[pi];
-  const pct = t != null ? timeToPct(t) : pi / Math.max(1, photos.length - 1);
-  const pctStr = `${pct * 100}%`;
-  tlThumbLabel.style.left = pctStr;
-  if (t != null) tlInput.value = t;
-  // Move visible cursor
-  const cursor = document.getElementById('tl-cursor');
-  if (cursor) cursor.style.left = pctStr;
   // Affiche la date + heure de la photo
   const p = photos[pi];
   if (p) {
     const cap = p.caption || '';
     const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
-    const t = photoTimeStr(p);
+    const tStr = photoTimeStr(p);
     if (m) {
       const day = parseInt(m[3]);
       const month = MONTHS_FR[parseInt(m[2])];
-      tlThumbLabel.textContent = t ? `${day} ${month} · ${t}` : `${day} ${month}`;
+      tlThumbLabel.textContent = tStr ? `${day} ${month} · ${tStr}` : `${day} ${month}`;
     } else if (p.entryIdx != null && state.entries[p.entryIdx]) {
       const e = state.entries[p.entryIdx];
-      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]}${t ? ' · ' + t : ''}`;
+      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]}${tStr ? ' · ' + tStr : ''}`;
     }
   }
+  // Move scroll track so this photo's time is under the fixed cursor
+  if (t != null && typeof window._tlSeekToMs === 'function') window._tlSeekToMs(t);
 }
 
 // Compat wrapper pour les appels existants par entryIdx
@@ -538,7 +533,7 @@ function buildSegmentTrack(segMap) {
 }
 
 // ── Carousel ───────────────────────────────────────────────────────────
-const THUMB_STEP = 124;
+const THUMB_STEP = 114; // 110px + 4px gap
 
 function nearestPhotoIdx(entryIdx) {
   const photos = state.photos;
@@ -634,8 +629,6 @@ function selectPhotoEntry(photo, skipCarousel) {
   // Update slider to this photo's ms time
   const pi = state.photos.indexOf(photo);
   if (pi >= 0) {
-    const photoT = state.photoTimes?.[pi];
-    if (photoT != null) tlInput.value = photoT;
     updateTimelineThumbByPhoto(pi);
     if (!skipCarousel) scrollCarouselTo(pi, true);
     // Update date display from photo
@@ -672,10 +665,6 @@ function selectEntry(idx, skipCarousel, skipSlider) {
   if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
-  if (!skipSlider) {
-    const photoT = state.photoTimes?.[pi];
-    if (photoT != null) tlInput.value = photoT;
-  }
   updateTimelineThumbByPhoto(pi);
 }
 
@@ -755,7 +744,7 @@ async function init() {
 
       const tick = document.createElement('div');
       tick.className = 'tl-escale-city-tick';
-      tick.style.cssText = `position:absolute;left:${pct}%;top:50%;transform:translateY(-50%);pointer-events:none;z-index:3`;
+      tick.style.cssText = `position:absolute;left:${pct}%;top:50%;transform:translateX(-50%);pointer-events:none;z-index:3`;
 
       const line = document.createElement('div');
       line.className = 'tick-line';
@@ -787,23 +776,19 @@ async function init() {
     }
   }
 
-  // ── Day separators and photo dots REMOVED ──
-  // Only escale cities are shown on the timeline now.
+  // ── Day separators and photo dots ──
+  // Rendered inside renderScrollTrack (scroll-track architecture)
 
   setTimeout(() => {
-    renderTimelineBaseLine();
-    renderTimelineEscales(escales);
+    renderScrollTrack();
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
   function refreshTimeline() {
-    tlInput.max = state.tMax || Math.max(0, state.photos.length - 1);
-    renderTimelineBaseLine();
-    renderTimelineEscales(state.escales);
+    renderScrollTrack();
   }
   window._refreshTimeline = refreshTimeline;
-  window._refreshTimelineEscales = () =>
-    renderTimelineEscales(state.escales);
+  window._refreshTimelineEscales = () => renderScrollTrack();
 
   // Normalise les URLs photos :
   //  1. Migre les anciennes URLs pCloud (filedn.com) vers hub.studios-voa.com:1666/files
@@ -1079,27 +1064,211 @@ async function init() {
     if (endEl)   endEl.textContent   = labelFromCaption(state.photos[state.photos.length - 1].caption);
   }
 
-  // ── Timeline setup (temps réel) ──
+  // ── Timeline setup (temps réel, track scrollable) ──
   state.segMap = entries.length ? buildSegmentMap(entries, state.entryTimes) : null;
-  if (state.segMap) buildSegmentTrack(state.segMap);
 
-  // Slider = ms UTC (tMin .. tMax)
   const nPhotos = state.photos.length;
-  tlInput.min   = state.tMin || 0;
-  tlInput.max   = state.tMax || Math.max(0, nPhotos - 1);
-  tlInput.step  = 60000; // 1 minute
-  tlInput.value = state.tMin || 0;
+  const tlWrap = document.getElementById('timeline-slider-wrap');
 
-  // Start on a random photo
+  // Pixels per ms — total track width = container width * scale factor
+  // We compute dynamically from container width on render
+  const TL_PX_PER_DAY = 40; // 40px per day visually
+  const MS_PER_DAY    = 86400000;
+  const totalMs       = (state.tMax || 0) - (state.tMin || 0);
+  const totalDays     = totalMs / MS_PER_DAY;
+
+  // Current timeline time (ms), centered under cursor
+  let tlCurrentMs = state.tMin || 0;
+
+  function tlTrackWidth() {
+    return Math.round(totalDays * TL_PX_PER_DAY);
+  }
+  function msToPx(ms) {
+    if (!totalMs) return 0;
+    return ((ms - state.tMin) / totalMs) * tlTrackWidth();
+  }
+  function pxToMs(px) {
+    if (!tlTrackWidth()) return state.tMin;
+    return state.tMin + (px / tlTrackWidth()) * totalMs;
+  }
+
+  // Build the scroll track once
+  let tlTrack = document.getElementById('tl-scroll-track');
+  if (!tlTrack) {
+    tlTrack = document.createElement('div');
+    tlTrack.id = 'tl-scroll-track';
+    tlWrap.appendChild(tlTrack);
+  }
+
+  function renderScrollTrack() {
+    if (!tlWrap || !tlTrack) return;
+    const W = tlTrackWidth();
+    const halfWrap = tlWrap.offsetWidth / 2;
+    tlTrack.style.width = W + 'px';
+
+    tlTrack.innerHTML = '';
+
+    // Base line
+    const base = document.createElement('div');
+    base.className = 'tl-base-line';
+    tlTrack.appendChild(base);
+
+    // Photo dots
+    state.photoTimes.forEach(t => {
+      if (t == null) return;
+      const x = msToPx(t);
+      const dot = document.createElement('div');
+      dot.className = 'tl-photo-dot';
+      dot.style.left = `${x}px`;
+      tlTrack.appendChild(dot);
+    });
+
+    // Escale ticks
+    (state.escales || []).forEach(e => {
+      if (!e.start) return;
+      const t = new Date(e.start).getTime();
+      if (isNaN(t)) return;
+      const x = msToPx(t);
+
+      const tick = document.createElement('div');
+      tick.className = 'tl-escale-city-tick';
+      tick.style.cssText = `position:absolute;left:${x}px;top:50%;transform:translateX(-50%);pointer-events:none;z-index:3`;
+
+      const line = document.createElement('div');
+      line.className = 'tick-line';
+      tick.appendChild(line);
+
+      const name = document.createElement('div');
+      name.className = 'tick-name';
+      name.textContent = e.city;
+      tick.appendChild(name);
+
+      tlTrack.appendChild(tick);
+    });
+
+    // Date labels at start and end of track
+    if (state.tMin && state.tMax) {
+      const fmt = ms => {
+        const d = new Date(ms);
+        return `${d.getUTCDate()} ${MONTHS_FR[d.getUTCMonth() + 1]}`;
+      };
+      const s = document.createElement('div');
+      s.id = 'tl-date-start';
+      s.style.cssText = `position:absolute;left:0;top:calc(50% + 7px);font-size:0.52rem;letter-spacing:0.06em;font-weight:600;color:rgba(240,192,96,0.55);text-transform:uppercase;white-space:nowrap;pointer-events:none;z-index:5`;
+      s.textContent = fmt(state.tMin);
+      tlTrack.appendChild(s);
+
+      const eEl = document.createElement('div');
+      eEl.id = 'tl-date-end';
+      eEl.style.cssText = `position:absolute;right:0;top:calc(50% + 7px);font-size:0.52rem;letter-spacing:0.06em;font-weight:600;color:rgba(240,192,96,0.55);text-transform:uppercase;white-space:nowrap;pointer-events:none;z-index:5`;
+      eEl.textContent = fmt(state.tMax);
+      tlTrack.appendChild(eEl);
+    }
+
+    // Position track so tlCurrentMs is under center
+    setTrackOffset(tlCurrentMs);
+  }
+
+  function setTrackOffset(ms) {
+    if (!tlTrack || !tlWrap) return;
+    const halfWrap = tlWrap.offsetWidth / 2;
+    const x = msToPx(ms);
+    tlTrack.style.left = `${halfWrap - x}px`;
+  }
+
+  // Expose track-offset mover for use by updateTimelineThumbByPhoto (no recursion)
+  window._tlSeekToMs = ms => setTrackOffset(ms);
+
+  function seekToMs(ms) {
+    const clamped = Math.max(state.tMin, Math.min(state.tMax, ms));
+    tlCurrentMs = clamped;
+    setTrackOffset(clamped);
+    const pi = timeToPhotoIdx(clamped);
+    scrollCarouselTo(pi);
+    const photo = state.photos[pi];
+    if (photo) {
+      if (photo.lat != null && photo.lon != null) {
+        try { showRing([photo.lat, photo.lon]); } catch(e) {}
+      } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+        const e = state.entries[photo.entryIdx];
+        try { showRing([e.lat, e.lon]); } catch(e2) {}
+      }
+    }
+  }
+
+  // ── Pointer/touch drag on timeline ──
+  let tlDrag = null;
+  tlWrap.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    tlWrap.setPointerCapture(e.pointerId);
+    tlWrap.classList.add('dragging');
+    cancelAutoSlide();
+    tlDrag = { startX: e.clientX, startMs: tlCurrentMs };
+  });
+  tlWrap.addEventListener('pointermove', e => {
+    if (!tlDrag) return;
+    const dx = e.clientX - tlDrag.startX;
+    const dms = -(dx / tlTrackWidth()) * totalMs;
+    seekToMs(tlDrag.startMs + dms, false);
+  });
+  const endDrag = e => {
+    if (!tlDrag) return;
+    tlWrap.classList.remove('dragging');
+    tlDrag = null;
+    // Snap to nearest escale
+    const snappedMs = snapToEscaleMs(tlCurrentMs);
+    if (snappedMs !== tlCurrentMs) {
+      animateToTime(tlCurrentMs, snappedMs, 1500,
+        val => seekToMs(val, false),
+        () => { const pi = timeToPhotoIdx(snappedMs); const photo = state.photos[pi]; if (photo) selectPhotoEntry(photo, false); }
+      );
+    } else {
+      const pi = timeToPhotoIdx(tlCurrentMs);
+      const photo = state.photos[pi];
+      if (photo) selectPhotoEntry(photo, false);
+    }
+  };
+  tlWrap.addEventListener('pointerup', endDrag);
+  tlWrap.addEventListener('pointercancel', endDrag);
+
+  // ── Wheel scroll on timeline ──
+  tlWrap.addEventListener('wheel', e => {
+    e.preventDefault();
+    cancelAutoSlide();
+    const dms = (e.deltaY + e.deltaX) * MS_PER_DAY / 80;
+    seekToMs(tlCurrentMs + dms, false);
+  }, { passive: false });
+
+  function snapToEscaleMs(currentMs) {
+    const esc = state.escales || [];
+    if (!esc.length) return currentMs;
+    let bestMs = null, bestDist = Infinity;
+    esc.forEach(e => {
+      if (!e.start) return;
+      const t = new Date(e.start).getTime();
+      if (isNaN(t)) return;
+      const dist = Math.abs(t - currentMs);
+      if (dist < bestDist) { bestDist = dist; bestMs = t; }
+    });
+    // Only snap if within 2 days
+    return (bestMs != null && bestDist < 2 * MS_PER_DAY) ? bestMs : currentMs;
+  }
+
+  // Start position
   const startPi = nPhotos > 0 ? Math.floor(Math.random() * nPhotos) : 0;
-  const startT  = state.photoTimes?.[startPi];
-  if (startT != null) tlInput.value = startT;
-  updateTimelineThumbByPhoto(startPi);
+  tlCurrentMs = state.photoTimes?.[startPi] || state.tMin || 0;
   setTimeout(() => {
+    renderScrollTrack();
+    updateTimelineThumbByPhoto(startPi);
     if (nPhotos > 0) selectPhotoEntry(state.photos[startPi], false);
     else if (entries.length) selectEntry(0);
   }, 0);
-  buildTimelineCities();
+
+  window.addEventListener('resize', () => {
+    renderScrollTrack();
+  });
+
+  buildTimelineCities(); // still used for the hidden cities-row if needed
 
   // ── Animation timeline ──
   let autoSlideRAF = null;
@@ -1119,85 +1288,6 @@ async function init() {
     cancelAutoSlide();
     autoSlideRAF = requestAnimationFrame(step);
   }
-
-  tlInput.addEventListener('input', () => {
-    cancelAutoSlide();
-    const t = Number(tlInput.value);
-    const pi = timeToPhotoIdx(t);
-    // Curseur à la position temps (pas photo index)
-    const pct = timeToPct(t) * 100;
-    const cursor = document.getElementById('tl-cursor');
-    if (cursor) cursor.style.left = `${pct}%`;
-    tlThumbLabel.style.left = `${pct}%`;
-    updateTimelineThumbByPhoto(pi);
-    scrollCarouselTo(pi);
-    const photo = state.photos[pi];
-    if (photo) {
-      if (photo.lat != null && photo.lon != null) {
-        try { showRing([photo.lat, photo.lon]); } catch(e) {}
-      } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
-        const e = state.entries[photo.entryIdx];
-        try { showRing([e.lat, e.lon]); } catch(e2) {}
-      }
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    renderTimelineEscales(escales);
-  });
-
-  // Helper: trouve le ms de l'escale la plus proche du temps courant
-  function snapToEscaleRight(currentMs) {
-    const esc = state.escales || [];
-    if (!esc.length) return currentMs;
-    let bestMs = null, bestDist = Infinity;
-    esc.forEach(e => {
-      if (!e.start) return;
-      const t = new Date(e.start).getTime();
-      if (isNaN(t)) return;
-      const dist = Math.abs(t - currentMs);
-      if (dist < bestDist) { bestDist = dist; bestMs = t; }
-    });
-    return bestMs != null ? bestMs : currentMs;
-  }
-
-  tlInput.addEventListener('change', () => {
-    const currentMs = Number(tlInput.value);
-    const snappedMs = snapToEscaleRight(currentMs);
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.remove('dragging');
-    animateToTime(currentMs, snappedMs, 2000,
-      val => {
-        tlInput.value = Math.round(val);
-        const pi = timeToPhotoIdx(val);
-        const pct = timeToPct(val) * 100;
-        const cursor = document.getElementById('tl-cursor');
-        if (cursor) cursor.style.left = `${pct}%`;
-        tlThumbLabel.style.left = `${pct}%`;
-        updateTimelineThumbByPhoto(pi);
-        scrollCarouselTo(pi);
-      },
-      () => {
-        const pi = timeToPhotoIdx(snappedMs);
-        const photo = state.photos[pi];
-        if (photo) selectPhotoEntry(photo, false);
-      }
-    );
-  });
-
-  // Show thumb label during touch drag
-  tlInput.addEventListener('touchstart', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.add('dragging');
-  }, { passive: true });
-  tlInput.addEventListener('mousedown', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.add('dragging');
-  });
-  document.addEventListener('mouseup', () => {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) wrap.classList.remove('dragging');
-  });
 
   // ── Nav buttons (navigate between photo-bearing entries) ──
   function debounce(fn, ms) {
