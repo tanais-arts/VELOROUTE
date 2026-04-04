@@ -4450,5 +4450,14 @@
     "caption": "2026-03-04",
     "lat": 48.86482,
     "lon": 2.35963
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_3760.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_3760.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_3760.jpeg",
+    "entryIdx": null,
+    "caption": "2026-04-01",
+    "lat": 48.77291,
+    "lon": 2.377
   }
 ]
