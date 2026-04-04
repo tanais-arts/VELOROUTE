@@ -498,6 +498,8 @@ function scrollCarouselTo(pi, smooth = false) {
     }
   }
   state.activePhotoIdx = pi;
+  const scrubber = document.getElementById('carousel-scrubber');
+  if (scrubber) scrubber.value = pi;
 }
 
 // ── Select entry ──────────────────────────────────────────────────────
@@ -732,13 +734,15 @@ async function init() {
     });
   }, { root: carousel, rootMargin: '0px 4000px 0px 4000px' });
 
-  // ── Carousel scroll → sync slider ──
+  // ── Carousel scroll → sync slider + scrubber ──
   let carouselScrollTimer = null;
   carousel.addEventListener('scroll', () => {
     if (carouselScrollTimer) clearTimeout(carouselScrollTimer);
     carouselScrollTimer = setTimeout(() => {
       const pi = Math.round(carousel.scrollLeft / THUMB_STEP);
       const clamped = Math.max(0, Math.min(pi, state.photos.length - 1));
+      const scrubber = document.getElementById('carousel-scrubber');
+      if (scrubber) scrubber.value = clamped;
       if (clamped !== state.activePhotoIdx) {
         updateTimelineThumbByPhoto(clamped);
         selectPhotoEntry(state.photos[clamped], true);
@@ -802,6 +806,18 @@ async function init() {
   } else {
     console.warn('photo-carousel element not found');
     state.thumbEls = [];
+  }
+
+  // ── Scrubber carousel ──
+  const scrubber = document.getElementById('carousel-scrubber');
+  if (scrubber && state.photos.length) {
+    scrubber.max = state.photos.length - 1;
+    scrubber.value = 0;
+    scrubber.addEventListener('input', () => {
+      const pi = Number(scrubber.value);
+      scrollCarouselTo(pi, false);
+      selectPhotoEntry(state.photos[pi], true);
+    });
   }
 
   // Nearest entryIdx for each city / escale
