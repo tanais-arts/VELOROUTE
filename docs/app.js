@@ -1070,26 +1070,28 @@ async function init() {
   const nPhotos = state.photos.length;
   const tlWrap = document.getElementById('timeline-slider-wrap');
 
-  // Pixels per ms — total track width = container width * scale factor
-  // We compute dynamically from container width on render
-  const TL_PX_PER_DAY = 40; // 40px per day visually
-  const MS_PER_DAY    = 86400000;
-  const totalMs       = (state.tMax || 0) - (state.tMin || 0);
-  const totalDays     = totalMs / MS_PER_DAY;
+  // Zoom : 10 jours visibles sur toute la largeur du conteneur
+  const VISIBLE_DAYS = 10;
+  const MS_PER_DAY   = 86400000;
+  const totalMs      = (state.tMax || 0) - (state.tMin || 0);
 
   // Current timeline time (ms), centered under cursor
   let tlCurrentMs = state.tMin || 0;
 
+  function tlPxPerMs() {
+    const w = tlWrap ? tlWrap.offsetWidth : 300;
+    return w / (VISIBLE_DAYS * MS_PER_DAY);
+  }
   function tlTrackWidth() {
-    return Math.round(totalDays * TL_PX_PER_DAY);
+    return Math.round(totalMs * tlPxPerMs());
   }
   function msToPx(ms) {
     if (!totalMs) return 0;
-    return ((ms - state.tMin) / totalMs) * tlTrackWidth();
+    return (ms - state.tMin) * tlPxPerMs();
   }
   function pxToMs(px) {
-    if (!tlTrackWidth()) return state.tMin;
-    return state.tMin + (px / tlTrackWidth()) * totalMs;
+    const ppm = tlPxPerMs();
+    return ppm ? state.tMin + px / ppm : state.tMin;
   }
 
   // Build the scroll track once
@@ -1208,14 +1210,30 @@ async function init() {
   tlWrap.addEventListener('pointermove', e => {
     if (!tlDrag) return;
     const dx = e.clientX - tlDrag.startX;
-    const dms = -(dx / tlTrackWidth()) * totalMs;
-    seekToMs(tlDrag.startMs + dms, false);
+    seekToMs(tlDrag.startMs - dx / tlPxPerMs(), false);
   });
   const endDrag = e => {
     if (!tlDrag) return;
     tlWrap.classList.remove('dragging');
+    const moved  = Math.abs(e.clientX - tlDrag.startX);
     tlDrag = null;
-    // Snap to nearest escale
+
+    if (moved < 5) {
+      // Clic : animer pour centrer le temps cliqué sous le curseur
+      cancelAutoSlide();
+      const rect   = tlWrap.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const target = Math.max(state.tMin, Math.min(state.tMax,
+        tlCurrentMs + (clickX - tlWrap.offsetWidth / 2) / tlPxPerMs()));
+      const from   = tlCurrentMs;
+      animateToTime(from, target, 500,
+        val => { tlCurrentMs = val; setTrackOffset(val); },
+        () => { tlCurrentMs = target; const pi = timeToPhotoIdx(target); const photo = state.photos[pi]; if (photo) selectPhotoEntry(photo, false); }
+      );
+      return;
+    }
+
+    // Fin de drag : snap vers l'escale la plus proche
     const snappedMs = snapToEscaleMs(tlCurrentMs);
     if (snappedMs !== tlCurrentMs) {
       animateToTime(tlCurrentMs, snappedMs, 1500,
@@ -1229,14 +1247,14 @@ async function init() {
     }
   };
   tlWrap.addEventListener('pointerup', endDrag);
-  tlWrap.addEventListener('pointercancel', endDrag);
+  tlWrap.addEventListener('pointercancel', e => { tlDrag = null; tlWrap.classList.remove('dragging'); });
 
   // ── Wheel scroll on timeline ──
   tlWrap.addEventListener('wheel', e => {
     e.preventDefault();
     cancelAutoSlide();
-    const dms = (e.deltaY + e.deltaX) * MS_PER_DAY / 80;
-    seekToMs(tlCurrentMs + dms, false);
+    // 1 step molette (~100 px deltaY) ≈ déplacement d'autant de px sur le track
+    seekToMs(tlCurrentMs + (e.deltaY + e.deltaX) / tlPxPerMs(), false);
   }, { passive: false });
 
   function snapToEscaleMs(currentMs) {
