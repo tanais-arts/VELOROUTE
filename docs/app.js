@@ -801,6 +801,21 @@ async function init() {
   state.entryTimeMin  = Math.min(...state.entryTimes);
   state.entryTimeMax  = Math.max(...state.entryTimes);
 
+  // ── Carousel scroll → sync slider ──
+  let carouselScrollTimer = null;
+  carousel.addEventListener('scroll', () => {
+    if (carouselScrollTimer) clearTimeout(carouselScrollTimer);
+    carouselScrollTimer = setTimeout(() => {
+      const pi = Math.round(carousel.scrollLeft / THUMB_STEP);
+      const clamped = Math.max(0, Math.min(pi, state.photos.length - 1));
+      if (clamped !== state.activePhotoIdx) {
+        tlInput.value = clamped;
+        updateTimelineThumbByPhoto(clamped);
+        selectPhotoEntry(state.photos[clamped], true);
+      }
+    }, 80);
+  }, { passive: true });
+
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
   const thumbObserver = new IntersectionObserver((entries) => {

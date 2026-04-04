@@ -1061,8 +1061,6 @@ async function handlePhotos(files, clearGrid = true) {
       const pad = n => String(n).padStart(2, '0');
       return `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
     }
-    const duration_h = Math.round((maxMs - minMs) / 3600000);
-
     // Coordonnées : priorité aux photos GPS, sinon trace GPX, sinon géocodage Nominatim
     const gpsPhotos = datedPhotos.filter(p => p.lat != null && p.lon != null);
     let avgLat = null, avgLon = null;
@@ -1098,7 +1096,7 @@ async function handlePhotos(files, clearGrid = true) {
     }
 
     const normCity = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-    const newEscale = { city: cityName, start: toLocalStr(minMs), end: toLocalStr(maxMs), duration_h,
+    const newEscale = { city: cityName, start: toLocalStr(minMs), end: toLocalStr(maxMs),
       ...(avgLat != null ? { lat: +avgLat.toFixed(5), lon: +avgLon.toFixed(5) } : {}) };
     const idx = escaleEntries.findIndex(e => normCity(e.city) === normCity(cityName));
     if (idx >= 0) escaleEntries[idx] = newEscale; else escaleEntries.push(newEscale);
@@ -1771,7 +1769,7 @@ function renderEscales() {
     inp.style.cssText = 'flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;font-size:.8rem';
     const meta = document.createElement('span');
     meta.style.cssText = 'font-size:.68rem;color:rgba(255,255,255,.35);white-space:nowrap';
-    meta.textContent = `${e.start?.slice(0,10) || ''} · ${e.duration_h || 0}h`;
+    meta.textContent = e.start?.slice(0,10) || '';
     const saveBtn = document.createElement('button');
     saveBtn.className = 'btn'; saveBtn.textContent = '✓';
     saveBtn.style.cssText = 'padding:3px 10px;font-size:.75rem';
