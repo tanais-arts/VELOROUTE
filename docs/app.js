@@ -960,13 +960,6 @@ async function init() {
     const interp = e.frame === 0;
     if (i > 0 && gapKm(entries[i - 1], e) > GAP_THRESHOLD_KM) {
       flushSeg(curInterp);
-      const prev = entries[i - 1];
-      const gap = gapRoutes.find(g =>
-        Math.abs(g.fromLatLon[0] - prev.lat) < 0.001 && Math.abs(g.fromLatLon[1] - prev.lon) < 0.001
-      );
-      const gapCoords = gap ? gap.coords : [[prev.lat, prev.lon], [e.lat, e.lon]];
-      L.polyline(gapCoords, { color: ACCENT, weight: 2, opacity: 1, dashArray: '6 6', smoothFactor: 1, pane: 'routePane' })
-        .on('click', ev => selectEntry(findNearestEntry(ev.latlng))).addTo(map);
       curSeg = [];
       curInterp = interp;
     } else if (curInterp === null) {
