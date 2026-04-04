@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="styles.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body>
 
@@ -31,20 +31,11 @@
 
   <div id="map"></div>
 
-  <!-- ── SOUND TOGGLE ── -->
-  <button id="sound-toggle" title="Activer le son" aria-label="Activer/couper le son"></button>
-
   <!-- ── PHOTO BAR ── -->
   <div id="photo-bar">
     <button class="carousel-arrow" id="carousel-prev">&#8249;</button>
     <div id="photo-carousel"></div>
     <button class="carousel-arrow" id="carousel-next">&#8249;</button>
-    <div id="photo-info">
-      <div id="date-loc"></div>
-      <div id="photo-info-date">
-        <span id="date-day"></span>&thinsp;<span id="date-month"></span><span id="date-time"></span>
-      </div>
-    </div>
   </div>
 
   <header id="title-bar">
@@ -68,11 +59,17 @@
     <div id="lb-progress"><div id="lb-progress-bar"></div></div>
   </div>
 
-  <audio id="amb-a" preload="none" loop></audio>
-  <audio id="amb-b" preload="none" loop></audio>
+  <!-- ── INFO BAS ── -->
+  <div id="photo-info">
+    <div id="date-loc"></div>
+    <div id="photo-info-date">
+      <span id="date-day"></span>&thinsp;<span id="date-month"></span><span id="date-time"></span>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script>
   <script src="https://unpkg.com/suncalc@1.9.0/suncalc.js"></script>
-  <script src="app.js?v=13"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
