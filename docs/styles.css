@@ -19,6 +19,8 @@
   font-weight: bold;
   font-size: 0.65rem;
   opacity: 1;
+  transform-origin: left bottom;
+  transform: rotate(-45deg);
 }
 .tl-escale-cover {
   position: absolute;
@@ -677,10 +679,12 @@ body.immersive #sound-toggle { display: none; }
   background: rgba(240,192,96,0.35);
 }
 .tl-city-tick .tick-name {
-  position: absolute; bottom: 2px; left: 3px;
+  position: absolute; bottom: 6px; left: 4px;
   font-size: 0.55rem; letter-spacing: 0.05em; font-weight: 600;
   color: rgba(240,192,96,0.8); text-transform: uppercase;
   white-space: nowrap;
+  transform-origin: left bottom;
+  transform: rotate(-45deg);
 }
 
 /* highlights */

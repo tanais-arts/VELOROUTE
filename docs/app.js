@@ -828,6 +828,18 @@ async function init() {
   state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
   state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
 
+  // ── Carousel ──
+  const carousel = document.getElementById('photo-carousel');
+  const thumbObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+        thumbObserver.unobserve(img);
+      }
+    });
+  }, { root: carousel, rootMargin: '0px 4000px 0px 4000px' });
+
   // ── Carousel scroll → sync slider ──
   let carouselScrollTimer = null;
   carousel.addEventListener('scroll', () => {
@@ -841,18 +853,6 @@ async function init() {
       }
     }, 80);
   }, { passive: true });
-
-  // ── Carousel ──
-  const carousel = document.getElementById('photo-carousel');
-  const thumbObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
-        thumbObserver.unobserve(img);
-      }
-    });
-  }, { root: carousel, rootMargin: '0px 4000px 0px 4000px' });
 
   const MONTHS_SHORT = ['','jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   const fragment = document.createDocumentFragment();
