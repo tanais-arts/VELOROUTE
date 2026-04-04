@@ -295,6 +295,44 @@ function photoEscaleCity(pi) {
   return best;
 }
 
+// Affiche la ville dans #date-loc : escale en priorité, sinon Nominatim sur les coords
+let _datLocReqId = 0;
+async function updateDateLoc(pi, photo) {
+  if (!dateLoc) return;
+  const city = photoEscaleCity(pi);
+  if (city) { dateLoc.textContent = city; return; }
+
+  // Résoudre les coordonnées (GPS EXIF ou point GPX)
+  let lat, lon;
+  if (photo.lat != null && photo.lon != null) {
+    lat = photo.lat; lon = photo.lon;
+  } else if (photo.entryIdx != null && state.entries?.[photo.entryIdx]) {
+    const e = state.entries[photo.entryIdx];
+    lat = e.lat; lon = e.lon;
+  }
+  if (lat == null) { dateLoc.textContent = ''; return; }
+
+  const key = `${Math.round(lat * 100) / 100},${Math.round(lon * 100) / 100}`;
+  if (lbLocCache[key]) { dateLoc.textContent = lbLocCache[key]; return; }
+
+  dateLoc.textContent = '…';
+  const reqId = ++_datLocReqId;
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+    const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+    if (reqId !== _datLocReqId) return;
+    const data = await r.json();
+    const place = data.address?.city || data.address?.town || data.address?.village ||
+                  data.address?.county || (data.display_name || '').split(',')[0].trim();
+    if (place) {
+      lbLocCache[key] = place;
+      if (reqId === _datLocReqId) dateLoc.textContent = place;
+    } else {
+      if (reqId === _datLocReqId) dateLoc.textContent = '';
+    }
+  } catch { if (reqId === _datLocReqId) dateLoc.textContent = ''; }
+}
+
 // Compat wrapper pour les appels existants par entryIdx
 function updateTimelineThumb(idx) {
   const pi = nearestPhotoIdx(idx);
@@ -522,8 +560,8 @@ function selectPhotoEntry(photo, skipCarousel) {
   if (pi >= 0) {
     updateTimelineThumbByPhoto(pi);
     if (!skipCarousel) scrollCarouselTo(pi, false);
-    // Ville / lieu
-    if (dateLoc) dateLoc.textContent = photoEscaleCity(pi);
+    // Ville / lieu (escale ou Nominatim async)
+    updateDateLoc(pi, photo);
     // Update date display from photo
     const cap = photo.caption || '';
     const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
