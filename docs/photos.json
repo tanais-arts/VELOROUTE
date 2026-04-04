@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_2104.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_2104.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_2104.HEIC",
+    "entryIdx": null,
+    "caption": "2025-05-01",
+    "photoMs": 1746112648000,
+    "lat": 49.30237,
+    "lon": -0.31367
+  }
+]
