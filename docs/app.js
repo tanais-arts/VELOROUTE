@@ -342,25 +342,7 @@ document.getElementById('lightbox-next').addEventListener('click', () => { if (s
 
 // ── Timeline ───────────────────────────────────────────────────────────
 // Timeline basée sur les PHOTOS : slider = index photo 0..N-1
-// Positionnement par JOUR : chaque jour distinct occupe un espace égal.
-function buildPhotoPositions() {
-  const photos = state.photos;
-  const n = photos.length;
-  state._dayMap = new Array(n);
-  let dayIdx = -1, lastKey = '';
-  for (let i = 0; i < n; i++) {
-    const m = (photos[i].caption || '').match(/^(\d{4}-\d{2}-\d{2})/);
-    const key = m ? m[1] : `__${i}`;
-    if (key !== lastKey) { dayIdx++; lastKey = key; }
-    state._dayMap[i] = dayIdx;
-  }
-  state._totalDays = dayIdx + 1;
-}
-
 function photoIdxToPct(pi) {
-  if (state._dayMap && state._totalDays > 1) {
-    return state._dayMap[pi] / (state._totalDays - 1);
-  }
   const n = state.photos.length;
   return n > 1 ? pi / (n - 1) : 0;
 }
@@ -395,18 +377,6 @@ function updateTimelineThumbByPhoto(pi) {
       tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
     }
   }
-  updateActiveDot(pi);
-}
-
-function updateActiveDot(pi) {
-  if (!state.dotEls || !state.dotEls.length) return;
-  if (state._activeDotPi != null && state.dotEls[state._activeDotPi]) {
-    state.dotEls[state._activeDotPi].classList.remove('active');
-  }
-  if (state.dotEls[pi]) {
-    state.dotEls[pi].classList.add('active');
-  }
-  state._activeDotPi = pi;
 }
 
 // Compat wrapper pour les appels existants par entryIdx
@@ -769,79 +739,22 @@ async function init() {
     });
   }
 
-  // ── Day separators on timeline (barres verticales à chaque nouveau jour) ──
-  function renderTimelineDayBars() {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !state.photos.length) return;
-    wrap.querySelectorAll('.tl-day-bar').forEach(el => el.remove());
-
-    const MONTHS_SHORT = ['','jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
-    let lastDay = '';
-    let lastMonth = -1;
-    state.photos.forEach((p, i) => {
-      const m = (p.caption || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
-      if (!m) return;
-      const dayKey = m[0];
-      if (dayKey === lastDay) return;
-      lastDay = dayKey;
-      const dayNum = parseInt(m[3]);
-      const monthNum = parseInt(m[2]);
-      const monthKey = Number(m[1]) * 100 + monthNum;
-      const isNewMonth = monthKey !== lastMonth;
-      if (isNewMonth) lastMonth = monthKey;
-
-      const pct = Math.max(0, Math.min(100, photoIdxToPct(i) * 100));
-      const bar = document.createElement('div');
-      bar.className = 'tl-day-bar';
-      bar.style.left = `${pct}%`;
-      const lbl = document.createElement('span');
-      lbl.className = 'tl-day-label' + (isNewMonth ? ' tl-month-label' : '');
-      lbl.textContent = isNewMonth ? `${dayNum} ${MONTHS_SHORT[monthNum]}` : `${dayNum}`;
-      bar.appendChild(lbl);
-      wrap.appendChild(bar);
-    });
-  }
-
-  // ── Photo dots on timeline ──
-  function renderTimelinePhotoDots() {
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !state.photos.length) return;
-    wrap.querySelectorAll('.tl-photo-dot').forEach(el => el.remove());
-    state.dotEls = [];
-
-    state.photos.forEach((p, i) => {
-      const pct = photoIdxToPct(i) * 100;
-      const dot = document.createElement('div');
-      dot.className = 'tl-photo-dot';
-      dot.style.left = `${pct}%`;
-      state.dotEls.push(dot);
-      wrap.appendChild(dot);
-    });
-  }
+  // ── Day separators and photo dots REMOVED ──
+  // Only escale cities are shown on the timeline now.
 
   setTimeout(() => {
     renderTimelineBaseLine();
     renderTimelineEscales(escales);
-    renderTimelineDayBars();
-    renderTimelinePhotoDots();
-    updateActiveDot(startPi);
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
   function refreshTimeline() {
-    // Recalcule positions par jour
-    buildPhotoPositions();
     // Recalcule slider range
     const n = state.photos.length;
     tlInput.max = Math.max(0, n - 1);
     // Redessine tous les éléments visuels
     renderTimelineBaseLine();
     renderTimelineEscales(state.escales);
-    renderTimelineDayBars();
-    renderTimelinePhotoDots();
-    // Met à jour le dot actif
-    const pi = Math.min(state.activePhotoIdx || 0, n - 1);
-    updateActiveDot(pi);
     // Met à jour les labels de bord
     const startEl = document.getElementById('tl-label-start');
     const endEl   = document.getElementById('tl-label-end');
@@ -874,7 +787,6 @@ async function init() {
   state.photos  = photos
     .filter(p => !p.hidden)
     .map(p => ({ ...p, src: normUrl(p.src), thumb: normUrl(p.thumb), webp: normUrl(p.webp), src_orig: normUrl(p.src_orig) }));
-  buildPhotoPositions();
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
@@ -898,8 +810,17 @@ async function init() {
     });
   }, { root: carousel, rootMargin: '0px 4000px 0px 4000px' });
 
+  const MONTHS_SHORT = ['','jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   const fragment = document.createDocumentFragment();
+  let lastThumbDay = '';
   state.photos.forEach((p, i) => {
+    // Date label text
+    const cap = p.caption || '';
+    const dm = cap.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    const dayKey = dm ? dm[0] : '';
+    const showDate = dayKey !== lastThumbDay;
+    if (dayKey) lastThumbDay = dayKey;
+
     const img = document.createElement('img');
     if (i < 10) {
       img.src = p.thumb || p.src;
@@ -910,6 +831,16 @@ async function init() {
     img.draggable = false;
     img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
 
+    // Outer wrapper with date
+    const outer = document.createElement('div');
+    outer.className = 'thumb-cell';
+    if (showDate && dm) {
+      const dateLbl = document.createElement('div');
+      dateLbl.className = 'thumb-date';
+      dateLbl.textContent = `${parseInt(dm[3])} ${MONTHS_SHORT[parseInt(dm[2])]}`;
+      outer.appendChild(dateLbl);
+    }
+
     if (p.type === 'video') {
       const wrap = document.createElement('div');
       wrap.className = 'video-thumb-wrap';
@@ -919,11 +850,12 @@ async function init() {
       badge.setAttribute('aria-hidden', 'true');
       wrap.appendChild(img);
       wrap.appendChild(badge);
-      fragment.appendChild(wrap);
+      outer.appendChild(wrap);
     } else {
       img.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
-      fragment.appendChild(img);
+      outer.appendChild(img);
     }
+    fragment.appendChild(outer);
   });
   if (carousel) {
     carousel.appendChild(fragment);
@@ -1145,17 +1077,34 @@ async function init() {
 
   window.addEventListener('resize', () => {
     renderTimelineEscales(escales);
-    renderTimelineDayBars();
-    renderTimelinePhotoDots();
-    updateActiveDot(state.activePhotoIdx || 0);
   });
 
+  // Helper: find the photo index of the nearest escale at or after pi
+  function snapToEscaleRight(pi) {
+    const esc = state.escales || [];
+    if (!esc.length) return pi;
+    let bestPi = -1, bestDist = Infinity;
+    esc.forEach(e => {
+      const epi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
+      if (epi >= pi && (epi - pi) < bestDist) { bestDist = epi - pi; bestPi = epi; }
+    });
+    // If nothing to the right, snap to the last escale
+    if (bestPi < 0) {
+      esc.forEach(e => {
+        const epi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
+        if (epi > bestPi) bestPi = epi;
+      });
+    }
+    return bestPi >= 0 ? bestPi : pi;
+  }
+
   tlInput.addEventListener('change', () => {
-    // Slider = photo index, on relâche → sélectionner la photo
     const pi = Math.round(Number(tlInput.value));
-    const photo = state.photos[pi];
+    const snapped = snapToEscaleRight(pi);
+    tlInput.value = snapped;
+    updateTimelineThumbByPhoto(snapped);
+    const photo = state.photos[snapped];
     if (photo) selectPhotoEntry(photo, false);
-    // Hide thumb label after release
     const wrap = document.getElementById('timeline-slider-wrap');
     if (wrap) wrap.classList.remove('dragging');
   });
