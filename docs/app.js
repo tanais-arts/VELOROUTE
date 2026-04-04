@@ -397,38 +397,40 @@ function updateTimelineThumb(idx) {
   updateTimelineThumbByPhoto(pi);
 }
 
+// Helper : trouver l'index photo le plus proche d'un entryIdx
+function photoIdxForEntryIdx(eidx) {
+  const photos = state.photos;
+  let best = 0, bestD = Infinity;
+  photos.forEach((p, i) => {
+    if (p.entryIdx == null) return;
+    const d = Math.abs(p.entryIdx - eidx);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  return best;
+}
+
+// Helper : trouver l'index photo le plus proche d'une date (string)
+function photoIdxForDate(dateStr) {
+  if (!dateStr) return 0;
+  const photos = state.photos;
+  const t = new Date(dateStr).getTime();
+  let best = 0, bestD = Infinity;
+  photos.forEach((p, i) => {
+    const cap = p.caption || '';
+    const m = cap.match(/(\d{4}-\d{2}-\d{2})/);
+    if (!m) return;
+    const pt = new Date(m[1]).getTime();
+    const d = Math.abs(pt - t);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  return best;
+}
+
 function buildTimelineCities() {
   if (!tlCitiesRow) return;
   tlCitiesRow.innerHTML = '';
   const photos = state.photos;
   if (!photos || !photos.length) return;
-
-  // Helper : trouver l'index photo le plus proche d'un entryIdx
-  function photoIdxForEntryIdx(eidx) {
-    let best = 0, bestD = Infinity;
-    photos.forEach((p, i) => {
-      if (p.entryIdx == null) return;
-      const d = Math.abs(p.entryIdx - eidx);
-      if (d < bestD) { bestD = d; best = i; }
-    });
-    return best;
-  }
-
-  // Helper : trouver l'index photo le plus proche d'une date (string)
-  function photoIdxForDate(dateStr) {
-    if (!dateStr) return 0;
-    const t = new Date(dateStr).getTime();
-    let best = 0, bestD = Infinity;
-    photos.forEach((p, i) => {
-      const cap = p.caption || '';
-      const m = cap.match(/(\d{4}-\d{2}-\d{2})/);
-      if (!m) return;
-      const pt = new Date(m[1]).getTime();
-      const d = Math.abs(pt - t);
-      if (d < bestD) { bestD = d; best = i; }
-    });
-    return best;
-  }
 
   const escaleTicked = new Set();
   const escaleCities = (window.escales || []).map(e =>
