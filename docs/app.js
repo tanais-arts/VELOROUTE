@@ -521,7 +521,7 @@ function selectPhotoEntry(photo, skipCarousel) {
   const pi = state.photos.indexOf(photo);
   if (pi >= 0) {
     updateTimelineThumbByPhoto(pi);
-    if (!skipCarousel) scrollCarouselTo(pi, true);
+    if (!skipCarousel) scrollCarouselTo(pi, false);
     // Ville / lieu
     if (dateLoc) dateLoc.textContent = photoEscaleCity(pi);
     // Update date display from photo
@@ -549,7 +549,7 @@ function selectEntry(idx, skipCarousel, skipSlider) {
 
   showRing([e.lat, e.lon]);
   const pi = nearestPhotoIdx(idx);
-  if (!skipCarousel) scrollCarouselTo(pi, true);
+  if (!skipCarousel) scrollCarouselTo(pi, false);
   if (!map.getBounds().contains([e.lat, e.lon])) {
     map.panTo([e.lat, e.lon], { animate: true, duration: 0.4 });
   }
