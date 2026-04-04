@@ -516,8 +516,12 @@
           <input type="text" id="esc-add-city" placeholder="ex : Bayeux" style="width:100%">
         </div>
         <div class="field" style="margin:0;flex:1;min-width:140px">
-          <label>Date</label>
-          <input type="datetime-local" id="esc-add-date" style="width:100%">
+          <label>Début</label>
+          <input type="datetime-local" id="esc-add-start" style="width:100%">
+        </div>
+        <div class="field" style="margin:0;flex:1;min-width:140px">
+          <label>Fin</label>
+          <input type="datetime-local" id="esc-add-end" style="width:100%">
         </div>
         <button class="btn" id="btn-esc-add" style="height:32px">+ Ajouter étape</button>
       </div>
@@ -1130,16 +1134,10 @@ async function handlePhotos(files, clearGrid = true) {
 // ── Résolution ville par Nominatim à l'ingestion (1 req/s, par lieu unique) ──────
 const _admLocCache = {};
 async function enrichPhotoCities() {
-  const sub = $('photo-subfolder').value.trim();
-  if (sub) {
-    // Le dossier est le nom de l'étape — on l'affecte directement à toutes les photos
-    rawPhotos.forEach(p => { p.city = sub; });
-    return;
-  }
-  // Pas de dossier : reverse geocode une fois par lieu unique (~0.01°)
+  // Reverse geocode toutes les photos avec GPS (une req par lieu unique ~0.01°, 1 req/s)
   let first = true;
   for (const p of rawPhotos) {
-    if (p.city || p.lat == null) continue;
+    if (p.lat == null) continue;
     const key = `${Math.round(p.lat * 100) / 100},${Math.round(p.lon * 100) / 100}`;
     if (_admLocCache[key]) { p.city = _admLocCache[key]; continue; }
     if (!first) await new Promise(r => setTimeout(r, 1100)); // 1 req/s Nominatim
@@ -1855,10 +1853,12 @@ function renderEscales() {
 
 // ── Ajout manuel d'escale ───────────────────────────────────────────
 $('btn-esc-add').addEventListener('click', async () => {
-  const city = $('esc-add-city').value.trim();
-  const dateVal = $('esc-add-date').value; // format: YYYY-MM-DDThh:mm
-  if (!city) { setStatus('manage-status', '⚠ Nom de ville requis', 'warn'); return; }
-  if (!dateVal) { setStatus('manage-status', '⚠ Date requise', 'warn'); return; }
+  const city     = $('esc-add-city').value.trim();
+  const startVal = $('esc-add-start').value; // YYYY-MM-DDThh:mm
+  const endVal   = $('esc-add-end').value;
+  if (!city)     { setStatus('manage-status', '⚠ Nom de ville requis', 'warn'); return; }
+  if (!startVal) { setStatus('manage-status', '⚠ Date de début requise', 'warn'); return; }
+  if (!endVal)   { setStatus('manage-status', '⚠ Date de fin requise', 'warn'); return; }
 
   // Géocodage Nominatim du nom de ville
   let lat = null, lon = null;
@@ -1877,8 +1877,8 @@ $('btn-esc-add').addEventListener('click', async () => {
   const normCity = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
   const newEscale = {
     city,
-    start: dateVal,
-    end: dateVal,
+    start: startVal,
+    end: endVal,
     duration_h: 0,
     ...(lat != null ? { lat: +lat.toFixed(5), lon: +lon.toFixed(5) } : {}),
   };
@@ -1888,8 +1888,9 @@ $('btn-esc-add').addEventListener('click', async () => {
   try {
     await commitEscalesJson();
     renderEscales();
-    $('esc-add-city').value = '';
-    $('esc-add-date').value = '';
+    $('esc-add-city').value  = '';
+    $('esc-add-start').value = '';
+    $('esc-add-end').value   = '';
     setStatus('manage-status', `✓ Étape « ${city} » ajoutée`, 'ok');
   } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
