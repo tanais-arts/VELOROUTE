@@ -1228,8 +1228,10 @@ async function commitPhotosJsonMerged() {
   if (!ghToken) { setStatus('pcloud-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
   try {
     const existing = await loadRepoJsonDirect('photos.json').catch(() => []);
-    const srcSet = new Set(photoEntries.map(p => p.src));
-    const merged = [...existing.filter(p => !srcSet.has(p.src)), ...photoEntries.map(({ _selected, ...r }) => r)];
+    // Déduplication par nom de fichier (évite doublons si même photo uploadée sous dossier différent)
+    const newEntries = photoEntries.map(({ _selected, ...r }) => r);
+    const newFnames = new Set(newEntries.map(p => p.src.split('/').pop()));
+    const merged = [...existing.filter(p => !newFnames.has(p.src.split('/').pop())), ...newEntries];
     merged.sort((a, b) => {
       const ca = a.caption || '', cb = b.caption || '';
       if (ca !== cb) return ca < cb ? -1 : 1;
@@ -1887,7 +1889,6 @@ $('photos-reset').addEventListener('click', () => {
   setStatus('photos-status', 'Réinitialisé — vous pouvez redéposer les mêmes photos');
   setStatus('pcloud-status', '');
 });
-setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
 
 // Photos drop zone — supporte fichiers individuels ET dossiers
 (function setupPhotosDrop() {
