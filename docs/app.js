@@ -140,7 +140,8 @@ function nearestNamedPlace(lat, lon) {
   return bestD < 10 ? best : null;
 }
 
-const lbLocCache = {};
+const lbLocCache = (() => { try { return JSON.parse(localStorage.getItem('lbLocCache') || '{}'); } catch { return {}; } })();
+function _saveLocCache() { try { localStorage.setItem('lbLocCache', JSON.stringify(lbLocCache)); } catch {} }
 let lbLocReqId = 0;
 
 async function updateLbLocation(item) {
@@ -170,6 +171,7 @@ async function updateLbLocation(item) {
                   data.address?.county || (data.display_name || '').split(',')[0].trim();
     if (place) {
       lbLocCache[key] = place;
+      _saveLocCache();
       if (reqId === lbLocReqId) counter.textContent = `\u{1F4CD} ${place}`;
     }
   } catch { /* keep local result */ }
@@ -295,10 +297,13 @@ function photoEscaleCity(pi) {
   return best;
 }
 
-// Affiche la ville dans #date-loc : escale en priorité, sinon Nominatim sur les coords
-let _datLocReqId = 0;
+// Affiche la ville dans #date-loc : champ city > escale > Nominatim
+let _datLocReqId = 0, _datLocTimer = 0;
 async function updateDateLoc(pi, photo) {
   if (!dateLoc) return;
+  // 1. Ville stockée dans l'entrée photo (définie à l'ingestion admin)
+  if (photo.city) { dateLoc.textContent = photo.city; return; }
+  // 2. Escale correspondante
   const city = photoEscaleCity(pi);
   if (city) { dateLoc.textContent = city; return; }
 
@@ -315,22 +320,28 @@ async function updateDateLoc(pi, photo) {
   const key = `${Math.round(lat * 100) / 100},${Math.round(lon * 100) / 100}`;
   if (lbLocCache[key]) { dateLoc.textContent = lbLocCache[key]; return; }
 
+  // Debounce : attend 350 ms de pause avant de contacter Nominatim
   dateLoc.textContent = '…';
   const reqId = ++_datLocReqId;
-  try {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
-    const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+  clearTimeout(_datLocTimer);
+  _datLocTimer = setTimeout(async () => {
     if (reqId !== _datLocReqId) return;
-    const data = await r.json();
-    const place = data.address?.city || data.address?.town || data.address?.village ||
-                  data.address?.county || (data.display_name || '').split(',')[0].trim();
-    if (place) {
-      lbLocCache[key] = place;
-      if (reqId === _datLocReqId) dateLoc.textContent = place;
-    } else {
-      if (reqId === _datLocReqId) dateLoc.textContent = '';
-    }
-  } catch { if (reqId === _datLocReqId) dateLoc.textContent = ''; }
+    try {
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+      const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
+      if (reqId !== _datLocReqId) return;
+      const data = await r.json();
+      const place = data.address?.city || data.address?.town || data.address?.village ||
+                    data.address?.county || (data.display_name || '').split(',')[0].trim();
+      if (place) {
+        lbLocCache[key] = place;
+        _saveLocCache();
+        if (reqId === _datLocReqId) dateLoc.textContent = place;
+      } else {
+        if (reqId === _datLocReqId) dateLoc.textContent = '';
+      }
+    } catch { if (reqId === _datLocReqId) dateLoc.textContent = ''; }
+  }, 350);
 }
 
 // Compat wrapper pour les appels existants par entryIdx

@@ -888,6 +888,7 @@ function buildPhotoEntries() {
         caption:  p.captionDate || '',
         photoMs:  p.photoMs,
         ...(p.lat != null && p.lon != null ? { lat: +p.lat.toFixed(5), lon: +p.lon.toFixed(5) } : {}),
+        ...(p.city ? { city: p.city } : {}),
         ...(p.type === 'video' ? { type: 'video' } : {}),
       };
     });
@@ -1047,6 +1048,7 @@ async function handlePhotos(files, clearGrid = true) {
     `✓ ${files.length} photo${files.length > 1 ? 's' : ''} — ${withDate} avec horodatage EXIF`,
     withDate > 0 ? 'ok' : 'warn');
 
+  await enrichPhotoCities();
   matchPhotosToTravel();
 
   // Enregistrer les nouveaux noms pour éviter re-upload
@@ -1122,6 +1124,36 @@ async function handlePhotos(files, clearGrid = true) {
     await uploadAndProcess();
   } else {
     await commitPhotosJsonMerged();
+  }
+}
+
+// ── Résolution ville par Nominatim à l'ingestion (1 req/s, par lieu unique) ──────
+const _admLocCache = {};
+async function enrichPhotoCities() {
+  const sub = $('photo-subfolder').value.trim();
+  if (sub) {
+    // Le dossier est le nom de l'étape — on l'affecte directement à toutes les photos
+    rawPhotos.forEach(p => { p.city = sub; });
+    return;
+  }
+  // Pas de dossier : reverse geocode une fois par lieu unique (~0.01°)
+  let first = true;
+  for (const p of rawPhotos) {
+    if (p.city || p.lat == null) continue;
+    const key = `${Math.round(p.lat * 100) / 100},${Math.round(p.lon * 100) / 100}`;
+    if (_admLocCache[key]) { p.city = _admLocCache[key]; continue; }
+    if (!first) await new Promise(r => setTimeout(r, 1100)); // 1 req/s Nominatim
+    first = false;
+    try {
+      const r = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
+        { headers: { 'Accept-Language': 'fr' } }
+      );
+      const data = await r.json();
+      const place = data.address?.city || data.address?.town || data.address?.village ||
+                    data.address?.county || '';
+      if (place) { _admLocCache[key] = place; p.city = place; }
+    } catch {}
   }
 }
 
