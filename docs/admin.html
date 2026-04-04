@@ -505,6 +505,7 @@
         <button class="btn" id="btn-ph-hide">👁 Masquer</button>
         <button class="btn danger" id="btn-ph-delete">🗑 Supprimer</button>
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
+        <button class="btn" id="btn-retro-enrich" style="margin-left:auto">🌍 Enrichir villes manquantes</button>
       </div>
       <div class="manage-photo-grid" id="manage-photo-grid"></div>
     </div>
@@ -1908,6 +1909,53 @@ $('btn-esc-add').addEventListener('click', async () => {
     setStatus('manage-status', `✓ Étape « ${city} » ajoutée`, 'ok');
   } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
+
+// ── Enrichissement rétroactif des villes sur photos.json existant ────────────
+async function retroEnrichCities() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) { setStatus('manage-status', '⚠ Token GitHub manquant', 'warn'); return; }
+
+  setStatus('manage-status', '📥 Chargement photos.json…');
+  let entries;
+  try { entries = await loadRepoJsonDirect('photos.json'); }
+  catch (e) { setStatus('manage-status', `⚠ Impossible de lire photos.json : ${e.message}`, 'warn'); return; }
+
+  const todo = entries.filter(p => !p.city && p.lat != null && p.lon != null);
+  if (!todo.length) { setStatus('manage-status', '✓ Toutes les photos ont déjà une ville', 'ok'); return; }
+
+  setStatus('manage-status', `🌍 Géocodage de ${todo.length} photo(s) sans ville… ne fermez pas la page`);
+  let done = 0, first = true;
+  for (const p of todo) {
+    const key = `${Math.round(p.lat * 100) / 100},${Math.round(p.lon * 100) / 100}`;
+    let place = _admLocCache[key];
+    if (!place) {
+      if (!first) await new Promise(r => setTimeout(r, 1100));
+      first = false;
+      try {
+        const r = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
+          { headers: { 'Accept-Language': 'fr' } }
+        );
+        const data = await r.json();
+        place = data.address?.city || data.address?.town || data.address?.village ||
+                data.address?.county || '';
+        if (place) _admLocCache[key] = place;
+      } catch {}
+    }
+    if (place) p.city = place;
+    done++;
+    setStatus('manage-status', `🌍 Géocodage ${done}/${todo.length}… ne fermez pas la page`);
+  }
+
+  setStatus('manage-status', 'Commit photos.json…');
+  try {
+    await githubPutFile('docs/photos.json', JSON.stringify(entries, null, 2),
+      `admin: enrichissement villes (${todo.length} photo(s))`, ghToken);
+    setStatus('manage-status', `✓ ${todo.length} photo(s) enrichie(s) et committées`, 'ok');
+  } catch (e) { setStatus('manage-status', `⚠ Commit échoué : ${e.message}`, 'warn'); }
+}
+
+$('btn-retro-enrich').addEventListener('click', retroEnrichCities);
 
 // ── Tab switching & refresh panel ─────────────────────────────────────
 function switchManageTab(tab) {
