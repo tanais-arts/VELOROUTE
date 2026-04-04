@@ -654,7 +654,7 @@ body.immersive #sound-toggle { display: none; }
 #tl-prev:active, #tl-next:active {
   background: rgba(240,192,96,0.45);
 }
-#timeline-wrap { flex: 1; position: relative; display: flex; flex-direction: column; gap: 0; height: 100%; }
+#timeline-wrap { flex: 1 1 0; min-width: 0; position: relative; display: flex; flex-direction: column; gap: 0; height: 100%; }
 
 #timeline-cities-row { position: relative; height: 22px; width: 100%; flex-shrink: 0; overflow: visible; }
 .tl-city-tick {
@@ -692,7 +692,7 @@ body.immersive #sound-toggle { display: none; }
   box-shadow: 0 0 14px rgba(240,192,96,1);
 }
 
-#timeline-slider-wrap { position: relative; flex: 1; overflow: visible; }
+#timeline-slider-wrap { position: relative; flex: 1; overflow: visible; width: 100%; }
 
 /* Non-linear segment track */
 #tl-segment-layer {
