@@ -955,8 +955,12 @@ async function generateVideoThumbnail(file) {
 async function handlePhotos(files, clearGrid = true) {
   if (!files.length) return;
 
-  // Déduplication : ignorer fichiers déjà uploadés
-  const newFiles = files.filter(f => !existingPhotoFilenames.has(f.name));
+  // Déduplication : ignorer fichiers déjà uploadés dans le même dossier cible
+  const currentSub = $('photo-subfolder').value.trim();
+  const newFiles = files.filter(f => {
+    const key = currentSub ? `${currentSub}/${f.name}` : f.name;
+    return !existingPhotoFilenames.has(key);
+  });
   const skipped  = files.length - newFiles.length;
   if (!newFiles.length) {
     setStatus('photos-status',
@@ -1046,7 +1050,11 @@ async function handlePhotos(files, clearGrid = true) {
   matchPhotosToTravel();
 
   // Enregistrer les nouveaux noms pour éviter re-upload
-  rawPhotos.forEach(p => existingPhotoFilenames.add(p.file.name));
+  const sub = $('photo-subfolder').value.trim();
+  rawPhotos.forEach(p => {
+    const key = sub ? `${sub}/${p.file.name}` : p.file.name;
+    existingPhotoFilenames.add(key);
+  });
 
   // ── Escale : tagger l'étape dans escales.json ──────────────────────
   const cityName = $('photo-subfolder').value.trim();
@@ -1185,7 +1193,12 @@ async function loadExistingData(useApi = false) {
   try {
     photoEntries = await fetchJson('photos.json');
     pCount = photoEntries.length;
-    existingPhotoFilenames = new Set(photoEntries.map(p => decodeURIComponent(p.src.split('/').pop())));
+    // Clé : "Dossier/fichier.jpg" extrait depuis l'URL CDN (ex: Photos/Tokyo/IMG_0001.jpg → Tokyo/IMG_0001.jpg)
+    existingPhotoFilenames = new Set(photoEntries.map(p => {
+      const dec = decodeURIComponent(p.src);
+      const m = dec.match(/\/Photos\/(.+)$/);
+      return m ? m[1] : dec.split('/').pop();
+    }));
   } catch {}
   try {
     visitedCities = await fetchJson('visited.json');
@@ -1228,10 +1241,17 @@ async function commitPhotosJsonMerged() {
   if (!ghToken) { setStatus('pcloud-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
   try {
     const existing = await loadRepoJsonDirect('photos.json').catch(() => []);
-    // Déduplication par nom de fichier (évite doublons si même photo uploadée sous dossier différent)
+    // Déduplication par photoMs (timestamp unique) — gère les noms de fichiers identiques
+    // sur cartes mémoire différentes. Fallback sur src URL si pas de photoMs.
     const newEntries = photoEntries.map(({ _selected, ...r }) => r);
-    const newFnames = new Set(newEntries.map(p => p.src.split('/').pop()));
-    const merged = [...existing.filter(p => !newFnames.has(p.src.split('/').pop())), ...newEntries];
+    const newPhotoMs = new Set(newEntries.filter(p => p.photoMs).map(p => p.photoMs));
+    const newSrcs    = new Set(newEntries.map(p => p.src));
+    const merged = [
+      ...existing.filter(p =>
+        !(p.photoMs && newPhotoMs.has(p.photoMs)) && !newSrcs.has(p.src)
+      ),
+      ...newEntries
+    ];
     merged.sort((a, b) => {
       const ca = a.caption || '', cb = b.caption || '';
       if (ca !== cb) return ca < cb ? -1 : 1;
