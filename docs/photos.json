@@ -170,46 +170,6 @@
     "lon": -0.31364
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2104.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2104.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2104.HEIC",
-    "entryIdx": 104,
-    "caption": "2025-05-01",
-    "photoMs": 1746112648000,
-    "lat": 49.30237,
-    "lon": -0.31367
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2105.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2105.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2105.HEIC",
-    "entryIdx": 104,
-    "caption": "2025-05-01",
-    "photoMs": 1746112697000,
-    "lat": 49.30237,
-    "lon": -0.31361
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2106.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2106.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2106.HEIC",
-    "entryIdx": 104,
-    "caption": "2025-05-01",
-    "photoMs": 1746112711000,
-    "lat": 49.30236,
-    "lon": -0.31364
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2107.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2107.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2107.HEIC",
-    "entryIdx": 104,
-    "caption": "2025-05-01",
-    "photoMs": 1746112714000,
-    "lat": 49.30236,
-    "lon": -0.31364
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250501_153417.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250501_153417.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250501_153417.jpg",
@@ -323,16 +283,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2108.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2108.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2108.HEIC",
-    "entryIdx": 194,
-    "caption": "2025-05-01",
-    "photoMs": 1746120933000,
-    "lat": 49.34216,
-    "lon": -0.58522
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2108.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2108.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2108.HEIC",
     "entryIdx": 194,
     "caption": "2025-05-01",
     "photoMs": 1746120933000,
@@ -486,29 +436,9 @@
     "lon": -0.75677
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2111.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2111.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2111.HEIC",
-    "entryIdx": 263,
-    "caption": "2025-05-02",
-    "photoMs": 1746181708000,
-    "lat": 49.34849,
-    "lon": -0.75677
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2110.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2110.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2110.HEIC",
-    "entryIdx": 264,
-    "caption": "2025-05-02",
-    "photoMs": 1746181420000,
-    "lat": 49.34872,
-    "lon": -0.75766
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2110.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2110.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2110.HEIC",
     "entryIdx": 264,
     "caption": "2025-05-02",
     "photoMs": 1746181420000,
@@ -559,16 +489,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2112.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2112.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2112.HEIC",
-    "entryIdx": 265,
-    "caption": "2025-05-02",
-    "photoMs": 1746181714000,
-    "lat": 49.34884,
-    "lon": -0.75911
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2112.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2112.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2112.HEIC",
     "entryIdx": 265,
     "caption": "2025-05-02",
     "photoMs": 1746181714000,
@@ -816,49 +736,9 @@
     "lon": -0.94401
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2117.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2117.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2117.HEIC",
-    "entryIdx": 344,
-    "caption": "2025-05-02",
-    "photoMs": 1746195474000,
-    "lat": 49.39511,
-    "lon": -0.94416
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2118.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2118.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2118.HEIC",
-    "entryIdx": 344,
-    "caption": "2025-05-02",
-    "photoMs": 1746195530000,
-    "lat": 49.39525,
-    "lon": -0.94392
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2119.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2119.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2119.HEIC",
-    "entryIdx": 344,
-    "caption": "2025-05-02",
-    "photoMs": 1746195590000,
-    "lat": 49.39521,
-    "lon": -0.94401
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2120.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2120.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2120.HEIC",
-    "entryIdx": 364,
-    "caption": "2025-05-02",
-    "photoMs": 1746197281000,
-    "lat": 49.38865,
-    "lon": -1.02788
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2120.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2120.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2120.HEIC",
     "entryIdx": 364,
     "caption": "2025-05-02",
     "photoMs": 1746197281000,
@@ -896,29 +776,9 @@
     "lon": -1.09021
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2113.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2113.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2113.HEIC",
-    "entryIdx": 405,
-    "caption": "2025-05-02",
-    "photoMs": 1746194373000,
-    "lat": 49.34439,
-    "lon": -1.09021
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2121.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2121.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2121.HEIC",
-    "entryIdx": 407,
-    "caption": "2025-05-02",
-    "photoMs": 1746207020000,
-    "lat": 49.34495,
-    "lon": -1.08574
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2121.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2121.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2121.HEIC",
     "entryIdx": 407,
     "caption": "2025-05-02",
     "photoMs": 1746207020000,
@@ -1226,136 +1086,6 @@
     "lon": -1.61368
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2124.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2124.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2124.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296926000,
-    "lat": 49.09853,
-    "lon": -1.61361
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2125.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2125.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2125.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296933000,
-    "lat": 49.09852,
-    "lon": -1.61361
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2126.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2126.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2126.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296956000,
-    "lat": 49.09858,
-    "lon": -1.61359
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2127.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2127.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2127.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296959000,
-    "lat": 49.09858,
-    "lon": -1.61359
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2128.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2128.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2128.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296967000,
-    "lat": 49.09857,
-    "lon": -1.61358
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2129.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2129.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2129.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746296976000,
-    "lat": 49.09857,
-    "lon": -1.61358
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2130.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2130.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2130.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297122000,
-    "lat": 49.09863,
-    "lon": -1.61367
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2131.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2131.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2131.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297129000,
-    "lat": 49.09859,
-    "lon": -1.61369
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2132.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2132.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2132.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297133000,
-    "lat": 49.09859,
-    "lon": -1.6137
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2133.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2133.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2133.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297136000,
-    "lat": 49.09859,
-    "lon": -1.61371
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2134.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2134.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2134.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297139000,
-    "lat": 49.09859,
-    "lon": -1.61371
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2135.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2135.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2135.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297178000,
-    "lat": 49.09861,
-    "lon": -1.61367
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2136.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2136.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2136.HEIC",
-    "entryIdx": 590,
-    "caption": "2025-05-03",
-    "photoMs": 1746297184000,
-    "lat": 49.09862,
-    "lon": -1.61368
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250504_095339.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250504_095339.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250504_095339.jpg",
@@ -1466,16 +1196,6 @@
     "lon": -1.54886
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2137.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2137.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2137.HEIC",
-    "entryIdx": 710,
-    "caption": "2025-05-04",
-    "photoMs": 1746366287000,
-    "lat": 48.91477,
-    "lon": -1.54886
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250504_134538.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250504_134538.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250504_134538.jpg",
@@ -1576,36 +1296,6 @@
     "lon": -1.56216
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2138.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2138.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2138.HEIC",
-    "entryIdx": 719,
-    "caption": "2025-05-04",
-    "photoMs": 1746366291000,
-    "lat": 48.91506,
-    "lon": -1.56205
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2139.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2139.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2139.HEIC",
-    "entryIdx": 719,
-    "caption": "2025-05-04",
-    "photoMs": 1746366294000,
-    "lat": 48.91505,
-    "lon": -1.56213
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2140.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2140.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2140.HEIC",
-    "entryIdx": 719,
-    "caption": "2025-05-04",
-    "photoMs": 1746366305000,
-    "lat": 48.91504,
-    "lon": -1.56216
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250504_135617.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250504_135617.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250504_135617.jpg",
@@ -1666,36 +1356,6 @@
     "lon": -1.56934
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2141.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2141.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2141.HEIC",
-    "entryIdx": 721,
-    "caption": "2025-05-04",
-    "photoMs": 1746366967000,
-    "lat": 48.90094,
-    "lon": -1.56875
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2142.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2142.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2142.HEIC",
-    "entryIdx": 721,
-    "caption": "2025-05-04",
-    "photoMs": 1746366979000,
-    "lat": 48.90068,
-    "lon": -1.5693
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2143.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2143.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2143.HEIC",
-    "entryIdx": 721,
-    "caption": "2025-05-04",
-    "photoMs": 1746367022000,
-    "lat": 48.90042,
-    "lon": -1.56934
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250504_161619.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250504_161619.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250504_161619.jpg",
@@ -1729,26 +1389,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2145.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2145.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2145.HEIC",
-    "entryIdx": 752,
-    "caption": "2025-05-04",
-    "photoMs": 1746375369000,
-    "lat": 48.84467,
-    "lon": -1.59156
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2144.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2144.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2144.HEIC",
-    "entryIdx": 752,
-    "caption": "2025-05-04",
-    "photoMs": 1746375364000,
-    "lat": 48.84452,
-    "lon": -1.59123
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2145.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2145.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2145.HEIC",
     "entryIdx": 752,
     "caption": "2025-05-04",
     "photoMs": 1746375369000,
@@ -1864,16 +1504,6 @@
     "lon": 3.97882
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2225.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2225.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2225.HEIC",
-    "entryIdx": 832,
-    "caption": "2025-05-29",
-    "photoMs": 1748528136000,
-    "lat": 47.86341,
-    "lon": 3.97882
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2223.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2223.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2223.HEIC",
@@ -1884,29 +1514,9 @@
     "lon": 4.0056
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2223.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2223.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2223.HEIC",
-    "entryIdx": 838,
-    "caption": "2025-05-29",
-    "photoMs": 1748525497000,
-    "lat": 47.86205,
-    "lon": 4.0056
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2224.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2224.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2224.HEIC",
-    "entryIdx": 839,
-    "caption": "2025-05-29",
-    "photoMs": 1748525516000,
-    "lat": 47.86212,
-    "lon": 4.00619
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2224.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2224.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2224.HEIC",
     "entryIdx": 839,
     "caption": "2025-05-29",
     "photoMs": 1748525516000,
@@ -1994,39 +1604,9 @@
     "lon": 4.11595
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2226.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2226.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2226.HEIC",
-    "entryIdx": 887,
-    "caption": "2025-05-29",
-    "photoMs": 1748531588000,
-    "lat": 47.80092,
-    "lon": 4.11569
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2227.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2227.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2227.HEIC",
-    "entryIdx": 887,
-    "caption": "2025-05-29",
-    "photoMs": 1748531996000,
-    "lat": 47.80126,
-    "lon": 4.11595
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2228.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2228.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2228.HEIC",
-    "entryIdx": 933,
-    "caption": "2025-05-29",
-    "photoMs": 1748535216000,
-    "lat": 47.75913,
-    "lon": 4.17356
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2228.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2228.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2228.HEIC",
     "entryIdx": 933,
     "caption": "2025-05-29",
     "photoMs": 1748535216000,
@@ -2054,26 +1634,6 @@
     "lon": 4.22442
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2230.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2230.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2230.HEIC",
-    "entryIdx": 960,
-    "caption": "2025-05-29",
-    "photoMs": 1748538220000,
-    "lat": 47.72252,
-    "lon": 4.22442
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2229.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2229.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2229.HEIC",
-    "entryIdx": 960,
-    "caption": "2025-05-29",
-    "photoMs": 1748538220000,
-    "lat": 47.72252,
-    "lon": 4.22442
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2231.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2231.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2231.HEIC",
@@ -2087,26 +1647,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2232.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2232.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2232.HEIC",
-    "entryIdx": 970,
-    "caption": "2025-05-29",
-    "photoMs": 1748538227000,
-    "lat": 47.71101,
-    "lon": 4.24144
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2231.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2231.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2231.HEIC",
-    "entryIdx": 970,
-    "caption": "2025-05-29",
-    "photoMs": 1748538226000,
-    "lat": 47.71099,
-    "lon": 4.24143
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2232.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2232.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2232.HEIC",
     "entryIdx": 970,
     "caption": "2025-05-29",
     "photoMs": 1748538227000,
@@ -2284,46 +1824,6 @@
     "lon": 4.33449
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2234.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2234.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2234.HEIC",
-    "entryIdx": 1023,
-    "caption": "2025-05-29",
-    "photoMs": 1748553406000,
-    "lat": 47.62604,
-    "lon": 4.33631
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2236.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2236.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2236.HEIC",
-    "entryIdx": 1023,
-    "caption": "2025-05-29",
-    "photoMs": 1748554088000,
-    "lat": 47.62632,
-    "lon": 4.33497
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2237.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2237.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2237.HEIC",
-    "entryIdx": 1023,
-    "caption": "2025-05-29",
-    "photoMs": 1748554091000,
-    "lat": 47.62638,
-    "lon": 4.33478
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2238.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2238.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2238.HEIC",
-    "entryIdx": 1023,
-    "caption": "2025-05-29",
-    "photoMs": 1748554652000,
-    "lat": 47.62388,
-    "lon": 4.33449
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250529_212429.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250529_212429.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250529_212429.jpg",
@@ -2347,16 +1847,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2235.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2235.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2235.HEIC",
-    "entryIdx": 1028,
-    "caption": "2025-05-29",
-    "photoMs": 1748553829000,
-    "lat": 47.62666,
-    "lon": 4.33562
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2235.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2235.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2235.HEIC",
     "entryIdx": 1028,
     "caption": "2025-05-29",
     "photoMs": 1748553829000,
@@ -2394,16 +1884,6 @@
     "lon": 4.33879
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2233.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2233.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2233.HEIC",
-    "entryIdx": 1038,
-    "caption": "2025-05-29",
-    "photoMs": 1748553394000,
-    "lat": 47.62658,
-    "lon": 4.33879
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2258.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2258.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2258.HEIC",
@@ -2425,26 +1905,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2240.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2240.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2240.HEIC",
-    "entryIdx": 1061,
-    "caption": "2025-05-30",
-    "photoMs": 1748601796000,
-    "lat": 47.58165,
-    "lon": 4.40724
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2239.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2239.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2239.HEIC",
-    "entryIdx": 1061,
-    "caption": "2025-05-30",
-    "photoMs": 1748601792000,
-    "lat": 47.58164,
-    "lon": 4.40724
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2240.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2240.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2240.HEIC",
     "entryIdx": 1061,
     "caption": "2025-05-30",
     "photoMs": 1748601796000,
@@ -2475,36 +1935,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2243.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2243.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2243.HEIC",
-    "entryIdx": 1064,
-    "caption": "2025-05-30",
-    "photoMs": 1748602108000,
-    "lat": 47.5726,
-    "lon": 4.41569
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2241.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2241.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2241.HEIC",
-    "entryIdx": 1064,
-    "caption": "2025-05-30",
-    "photoMs": 1748602100000,
-    "lat": 47.57261,
-    "lon": 4.41568
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2242.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2242.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2242.HEIC",
-    "entryIdx": 1064,
-    "caption": "2025-05-30",
-    "photoMs": 1748602105000,
-    "lat": 47.57261,
-    "lon": 4.41568
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2243.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2243.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2243.HEIC",
     "entryIdx": 1064,
     "caption": "2025-05-30",
     "photoMs": 1748602108000,
@@ -2545,46 +1975,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2247.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2247.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2247.HEIC",
-    "entryIdx": 1091,
-    "caption": "2025-05-30",
-    "photoMs": 1748604091000,
-    "lat": 47.50686,
-    "lon": 4.45949
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2244.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2244.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2244.HEIC",
-    "entryIdx": 1091,
-    "caption": "2025-05-30",
-    "photoMs": 1748604068000,
-    "lat": 47.50687,
-    "lon": 4.45949
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2245.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2245.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2245.HEIC",
-    "entryIdx": 1091,
-    "caption": "2025-05-30",
-    "photoMs": 1748604075000,
-    "lat": 47.50683,
-    "lon": 4.45951
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2246.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2246.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2246.HEIC",
-    "entryIdx": 1091,
-    "caption": "2025-05-30",
-    "photoMs": 1748604089000,
-    "lat": 47.50686,
-    "lon": 4.4595
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2247.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2247.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2247.HEIC",
     "entryIdx": 1091,
     "caption": "2025-05-30",
     "photoMs": 1748604091000,
@@ -2652,46 +2042,6 @@
     "lon": 4.45781
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2248.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2248.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2248.HEIC",
-    "entryIdx": 1100,
-    "caption": "2025-05-30",
-    "photoMs": 1748605102000,
-    "lat": 47.48778,
-    "lon": 4.4578
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2249.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2249.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2249.HEIC",
-    "entryIdx": 1100,
-    "caption": "2025-05-30",
-    "photoMs": 1748605126000,
-    "lat": 47.48799,
-    "lon": 4.4578
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2250.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2250.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2250.HEIC",
-    "entryIdx": 1100,
-    "caption": "2025-05-30",
-    "photoMs": 1748605130000,
-    "lat": 47.48801,
-    "lon": 4.45781
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2251.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2251.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2251.HEIC",
-    "entryIdx": 1100,
-    "caption": "2025-05-30",
-    "photoMs": 1748605143000,
-    "lat": 47.48799,
-    "lon": 4.45781
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2252.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2252.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2252.HEIC",
@@ -2722,36 +2072,6 @@
     "lon": 4.45574
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2252.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2252.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2252.HEIC",
-    "entryIdx": 1107,
-    "caption": "2025-05-30",
-    "photoMs": 1748605880000,
-    "lat": 47.4761,
-    "lon": 4.45562
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2253.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2253.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2253.HEIC",
-    "entryIdx": 1107,
-    "caption": "2025-05-30",
-    "photoMs": 1748605908000,
-    "lat": 47.47606,
-    "lon": 4.45574
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2254.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2254.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2254.HEIC",
-    "entryIdx": 1107,
-    "caption": "2025-05-30",
-    "photoMs": 1748605913000,
-    "lat": 47.47606,
-    "lon": 4.45574
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2256.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2256.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2256.HEIC",
@@ -2762,29 +2082,9 @@
     "lon": 4.44301
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2256.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2256.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2256.HEIC",
-    "entryIdx": 1151,
-    "caption": "2025-05-30",
-    "photoMs": 1748608958000,
-    "lat": 47.39381,
-    "lon": 4.44301
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2255.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2255.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2255.HEIC",
-    "entryIdx": 1153,
-    "caption": "2025-05-30",
-    "photoMs": 1748608810000,
-    "lat": 47.39009,
-    "lon": 4.44092
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2255.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2255.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2255.HEIC",
     "entryIdx": 1153,
     "caption": "2025-05-30",
     "photoMs": 1748608810000,
@@ -2805,26 +2105,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2260.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2260.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2260.HEIC",
-    "entryIdx": 1209,
-    "caption": "2025-05-30",
-    "photoMs": 1748620344000,
-    "lat": 47.26774,
-    "lon": 4.53674
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2259.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2259.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2259.HEIC",
-    "entryIdx": 1209,
-    "caption": "2025-05-30",
-    "photoMs": 1748620343000,
-    "lat": 47.26774,
-    "lon": 4.53674
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2260.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2260.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2260.HEIC",
     "entryIdx": 1209,
     "caption": "2025-05-30",
     "photoMs": 1748620344000,
@@ -2882,29 +2162,9 @@
     "lon": 4.55341
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2262.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2262.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2262.HEIC",
-    "entryIdx": 1215,
-    "caption": "2025-05-30",
-    "photoMs": 1748629425000,
-    "lat": 47.26307,
-    "lon": 4.55341
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2261.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2261.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2261.HEIC",
-    "entryIdx": 1217,
-    "caption": "2025-05-30",
-    "photoMs": 1748620663000,
-    "lat": 47.26687,
-    "lon": 4.54762
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2261.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2261.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2261.HEIC",
     "entryIdx": 1217,
     "caption": "2025-05-30",
     "photoMs": 1748620663000,
@@ -2935,16 +2195,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2263.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2263.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2263.HEIC",
-    "entryIdx": 1220,
-    "caption": "2025-05-31",
-    "photoMs": 1748679827000,
-    "lat": 47.26233,
-    "lon": 4.55477
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2263.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2263.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2263.HEIC",
     "entryIdx": 1220,
     "caption": "2025-05-31",
     "photoMs": 1748679827000,
@@ -2992,39 +2242,9 @@
     "lon": 4.58416
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2264.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2264.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2264.HEIC",
-    "entryIdx": 1233,
-    "caption": "2025-05-31",
-    "photoMs": 1748681214000,
-    "lat": 47.24206,
-    "lon": 4.58436
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2265.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2265.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2265.HEIC",
-    "entryIdx": 1233,
-    "caption": "2025-05-31",
-    "photoMs": 1748681219000,
-    "lat": 47.24163,
-    "lon": 4.58416
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2266.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2266.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2266.HEIC",
-    "entryIdx": 1238,
-    "caption": "2025-05-31",
-    "photoMs": 1748681720000,
-    "lat": 47.2305,
-    "lon": 4.58988
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2266.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2266.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2266.HEIC",
     "entryIdx": 1238,
     "caption": "2025-05-31",
     "photoMs": 1748681720000,
@@ -3065,46 +2285,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2270.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2270.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2270.HEIC",
-    "entryIdx": 1244,
-    "caption": "2025-05-31",
-    "photoMs": 1748681977000,
-    "lat": 47.22028,
-    "lon": 4.61064
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2267.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2267.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2267.HEIC",
-    "entryIdx": 1244,
-    "caption": "2025-05-31",
-    "photoMs": 1748681945000,
-    "lat": 47.22024,
-    "lon": 4.61058
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2268.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2268.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2268.HEIC",
-    "entryIdx": 1244,
-    "caption": "2025-05-31",
-    "photoMs": 1748681960000,
-    "lat": 47.22021,
-    "lon": 4.61064
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2269.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2269.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2269.HEIC",
-    "entryIdx": 1244,
-    "caption": "2025-05-31",
-    "photoMs": 1748681964000,
-    "lat": 47.2202,
-    "lon": 4.61067
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2270.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2270.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2270.HEIC",
     "entryIdx": 1244,
     "caption": "2025-05-31",
     "photoMs": 1748681977000,
@@ -3202,56 +2382,6 @@
     "lon": 4.61587
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2271.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2271.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2271.HEIC",
-    "entryIdx": 1246,
-    "caption": "2025-05-31",
-    "photoMs": 1748682128000,
-    "lat": 47.21997,
-    "lon": 4.61566
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2272.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2272.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2272.HEIC",
-    "entryIdx": 1246,
-    "caption": "2025-05-31",
-    "photoMs": 1748682139000,
-    "lat": 47.22002,
-    "lon": 4.61571
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2273.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2273.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2273.HEIC",
-    "entryIdx": 1246,
-    "caption": "2025-05-31",
-    "photoMs": 1748682175000,
-    "lat": 47.22006,
-    "lon": 4.61562
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2274.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2274.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2274.HEIC",
-    "entryIdx": 1246,
-    "caption": "2025-05-31",
-    "photoMs": 1748682181000,
-    "lat": 47.22004,
-    "lon": 4.61557
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2275.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2275.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2275.HEIC",
-    "entryIdx": 1246,
-    "caption": "2025-05-31",
-    "photoMs": 1748682355000,
-    "lat": 47.22004,
-    "lon": 4.61587
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250531_093739.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250531_093739.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250531_093739.jpg",
@@ -3322,36 +2452,6 @@
     "lon": 4.70085
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2276.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2276.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2276.HEIC",
-    "entryIdx": 1280,
-    "caption": "2025-05-31",
-    "photoMs": 1748684228000,
-    "lat": 47.16771,
-    "lon": 4.70085
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2277.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2277.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2277.HEIC",
-    "entryIdx": 1280,
-    "caption": "2025-05-31",
-    "photoMs": 1748684231000,
-    "lat": 47.16758,
-    "lon": 4.70084
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2278.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2278.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2278.HEIC",
-    "entryIdx": 1280,
-    "caption": "2025-05-31",
-    "photoMs": 1748684246000,
-    "lat": 47.1676,
-    "lon": 4.70085
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2280.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2280.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2280.HEIC",
@@ -3362,29 +2462,9 @@
     "lon": 4.91068
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2280.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2280.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2280.HEIC",
-    "entryIdx": 1379,
-    "caption": "2025-05-31",
-    "photoMs": 1748689576000,
-    "lat": 47.31853,
-    "lon": 4.91068
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2279.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2279.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2279.HEIC",
-    "entryIdx": 1380,
-    "caption": "2025-05-31",
-    "photoMs": 1748689566000,
-    "lat": 47.3185,
-    "lon": 4.91096
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2279.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2279.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2279.HEIC",
     "entryIdx": 1380,
     "caption": "2025-05-31",
     "photoMs": 1748689566000,
@@ -3572,106 +2652,6 @@
     "lon": 5.03996
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2281.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2281.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2281.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748692995000,
-    "lat": 47.32001,
-    "lon": 5.0389
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2282.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2282.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2282.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693273000,
-    "lat": 47.31881,
-    "lon": 5.04066
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2283.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2283.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2283.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693415000,
-    "lat": 47.31971,
-    "lon": 5.04105
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2284.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2284.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2284.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693420000,
-    "lat": 47.31971,
-    "lon": 5.0411
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2285.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2285.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2285.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693500000,
-    "lat": 47.31948,
-    "lon": 5.04211
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2286.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2286.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2286.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693698000,
-    "lat": 47.32093,
-    "lon": 5.04326
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2287.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2287.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2287.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693851000,
-    "lat": 47.32133,
-    "lon": 5.04236
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2288.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2288.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2288.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748693988000,
-    "lat": 47.32205,
-    "lon": 5.04242
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2289.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2289.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2289.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748694362000,
-    "lat": 47.32244,
-    "lon": 5.04327
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2290.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2290.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2290.HEIC",
-    "entryIdx": 1420,
-    "caption": "2025-05-31",
-    "photoMs": 1748695539000,
-    "lat": 47.3235,
-    "lon": 5.03996
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250531_151541.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250531_151541.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250531_151541.jpg",
@@ -3692,29 +2672,9 @@
     "lon": 4.99929
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2292.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2292.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2292.HEIC",
-    "entryIdx": 1441,
-    "caption": "2025-05-31",
-    "photoMs": 1748705912000,
-    "lat": 47.28531,
-    "lon": 4.99929
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2294.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2294.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2294.HEIC",
-    "entryIdx": 1461,
-    "caption": "2025-05-31",
-    "photoMs": 1748707367000,
-    "lat": 47.24004,
-    "lon": 4.97967
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2294.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2294.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2294.HEIC",
     "entryIdx": 1461,
     "caption": "2025-05-31",
     "photoMs": 1748707367000,
@@ -3735,26 +2695,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2299.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2299.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2299.HEIC",
-    "entryIdx": 1464,
-    "caption": "2025-05-31",
-    "photoMs": 1748710480000,
-    "lat": 47.23497,
-    "lon": 4.96927
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2298.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2298.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2298.HEIC",
-    "entryIdx": 1464,
-    "caption": "2025-05-31",
-    "photoMs": 1748710478000,
-    "lat": 47.23497,
-    "lon": 4.96926
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2299.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2299.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2299.HEIC",
     "entryIdx": 1464,
     "caption": "2025-05-31",
     "photoMs": 1748710480000,
@@ -3872,66 +2812,6 @@
     "lon": 4.9064
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2304.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2304.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2304.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748719447000,
-    "lat": 47.23243,
-    "lon": 4.90614
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2305.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2305.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2305.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748719507000,
-    "lat": 47.23227,
-    "lon": 4.90566
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2306.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2306.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2306.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748719510000,
-    "lat": 47.23227,
-    "lon": 4.90565
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2307.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2307.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2307.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748719524000,
-    "lat": 47.23226,
-    "lon": 4.90561
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2308.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2308.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2308.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748721560000,
-    "lat": 47.23248,
-    "lon": 4.9064
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2309.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2309.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2309.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-05-31",
-    "photoMs": 1748721564000,
-    "lat": 47.23248,
-    "lon": 4.9064
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2300.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2300.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2300.HEIC",
@@ -3965,46 +2845,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2303.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2303.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2303.HEIC",
-    "entryIdx": 1509,
-    "caption": "2025-05-31",
-    "photoMs": 1748714924000,
-    "lat": 47.22458,
-    "lon": 4.90829
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2300.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2300.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2300.HEIC",
-    "entryIdx": 1509,
-    "caption": "2025-05-31",
-    "photoMs": 1748714914000,
-    "lat": 47.22457,
-    "lon": 4.90831
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2301.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2301.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2301.HEIC",
-    "entryIdx": 1509,
-    "caption": "2025-05-31",
-    "photoMs": 1748714916000,
-    "lat": 47.22457,
-    "lon": 4.9083
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2302.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2302.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2302.HEIC",
-    "entryIdx": 1509,
-    "caption": "2025-05-31",
-    "photoMs": 1748714919000,
-    "lat": 47.22457,
-    "lon": 4.9083
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2303.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2303.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2303.HEIC",
     "entryIdx": 1509,
     "caption": "2025-05-31",
     "photoMs": 1748714924000,
@@ -4092,26 +2932,6 @@
     "lon": 4.90557
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2311.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2311.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2311.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-06-01",
-    "photoMs": 1748765496000,
-    "lat": 47.23244,
-    "lon": 4.90566
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2312.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2312.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2312.HEIC",
-    "entryIdx": 1504,
-    "caption": "2025-06-01",
-    "photoMs": 1748765520000,
-    "lat": 47.23228,
-    "lon": 4.90557
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250601_090947.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250601_090947.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250601_090947.jpg",
@@ -4192,56 +3012,6 @@
     "lon": 4.92342
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2314.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2314.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2314.HEIC",
-    "entryIdx": 1519,
-    "caption": "2025-06-01",
-    "photoMs": 1748768965000,
-    "lat": 47.2061,
-    "lon": 4.91602
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2315.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2315.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2315.HEIC",
-    "entryIdx": 1519,
-    "caption": "2025-06-01",
-    "photoMs": 1748768968000,
-    "lat": 47.2061,
-    "lon": 4.91602
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2316.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2316.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2316.HEIC",
-    "entryIdx": 1519,
-    "caption": "2025-06-01",
-    "photoMs": 1748769224000,
-    "lat": 47.20191,
-    "lon": 4.91795
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2317.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2317.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2317.HEIC",
-    "entryIdx": 1519,
-    "caption": "2025-06-01",
-    "photoMs": 1748769225000,
-    "lat": 47.20191,
-    "lon": 4.91795
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2318.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2318.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2318.HEIC",
-    "entryIdx": 1519,
-    "caption": "2025-06-01",
-    "photoMs": 1748770070000,
-    "lat": 47.18853,
-    "lon": 4.92342
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250601_100441.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250601_100441.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250601_100441.jpg",
@@ -4292,36 +3062,6 @@
     "lon": 4.95664
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2320.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2320.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2320.HEIC",
-    "entryIdx": 1556,
-    "caption": "2025-06-01",
-    "photoMs": 1748772245000,
-    "lat": 47.18017,
-    "lon": 4.9567
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2322.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2322.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2322.HEIC",
-    "entryIdx": 1556,
-    "caption": "2025-06-01",
-    "photoMs": 1748772246000,
-    "lat": 47.18017,
-    "lon": 4.95661
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2321.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2321.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2321.HEIC",
-    "entryIdx": 1556,
-    "caption": "2025-06-01",
-    "photoMs": 1748772246000,
-    "lat": 47.18016,
-    "lon": 4.95664
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2319.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2319.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2319.HEIC",
@@ -4335,26 +3075,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2323.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2323.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2323.HEIC",
-    "entryIdx": 1557,
-    "caption": "2025-06-01",
-    "photoMs": 1748772387000,
-    "lat": 47.17691,
-    "lon": 4.955
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2319.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2319.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2319.HEIC",
-    "entryIdx": 1557,
-    "caption": "2025-06-01",
-    "photoMs": 1748771318000,
-    "lat": 47.17974,
-    "lon": 4.95052
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2323.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2323.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2323.HEIC",
     "entryIdx": 1557,
     "caption": "2025-06-01",
     "photoMs": 1748772387000,
@@ -4412,29 +3132,9 @@
     "lon": 4.95167
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2325.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2325.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2325.HEIC",
-    "entryIdx": 1561,
-    "caption": "2025-06-01",
-    "photoMs": 1748772887000,
-    "lat": 47.16727,
-    "lon": 4.95167
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2326.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2326.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2326.HEIC",
-    "entryIdx": 1566,
-    "caption": "2025-06-01",
-    "photoMs": 1748773137000,
-    "lat": 47.16019,
-    "lon": 4.95542
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2326.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2326.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2326.HEIC",
     "entryIdx": 1566,
     "caption": "2025-06-01",
     "photoMs": 1748773137000,
@@ -4522,39 +3222,9 @@
     "lon": 4.93219
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2327.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2327.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2327.HEIC",
-    "entryIdx": 1590,
-    "caption": "2025-06-01",
-    "photoMs": 1748774812000,
-    "lat": 47.116,
-    "lon": 4.93219
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2328.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2328.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2328.HEIC",
-    "entryIdx": 1590,
-    "caption": "2025-06-01",
-    "photoMs": 1748774816000,
-    "lat": 47.11599,
-    "lon": 4.93219
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2329.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2329.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2329.HEIC",
-    "entryIdx": 1624,
-    "caption": "2025-06-01",
-    "photoMs": 1748777655000,
-    "lat": 47.0687,
-    "lon": 4.86316
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2329.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2329.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2329.HEIC",
     "entryIdx": 1624,
     "caption": "2025-06-01",
     "photoMs": 1748777655000,
@@ -4572,29 +3242,9 @@
     "lon": 4.86137
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2330.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2330.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2330.HEIC",
-    "entryIdx": 1625,
-    "caption": "2025-06-01",
-    "photoMs": 1748777713000,
-    "lat": 47.06718,
-    "lon": 4.86137
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2331.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2331.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2331.HEIC",
-    "entryIdx": 1676,
-    "caption": "2025-06-01",
-    "photoMs": 1748780695000,
-    "lat": 47.02273,
-    "lon": 4.83702
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2331.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2331.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2331.HEIC",
     "entryIdx": 1676,
     "caption": "2025-06-01",
     "photoMs": 1748780695000,
@@ -4622,16 +3272,6 @@
     "lon": 4.82418
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2332.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2332.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2332.HEIC",
-    "entryIdx": 1683,
-    "caption": "2025-06-01",
-    "photoMs": 1748787988000,
-    "lat": 47.02322,
-    "lon": 4.82418
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2333.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2333.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2333.HEIC",
@@ -4652,39 +3292,9 @@
     "lon": 4.78974
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2333.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2333.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2333.HEIC",
-    "entryIdx": 1698,
-    "caption": "2025-06-01",
-    "photoMs": 1748789011000,
-    "lat": 47.00653,
-    "lon": 4.78984
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2334.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2334.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2334.HEIC",
-    "entryIdx": 1698,
-    "caption": "2025-06-01",
-    "photoMs": 1748789017000,
-    "lat": 47.00654,
-    "lon": 4.78974
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2335.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2335.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2335.HEIC",
-    "entryIdx": 1712,
-    "caption": "2025-06-01",
-    "photoMs": 1748790441000,
-    "lat": 46.98594,
-    "lon": 4.77428
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2335.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2335.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2335.HEIC",
     "entryIdx": 1712,
     "caption": "2025-06-01",
     "photoMs": 1748790441000,
@@ -4705,26 +3315,6 @@
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2337.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2337.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2337.HEIC",
-    "entryIdx": 1719,
-    "caption": "2025-06-01",
-    "photoMs": 1748790447000,
-    "lat": 46.97166,
-    "lon": 4.76503
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2336.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2336.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2336.HEIC",
-    "entryIdx": 1719,
-    "caption": "2025-06-01",
-    "photoMs": 1748790444000,
-    "lat": 46.97171,
-    "lon": 4.76504
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2337.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2337.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2337.HEIC",
     "entryIdx": 1719,
     "caption": "2025-06-01",
     "photoMs": 1748790447000,
@@ -4792,16 +3382,6 @@
     "lon": 4.73255
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2338.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2338.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2338.HEIC",
-    "entryIdx": 1748,
-    "caption": "2025-06-01",
-    "photoMs": 1748791981000,
-    "lat": 46.93785,
-    "lon": 4.73255
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250601_154258.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_20250601_154258.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_20250601_154258.jpg",
@@ -4842,26 +3422,6 @@
     "lon": 4.72064
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2339.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2339.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2339.HEIC",
-    "entryIdx": 1762,
-    "caption": "2025-06-01",
-    "photoMs": 1748792574000,
-    "lat": 46.91579,
-    "lon": 4.72066
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2340.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2340.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2340.HEIC",
-    "entryIdx": 1762,
-    "caption": "2025-06-01",
-    "photoMs": 1748792579000,
-    "lat": 46.91578,
-    "lon": 4.72064
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2341.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2341.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2341.HEIC",
@@ -4882,39 +3442,9 @@
     "lon": 4.70868
   },
   {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2341.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2341.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2341.HEIC",
-    "entryIdx": 1766,
-    "caption": "2025-06-01",
-    "photoMs": 1748792856000,
-    "lat": 46.91413,
-    "lon": 4.70868
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2342.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2342.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2342.HEIC",
-    "entryIdx": 1766,
-    "caption": "2025-06-01",
-    "photoMs": 1748792860000,
-    "lat": 46.91407,
-    "lon": 4.70868
-  },
-  {
     "src": "https://hub.studios-voa.com:1666/files/Photos/Tom/IMG_2343.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom/IMG_2343.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom/IMG_2343.HEIC",
-    "entryIdx": 1785,
-    "caption": "2025-06-01",
-    "photoMs": 1748793992000,
-    "lat": 46.90714,
-    "lon": 4.71645
-  },
-  {
-    "src": "https://hub.studios-voa.com:1666/files/Photos/Tom2/IMG_2343.jpg",
-    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/Tom2/IMG_2343.jpg",
-    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/Tom2/IMG_2343.HEIC",
     "entryIdx": 1785,
     "caption": "2025-06-01",
     "photoMs": 1748793992000,
