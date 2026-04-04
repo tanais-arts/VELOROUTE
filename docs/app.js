@@ -420,17 +420,20 @@ function buildTimelineCities() {
   const photos = state.photos;
   if (!photos || !photos.length) return;
 
-  const escaleTicked = new Set();
-  const escaleCities = (window.escales || []).map(e =>
-    (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, ''));
+  const dateMin = new Date((photos[0].caption || '').slice(0, 10)).getTime();
+  const dateMax = new Date((photos[photos.length - 1].caption || '').slice(0, 10)).getTime();
+  if (dateMax === dateMin) return;
 
-  // Escales d'abord (priorité visuelle)
+  const escaleTicked = new Set();
+
   (window.escales || []).forEach(e => {
     const norm = (e.city || '').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
     if (escaleTicked.has(norm)) return;
     escaleTicked.add(norm);
-    const pi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
-    const pct = Math.max(0, Math.min(100, photoIdxToPct(pi) * 100));
+    if (!e.start) return;
+    const t = new Date(e.start).getTime();
+    if (isNaN(t)) return;
+    const pct = Math.max(0, Math.min(100, (t - dateMin) / (dateMax - dateMin) * 100));
     const div = document.createElement('div');
     div.className = 'tl-city-tick tl-escale-city-tick';
     div.style.left = `${pct}%`;
@@ -719,12 +722,18 @@ async function init() {
     if (!wrap || !escales || !escales.length || !state.photos.length) return;
     Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
 
-    const BAR_W = 0.008; // largeur en fraction du slider
+    if (!state.photos.length) return;
+    const dateMin = new Date((state.photos[0].caption || '').slice(0, 10)).getTime();
+    const dateMax = new Date((state.photos[state.photos.length - 1].caption || '').slice(0, 10)).getTime();
+    if (dateMax === dateMin) return;
+
+    const BAR_W = 0.008;
 
     escales.forEach(e => {
-      const pi = e.entryIdx != null ? photoIdxForEntryIdx(e.entryIdx) : photoIdxForDate(e.start);
-      if (pi < 0) return;
-      const pct = Math.max(0, Math.min(1, photoIdxToPct(pi)));
+      if (!e.start) return;
+      const t = new Date(e.start).getTime();
+      if (isNaN(t)) return;
+      const pct = Math.max(0, Math.min(1, (t - dateMin) / (dateMax - dateMin)));
 
       const cover = document.createElement('div');
       cover.className = 'tl-escale-cover';
@@ -812,14 +821,18 @@ async function init() {
 
   const MONTHS_SHORT = ['','jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   const fragment = document.createDocumentFragment();
-  let lastThumbDay = '';
   state.photos.forEach((p, i) => {
-    // Date label text
+    // Date + heure label
     const cap = p.caption || '';
     const dm = cap.match(/^(\d{4})-(\d{2})-(\d{2})/);
-    const dayKey = dm ? dm[0] : '';
-    const showDate = dayKey !== lastThumbDay;
-    if (dayKey) lastThumbDay = dayKey;
+    let labelText = '';
+    if (dm) {
+      labelText = `${parseInt(dm[3])} ${MONTHS_SHORT[parseInt(dm[2])]}`;
+      if (p.entryIdx != null && state.entries[p.entryIdx]) {
+        const e = state.entries[p.entryIdx];
+        labelText += ` ${e.hour}h${String(e.minute).padStart(2,'0')}`;
+      }
+    }
 
     const img = document.createElement('img');
     if (i < 10) {
@@ -831,15 +844,8 @@ async function init() {
     img.draggable = false;
     img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
 
-    // Outer wrapper with date
     const outer = document.createElement('div');
     outer.className = 'thumb-cell';
-    if (showDate && dm) {
-      const dateLbl = document.createElement('div');
-      dateLbl.className = 'thumb-date';
-      dateLbl.textContent = `${parseInt(dm[3])} ${MONTHS_SHORT[parseInt(dm[2])]}`;
-      outer.appendChild(dateLbl);
-    }
 
     if (p.type === 'video') {
       const wrap = document.createElement('div');
@@ -854,6 +860,13 @@ async function init() {
     } else {
       img.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
       outer.appendChild(img);
+    }
+
+    if (labelText) {
+      const dateLbl = document.createElement('div');
+      dateLbl.className = 'thumb-date';
+      dateLbl.textContent = labelText;
+      outer.appendChild(dateLbl);
     }
     fragment.appendChild(outer);
   });
@@ -1101,12 +1114,20 @@ async function init() {
   tlInput.addEventListener('change', () => {
     const pi = Math.round(Number(tlInput.value));
     const snapped = snapToEscaleRight(pi);
-    tlInput.value = snapped;
-    updateTimelineThumbByPhoto(snapped);
-    const photo = state.photos[snapped];
-    if (photo) selectPhotoEntry(photo, false);
     const wrap = document.getElementById('timeline-slider-wrap');
     if (wrap) wrap.classList.remove('dragging');
+    animateToTime(pi, snapped, 2000,
+      val => {
+        const v = Math.round(val);
+        tlInput.value = v;
+        updateTimelineThumbByPhoto(v);
+        scrollCarouselTo(v);
+      },
+      () => {
+        const photo = state.photos[snapped];
+        if (photo) selectPhotoEntry(photo, false);
+      }
+    );
   });
 
   // Show thumb label during touch drag

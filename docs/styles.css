@@ -204,11 +204,11 @@ html, body {
   transition: background 1.4s ease, border-color 1.4s ease;
 }
 #photo-carousel {
-  display: flex; align-items: flex-end;
+  display: flex; align-items: flex-start;
   height: 100%; overflow-x: scroll; scroll-behavior: smooth;
   scrollbar-width: none;
   gap: 4px;
-  padding: 0 50%;
+  padding: 8px 50% 0;
   mask-image: linear-gradient(to right, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
 }
@@ -216,12 +216,12 @@ html, body {
 .thumb-cell {
   flex-shrink: 0;
   display: flex; flex-direction: column; align-items: center;
-  gap: 2px;
+  gap: 3px;
 }
 .thumb-date {
-  font-size: 0.55rem; letter-spacing: 0.05em;
-  color: rgba(240,192,96,0.7); white-space: nowrap;
-  text-transform: uppercase; font-weight: 600;
+  font-size: 0.5rem; letter-spacing: 0.04em;
+  color: rgba(240,192,96,0.65); white-space: nowrap;
+  font-weight: 500; line-height: 1;
 }
 .photo-thumb {
   flex-shrink: 0; width: 120px; height: 80px;
