@@ -342,11 +342,26 @@ document.getElementById('lightbox-next').addEventListener('click', () => { if (s
 
 // ── Timeline ───────────────────────────────────────────────────────────
 // Timeline basée sur le TEMPS : slider = ms UTC, curseur proportionnel au temps réel
+// state.tlWindow = { t0, t1 } définit la portion visible (zoom)
 
 function timeToPct(ms) {
-  const tMin = state.tMin, tMax = state.tMax;
-  if (!tMin || tMax === tMin) return 0;
-  return Math.max(0, Math.min(1, (ms - tMin) / (tMax - tMin)));
+  const t0 = state.tlWindow?.t0 ?? state.tMin;
+  const t1 = state.tlWindow?.t1 ?? state.tMax;
+  if (!t0 || t1 === t0) return 0;
+  return Math.max(0, Math.min(1, (ms - t0) / (t1 - t0)));
+}
+
+// Redessine curseur + escales + labels selon la fenêtre courante
+function refreshTimeline() {
+  // Curseur
+  const curMs = Number(tlInput.value);
+  const pct = timeToPct(curMs) * 100;
+  const cursor = document.getElementById('tl-cursor');
+  if (cursor) cursor.style.left = `${pct}%`;
+  tlThumbLabel.style.left = `${pct}%`;
+  // Marqueurs et labels
+  buildTimelineCities();
+  renderTimelineEscales(state.escales);
 }
 
 function timeToPhotoIdx(ms) {
@@ -382,7 +397,7 @@ function photoTimeStr(p) {
   return '';
 }
 
-function updateTimelineThumbByPhoto(pi) {
+function updateTimelineThumbByPhoto(pi, skipInputUpdate) {
   const photos = state.photos;
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
@@ -390,7 +405,7 @@ function updateTimelineThumbByPhoto(pi) {
   const pct = t != null ? timeToPct(t) : pi / Math.max(1, photos.length - 1);
   const pctStr = `${pct * 100}%`;
   tlThumbLabel.style.left = pctStr;
-  if (t != null) tlInput.value = t;
+  if (t != null && !skipInputUpdate) tlInput.value = t;
   // Move visible cursor
   const cursor = document.getElementById('tl-cursor');
   if (cursor) cursor.style.left = pctStr;
@@ -827,6 +842,7 @@ async function init() {
   });
   state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
   state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
+  state.tlWindow = { t0: state.tMin, t1: state.tMax };
 
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
@@ -1085,8 +1101,73 @@ async function init() {
   }, 0);
   buildTimelineCities();
 
-  // ── Animation timeline ──
-  let autoSlideRAF = null;
+  // ── Zoom timeline (wheel + pinch) ──
+  const tlWrap = document.getElementById('timeline-wrap');
+
+  function applyZoom(pivotMs, factor) {
+    const w = state.tlWindow;
+    const span = (w.t1 - w.t0) * factor;
+    const minSpan = 3600 * 1000;        // 1h minimum
+    const maxSpan = state.tMax - state.tMin;
+    const clampedSpan = Math.max(minSpan, Math.min(maxSpan, span));
+    // Centre le zoom sur le point de pivot
+    const pivotFrac = (pivotMs - w.t0) / (w.t1 - w.t0);
+    let t0 = pivotMs - pivotFrac * clampedSpan;
+    let t1 = t0 + clampedSpan;
+    // Clamp dans les bornes absolues
+    if (t0 < state.tMin) { t0 = state.tMin; t1 = t0 + clampedSpan; }
+    if (t1 > state.tMax) { t1 = state.tMax; t0 = t1 - clampedSpan; }
+    state.tlWindow = { t0, t1 };
+    tlInput.min = t0;
+    tlInput.max = t1;
+    refreshTimeline();
+  }
+
+  // Wheel : zoom centré sur la position de la souris sur la barre
+  tlWrap.addEventListener('wheel', (ev) => {
+    ev.preventDefault();
+    const rect = tlWrap.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+    const pivotMs = state.tlWindow.t0 + frac * (state.tlWindow.t1 - state.tlWindow.t0);
+    const factor = ev.deltaY > 0 ? 1.35 : 1 / 1.35;
+    applyZoom(pivotMs, factor);
+  }, { passive: false });
+
+  // Pinch (touch) — deux doigts
+  let lastPinchDist = null;
+  let lastPinchMidMs = null;
+  tlWrap.addEventListener('touchstart', (ev) => {
+    if (ev.touches.length === 2) {
+      const t = ev.touches;
+      lastPinchDist = Math.abs(t[0].clientX - t[1].clientX);
+      const rect = tlWrap.getBoundingClientRect();
+      const midX = (t[0].clientX + t[1].clientX) / 2;
+      const frac = Math.max(0, Math.min(1, (midX - rect.left) / rect.width));
+      lastPinchMidMs = state.tlWindow.t0 + frac * (state.tlWindow.t1 - state.tlWindow.t0);
+    }
+  }, { passive: true });
+  tlWrap.addEventListener('touchmove', (ev) => {
+    if (ev.touches.length !== 2 || lastPinchDist == null) return;
+    ev.preventDefault();
+    const t = ev.touches;
+    const dist = Math.abs(t[0].clientX - t[1].clientX);
+    const factor = lastPinchDist / Math.max(1, dist);
+    lastPinchDist = dist;
+    applyZoom(lastPinchMidMs, factor);
+  }, { passive: false });
+  tlWrap.addEventListener('touchend', () => { lastPinchDist = null; lastPinchMidMs = null; });
+
+  // Double-clic : reset zoom
+  tlWrap.addEventListener('dblclick', () => {
+    state.tlWindow = { t0: state.tMin, t1: state.tMax };
+    tlInput.min = state.tMin;
+    tlInput.max = state.tMax;
+    refreshTimeline();
+  });
+
+  window.addEventListener('resize', () => {
+    renderTimelineEscales(escales);
+  });
   function cancelAutoSlide() {
     if (autoSlideRAF) { cancelAnimationFrame(autoSlideRAF); autoSlideRAF = null; }
   }
@@ -1126,10 +1207,6 @@ async function init() {
     }
   });
 
-  window.addEventListener('resize', () => {
-    renderTimelineEscales(escales);
-  });
-
   // Helper: trouve le ms de l'escale la plus proche du temps courant
   function snapToEscaleRight(currentMs) {
     const esc = state.escales || [];
@@ -1158,7 +1235,7 @@ async function init() {
         const cursor = document.getElementById('tl-cursor');
         if (cursor) cursor.style.left = `${pct}%`;
         tlThumbLabel.style.left = `${pct}%`;
-        updateTimelineThumbByPhoto(pi);
+        updateTimelineThumbByPhoto(pi, true);
         scrollCarouselTo(pi);
       },
       () => {
