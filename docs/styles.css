@@ -654,9 +654,9 @@ body.immersive #sound-toggle { display: none; }
 #tl-prev:active, #tl-next:active {
   background: rgba(240,192,96,0.45);
 }
-#timeline-wrap { flex: 1; position: relative; display: flex; flex-direction: column; gap: 2px; }
+#timeline-wrap { flex: 1; position: relative; display: flex; flex-direction: column; gap: 0; align-self: stretch; }
 
-#timeline-cities-row { position: relative; height: 64px; width: 100%; }
+#timeline-cities-row { display: none; }
 .tl-city-tick {
   position: absolute; bottom: 0;
   pointer-events: none;
@@ -694,7 +694,7 @@ body.immersive #sound-toggle { display: none; }
   box-shadow: 0 0 14px rgba(240,192,96,1);
 }
 
-#timeline-slider-wrap { position: relative; }
+#timeline-slider-wrap { position: relative; flex: 1; }
 
 /* Non-linear segment track */
 #tl-segment-layer {
@@ -722,30 +722,72 @@ body.immersive #sound-toggle { display: none; }
 
 #timeline-input {
   -webkit-appearance: none; appearance: none;
-  width: 100%; height: 3px; border-radius: 2px;
-  background: var(--tltrack); outline: none; cursor: pointer; display: block;
-  transition: background 1.4s ease;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: transparent !important; outline: none; cursor: pointer;
+  z-index: 10; opacity: 0; margin: 0;
 }
 #timeline-input::-webkit-slider-thumb {
   -webkit-appearance: none; width: 14px; height: 14px;
-  border-radius: 50%; background: #f0c060; cursor: pointer;
-  box-shadow: 0 0 8px rgba(240,192,96,0.6);
+  cursor: pointer;
 }
 #timeline-input::-moz-range-thumb {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: #f0c060; border: none; cursor: pointer;
+  width: 14px; height: 14px;
+  border: none; cursor: pointer;
 }
 #timeline-thumb-label {
-  position: absolute; bottom: calc(100% + 8px);
+  position: absolute; top: -20px;
   transform: translateX(-50%);
   background: #f0c060; color: #000;
   font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
   padding: 2px 7px; border-radius: 2px; white-space: nowrap;
   pointer-events: none; opacity: 0; transition: opacity 0.15s;
 }
-#timeline-input:hover ~ #timeline-thumb-label,
+#timeline-slider-wrap:hover #timeline-thumb-label,
 #timeline-input:active ~ #timeline-thumb-label { opacity: 1; }
 
+/* ── Day bars ── */
+.tl-day-bar {
+  position: absolute; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(240, 192, 96, 0.25);
+  z-index: 2;
+  pointer-events: none;
+}
+.tl-day-label {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 0.5rem;
+  color: rgba(240, 192, 96, 0.55);
+  white-space: nowrap;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+}
+.tl-day-label.tl-month-label {
+  font-weight: 700;
+  color: rgba(240, 192, 96, 0.9);
+  font-size: 0.55rem;
+}
+
+/* ── Photo dots ── */
+.tl-photo-dot {
+  position: absolute;
+  top: 50%;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(240, 192, 96, 0.45);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+  transition: width 0.15s, height 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.tl-photo-dot.active {
+  width: 10px; height: 10px;
+  background: #f0c060;
+  box-shadow: 0 0 10px rgba(240, 192, 96, 0.9);
+  z-index: 5;
+}
 
 
 /* ── VISITED CITY LABELS ────────────────────────────── */

@@ -352,9 +352,7 @@ function updateTimelineThumbByPhoto(pi) {
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
   const pct = photoIdxToPct(pi);
-  const wrapW  = document.getElementById('timeline-slider-wrap').offsetWidth;
-  const offset = pct * (wrapW - 14) + 7;
-  tlThumbLabel.style.left = `${offset}px`;
+  tlThumbLabel.style.left = `${pct * 100}%`;
   // Affiche la date de la photo (depuis caption ou entryIdx)
   const p = photos[pi];
   if (p) {
@@ -369,6 +367,18 @@ function updateTimelineThumbByPhoto(pi) {
       tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
     }
   }
+  updateActiveDot(pi);
+}
+
+function updateActiveDot(pi) {
+  if (!state.dotEls || !state.dotEls.length) return;
+  if (state._activeDotPi != null && state.dotEls[state._activeDotPi]) {
+    state.dotEls[state._activeDotPi].classList.remove('active');
+  }
+  if (state.dotEls[pi]) {
+    state.dotEls[pi].classList.add('active');
+  }
+  state._activeDotPi = pi;
 }
 
 // Compat wrapper pour les appels existants par entryIdx
@@ -690,7 +700,7 @@ async function init() {
     base.style.left       = '0';
     base.style.width      = '100%';
     base.style.top        = '50%';
-    base.style.height     = '2px';
+    base.style.height     = '1px';
     base.style.transform  = 'translateY(-50%)';
     base.style.background = 'rgba(240,192,96,0.75)';
     base.style.zIndex     = '0';
@@ -723,47 +733,88 @@ async function init() {
     });
   }
 
-  // ── Date separators on timeline (barres verticales mois/année) ──
-  function renderTimelineDateBars() {
+  // ── Day separators on timeline (barres verticales à chaque nouveau jour) ──
+  function renderTimelineDayBars() {
     const wrap = document.getElementById('timeline-slider-wrap');
     if (!wrap || !state.photos.length) return;
-    wrap.querySelectorAll('.tl-date-bar').forEach(el => el.remove());
+    wrap.querySelectorAll('.tl-day-bar').forEach(el => el.remove());
 
-    // Détecter les changements de mois dans les photos (triées par date via caption YYYY-MM-DD)
-    const MONTHS_SHORT = ['','Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    const MONTHS_SHORT = ['','jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+    let lastDay = '';
     let lastMonth = -1;
-    const dateBars = [];
     state.photos.forEach((p, i) => {
-      const m = (p.caption || '').match(/^(\d{4})-(\d{2})/);
+      const m = (p.caption || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
       if (!m) return;
-      const key = Number(m[1]) * 100 + Number(m[2]);
-      if (key !== lastMonth) {
-        lastMonth = key;
-        dateBars.push({ pi: i, label: `${MONTHS_SHORT[Number(m[2])]} ${m[1].slice(2)}` });
-      }
-    });
+      const dayKey = m[0];
+      if (dayKey === lastDay) return;
+      lastDay = dayKey;
+      const dayNum = parseInt(m[3]);
+      const monthNum = parseInt(m[2]);
+      const monthKey = Number(m[1]) * 100 + monthNum;
+      const isNewMonth = monthKey !== lastMonth;
+      if (isNewMonth) lastMonth = monthKey;
 
-    dateBars.forEach(db => {
-      const pct = Math.max(0, Math.min(100, photoIdxToPct(db.pi) * 100));
-
+      const pct = Math.max(0, Math.min(100, photoIdxToPct(i) * 100));
       const bar = document.createElement('div');
-      bar.className = 'tl-date-bar';
-      bar.style.cssText = `position:absolute;left:${pct}%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.35);z-index:3;pointer-events:none;transform:translateX(-0.5px)`;
+      bar.className = 'tl-day-bar';
+      bar.style.left = `${pct}%`;
       const lbl = document.createElement('span');
-      lbl.style.cssText = 'position:absolute;top:-14px;left:2px;font-size:9px;color:rgba(255,255,255,0.6);white-space:nowrap;font-family:inherit';
-      lbl.textContent = db.label;
+      lbl.className = 'tl-day-label' + (isNewMonth ? ' tl-month-label' : '');
+      lbl.textContent = isNewMonth ? `${dayNum} ${MONTHS_SHORT[monthNum]}` : `${dayNum}`;
       bar.appendChild(lbl);
       wrap.appendChild(bar);
+    });
+  }
+
+  // ── Photo dots on timeline ──
+  function renderTimelinePhotoDots() {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (!wrap || !state.photos.length) return;
+    wrap.querySelectorAll('.tl-photo-dot').forEach(el => el.remove());
+    state.dotEls = [];
+
+    state.photos.forEach((p, i) => {
+      const pct = photoIdxToPct(i) * 100;
+      const dot = document.createElement('div');
+      dot.className = 'tl-photo-dot';
+      dot.style.left = `${pct}%`;
+      state.dotEls.push(dot);
+      wrap.appendChild(dot);
     });
   }
 
   setTimeout(() => {
     renderTimelineBaseLine();
     renderTimelineEscales(escales);
-    renderTimelineDateBars();
+    renderTimelineDayBars();
+    renderTimelinePhotoDots();
+    updateActiveDot(startPi);
   }, 0);
 
-  // Expose pour rappel externe (ex: après commit escales depuis admin)
+  // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
+  function refreshTimeline() {
+    // Recalcule slider range
+    const n = state.photos.length;
+    tlInput.max = Math.max(0, n - 1);
+    // Redessine tous les éléments visuels
+    renderTimelineBaseLine();
+    renderTimelineEscales(state.escales);
+    renderTimelineDayBars();
+    renderTimelinePhotoDots();
+    // Met à jour le dot actif
+    const pi = Math.min(state.activePhotoIdx || 0, n - 1);
+    updateActiveDot(pi);
+    // Met à jour les labels de bord
+    const startEl = document.getElementById('tl-label-start');
+    const endEl   = document.getElementById('tl-label-end');
+    const labelFromCaption = (cap) => {
+      const m = (cap || '').match(/(\d{4})-(\d{2})-(\d{2})/);
+      return m ? `${parseInt(m[3])} ${MONTHS_FR[parseInt(m[2])]}` : '';
+    };
+    if (startEl && n > 0) startEl.textContent = labelFromCaption(state.photos[0].caption);
+    if (endEl && n > 0)   endEl.textContent   = labelFromCaption(state.photos[n - 1].caption);
+  }
+  window._refreshTimeline = refreshTimeline;
   window._refreshTimelineEscales = () =>
     renderTimelineEscales(state.escales);
 
@@ -1062,6 +1113,9 @@ async function init() {
 
   window.addEventListener('resize', () => {
     renderTimelineEscales(escales);
+    renderTimelineDayBars();
+    renderTimelinePhotoDots();
+    updateActiveDot(state.activePhotoIdx || 0);
   });
 
   tlInput.addEventListener('change', () => {
