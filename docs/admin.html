@@ -1052,8 +1052,8 @@ async function handlePhotos(files, clearGrid = true) {
     `✓ ${files.length} photo${files.length > 1 ? 's' : ''} — ${withDate} avec horodatage EXIF`,
     withDate > 0 ? 'ok' : 'warn');
 
-  await enrichPhotoCities();
   matchPhotosToTravel();
+  _enrichCitiesPromise = enrichPhotoCities(); // démarre en parallèle de l'upload
 
   // Enregistrer les nouveaux noms pour éviter re-upload
   const sub = $('photo-subfolder').value.trim();
@@ -1127,12 +1127,24 @@ async function handlePhotos(files, clearGrid = true) {
     setStatus('photos-status', `↑ Upload de ${rawPhotos.length} source(s) vers VLR-server…`);
     await uploadAndProcess();
   } else {
+    await _awaitEnrichAndRebuild('photos-status');
     await commitPhotosJsonMerged();
   }
 }
 
 // ── Résolution ville par Nominatim à l'ingestion (1 req/s, par lieu unique) ──────
 const _admLocCache = {};
+let _enrichCitiesPromise = null;
+
+async function _awaitEnrichAndRebuild(statusId) {
+  if (!_enrichCitiesPromise) return;
+  setStatus(statusId, '🌍 Géocodage des villes en cours… ne fermez pas la page');
+  await _enrichCitiesPromise;
+  _enrichCitiesPromise = null;
+  buildPhotoEntries();
+  setStatus(statusId, '✓ Géocodage terminé', 'ok');
+}
+
 async function enrichPhotoCities() {
   // Reverse geocode toutes les photos avec GPS (une req par lieu unique ~0.01°, 1 req/s)
   let first = true;
@@ -1579,6 +1591,7 @@ async function uploadToServer() {
     if (uploadAborted) {
       const sent = photos.indexOf(p) >= 0 ? photos.indexOf(p) : done;
       setStatus('pcloud-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
+      await _awaitEnrichAndRebuild('pcloud-status');
       await commitPhotosJsonMerged();
       return;
     }
@@ -1586,6 +1599,7 @@ async function uploadToServer() {
       ? `⚠ ${errors} erreur(s) — ${photos.length - errors} photo(s) traitées`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
     setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
+    await _awaitEnrichAndRebuild('pcloud-status');
     await commitPhotosJsonMerged();
   } catch (err) {
     btnStop.style.display = 'none';
