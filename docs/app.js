@@ -342,43 +342,11 @@ document.getElementById('lightbox-next').addEventListener('click', () => { if (s
 
 // ── Timeline ───────────────────────────────────────────────────────────
 // Timeline basée sur le TEMPS : slider = ms UTC, curseur proportionnel au temps réel
-// state.tlWindow = { t0, t1 } définit la portion visible (zoom)
 
 function timeToPct(ms) {
-  const t0 = state.tlWindow?.t0 ?? state.tMin;
-  const t1 = state.tlWindow?.t1 ?? state.tMax;
-  if (!t0 || t1 === t0) return 0;
-  return Math.max(0, Math.min(1, (ms - t0) / (t1 - t0)));
-}
-
-// Redessine curseur + escales + labels + photo dots selon la fenêtre courante
-function refreshTimeline() {
-  // Curseur
-  const curMs = Number(tlInput.value);
-  const pct = timeToPct(curMs) * 100;
-  const cursor = document.getElementById('tl-cursor');
-  if (cursor) cursor.style.left = `${pct}%`;
-  tlThumbLabel.style.left = `${pct}%`;
-  // Marqueurs et labels
-  buildTimelineCities();
-  renderTimelineEscales(state.escales);
-  renderTimelinePhotoDots();
-}
-
-function renderTimelinePhotoDots() {
-  const wrap = document.getElementById('timeline-slider-wrap');
-  if (!wrap) return;
-  Array.from(wrap.querySelectorAll('.tl-photo-dot')).forEach(el => el.remove());
-  const t0 = state.tlWindow?.t0 ?? state.tMin;
-  const t1 = state.tlWindow?.t1 ?? state.tMax;
-  state.photoTimes.forEach(t => {
-    if (t == null || t < t0 || t > t1) return;
-    const pct = timeToPct(t) * 100;
-    const dot = document.createElement('div');
-    dot.className = 'tl-photo-dot';
-    dot.style.left = `${pct}%`;
-    wrap.appendChild(dot);
-  });
+  const tMin = state.tMin, tMax = state.tMax;
+  if (!tMin || tMax === tMin) return 0;
+  return Math.max(0, Math.min(1, (ms - tMin) / (tMax - tMin)));
 }
 
 function timeToPhotoIdx(ms) {
@@ -414,7 +382,7 @@ function photoTimeStr(p) {
   return '';
 }
 
-function updateTimelineThumbByPhoto(pi, skipInputUpdate) {
+function updateTimelineThumbByPhoto(pi) {
   const photos = state.photos;
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
@@ -422,7 +390,7 @@ function updateTimelineThumbByPhoto(pi, skipInputUpdate) {
   const pct = t != null ? timeToPct(t) : pi / Math.max(1, photos.length - 1);
   const pctStr = `${pct * 100}%`;
   tlThumbLabel.style.left = pctStr;
-  if (t != null && !skipInputUpdate) tlInput.value = t;
+  if (t != null) tlInput.value = t;
   // Move visible cursor
   const cursor = document.getElementById('tl-cursor');
   if (cursor) cursor.style.left = pctStr;
@@ -765,30 +733,58 @@ async function init() {
   // ── Timeline Escale Highlights (photo-index based) ──
   function renderTimelineEscales(escales) {
     const wrap = document.getElementById('timeline-slider-wrap');
-    if (!wrap || !escales || !escales.length || !state.photos.length) return;
-    Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover')).forEach(el => el.remove());
+    if (!wrap || !state.photos.length) return;
+    Array.from(wrap.querySelectorAll('.tl-escale-bar, .tl-escale-cover, .tl-escale-city-tick, .tl-photo-dot, #tl-date-start, #tl-date-end')).forEach(el => el.remove());
 
-    if (!state.photos.length) return;
+    // ── Photo dots ──
+    state.photoTimes.forEach(t => {
+      if (t == null) return;
+      const pct = timeToPct(t) * 100;
+      const dot = document.createElement('div');
+      dot.className = 'tl-photo-dot';
+      dot.style.left = `${pct}%`;
+      wrap.appendChild(dot);
+    });
 
-    const BAR_W = 0.008;
-
-    escales.forEach(e => {
+    // ── Escale ticks ──
+    (escales || []).forEach(e => {
       if (!e.start) return;
       const t = new Date(e.start).getTime();
       if (isNaN(t)) return;
-      const pct = timeToPct(t);
+      const pct = timeToPct(t) * 100;
 
-      const cover = document.createElement('div');
-      cover.className = 'tl-escale-cover';
-      cover.style.cssText = `position:absolute;left:${pct*100}%;width:${BAR_W*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);z-index:1;pointer-events:none`;
-      wrap.appendChild(cover);
+      const tick = document.createElement('div');
+      tick.className = 'tl-escale-city-tick';
+      tick.style.cssText = `position:absolute;left:${pct}%;top:50%;transform:translateY(-50%);pointer-events:none;z-index:3`;
 
-      const bar = document.createElement('div');
-      bar.className = 'tl-escale-bar';
-      bar.title = e.city;
-      bar.style.cssText = `position:absolute;left:${pct*100}%;width:${BAR_W*100}%;top:50%;height:6px;margin-top:-2px;transform:translateY(-16%);background:rgba(240,192,96,1);border-radius:3px;z-index:2;box-shadow:0 0 2px 0 rgba(240,192,96,0.10);pointer-events:none`;
-      wrap.appendChild(bar);
+      const line = document.createElement('div');
+      line.className = 'tick-line';
+      tick.appendChild(line);
+
+      const name = document.createElement('div');
+      name.className = 'tick-name';
+      name.textContent = e.city;
+      tick.appendChild(name);
+
+      wrap.appendChild(tick);
     });
+
+    // ── Date labels below ──
+    if (state.tMin && state.tMax) {
+      const fmt = ms => {
+        const d = new Date(ms);
+        return `${d.getUTCDate()} ${MONTHS_FR[d.getUTCMonth() + 1]}`;
+      };
+      const s = document.createElement('div');
+      s.id = 'tl-date-start';
+      s.textContent = fmt(state.tMin);
+      wrap.appendChild(s);
+
+      const e2 = document.createElement('div');
+      e2.id = 'tl-date-end';
+      e2.textContent = fmt(state.tMax);
+      wrap.appendChild(e2);
+    }
   }
 
   // ── Day separators and photo dots REMOVED ──
@@ -801,21 +797,9 @@ async function init() {
 
   // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
   function refreshTimeline() {
-    // Recalcule slider range
-    const n = state.photos.length;
-    tlInput.max = Math.max(0, n - 1);
-    // Redessine tous les éléments visuels
+    tlInput.max = state.tMax || Math.max(0, state.photos.length - 1);
     renderTimelineBaseLine();
     renderTimelineEscales(state.escales);
-    // Met à jour les labels de bord
-    const startEl = document.getElementById('tl-label-start');
-    const endEl   = document.getElementById('tl-label-end');
-    const labelFromCaption = (cap) => {
-      const m = (cap || '').match(/(\d{4})-(\d{2})-(\d{2})/);
-      return m ? `${parseInt(m[3])} ${MONTHS_FR[parseInt(m[2])]}` : '';
-    };
-    if (startEl && n > 0) startEl.textContent = labelFromCaption(state.photos[0].caption);
-    if (endEl && n > 0)   endEl.textContent   = labelFromCaption(state.photos[n - 1].caption);
   }
   window._refreshTimeline = refreshTimeline;
   window._refreshTimelineEscales = () =>
@@ -859,7 +843,6 @@ async function init() {
   });
   state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
   state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
-  state.tlWindow = { t0: state.tMin, t1: state.tMax };
 
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
@@ -1117,76 +1100,9 @@ async function init() {
     else if (entries.length) selectEntry(0);
   }, 0);
   buildTimelineCities();
-  renderTimelinePhotoDots();
 
-  // ── Zoom timeline (wheel + pinch) ──  const tlWrap = document.getElementById('timeline-wrap');
-
-  function applyZoom(pivotMs, factor) {
-    const w = state.tlWindow;
-    const span = (w.t1 - w.t0) * factor;
-    const minSpan = 3600 * 1000;        // 1h minimum
-    const maxSpan = state.tMax - state.tMin;
-    const clampedSpan = Math.max(minSpan, Math.min(maxSpan, span));
-    // Centre le zoom sur le point de pivot
-    const pivotFrac = (pivotMs - w.t0) / (w.t1 - w.t0);
-    let t0 = pivotMs - pivotFrac * clampedSpan;
-    let t1 = t0 + clampedSpan;
-    // Clamp dans les bornes absolues
-    if (t0 < state.tMin) { t0 = state.tMin; t1 = t0 + clampedSpan; }
-    if (t1 > state.tMax) { t1 = state.tMax; t0 = t1 - clampedSpan; }
-    state.tlWindow = { t0, t1 };
-    tlInput.min = t0;
-    tlInput.max = t1;
-    refreshTimeline();
-  }
-
-  // Wheel : zoom centré sur la position de la souris sur la barre
-  tlWrap.addEventListener('wheel', (ev) => {
-    ev.preventDefault();
-    const rect = tlWrap.getBoundingClientRect();
-    const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
-    const pivotMs = state.tlWindow.t0 + frac * (state.tlWindow.t1 - state.tlWindow.t0);
-    const factor = ev.deltaY > 0 ? 1.35 : 1 / 1.35;
-    applyZoom(pivotMs, factor);
-  }, { passive: false });
-
-  // Pinch (touch) — deux doigts
-  let lastPinchDist = null;
-  let lastPinchMidMs = null;
-  tlWrap.addEventListener('touchstart', (ev) => {
-    if (ev.touches.length === 2) {
-      // Annuler tout drag en cours au profit du pinch
-      if (tlDrag) { tlDrag = null; tlSliderWrap.classList.remove('dragging'); }
-      const t = ev.touches;
-      lastPinchDist = Math.abs(t[0].clientX - t[1].clientX);
-      const rect = tlSliderWrap.getBoundingClientRect();
-      const midX = (t[0].clientX + t[1].clientX) / 2;
-      const frac = Math.max(0, Math.min(1, (midX - rect.left) / rect.width));
-      lastPinchMidMs = state.tlWindow.t0 + frac * (state.tlWindow.t1 - state.tlWindow.t0);
-    }
-  }, { passive: true });
-  tlWrap.addEventListener('touchmove', (ev) => {
-    if (ev.touches.length !== 2 || lastPinchDist == null) return;
-    ev.preventDefault();
-    const t = ev.touches;
-    const dist = Math.abs(t[0].clientX - t[1].clientX);
-    const factor = lastPinchDist / Math.max(1, dist);
-    lastPinchDist = dist;
-    applyZoom(lastPinchMidMs, factor);
-  }, { passive: false });
-  tlWrap.addEventListener('touchend', () => { lastPinchDist = null; lastPinchMidMs = null; });
-
-  // Double-clic : reset zoom
-  tlWrap.addEventListener('dblclick', () => {
-    state.tlWindow = { t0: state.tMin, t1: state.tMax };
-    tlInput.min = state.tMin;
-    tlInput.max = state.tMax;
-    refreshTimeline();
-  });
-
-  window.addEventListener('resize', () => {
-    renderTimelineEscales(escales);
-  });
+  // ── Animation timeline ──
+  let autoSlideRAF = null;
   function cancelAutoSlide() {
     if (autoSlideRAF) { cancelAnimationFrame(autoSlideRAF); autoSlideRAF = null; }
   }
@@ -1204,6 +1120,32 @@ async function init() {
     autoSlideRAF = requestAnimationFrame(step);
   }
 
+  tlInput.addEventListener('input', () => {
+    cancelAutoSlide();
+    const t = Number(tlInput.value);
+    const pi = timeToPhotoIdx(t);
+    // Curseur à la position temps (pas photo index)
+    const pct = timeToPct(t) * 100;
+    const cursor = document.getElementById('tl-cursor');
+    if (cursor) cursor.style.left = `${pct}%`;
+    tlThumbLabel.style.left = `${pct}%`;
+    updateTimelineThumbByPhoto(pi);
+    scrollCarouselTo(pi);
+    const photo = state.photos[pi];
+    if (photo) {
+      if (photo.lat != null && photo.lon != null) {
+        try { showRing([photo.lat, photo.lon]); } catch(e) {}
+      } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+        const e = state.entries[photo.entryIdx];
+        try { showRing([e.lat, e.lon]); } catch(e2) {}
+      }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    renderTimelineEscales(escales);
+  });
+
   // Helper: trouve le ms de l'escale la plus proche du temps courant
   function snapToEscaleRight(currentMs) {
     const esc = state.escales || [];
@@ -1219,89 +1161,42 @@ async function init() {
     return bestMs != null ? bestMs : currentMs;
   }
 
-  // ── Interaction timeline : seek + pan (pointer events unifiés) ──
-  const tlSliderWrap = document.getElementById('timeline-slider-wrap');
-
-  function clientXtoMs(clientX) {
-    const rect = tlSliderWrap.getBoundingClientRect();
-    const frac = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    const { t0, t1 } = state.tlWindow;
-    return t0 + frac * (t1 - t0);
-  }
-
-  function updateCursorAt(ms) {
-    const pct = timeToPct(ms) * 100;
-    const cursor = document.getElementById('tl-cursor');
-    if (cursor) cursor.style.left = `${pct}%`;
-    tlThumbLabel.style.left = `${pct}%`;
-  }
-
-  let tlDrag = null; // { startX, startT0, startT1, currentMs, isPan }
-
-  tlSliderWrap.addEventListener('pointerdown', (ev) => {
-    if (ev.button !== 0) return;
-    cancelAutoSlide();
-    tlSliderWrap.setPointerCapture(ev.pointerId);
-    const ms = clientXtoMs(ev.clientX);
-    tlDrag = { startX: ev.clientX, startT0: state.tlWindow.t0, startT1: state.tlWindow.t1, currentMs: ms, isPan: false };
-    tlSliderWrap.classList.add('dragging');
-    updateCursorAt(ms);
-    updateTimelineThumbByPhoto(timeToPhotoIdx(ms), true);
+  tlInput.addEventListener('change', () => {
+    const currentMs = Number(tlInput.value);
+    const snappedMs = snapToEscaleRight(currentMs);
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.remove('dragging');
+    animateToTime(currentMs, snappedMs, 2000,
+      val => {
+        tlInput.value = Math.round(val);
+        const pi = timeToPhotoIdx(val);
+        const pct = timeToPct(val) * 100;
+        const cursor = document.getElementById('tl-cursor');
+        if (cursor) cursor.style.left = `${pct}%`;
+        tlThumbLabel.style.left = `${pct}%`;
+        updateTimelineThumbByPhoto(pi);
+        scrollCarouselTo(pi);
+      },
+      () => {
+        const pi = timeToPhotoIdx(snappedMs);
+        const photo = state.photos[pi];
+        if (photo) selectPhotoEntry(photo, false);
+      }
+    );
   });
 
-  tlSliderWrap.addEventListener('pointermove', (ev) => {
-    if (!tlDrag) return;
-    const dx = ev.clientX - tlDrag.startX;
-    if (!tlDrag.isPan && Math.abs(dx) > 6) tlDrag.isPan = true;
-    if (tlDrag.isPan) {
-      tlSliderWrap.style.cursor = 'grabbing';
-      const rect = tlSliderWrap.getBoundingClientRect();
-      const span = tlDrag.startT1 - tlDrag.startT0;
-      const dMs = -(dx / rect.width) * span;
-      let t0 = tlDrag.startT0 + dMs;
-      let t1 = tlDrag.startT1 + dMs;
-      if (t0 < state.tMin) { t0 = state.tMin; t1 = t0 + span; }
-      if (t1 > state.tMax) { t1 = state.tMax; t0 = t1 - span; }
-      state.tlWindow = { t0, t1 };
-      tlInput.min = t0; tlInput.max = t1;
-      refreshTimeline();
-    } else {
-      const ms = clientXtoMs(ev.clientX);
-      tlDrag.currentMs = ms;
-      updateCursorAt(ms);
-      updateTimelineThumbByPhoto(timeToPhotoIdx(ms), true);
-    }
+  // Show thumb label during touch drag
+  tlInput.addEventListener('touchstart', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.add('dragging');
+  }, { passive: true });
+  tlInput.addEventListener('mousedown', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.add('dragging');
   });
-
-  tlSliderWrap.addEventListener('pointerup', (ev) => {
-    if (!tlDrag) return;
-    const { isPan, currentMs } = tlDrag;
-    tlDrag = null;
-    tlSliderWrap.classList.remove('dragging');
-    tlSliderWrap.style.cursor = '';
-    if (!isPan) {
-      tlInput.value = currentMs;
-      const snappedMs = snapToEscaleRight(currentMs);
-      animateToTime(currentMs, snappedMs, 2000,
-        val => {
-          tlInput.value = Math.round(val);
-          const pi = timeToPhotoIdx(val);
-          updateCursorAt(val);
-          updateTimelineThumbByPhoto(pi, true);
-          scrollCarouselTo(pi);
-        },
-        () => {
-          const pi = timeToPhotoIdx(snappedMs);
-          const photo = state.photos[pi];
-          if (photo) selectPhotoEntry(photo, false);
-        }
-      );
-    }
-  });
-
-  tlSliderWrap.addEventListener('pointercancel', () => {
-    tlDrag = null;
-    tlSliderWrap.classList.remove('dragging');
+  document.addEventListener('mouseup', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.remove('dragging');
   });
 
   // ── Nav buttons (navigate between photo-bearing entries) ──
