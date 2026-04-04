@@ -800,11 +800,23 @@ async function init() {
   }
 
   setTimeout(() => {
+    console.log('[TL] state.photos.length =', state.photos.length);
     renderTimelineBaseLine();
     renderTimelineEscales(escales);
     renderTimelineDayBars();
     renderTimelinePhotoDots();
     updateActiveDot(startPi);
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) {
+      const rect = wrap.getBoundingClientRect();
+      console.log('[TL] slider-wrap rect:', rect.width, 'x', rect.height);
+      console.log('[TL] dots:', wrap.querySelectorAll('.tl-photo-dot').length,
+                  'bars:', wrap.querySelectorAll('.tl-day-bar').length);
+      const dots = wrap.querySelectorAll('.tl-photo-dot');
+      if (dots.length > 0) {
+        console.log('[TL] first dot left:', dots[0].style.left, 'last:', dots[dots.length-1].style.left);
+      }
+    }
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
