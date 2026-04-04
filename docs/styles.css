@@ -654,25 +654,23 @@ body.immersive #sound-toggle { display: none; }
 #tl-prev:active, #tl-next:active {
   background: rgba(240,192,96,0.45);
 }
-#timeline-wrap { flex: 1; position: relative; display: flex; flex-direction: column; gap: 0; align-self: stretch; }
+#timeline-wrap { flex: 1; position: relative; display: flex; flex-direction: column; gap: 0; height: 100%; }
 
-#timeline-cities-row { display: none; }
+#timeline-cities-row { position: relative; height: 22px; width: 100%; flex-shrink: 0; overflow: visible; }
 .tl-city-tick {
   position: absolute; bottom: 0;
   pointer-events: none;
 }
 .tl-city-tick .tick-line {
   position: absolute; bottom: 0; left: 0;
-  width: 1px; height: 8px;
+  width: 1px; height: 6px;
   background: rgba(240,192,96,0.5);
 }
 .tl-city-tick .tick-name {
-  position: absolute; bottom: 10px; left: 2px;
-  font-size: 0.58rem; letter-spacing: 0.06em;
-  color: rgba(240,192,96,0.75); text-transform: uppercase;
+  position: absolute; bottom: 7px; left: 2px;
+  font-size: 0.5rem; letter-spacing: 0.04em;
+  color: rgba(240,192,96,0.65); text-transform: uppercase;
   white-space: nowrap;
-  transform-origin: bottom left;
-  transform: rotate(-45deg);
 }
 
 /* highlights */
@@ -694,7 +692,7 @@ body.immersive #sound-toggle { display: none; }
   box-shadow: 0 0 14px rgba(240,192,96,1);
 }
 
-#timeline-slider-wrap { position: relative; flex: 1; }
+#timeline-slider-wrap { position: relative; flex: 1; overflow: visible; }
 
 /* Non-linear segment track */
 #tl-segment-layer {
@@ -736,15 +734,30 @@ body.immersive #sound-toggle { display: none; }
   border: none; cursor: pointer;
 }
 #timeline-thumb-label {
-  position: absolute; top: -20px;
+  position: absolute; bottom: 100%; margin-bottom: 4px;
   transform: translateX(-50%);
   background: #f0c060; color: #000;
   font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
   padding: 2px 7px; border-radius: 2px; white-space: nowrap;
   pointer-events: none; opacity: 0; transition: opacity 0.15s;
+  z-index: 20;
 }
 #timeline-slider-wrap:hover #timeline-thumb-label,
+#timeline-slider-wrap.dragging #timeline-thumb-label,
 #timeline-input:active ~ #timeline-thumb-label { opacity: 1; }
+
+/* Visible cursor indicator */
+#tl-cursor {
+  position: absolute; top: 50%;
+  width: 3px; height: 60%;
+  background: #f0c060;
+  border-radius: 2px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 12;
+  box-shadow: 0 0 8px rgba(240,192,96,0.6);
+  transition: left 0.05s linear;
+}
 
 /* ── Day bars ── */
 .tl-day-bar {

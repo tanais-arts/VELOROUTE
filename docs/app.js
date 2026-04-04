@@ -352,7 +352,11 @@ function updateTimelineThumbByPhoto(pi) {
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
   const pct = photoIdxToPct(pi);
-  tlThumbLabel.style.left = `${pct * 100}%`;
+  const pctStr = `${pct * 100}%`;
+  tlThumbLabel.style.left = pctStr;
+  // Move visible cursor
+  const cursor = document.getElementById('tl-cursor');
+  if (cursor) cursor.style.left = pctStr;
   // Affiche la date de la photo (depuis caption ou entryIdx)
   const p = photos[pi];
   if (p) {
@@ -361,7 +365,13 @@ function updateTimelineThumbByPhoto(pi) {
     if (m) {
       const day = parseInt(m[3]);
       const month = MONTHS_FR[parseInt(m[2])];
-      tlThumbLabel.textContent = `${day} ${month}`;
+      // Include time from entryIdx if available
+      let timeStr = '';
+      if (p.entryIdx != null && state.entries[p.entryIdx]) {
+        const e = state.entries[p.entryIdx];
+        timeStr = ` · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
+      }
+      tlThumbLabel.textContent = `${day} ${month}${timeStr}`;
     } else if (p.entryIdx != null && state.entries[p.entryIdx]) {
       const e = state.entries[p.entryIdx];
       tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]} · ${e.hour}h${String(e.minute).padStart(2,'0')}`;
@@ -623,7 +633,13 @@ function selectPhotoEntry(photo, skipCarousel) {
     if (m) {
       if (dateDay)   dateDay.textContent   = parseInt(m[3]);
       if (dateMonth) dateMonth.textContent = MONTHS_FR[parseInt(m[2])];
-      if (dateTime)  dateTime.textContent  = '';
+      // Show time from GPX entry if available
+      if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
+        const e = state.entries[photo.entryIdx];
+        if (dateTime) dateTime.textContent = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
+      } else {
+        if (dateTime) dateTime.textContent = '';
+      }
     } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
       const e = state.entries[photo.entryIdx];
       if (dateDay)   dateDay.textContent   = e.day;
@@ -1116,6 +1132,23 @@ async function init() {
     const pi = Math.round(Number(tlInput.value));
     const photo = state.photos[pi];
     if (photo) selectPhotoEntry(photo, false);
+    // Hide thumb label after release
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.remove('dragging');
+  });
+
+  // Show thumb label during touch drag
+  tlInput.addEventListener('touchstart', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.add('dragging');
+  }, { passive: true });
+  tlInput.addEventListener('mousedown', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.add('dragging');
+  });
+  document.addEventListener('mouseup', () => {
+    const wrap = document.getElementById('timeline-slider-wrap');
+    if (wrap) wrap.classList.remove('dragging');
   });
 
   // ── Nav buttons (navigate between photo-bearing entries) ──
