@@ -342,7 +342,25 @@ document.getElementById('lightbox-next').addEventListener('click', () => { if (s
 
 // ── Timeline ───────────────────────────────────────────────────────────
 // Timeline basée sur les PHOTOS : slider = index photo 0..N-1
+// Positionnement par JOUR : chaque jour distinct occupe un espace égal.
+function buildPhotoPositions() {
+  const photos = state.photos;
+  const n = photos.length;
+  state._dayMap = new Array(n);
+  let dayIdx = -1, lastKey = '';
+  for (let i = 0; i < n; i++) {
+    const m = (photos[i].caption || '').match(/^(\d{4}-\d{2}-\d{2})/);
+    const key = m ? m[1] : `__${i}`;
+    if (key !== lastKey) { dayIdx++; lastKey = key; }
+    state._dayMap[i] = dayIdx;
+  }
+  state._totalDays = dayIdx + 1;
+}
+
 function photoIdxToPct(pi) {
+  if (state._dayMap && state._totalDays > 1) {
+    return state._dayMap[pi] / (state._totalDays - 1);
+  }
   const n = state.photos.length;
   return n > 1 ? pi / (n - 1) : 0;
 }
@@ -802,27 +820,17 @@ async function init() {
   }
 
   setTimeout(() => {
-    console.log('[TL] state.photos.length =', state.photos.length);
     renderTimelineBaseLine();
     renderTimelineEscales(escales);
     renderTimelineDayBars();
     renderTimelinePhotoDots();
     updateActiveDot(startPi);
-    const wrap = document.getElementById('timeline-slider-wrap');
-    if (wrap) {
-      const rect = wrap.getBoundingClientRect();
-      console.log('[TL] slider-wrap rect:', rect.width, 'x', rect.height);
-      console.log('[TL] dots:', wrap.querySelectorAll('.tl-photo-dot').length,
-                  'bars:', wrap.querySelectorAll('.tl-day-bar').length);
-      const dots = wrap.querySelectorAll('.tl-photo-dot');
-      if (dots.length > 0) {
-        console.log('[TL] first dot left:', dots[0].style.left, 'last:', dots[dots.length-1].style.left);
-      }
-    }
   }, 0);
 
   // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
   function refreshTimeline() {
+    // Recalcule positions par jour
+    buildPhotoPositions();
     // Recalcule slider range
     const n = state.photos.length;
     tlInput.max = Math.max(0, n - 1);
@@ -866,6 +874,7 @@ async function init() {
   state.photos  = photos
     .filter(p => !p.hidden)
     .map(p => ({ ...p, src: normUrl(p.src), thumb: normUrl(p.thumb), webp: normUrl(p.webp), src_orig: normUrl(p.src_orig) }));
+  buildPhotoPositions();
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
