@@ -75,9 +75,10 @@ const hillshade = L.tileLayer(
 const dateDay      = document.getElementById('date-day');
 const dateMonth    = document.getElementById('date-month');
 const dateTime     = document.getElementById('date-time');
-const tlInput      = document.getElementById('timeline-input');
-const tlThumbLabel = document.getElementById('timeline-thumb-label');
-const tlCitiesRow  = document.getElementById('timeline-cities-row');
+const dateLoc      = document.getElementById('date-loc');
+const tlInput      = document.getElementById('timeline-input');      // null (bottom-bar removed)
+const tlThumbLabel = document.getElementById('timeline-thumb-label'); // null (bottom-bar removed)
+const tlCitiesRow  = document.getElementById('timeline-cities-row');  // null (bottom-bar removed)
 const lightbox     = document.getElementById('lightbox');
 const lbImg        = document.getElementById('lightbox-img');
 
@@ -387,23 +388,25 @@ function updateTimelineThumbByPhoto(pi) {
   if (!photos || !photos.length) return;
   pi = Math.max(0, Math.min(pi, photos.length - 1));
   const t = state.photoTimes?.[pi];
-  // Affiche la date + heure de la photo
-  const p = photos[pi];
-  if (p) {
-    const cap = p.caption || '';
-    const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
-    const tStr = photoTimeStr(p);
-    if (m) {
-      const day = parseInt(m[3]);
-      const month = MONTHS_FR[parseInt(m[2])];
-      tlThumbLabel.textContent = tStr ? `${day} ${month} · ${tStr}` : `${day} ${month}`;
-    } else if (p.entryIdx != null && state.entries[p.entryIdx]) {
-      const e = state.entries[p.entryIdx];
-      tlThumbLabel.textContent = `${e.day} ${MONTHS_FR[e.month]}${tStr ? ' · ' + tStr : ''}`;
-    }
-  }
   // Move scroll track so this photo's time is under the fixed cursor
   if (t != null && typeof window._tlSeekToMs === 'function') window._tlSeekToMs(t);
+}
+
+// Helper : ville de l'escale la plus proche d'un index photo
+function photoEscaleCity(pi) {
+  const t = state.photoTimes?.[pi];
+  if (t == null) return '';
+  const esc = state.escales || [];
+  let best = '', bestDist = Infinity;
+  esc.forEach(e => {
+    if (!e.start || !e.city) return;
+    const et = new Date(e.start).getTime();
+    if (!isNaN(et)) {
+      const d = Math.abs(et - t);
+      if (d < bestDist) { bestDist = d; best = e.city; }
+    }
+  });
+  return best;
 }
 
 // Compat wrapper pour les appels existants par entryIdx
@@ -631,6 +634,8 @@ function selectPhotoEntry(photo, skipCarousel) {
   if (pi >= 0) {
     updateTimelineThumbByPhoto(pi);
     if (!skipCarousel) scrollCarouselTo(pi, true);
+    // Ville / lieu
+    if (dateLoc) dateLoc.textContent = photoEscaleCity(pi);
     // Update date display from photo
     const cap = photo.caption || '';
     const m = cap.match(/(\d{4})-(\d{2})-(\d{2})/);
@@ -1079,7 +1084,7 @@ async function init() {
   let tlCurrentMs = state.tMin || 0;
 
   function tlPxPerMs() {
-    const w = tlWrap ? tlWrap.offsetWidth : 300;
+    const w = tlWrap ? (tlWrap.offsetWidth || window.innerWidth) : window.innerWidth;
     return w / (VISIBLE_DAYS * MS_PER_DAY);
   }
   function tlTrackWidth() {
@@ -1096,7 +1101,7 @@ async function init() {
 
   // Build the scroll track once
   let tlTrack = document.getElementById('tl-scroll-track');
-  if (!tlTrack) {
+  if (!tlTrack && tlWrap) {
     tlTrack = document.createElement('div');
     tlTrack.id = 'tl-scroll-track';
     tlWrap.appendChild(tlTrack);
@@ -1200,6 +1205,7 @@ async function init() {
 
   // ── Pointer/touch drag on timeline ──
   let tlDrag = null;
+  if (tlWrap) {
   tlWrap.addEventListener('pointerdown', e => {
     e.preventDefault();
     tlWrap.setPointerCapture(e.pointerId);
@@ -1253,9 +1259,9 @@ async function init() {
   tlWrap.addEventListener('wheel', e => {
     e.preventDefault();
     cancelAutoSlide();
-    // 1 step molette (~100 px deltaY) ≈ déplacement d'autant de px sur le track
     seekToMs(tlCurrentMs + (e.deltaY + e.deltaX) / tlPxPerMs(), false);
   }, { passive: false });
+  } // end if (tlWrap)
 
   function snapToEscaleMs(currentMs) {
     const esc = state.escales || [];
@@ -1331,6 +1337,7 @@ async function init() {
   const carouselEl = document.getElementById('photo-carousel');
   function attachCarouselArrow(btnId, fn) {
     const btn = document.getElementById(btnId);
+    if (!btn) return;
     let intervalId = null;
     function start() { fn(); intervalId = setInterval(() => fn(), 350); }
     function stop()  { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
@@ -1343,8 +1350,8 @@ async function init() {
   attachCarouselArrow('carousel-prev', navPrev);
   attachCarouselArrow('carousel-next', navNext);
 
-  document.getElementById('tl-prev').addEventListener('click', debounce(navPrev, 400));
-  document.getElementById('tl-next').addEventListener('click', debounce(navNext, 400));
+  document.getElementById('tl-prev')?.addEventListener('click', debounce(navPrev, 400));
+  document.getElementById('tl-next')?.addEventListener('click', debounce(navNext, 400));
 
   // ── Keyboard ──
   document.addEventListener('keydown', ev => {
