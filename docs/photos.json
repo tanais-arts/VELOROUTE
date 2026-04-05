@@ -4893,5 +4893,16 @@
     "entryIdx": null,
     "caption": "2026-02-04",
     "photoMs": 1770238480000
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_3775.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_3775.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_3775.HEIC",
+    "entryIdx": 795,
+    "caption": "2026-04-05",
+    "photoMs": 1775388660000,
+    "lat": 48.76558,
+    "lon": 2.36448,
+    "city": "Chevilly-Larue"
   }
 ]
