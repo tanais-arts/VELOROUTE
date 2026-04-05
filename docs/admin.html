@@ -885,9 +885,10 @@ function buildPhotoEntries() {
     .sort((a, b) => a.photoMs - b.photoMs)
     .map(p => {
       const name = p.type === 'video' ? p.file.name : jpgName(p.file.name);
+      const thumbName = p.type === 'video' ? jpgName(p.file.name) : name;
       return {
         src:      buildUrl(name, 'Photos'),
-        thumb:    buildUrl(name, 'Thumbs'),
+        thumb:    buildUrl(thumbName, 'Thumbs'),
         src_orig: buildUrl(p.file.name, 'Sources'),
         entryIdx: p.entryIdx,
         caption:  p.captionDate || '',
@@ -1711,7 +1712,7 @@ async function uploadToServer() {
   const sub = subfolder ? `/${subfolder}` : '';
 
   const photos = rawPhotos.filter(p => p.file);
-  const total = photos.reduce((n, p) => n + (p.type === 'video' ? 2 : 3), 0);
+  const total = photos.reduce((n, p) => n + 3, 0); // Source + Photos/Thumbs + Thumb pour tous
   let done = 0, errors = 0;
   const tick = () => { done++; progBar.style.width = `${(done / total) * 100}%`; };
 
@@ -1727,11 +1728,17 @@ async function uploadToServer() {
       tick();
 
       if (isVideo) {
-        // ② Vignette vidéo (Thumbs)
-        setStatus('pcloud-status', `↑ Vignette vidéo : ${outName}…`);
+        // ② Fichier vidéo (Photos)
+        setStatus('pcloud-status', `↑ Vidéo : ${outName}…`);
+        try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; }
+        tick();
+
+        // ③ Vignette vidéo JPEG (Thumbs)
+        const thumbOutName = jpgName(outName);
+        setStatus('pcloud-status', `↑ Vignette vidéo : ${thumbOutName}…`);
         try {
           const thumbBlob = await generateVideoThumbnail(p.file);
-          await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
+          await serverUploadFile(`Thumbs${sub}/${thumbOutName}`, thumbBlob, thumbOutName);
         } catch (e) { console.warn(e); errors++; }
         tick();
       } else {
