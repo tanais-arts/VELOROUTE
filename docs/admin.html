@@ -937,7 +937,14 @@ async function generateVideoThumbnail(file) {
     };
 
     video.addEventListener('loadedmetadata', () => { video.currentTime = 0.5; }, { once: true });
-    video.addEventListener('seeked', draw, { once: true });
+    video.addEventListener('seeked', () => {
+      // Attendre que le frame soit réellement rendu avant de dessiner
+      if (typeof video.requestVideoFrameCallback === 'function') {
+        video.requestVideoFrameCallback(draw);
+      } else {
+        setTimeout(draw, 80);
+      }
+    }, { once: true });
     video.addEventListener('error', () => {
       URL.revokeObjectURL(objUrl);
       const W = 320, H = 240;

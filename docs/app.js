@@ -207,6 +207,9 @@ function lbShowCurrent() {
     if (lbVideo.src !== item.src) {
       lbVideo.src = item.src;
       lbVideo.load();
+      lbVideo.play().catch(() => {});
+    } else if (lbVideo.paused) {
+      lbVideo.play().catch(() => {});
     }
     prog.classList.remove('active');
   } else {
