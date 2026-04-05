@@ -936,7 +936,9 @@ async function generateVideoThumbnail(file) {
       canvas.toBlob(blob => { URL.revokeObjectURL(objUrl); resolve(blob); }, 'image/jpeg', 0.82);
     };
 
-    video.addEventListener('loadedmetadata', () => { video.currentTime = 0.5; }, { once: true });
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = video.duration > 0 ? video.duration / 2 : 0.5;
+    }, { once: true });
     video.addEventListener('seeked', () => {
       // Attendre que le frame soit réellement rendu avant de dessiner
       if (typeof video.requestVideoFrameCallback === 'function') {
