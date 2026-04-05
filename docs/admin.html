@@ -816,7 +816,7 @@ function buildUrlWith(filename, type, subfolder) {
 
 // Normalise l'extension vers .jpg (HEIC, PNG… → toujours JPEG après resize)
 function jpgName(filename) {
-  return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp)$/i, '.jpg');
+  return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
 }
 
 // Redimensionne une image (File/Blob) côté navigateur via canvas → Blob JPEG
