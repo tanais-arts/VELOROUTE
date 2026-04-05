@@ -198,17 +198,34 @@ function lbShowCurrent() {
   const item = state.lbPhotos[state.lbIdx];
   if (!item) return;
   const prog = document.getElementById('lb-progress');
-  prog.classList.add('active');
-  const srcs = [item.webp, item.src, item.thumb].filter(Boolean);
-  let si = 0;
-  const tryNext = () => {
-    if (si >= srcs.length) { prog.classList.remove('active'); return; }
-    const src = srcs[si++];
-    lbImg.onload  = () => prog.classList.remove('active');
-    lbImg.onerror = tryNext;
-    lbImg.src = src;
-  };
-  tryNext();
+  const lbVideo = document.getElementById('lightbox-video');
+
+  if (item.type === 'video') {
+    // Affichage vidéo
+    lbImg.style.display  = 'none';
+    lbVideo.style.display = '';
+    if (lbVideo.src !== item.src) {
+      lbVideo.src = item.src;
+      lbVideo.load();
+    }
+    prog.classList.remove('active');
+  } else {
+    // Affichage photo
+    lbVideo.style.display = 'none';
+    lbVideo.src = '';
+    lbImg.style.display = '';
+    prog.classList.add('active');
+    const srcs = [item.webp, item.src, item.thumb].filter(Boolean);
+    let si = 0;
+    const tryNext = () => {
+      if (si >= srcs.length) { prog.classList.remove('active'); return; }
+      const src = srcs[si++];
+      lbImg.onload  = () => prog.classList.remove('active');
+      lbImg.onerror = tryNext;
+      lbImg.src = src;
+    };
+    tryNext();
+  }
   document.getElementById('lightbox-prev').style.visibility = state.lbIdx > 0 ? '' : 'hidden';
   document.getElementById('lightbox-next').style.visibility = state.lbIdx < state.lbPhotos.length - 1 ? '' : 'hidden';
   updateLbLocation(item);

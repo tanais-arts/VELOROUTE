@@ -958,6 +958,142 @@ async function generateVideoThumbnail(file) {
 }
 
 // ── Photos handler ─────────────────────────────────────────────────────
+// ── Parser QuickTime/MP4 natif (Exifr ne lit pas les containers vidéo) ────────────
+async function parseQuickTimeMeta(file) {
+  const SCAN = 2 * 1024 * 1024; // 2 MB par fenêtre
+
+  function readAtoms(view, from, to) {
+    const atoms = {};
+    let o = from;
+    while (o + 8 <= to && o + 8 <= view.byteLength) {
+      const sz = view.getUint32(o);
+      if (sz < 8 || sz > 256 * 1024 * 1024) break;
+      const t = String.fromCharCode(view.getUint8(o+4), view.getUint8(o+5), view.getUint8(o+6), view.getUint8(o+7));
+      atoms[t] = { o, sz };
+      o += sz;
+    }
+    return atoms;
+  }
+
+  function findMoov(view) {
+    for (let i = 0; i + 8 <= view.byteLength; i++) {
+      if (view.getUint8(i+4)===0x6D && view.getUint8(i+5)===0x6F &&
+          view.getUint8(i+6)===0x6F && view.getUint8(i+7)===0x76) {
+        const sz = view.getUint32(i);
+        if (sz >= 8 && sz <= 100*1024*1024) return i;
+      }
+    }
+    return -1;
+  }
+
+  function parseISO6709(str) {
+    const m = (str||'').trim().match(/([+-]\d+\.?\d*)/g);
+    if (m && m.length >= 2) {
+      const lat = parseFloat(m[0]), lon = parseFloat(m[1]);
+      if (!isNaN(lat) && !isNaN(lon)) return { lat, lon };
+    }
+    return null;
+  }
+
+  function parseMoov(buf, moovOffset) {
+    const view = new DataView(buf);
+    const moovSize = view.getUint32(moovOffset);
+    const result = {};
+
+    const children = readAtoms(view, moovOffset + 8, moovOffset + moovSize);
+
+    // Date UTC depuis mvhd (secondes depuis l'époque QT 1904-01-01)
+    if (children.mvhd) {
+      const m = children.mvhd;
+      const v = view.getUint8(m.o + 8); // version (0 ou 1)
+      const qtSecs = v === 1
+        ? view.getUint32(m.o+12)*4294967296 + view.getUint32(m.o+16)
+        : view.getUint32(m.o + 12);
+      result.photoMs = (qtSecs - 2082844800) * 1000; // époche QT → Unix
+    }
+
+    // GPS depuis udta/©xyz (format StringData : len16 + lang16 + UTF-8)
+    if (children.udta) {
+      const u = children.udta;
+      const udta = readAtoms(view, u.o + 8, u.o + u.sz);
+      const xyz = udta['\xa9xyz'];
+      if (xyz) {
+        // Tentative format StringData
+        const strLen = view.getUint16(xyz.o + 8);
+        if (strLen > 0 && strLen < xyz.sz) {
+          const str = new TextDecoder().decode(new Uint8Array(buf, xyz.o + 12, strLen));
+          const c = parseISO6709(str);
+          if (c) { result.lat = c.lat; result.lon = c.lon; }
+        }
+        // Fallback : sous-atome data
+        if (result.lat == null) {
+          let co = xyz.o + 8;
+          while (co + 8 <= xyz.o + xyz.sz && co + 8 <= buf.byteLength) {
+            const csz = view.getUint32(co);
+            if (csz < 8) break;
+            const ct = String.fromCharCode(view.getUint8(co+4), view.getUint8(co+5), view.getUint8(co+6), view.getUint8(co+7));
+            if (ct === 'data' && csz > 16 && co + csz <= buf.byteLength) {
+              const str = new TextDecoder().decode(new Uint8Array(buf, co+16, csz-16));
+              const c = parseISO6709(str);
+              if (c) { result.lat = c.lat; result.lon = c.lon; }
+            }
+            co += csz;
+          }
+        }
+      }
+
+      // Fallback : udta/meta/ilst (métadonnées Apple clé/valeur)
+      if (result.lat == null && udta.meta) {
+        const mg = udta.meta;
+        const mc = readAtoms(view, mg.o + 8 + 4, mg.o + mg.sz); // 4 octets version/flags
+        if (mc.ilst) {
+          const il = mc.ilst;
+          let io = il.o + 8;
+          while (io + 8 <= il.o + il.sz && io + 8 <= buf.byteLength) {
+            const isz = view.getUint32(io);
+            if (isz < 8) break;
+            let co = io + 8;
+            while (co + 8 <= io + isz && co + 8 <= buf.byteLength) {
+              const csz = view.getUint32(co);
+              if (csz < 8) break;
+              const ct = String.fromCharCode(view.getUint8(co+4), view.getUint8(co+5), view.getUint8(co+6), view.getUint8(co+7));
+              if (ct === 'data' && csz > 16 && co + csz <= buf.byteLength) {
+                const str = new TextDecoder().decode(new Uint8Array(buf, co+16, csz-16));
+                const c = parseISO6709(str);
+                if (c) { result.lat = c.lat; result.lon = c.lon; }
+              }
+              co += csz;
+            }
+            io += isz;
+          }
+        }
+      }
+    }
+
+    return (result.photoMs != null || result.lat != null) ? result : null;
+  }
+
+  // Essai fenêtre début (fast-start), puis fin (enregistrement normal iPhone)
+  for (const start of [0, Math.max(0, file.size - SCAN)]) {
+    try {
+      const buf = await file.slice(start, start + SCAN).arrayBuffer();
+      const view = new DataView(buf);
+      const moovOff = findMoov(view);
+      if (moovOff === -1) continue;
+      const moovSize = view.getUint32(moovOff);
+      let finalBuf = buf, finalOff = moovOff;
+      if (moovOff + moovSize > buf.byteLength) {
+        // moov déborde — relire complètement
+        finalBuf = await file.slice(start + moovOff, start + moovOff + moovSize).arrayBuffer();
+        finalOff = 0;
+      }
+      const res = parseMoov(finalBuf, finalOff);
+      if (res) return res;
+    } catch {}
+  }
+  return null;
+}
+
 async function handlePhotos(files, clearGrid = true) {
   if (!files.length) return;
 
@@ -995,9 +1131,22 @@ async function handlePhotos(files, clearGrid = true) {
       });
 
       const dateVal  = exif?.DateTimeOriginal || exif?.DateTime || exif?.CreateDate;
-      const photoMs  = exifDateToMs(dateVal);
-      const lat      = exif?.latitude  ?? null;
-      const lon      = exif?.longitude ?? null;
+      let photoMs  = exifDateToMs(dateVal);
+      let lat      = exif?.latitude  ?? null;
+      let lon      = exif?.longitude ?? null;
+
+      const isVideo = file.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(file.name);
+
+      // Fallback QuickTime pour les vidéos (Exifr ne lit pas les containers MOV/MP4)
+      if (isVideo && (photoMs == null || lat == null)) {
+        try {
+          const qt = await parseQuickTimeMeta(file);
+          if (qt) {
+            if (photoMs == null && qt.photoMs != null) photoMs = qt.photoMs;
+            if (lat    == null && qt.lat    != null) { lat = qt.lat; lon = qt.lon; }
+          }
+        } catch {}
+      }
 
       let captionDate = '';
       if (photoMs != null) {
@@ -1006,7 +1155,7 @@ async function handlePhotos(files, clearGrid = true) {
       }
 
       rawPhotos.push({ file, photoMs, lat, lon, captionDate, entryIdx: 0,
-        type: (file.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(file.name)) ? 'video' : 'photo' });
+        type: isVideo ? 'video' : 'photo' });
 
       // Thumbnail preview
       const img = document.createElement('img');
@@ -1800,17 +1949,24 @@ $('btn-ph-delete').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
   if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur VLR-server seront également supprimés.`)) return;
-  // Supprimer les sources sur VLR-server
+  // Supprimer les 3 fichiers sur VLR-server (Sources, Photos, Thumbs)
   if (serverToken) {
     for (const p of sel) {
-      try {
-        const srcName = decodeURIComponent(p.src_orig ? p.src_orig.split('/Sources/')[1] || '' : p.src.split('/Sources/')[1] || '');
-        if (srcName) {
-          await fetch(`${serverBase()}/files?path=${encodeURIComponent('Sources/' + srcName)}`, {
+      const toDelete = [];
+      // Source originale
+      const srcRel = p.src_orig ? p.src_orig.split('/files/')[1] : (p.src ? p.src.split('/files/')[1] : null);
+      if (srcRel) toDelete.push(decodeURIComponent(srcRel));
+      // Photo 2500px
+      if (p.src) { const r = p.src.split('/files/')[1]; if (r) toDelete.push(decodeURIComponent(r)); }
+      // Vignette
+      if (p.thumb) { const r = p.thumb.split('/files/')[1]; if (r) toDelete.push(decodeURIComponent(r)); }
+      for (const relPath of toDelete) {
+        try {
+          await fetch(`${serverBase()}/files?path=${encodeURIComponent(relPath)}`, {
             method: 'DELETE', headers: { Authorization: `Bearer ${serverToken}` }
           });
-        }
-      } catch (err) { console.warn(`VLR-server delete photo:`, err); }
+        } catch (err) { console.warn(`VLR-server delete ${relPath}:`, err); }
+      }
     }
   }
   sel.forEach(p => { try { existingPhotoFilenames.delete(decodeURIComponent(p.src.split('/').pop())); } catch {} });
