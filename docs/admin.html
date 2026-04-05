@@ -1167,11 +1167,28 @@ async function handlePhotos(files, clearGrid = true) {
       grid.appendChild(img);
 
     } catch {
-      rawPhotos.push({ file, photoMs: null, lat: null, lon: null, captionDate: '', entryIdx: 0,
-        type: (file.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(file.name)) ? 'video' : 'photo' });
+      const isVideoFallback = file.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(file.name);
+      let photoMs = null, lat = null, lon = null, captionDate = '';
+
+      if (isVideoFallback) {
+        try {
+          const qt = await parseQuickTimeMeta(file);
+          if (qt) {
+            if (qt.photoMs != null) photoMs = qt.photoMs;
+            if (qt.lat    != null) { lat = qt.lat; lon = qt.lon; }
+          }
+        } catch {}
+        if (photoMs != null) {
+          const d = new Date(photoMs);
+          captionDate = `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
+        }
+      }
+
+      rawPhotos.push({ file, photoMs, lat, lon, captionDate, entryIdx: 0,
+        type: isVideoFallback ? 'video' : 'photo' });
       const img = document.createElement('img');
-      img.title = `${file.name} · erreur EXIF`;
-      img.className = 'no-exif';
+      img.title = `${file.name}${photoMs ? ' · ' + captionDate : ' · pas de date EXIF'}`;
+      img.className = photoMs != null ? 'has-exif' : 'no-exif';
       const objUrl = URL.createObjectURL(file);
       img.src = objUrl;
       img.onload = () => URL.revokeObjectURL(objUrl);
