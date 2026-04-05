@@ -49,7 +49,7 @@
     <button id="lightbox-close">✕</button>
     <div id="lightbox-img-wrap">
       <img id="lightbox-img" src="" alt="">
-      <video id="lightbox-video" controls playsinline style="display:none"></video>
+      <video id="lightbox-video" controls playsinline style="display:none" onclick="event.stopPropagation()"></video>
     </div>
     <div id="lb-toolbar">
       <button id="lightbox-prev">&#10094;</button>

@@ -196,6 +196,7 @@ html, body {
   cursor: pointer;
   border-radius: 2px;
   overflow: hidden;
+  background: #1a1a2a;
 }
 .video-thumb-wrap .photo-thumb {
   width: 100%; height: 100%;

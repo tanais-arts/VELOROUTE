@@ -242,6 +242,7 @@ function lbShowCurrent() {
 }
 
 document.getElementById('lightbox-backdrop').addEventListener('click', closeLightbox);
+document.getElementById('lightbox-video').addEventListener('click', e => e.stopPropagation());
 document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 document.getElementById('lightbox-prev').addEventListener('click', () => { if (state.lbIdx > 0) { state.lbIdx--; lbShowCurrent(); } });
 document.getElementById('lightbox-next').addEventListener('click', () => { if (state.lbIdx < state.lbPhotos.length - 1) { state.lbIdx++; lbShowCurrent(); } });
@@ -830,14 +831,21 @@ async function init() {
     }
 
     const img = document.createElement('img');
-    if (i < 10) {
+    if (p.type === 'video' && !p.thumb) {
+      // Pas de vignette : fond gris, juste le badge ▶
+      img.style.visibility = 'hidden';
+    } else if (i < 10) {
       img.src = p.thumb || p.src;
     } else {
       img.dataset.src = p.thumb || p.src;
     }
     img.className = 'photo-thumb';
     img.draggable = false;
-    img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
+    if (p.type === 'video') {
+      img.onerror = () => { img.removeAttribute('src'); img.style.visibility = 'hidden'; };
+    } else {
+      img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
+    }
 
     const outer = document.createElement('div');
     outer.className = 'thumb-cell';
