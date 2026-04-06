@@ -5751,7 +5751,7 @@
     "lat": 48.77291,
     "lon": 2.377,
     "city": "Vitry-sur-Seine",
-    "voyage": "test",
+    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
@@ -5785,7 +5785,7 @@
     "caption": "2026-04-05",
     "photoMs": 1775375962000,
     "type": "video",
-    "voyage": "test",
+    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
@@ -5796,7 +5796,7 @@
     "caption": "2026-04-05",
     "photoMs": 1775375985000,
     "type": "video",
-    "voyage": "test",
+    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
