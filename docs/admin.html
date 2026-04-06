@@ -472,8 +472,7 @@
           onclick="toggleAddVoyageForm()">+ Nouveau</button>
         <button type="button" id="btn-del-voyage"
           title="Supprimer le voyage sélectionné"
-          style="padding:3px 8px;font-size:.72rem;background:rgba(255,80,60,.08);border:1px solid rgba(255,80,60,.3);border-radius:4px;color:rgba(255,120,100,.8);cursor:pointer"
-          onclick="const v=$('photo-voyage').value;if(v)deleteVoyage(v);else setStatus('manage-status','Sélectionnez un voyage à supprimer.','warn')">🗑</button>
+          style="padding:3px 8px;font-size:.72rem;background:rgba(255,80,60,.08);border:1px solid rgba(255,80,60,.3);border-radius:4px;color:rgba(255,120,100,.8);cursor:pointer">🗑</button>
       </div>
       <div id="add-voyage-form" style="display:none;align-items:center;gap:6px;margin-bottom:8px;padding:6px 8px;background:rgba(240,192,96,.05);border:1px solid rgba(240,192,96,.2);border-radius:6px">
         <input id="add-voyage-input" type="text" placeholder="Ex : Bretagne 2026"
@@ -2439,6 +2438,11 @@ $('photos-mobile-btn').addEventListener('click', () => $('photos-input').click()
 window.toggleAddVoyageForm = toggleAddVoyageForm;
 window.confirmAddVoyage    = confirmAddVoyage;
 window.deleteVoyage        = deleteVoyage;
+$('btn-del-voyage').addEventListener('click', () => {
+  const v = $('photo-voyage').value;
+  if (v) deleteVoyage(v);
+  else setStatus('manage-status', 'Sélectionnez un voyage à supprimer.', 'warn');
+});
 </script>
 </body>
 </html>
