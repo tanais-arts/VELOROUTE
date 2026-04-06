@@ -5777,6 +5777,17 @@
     "author": "test"
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3796.mov",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3796.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3796.mov",
+    "entryIdx": null,
+    "caption": "2026-04-06",
+    "photoMs": 1775508957000,
+    "type": "video",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3782.jpeg",
     "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3782.jpeg",
     "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3782.jpeg",
