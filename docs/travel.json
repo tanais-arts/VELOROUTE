@@ -10388,6 +10388,396 @@
   },
   {
     "id": 800,
+    "lon": 2.39867,
+    "lat": 48.82328,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 23,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746400980000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 801,
+    "lon": 2.40191,
+    "lat": 48.82324,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 24,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401040000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 802,
+    "lon": 2.40435,
+    "lat": 48.82359,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 25,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401100000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 803,
+    "lon": 2.4061,
+    "lat": 48.82515,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 26,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401160000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 804,
+    "lon": 2.40419,
+    "lat": 48.82771,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 27,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401220000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 805,
+    "lon": 2.39966,
+    "lat": 48.83064,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 28,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401280000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 806,
+    "lon": 2.39734,
+    "lat": 48.83211,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 29,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401340000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 807,
+    "lon": 2.39339,
+    "lat": 48.83483,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 30,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401400000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 808,
+    "lon": 2.39032,
+    "lat": 48.83809,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 31,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401460000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 809,
+    "lon": 2.38789,
+    "lat": 48.84059,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 32,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401520000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 810,
+    "lon": 2.38387,
+    "lat": 48.84323,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 33,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401580000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 811,
+    "lon": 2.37995,
+    "lat": 48.84513,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 34,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401640000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 812,
+    "lon": 2.37558,
+    "lat": 48.84722,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 35,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401700000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 813,
+    "lon": 2.3715,
+    "lat": 48.8492,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 36,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401760000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 814,
+    "lon": 2.36955,
+    "lat": 48.85217,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 37,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401820000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 815,
+    "lon": 2.36661,
+    "lat": 48.85346,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 38,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401880000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 816,
+    "lon": 2.36189,
+    "lat": 48.85498,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 39,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746401940000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 817,
+    "lon": 2.3567,
+    "lat": 48.85625,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 40,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402000000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 818,
+    "lon": 2.35243,
+    "lat": 48.85723,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 41,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402060000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 819,
+    "lon": 2.34765,
+    "lat": 48.85869,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 42,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402120000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 820,
+    "lon": 2.34409,
+    "lat": 48.86118,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 43,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402180000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 821,
+    "lon": 2.33917,
+    "lat": 48.86222,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 44,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402240000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 822,
+    "lon": 2.33397,
+    "lat": 48.8632,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 45,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402300000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 823,
+    "lon": 2.32947,
+    "lat": 48.8646,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 46,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402360000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 824,
+    "lon": 2.32502,
+    "lat": 48.86603,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 47,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402420000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 825,
+    "lon": 2.32055,
+    "lat": 48.86672,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 48,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402480000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 826,
+    "lon": 2.32319,
+    "lat": 48.86828,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 49,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402540000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 827,
+    "lon": 2.32351,
+    "lat": 48.86982,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 50,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402600000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 828,
+    "lon": 2.32428,
+    "lat": 48.87328,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 51,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402660000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 829,
+    "lon": 2.32449,
+    "lat": 48.87592,
+    "day": 4,
+    "month": 5,
+    "hour": 23,
+    "minute": 52,
+    "frame": 4,
+    "year": 2025,
+    "jstMs": 1746402720000,
+    "gpxFile": "Sortie_vélo_de_nuit.gpx"
+  },
+  {
+    "id": 830,
     "lon": 3.97332,
     "lat": 47.85937,
     "day": 29,
@@ -10400,7 +10790,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 801,
+    "id": 831,
     "lon": 3.97542,
     "lat": 47.8585,
     "day": 29,
@@ -10413,7 +10803,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 802,
+    "id": 832,
     "lon": 3.97859,
     "lat": 47.85954,
     "day": 29,
@@ -10426,7 +10816,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 803,
+    "id": 833,
     "lon": 3.98095,
     "lat": 47.86189,
     "day": 29,
@@ -10439,7 +10829,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 804,
+    "id": 834,
     "lon": 3.98323,
     "lat": 47.86109,
     "day": 29,
@@ -10452,7 +10842,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 805,
+    "id": 835,
     "lon": 3.98656,
     "lat": 47.85993,
     "day": 29,
@@ -10465,7 +10855,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 806,
+    "id": 836,
     "lon": 3.99029,
     "lat": 47.8604,
     "day": 29,
@@ -10478,7 +10868,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 807,
+    "id": 837,
     "lon": 3.99449,
     "lat": 47.86086,
     "day": 29,
@@ -10491,7 +10881,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 808,
+    "id": 838,
     "lon": 3.9992,
     "lat": 47.86135,
     "day": 29,
@@ -10504,7 +10894,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 809,
+    "id": 839,
     "lon": 4.00555,
     "lat": 47.86203,
     "day": 29,
@@ -10517,7 +10907,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 810,
+    "id": 840,
     "lon": 4.00646,
     "lat": 47.86213,
     "day": 29,
@@ -10530,7 +10920,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 811,
+    "id": 841,
     "lon": 4.01251,
     "lat": 47.86159,
     "day": 29,
@@ -10543,7 +10933,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 812,
+    "id": 842,
     "lon": 4.01566,
     "lat": 47.86117,
     "day": 29,
@@ -10556,7 +10946,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 813,
+    "id": 843,
     "lon": 4.01882,
     "lat": 47.86075,
     "day": 29,
@@ -10569,7 +10959,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 814,
+    "id": 844,
     "lon": 4.02424,
     "lat": 47.86003,
     "day": 29,
@@ -10582,7 +10972,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 815,
+    "id": 845,
     "lon": 4.02662,
     "lat": 47.8594,
     "day": 29,
@@ -10595,7 +10985,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 816,
+    "id": 846,
     "lon": 4.02993,
     "lat": 47.85808,
     "day": 29,
@@ -10608,7 +10998,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 817,
+    "id": 847,
     "lon": 4.03376,
     "lat": 47.85657,
     "day": 29,
@@ -10621,7 +11011,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 818,
+    "id": 848,
     "lon": 4.03902,
     "lat": 47.85523,
     "day": 29,
@@ -10634,7 +11024,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 819,
+    "id": 849,
     "lon": 4.04133,
     "lat": 47.8547,
     "day": 29,
@@ -10647,7 +11037,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 820,
+    "id": 850,
     "lon": 4.04515,
     "lat": 47.85527,
     "day": 29,
@@ -10660,7 +11050,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 821,
+    "id": 851,
     "lon": 4.04812,
     "lat": 47.85683,
     "day": 29,
@@ -10673,7 +11063,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 822,
+    "id": 852,
     "lon": 4.0511,
     "lat": 47.85845,
     "day": 29,
@@ -10686,7 +11076,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 823,
+    "id": 853,
     "lon": 4.0546,
     "lat": 47.85896,
     "day": 29,
@@ -10699,7 +11089,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 824,
+    "id": 854,
     "lon": 4.05895,
     "lat": 47.85833,
     "day": 29,
@@ -10712,7 +11102,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 825,
+    "id": 855,
     "lon": 4.06241,
     "lat": 47.85784,
     "day": 29,
@@ -10725,7 +11115,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 826,
+    "id": 856,
     "lon": 4.06619,
     "lat": 47.85693,
     "day": 29,
@@ -10738,7 +11128,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 827,
+    "id": 857,
     "lon": 4.06874,
     "lat": 47.8554,
     "day": 29,
@@ -10751,7 +11141,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 828,
+    "id": 858,
     "lon": 4.07336,
     "lat": 47.85419,
     "day": 29,
@@ -10764,7 +11154,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 829,
+    "id": 859,
     "lon": 4.07672,
     "lat": 47.85198,
     "day": 29,
@@ -10777,7 +11167,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 830,
+    "id": 860,
     "lon": 4.07852,
     "lat": 47.85045,
     "day": 29,
@@ -10790,7 +11180,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 831,
+    "id": 861,
     "lon": 4.08094,
     "lat": 47.84839,
     "day": 29,
@@ -10803,7 +11193,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 832,
+    "id": 862,
     "lon": 4.08008,
     "lat": 47.84634,
     "day": 29,
@@ -10816,7 +11206,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 833,
+    "id": 863,
     "lon": 4.07906,
     "lat": 47.84472,
     "day": 29,
@@ -10829,7 +11219,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 834,
+    "id": 864,
     "lon": 4.07691,
     "lat": 47.8423,
     "day": 29,
@@ -10842,7 +11232,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 835,
+    "id": 865,
     "lon": 4.07415,
     "lat": 47.83923,
     "day": 29,
@@ -10855,7 +11245,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 836,
+    "id": 866,
     "lon": 4.07026,
     "lat": 47.83486,
     "day": 29,
@@ -10868,7 +11258,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 837,
+    "id": 867,
     "lon": 4.06869,
     "lat": 47.83309,
     "day": 29,
@@ -10881,7 +11271,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 838,
+    "id": 868,
     "lon": 4.06754,
     "lat": 47.83033,
     "day": 29,
@@ -10894,7 +11284,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 839,
+    "id": 869,
     "lon": 4.06829,
     "lat": 47.82807,
     "day": 29,
@@ -10907,7 +11297,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 840,
+    "id": 870,
     "lon": 4.07204,
     "lat": 47.82821,
     "day": 29,
@@ -10920,7 +11310,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 841,
+    "id": 871,
     "lon": 4.07589,
     "lat": 47.82718,
     "day": 29,
@@ -10933,7 +11323,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 842,
+    "id": 872,
     "lon": 4.07952,
     "lat": 47.82581,
     "day": 29,
@@ -10946,7 +11336,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 843,
+    "id": 873,
     "lon": 4.08381,
     "lat": 47.82525,
     "day": 29,
@@ -10959,7 +11349,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 844,
+    "id": 874,
     "lon": 4.08666,
     "lat": 47.82501,
     "day": 29,
@@ -10972,7 +11362,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 845,
+    "id": 875,
     "lon": 4.09206,
     "lat": 47.82276,
     "day": 29,
@@ -10985,7 +11375,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 846,
+    "id": 876,
     "lon": 4.09447,
     "lat": 47.82178,
     "day": 29,
@@ -10998,7 +11388,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 847,
+    "id": 877,
     "lon": 4.09811,
     "lat": 47.82162,
     "day": 29,
@@ -11011,7 +11401,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 848,
+    "id": 878,
     "lon": 4.1012,
     "lat": 47.82296,
     "day": 29,
@@ -11024,7 +11414,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 849,
+    "id": 879,
     "lon": 4.10496,
     "lat": 47.82289,
     "day": 29,
@@ -11037,7 +11427,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 850,
+    "id": 880,
     "lon": 4.10938,
     "lat": 47.82065,
     "day": 29,
@@ -11050,7 +11440,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 851,
+    "id": 881,
     "lon": 4.11403,
     "lat": 47.81751,
     "day": 29,
@@ -11063,7 +11453,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 852,
+    "id": 882,
     "lon": 4.11609,
     "lat": 47.81615,
     "day": 29,
@@ -11076,7 +11466,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 853,
+    "id": 883,
     "lon": 4.11856,
     "lat": 47.81378,
     "day": 29,
@@ -11089,7 +11479,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 854,
+    "id": 884,
     "lon": 4.11981,
     "lat": 47.81133,
     "day": 29,
@@ -11102,7 +11492,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 855,
+    "id": 885,
     "lon": 4.12016,
     "lat": 47.80802,
     "day": 29,
@@ -11115,7 +11505,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 856,
+    "id": 886,
     "lon": 4.12021,
     "lat": 47.80569,
     "day": 29,
@@ -11128,7 +11518,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 857,
+    "id": 887,
     "lon": 4.11862,
     "lat": 47.8035,
     "day": 29,
@@ -11141,7 +11531,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 858,
+    "id": 888,
     "lon": 4.11594,
     "lat": 47.80142,
     "day": 29,
@@ -11154,7 +11544,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 859,
+    "id": 889,
     "lon": 4.11026,
     "lat": 47.80096,
     "day": 29,
@@ -11167,7 +11557,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 860,
+    "id": 890,
     "lon": 4.10807,
     "lat": 47.80103,
     "day": 29,
@@ -11180,7 +11570,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 861,
+    "id": 891,
     "lon": 4.10466,
     "lat": 47.79943,
     "day": 29,
@@ -11193,7 +11583,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 862,
+    "id": 892,
     "lon": 4.09728,
     "lat": 47.79816,
     "day": 29,
@@ -11206,7 +11596,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 863,
+    "id": 893,
     "lon": 4.09675,
     "lat": 47.79808,
     "day": 29,
@@ -11219,7 +11609,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 864,
+    "id": 894,
     "lon": 4.09313,
     "lat": 47.79747,
     "day": 29,
@@ -11232,7 +11622,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 865,
+    "id": 895,
     "lon": 4.09052,
     "lat": 47.79645,
     "day": 29,
@@ -11245,7 +11635,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 866,
+    "id": 896,
     "lon": 4.08399,
     "lat": 47.79502,
     "day": 29,
@@ -11258,7 +11648,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 867,
+    "id": 897,
     "lon": 4.08102,
     "lat": 47.79439,
     "day": 29,
@@ -11271,7 +11661,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 868,
+    "id": 898,
     "lon": 4.07864,
     "lat": 47.7936,
     "day": 29,
@@ -11284,7 +11674,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 869,
+    "id": 899,
     "lon": 4.07642,
     "lat": 47.79141,
     "day": 29,
@@ -11297,7 +11687,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 870,
+    "id": 900,
     "lon": 4.07542,
     "lat": 47.78879,
     "day": 29,
@@ -11310,7 +11700,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 871,
+    "id": 901,
     "lon": 4.07585,
     "lat": 47.78642,
     "day": 29,
@@ -11323,7 +11713,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 872,
+    "id": 902,
     "lon": 4.07804,
     "lat": 47.78361,
     "day": 29,
@@ -11336,7 +11726,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 873,
+    "id": 903,
     "lon": 4.08159,
     "lat": 47.78296,
     "day": 29,
@@ -11349,7 +11739,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 874,
+    "id": 904,
     "lon": 4.08589,
     "lat": 47.78354,
     "day": 29,
@@ -11362,7 +11752,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 875,
+    "id": 905,
     "lon": 4.08969,
     "lat": 47.7845,
     "day": 29,
@@ -11375,7 +11765,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 876,
+    "id": 906,
     "lon": 4.09301,
     "lat": 47.78496,
     "day": 29,
@@ -11388,7 +11778,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 877,
+    "id": 907,
     "lon": 4.09682,
     "lat": 47.78501,
     "day": 29,
@@ -11401,7 +11791,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 878,
+    "id": 908,
     "lon": 4.10079,
     "lat": 47.78398,
     "day": 29,
@@ -11414,7 +11804,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 879,
+    "id": 909,
     "lon": 4.10326,
     "lat": 47.78188,
     "day": 29,
@@ -11427,7 +11817,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 880,
+    "id": 910,
     "lon": 4.10654,
     "lat": 47.77885,
     "day": 29,
@@ -11440,7 +11830,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 881,
+    "id": 911,
     "lon": 4.10742,
     "lat": 47.77741,
     "day": 29,
@@ -11453,7 +11843,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 882,
+    "id": 912,
     "lon": 4.10745,
     "lat": 47.77463,
     "day": 29,
@@ -11466,7 +11856,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 883,
+    "id": 913,
     "lon": 4.106,
     "lat": 47.77187,
     "day": 29,
@@ -11479,7 +11869,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 884,
+    "id": 914,
     "lon": 4.1049,
     "lat": 47.76935,
     "day": 29,
@@ -11492,7 +11882,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 885,
+    "id": 915,
     "lon": 4.10568,
     "lat": 47.76686,
     "day": 29,
@@ -11505,7 +11895,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 886,
+    "id": 916,
     "lon": 4.10976,
     "lat": 47.76613,
     "day": 29,
@@ -11518,7 +11908,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 887,
+    "id": 917,
     "lon": 4.1134,
     "lat": 47.76521,
     "day": 29,
@@ -11531,7 +11921,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 888,
+    "id": 918,
     "lon": 4.11589,
     "lat": 47.76516,
     "day": 29,
@@ -11544,7 +11934,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 889,
+    "id": 919,
     "lon": 4.12286,
     "lat": 47.76569,
     "day": 29,
@@ -11557,7 +11947,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 890,
+    "id": 920,
     "lon": 4.12448,
     "lat": 47.76582,
     "day": 29,
@@ -11570,7 +11960,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 891,
+    "id": 921,
     "lon": 4.12827,
     "lat": 47.76611,
     "day": 29,
@@ -11583,7 +11973,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 892,
+    "id": 922,
     "lon": 4.13227,
     "lat": 47.76639,
     "day": 29,
@@ -11596,7 +11986,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 893,
+    "id": 923,
     "lon": 4.1364,
     "lat": 47.76622,
     "day": 29,
@@ -11609,7 +11999,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 894,
+    "id": 924,
     "lon": 4.14133,
     "lat": 47.76711,
     "day": 29,
@@ -11622,7 +12012,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 895,
+    "id": 925,
     "lon": 4.14598,
     "lat": 47.76804,
     "day": 29,
@@ -11635,7 +12025,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 896,
+    "id": 926,
     "lon": 4.15115,
     "lat": 47.76907,
     "day": 29,
@@ -11648,7 +12038,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 897,
+    "id": 927,
     "lon": 4.15333,
     "lat": 47.76952,
     "day": 29,
@@ -11661,7 +12051,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 898,
+    "id": 928,
     "lon": 4.15624,
     "lat": 47.76992,
     "day": 29,
@@ -11674,7 +12064,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 899,
+    "id": 929,
     "lon": 4.16009,
     "lat": 47.76928,
     "day": 29,
@@ -11687,7 +12077,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 900,
+    "id": 930,
     "lon": 4.16605,
     "lat": 47.76818,
     "day": 29,
@@ -11700,7 +12090,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 901,
+    "id": 931,
     "lon": 4.1682,
     "lat": 47.76778,
     "day": 29,
@@ -11713,7 +12103,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 902,
+    "id": 932,
     "lon": 4.17114,
     "lat": 47.76702,
     "day": 29,
@@ -11726,7 +12116,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 903,
+    "id": 933,
     "lon": 4.17325,
     "lat": 47.76415,
     "day": 29,
@@ -11739,7 +12129,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 904,
+    "id": 934,
     "lon": 4.17348,
     "lat": 47.76034,
     "day": 29,
@@ -11752,7 +12142,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 905,
+    "id": 935,
     "lon": 4.17359,
     "lat": 47.75778,
     "day": 29,
@@ -11765,7 +12155,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 906,
+    "id": 936,
     "lon": 4.1733,
     "lat": 47.75616,
     "day": 29,
@@ -11778,7 +12168,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 907,
+    "id": 937,
     "lon": 4.17222,
     "lat": 47.75317,
     "day": 29,
@@ -11791,7 +12181,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 908,
+    "id": 938,
     "lon": 4.17137,
     "lat": 47.75084,
     "day": 29,
@@ -11804,7 +12194,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 909,
+    "id": 939,
     "lon": 4.17139,
     "lat": 47.7476,
     "day": 29,
@@ -11817,7 +12207,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 910,
+    "id": 940,
     "lon": 4.17244,
     "lat": 47.74587,
     "day": 29,
@@ -11830,7 +12220,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 911,
+    "id": 941,
     "lon": 4.1763,
     "lat": 47.74525,
     "day": 29,
@@ -11843,7 +12233,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 912,
+    "id": 942,
     "lon": 4.18042,
     "lat": 47.7457,
     "day": 29,
@@ -11856,7 +12246,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 913,
+    "id": 943,
     "lon": 4.18465,
     "lat": 47.7447,
     "day": 29,
@@ -11869,7 +12259,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 914,
+    "id": 944,
     "lon": 4.18816,
     "lat": 47.74367,
     "day": 29,
@@ -11882,7 +12272,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 915,
+    "id": 945,
     "lon": 4.19419,
     "lat": 47.74465,
     "day": 29,
@@ -11895,7 +12285,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 916,
+    "id": 946,
     "lon": 4.19511,
     "lat": 47.74519,
     "day": 29,
@@ -11908,7 +12298,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 917,
+    "id": 947,
     "lon": 4.19866,
     "lat": 47.74879,
     "day": 29,
@@ -11921,7 +12311,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 918,
+    "id": 948,
     "lon": 4.20387,
     "lat": 47.75119,
     "day": 29,
@@ -11934,7 +12324,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 919,
+    "id": 949,
     "lon": 4.20769,
     "lat": 47.75148,
     "day": 29,
@@ -11947,7 +12337,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 920,
+    "id": 950,
     "lon": 4.21119,
     "lat": 47.75128,
     "day": 29,
@@ -11960,7 +12350,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 921,
+    "id": 951,
     "lon": 4.21466,
     "lat": 47.74924,
     "day": 29,
@@ -11973,7 +12363,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 922,
+    "id": 952,
     "lon": 4.21686,
     "lat": 47.74567,
     "day": 29,
@@ -11986,7 +12376,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 923,
+    "id": 953,
     "lon": 4.21747,
     "lat": 47.74382,
     "day": 29,
@@ -11999,7 +12389,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 924,
+    "id": 954,
     "lon": 4.22016,
     "lat": 47.73974,
     "day": 29,
@@ -12012,7 +12402,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 925,
+    "id": 955,
     "lon": 4.22036,
     "lat": 47.73949,
     "day": 29,
@@ -12025,7 +12415,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 926,
+    "id": 956,
     "lon": 4.22202,
     "lat": 47.73741,
     "day": 29,
@@ -12038,7 +12428,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 927,
+    "id": 957,
     "lon": 4.22358,
     "lat": 47.734,
     "day": 29,
@@ -12051,7 +12441,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 928,
+    "id": 958,
     "lon": 4.22361,
     "lat": 47.73266,
     "day": 29,
@@ -12064,7 +12454,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 929,
+    "id": 959,
     "lon": 4.22364,
     "lat": 47.73013,
     "day": 29,
@@ -12077,7 +12467,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 930,
+    "id": 960,
     "lon": 4.22361,
     "lat": 47.72751,
     "day": 29,
@@ -12090,7 +12480,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 931,
+    "id": 961,
     "lon": 4.22364,
     "lat": 47.7247,
     "day": 29,
@@ -12103,7 +12493,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 932,
+    "id": 962,
     "lon": 4.22203,
     "lat": 47.72211,
     "day": 29,
@@ -12116,7 +12506,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 933,
+    "id": 963,
     "lon": 4.22192,
     "lat": 47.71841,
     "day": 29,
@@ -12129,7 +12519,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 934,
+    "id": 964,
     "lon": 4.2219,
     "lat": 47.71502,
     "day": 29,
@@ -12142,7 +12532,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 935,
+    "id": 965,
     "lon": 4.22194,
     "lat": 47.71407,
     "day": 29,
@@ -12155,7 +12545,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 936,
+    "id": 966,
     "lon": 4.22509,
     "lat": 47.7125,
     "day": 29,
@@ -12168,7 +12558,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 937,
+    "id": 967,
     "lon": 4.22887,
     "lat": 47.71307,
     "day": 29,
@@ -12181,7 +12571,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 938,
+    "id": 968,
     "lon": 4.23213,
     "lat": 47.71491,
     "day": 29,
@@ -12194,7 +12584,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 939,
+    "id": 969,
     "lon": 4.23635,
     "lat": 47.71496,
     "day": 29,
@@ -12207,7 +12597,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 940,
+    "id": 970,
     "lon": 4.23969,
     "lat": 47.71388,
     "day": 29,
@@ -12220,7 +12610,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 941,
+    "id": 971,
     "lon": 4.24124,
     "lat": 47.71187,
     "day": 29,
@@ -12233,7 +12623,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 942,
+    "id": 972,
     "lon": 4.24311,
     "lat": 47.70971,
     "day": 29,
@@ -12246,7 +12636,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 943,
+    "id": 973,
     "lon": 4.24427,
     "lat": 47.70666,
     "day": 29,
@@ -12259,7 +12649,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 944,
+    "id": 974,
     "lon": 4.24474,
     "lat": 47.70443,
     "day": 29,
@@ -12272,7 +12662,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 945,
+    "id": 975,
     "lon": 4.24444,
     "lat": 47.70103,
     "day": 29,
@@ -12285,7 +12675,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 946,
+    "id": 976,
     "lon": 4.24561,
     "lat": 47.69877,
     "day": 29,
@@ -12298,7 +12688,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 947,
+    "id": 977,
     "lon": 4.246,
     "lat": 47.69612,
     "day": 29,
@@ -12311,7 +12701,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 948,
+    "id": 978,
     "lon": 4.24602,
     "lat": 47.69365,
     "day": 29,
@@ -12324,7 +12714,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 949,
+    "id": 979,
     "lon": 4.24534,
     "lat": 47.69072,
     "day": 29,
@@ -12337,7 +12727,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 950,
+    "id": 980,
     "lon": 4.24452,
     "lat": 47.68821,
     "day": 29,
@@ -12350,7 +12740,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 951,
+    "id": 981,
     "lon": 4.24062,
     "lat": 47.68627,
     "day": 29,
@@ -12363,7 +12753,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 952,
+    "id": 982,
     "lon": 4.23766,
     "lat": 47.68513,
     "day": 29,
@@ -12376,7 +12766,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 953,
+    "id": 983,
     "lon": 4.23403,
     "lat": 47.68372,
     "day": 29,
@@ -12389,7 +12779,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 954,
+    "id": 984,
     "lon": 4.2312,
     "lat": 47.68188,
     "day": 29,
@@ -12402,7 +12792,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 955,
+    "id": 985,
     "lon": 4.22822,
     "lat": 47.67974,
     "day": 29,
@@ -12415,7 +12805,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 956,
+    "id": 986,
     "lon": 4.22681,
     "lat": 47.67767,
     "day": 29,
@@ -12428,7 +12818,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 957,
+    "id": 987,
     "lon": 4.22602,
     "lat": 47.67492,
     "day": 29,
@@ -12441,7 +12831,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 958,
+    "id": 988,
     "lon": 4.22598,
     "lat": 47.67265,
     "day": 29,
@@ -12454,7 +12844,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 959,
+    "id": 989,
     "lon": 4.228,
     "lat": 47.66986,
     "day": 29,
@@ -12467,7 +12857,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 960,
+    "id": 990,
     "lon": 4.2309,
     "lat": 47.66852,
     "day": 29,
@@ -12480,7 +12870,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 961,
+    "id": 991,
     "lon": 4.2343,
     "lat": 47.66753,
     "day": 29,
@@ -12493,7 +12883,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 962,
+    "id": 992,
     "lon": 4.23757,
     "lat": 47.66641,
     "day": 29,
@@ -12506,7 +12896,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 963,
+    "id": 993,
     "lon": 4.24197,
     "lat": 47.6643,
     "day": 29,
@@ -12519,7 +12909,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 964,
+    "id": 994,
     "lon": 4.24526,
     "lat": 47.66273,
     "day": 29,
@@ -12532,7 +12922,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 965,
+    "id": 995,
     "lon": 4.2487,
     "lat": 47.66116,
     "day": 29,
@@ -12545,7 +12935,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 966,
+    "id": 996,
     "lon": 4.25068,
     "lat": 47.66022,
     "day": 29,
@@ -12558,7 +12948,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 967,
+    "id": 997,
     "lon": 4.25356,
     "lat": 47.658,
     "day": 29,
@@ -12571,7 +12961,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 968,
+    "id": 998,
     "lon": 4.25426,
     "lat": 47.65544,
     "day": 29,
@@ -12584,7 +12974,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 969,
+    "id": 999,
     "lon": 4.25648,
     "lat": 47.65309,
     "day": 29,
@@ -12597,7 +12987,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 970,
+    "id": 1000,
     "lon": 4.25942,
     "lat": 47.65148,
     "day": 29,
@@ -12610,7 +13000,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 971,
+    "id": 1001,
     "lon": 4.26144,
     "lat": 47.6503,
     "day": 29,
@@ -12623,7 +13013,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 972,
+    "id": 1002,
     "lon": 4.26526,
     "lat": 47.64988,
     "day": 29,
@@ -12636,7 +13026,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 973,
+    "id": 1003,
     "lon": 4.26917,
     "lat": 47.64969,
     "day": 29,
@@ -12649,7 +13039,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 974,
+    "id": 1004,
     "lon": 4.27346,
     "lat": 47.64882,
     "day": 29,
@@ -12662,7 +13052,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 975,
+    "id": 1005,
     "lon": 4.27625,
     "lat": 47.64721,
     "day": 29,
@@ -12675,7 +13065,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 976,
+    "id": 1006,
     "lon": 4.27795,
     "lat": 47.64449,
     "day": 29,
@@ -12688,7 +13078,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 977,
+    "id": 1007,
     "lon": 4.27971,
     "lat": 47.64228,
     "day": 29,
@@ -12701,7 +13091,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 978,
+    "id": 1008,
     "lon": 4.2839,
     "lat": 47.64152,
     "day": 29,
@@ -12714,7 +13104,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 979,
+    "id": 1009,
     "lon": 4.28746,
     "lat": 47.64086,
     "day": 29,
@@ -12727,7 +13117,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 980,
+    "id": 1010,
     "lon": 4.29218,
     "lat": 47.64046,
     "day": 29,
@@ -12740,7 +13130,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 981,
+    "id": 1011,
     "lon": 4.29524,
     "lat": 47.64024,
     "day": 29,
@@ -12753,7 +13143,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 982,
+    "id": 1012,
     "lon": 4.29887,
     "lat": 47.63959,
     "day": 29,
@@ -12766,7 +13156,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 983,
+    "id": 1013,
     "lon": 4.303,
     "lat": 47.63823,
     "day": 29,
@@ -12779,7 +13169,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 984,
+    "id": 1014,
     "lon": 4.30585,
     "lat": 47.63722,
     "day": 29,
@@ -12792,7 +13182,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 985,
+    "id": 1015,
     "lon": 4.308,
     "lat": 47.63504,
     "day": 29,
@@ -12805,7 +13195,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 986,
+    "id": 1016,
     "lon": 4.31078,
     "lat": 47.63331,
     "day": 29,
@@ -12818,7 +13208,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 987,
+    "id": 1017,
     "lon": 4.3132,
     "lat": 47.63121,
     "day": 29,
@@ -12831,7 +13221,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 988,
+    "id": 1018,
     "lon": 4.3171,
     "lat": 47.62879,
     "day": 29,
@@ -12844,7 +13234,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 989,
+    "id": 1019,
     "lon": 4.319,
     "lat": 47.62749,
     "day": 29,
@@ -12857,7 +13247,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 990,
+    "id": 1020,
     "lon": 4.32211,
     "lat": 47.62555,
     "day": 29,
@@ -12870,7 +13260,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 991,
+    "id": 1021,
     "lon": 4.32584,
     "lat": 47.62464,
     "day": 29,
@@ -12883,7 +13273,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 992,
+    "id": 1022,
     "lon": 4.32916,
     "lat": 47.62395,
     "day": 29,
@@ -12896,7 +13286,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 993,
+    "id": 1023,
     "lon": 4.33201,
     "lat": 47.62239,
     "day": 29,
@@ -12909,7 +13299,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 994,
+    "id": 1024,
     "lon": 4.33258,
     "lat": 47.62235,
     "day": 29,
@@ -12922,7 +13312,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 995,
+    "id": 1025,
     "lon": 4.33034,
     "lat": 47.62397,
     "day": 29,
@@ -12935,7 +13325,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 996,
+    "id": 1026,
     "lon": 4.32643,
     "lat": 47.62478,
     "day": 29,
@@ -12948,7 +13338,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 997,
+    "id": 1027,
     "lon": 4.32852,
     "lat": 47.62731,
     "day": 29,
@@ -12961,7 +13351,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 998,
+    "id": 1028,
     "lon": 4.33014,
     "lat": 47.62906,
     "day": 29,
@@ -12974,7 +13364,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 999,
+    "id": 1029,
     "lon": 4.33278,
     "lat": 47.63058,
     "day": 29,
@@ -12987,7 +13377,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 1000,
+    "id": 1030,
     "lon": 4.33135,
     "lat": 47.63107,
     "day": 29,
@@ -13000,7 +13390,7 @@
     "gpxFile": "Bourgogne_Section_1.gpx"
   },
   {
-    "id": 1001,
+    "id": 1031,
     "lon": 4.33048,
     "lat": 47.63111,
     "day": 30,
@@ -13013,7 +13403,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1002,
+    "id": 1032,
     "lon": 4.33326,
     "lat": 47.6309,
     "day": 30,
@@ -13026,7 +13416,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1003,
+    "id": 1033,
     "lon": 4.32831,
     "lat": 47.6278,
     "day": 30,
@@ -13039,7 +13429,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1004,
+    "id": 1034,
     "lon": 4.32777,
     "lat": 47.62683,
     "day": 30,
@@ -13052,7 +13442,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1005,
+    "id": 1035,
     "lon": 4.3259,
     "lat": 47.62489,
     "day": 30,
@@ -13065,7 +13455,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1006,
+    "id": 1036,
     "lon": 4.33034,
     "lat": 47.62397,
     "day": 30,
@@ -13078,7 +13468,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1007,
+    "id": 1037,
     "lon": 4.33258,
     "lat": 47.62235,
     "day": 30,
@@ -13091,7 +13481,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1008,
+    "id": 1038,
     "lon": 4.33489,
     "lat": 47.62075,
     "day": 30,
@@ -13104,7 +13494,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1009,
+    "id": 1039,
     "lon": 4.33758,
     "lat": 47.62014,
     "day": 30,
@@ -13117,7 +13507,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1010,
+    "id": 1040,
     "lon": 4.34175,
     "lat": 47.61909,
     "day": 30,
@@ -13130,7 +13520,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1011,
+    "id": 1041,
     "lon": 4.34559,
     "lat": 47.61798,
     "day": 30,
@@ -13143,7 +13533,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1012,
+    "id": 1042,
     "lon": 4.3493,
     "lat": 47.61677,
     "day": 30,
@@ -13156,7 +13546,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1013,
+    "id": 1043,
     "lon": 4.35317,
     "lat": 47.61597,
     "day": 30,
@@ -13169,7 +13559,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1014,
+    "id": 1044,
     "lon": 4.35738,
     "lat": 47.6149,
     "day": 30,
@@ -13182,7 +13572,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1015,
+    "id": 1045,
     "lon": 4.36081,
     "lat": 47.61438,
     "day": 30,
@@ -13195,7 +13585,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1016,
+    "id": 1046,
     "lon": 4.36507,
     "lat": 47.61352,
     "day": 30,
@@ -13208,7 +13598,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1017,
+    "id": 1047,
     "lon": 4.36858,
     "lat": 47.6125,
     "day": 30,
@@ -13221,7 +13611,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1018,
+    "id": 1048,
     "lon": 4.37291,
     "lat": 47.61121,
     "day": 30,
@@ -13234,7 +13624,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1019,
+    "id": 1049,
     "lon": 4.376,
     "lat": 47.61029,
     "day": 30,
@@ -13247,7 +13637,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1020,
+    "id": 1050,
     "lon": 4.38084,
     "lat": 47.60934,
     "day": 30,
@@ -13260,7 +13650,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1021,
+    "id": 1051,
     "lon": 4.38572,
     "lat": 47.60846,
     "day": 30,
@@ -13273,7 +13663,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1022,
+    "id": 1052,
     "lon": 4.38805,
     "lat": 47.60804,
     "day": 30,
@@ -13286,7 +13676,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1023,
+    "id": 1053,
     "lon": 4.39192,
     "lat": 47.60697,
     "day": 30,
@@ -13299,7 +13689,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1024,
+    "id": 1054,
     "lon": 4.39354,
     "lat": 47.60474,
     "day": 30,
@@ -13312,7 +13702,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1025,
+    "id": 1055,
     "lon": 4.3981,
     "lat": 47.59915,
     "day": 30,
@@ -13325,7 +13715,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1026,
+    "id": 1056,
     "lon": 4.39964,
     "lat": 47.59707,
     "day": 30,
@@ -13338,7 +13728,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1027,
+    "id": 1057,
     "lon": 4.40145,
     "lat": 47.59474,
     "day": 30,
@@ -13351,7 +13741,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1028,
+    "id": 1058,
     "lon": 4.40205,
     "lat": 47.59219,
     "day": 30,
@@ -13364,7 +13754,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1029,
+    "id": 1059,
     "lon": 4.4052,
     "lat": 47.58939,
     "day": 30,
@@ -13377,7 +13767,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1030,
+    "id": 1060,
     "lon": 4.40532,
     "lat": 47.5865,
     "day": 30,
@@ -13390,7 +13780,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1031,
+    "id": 1061,
     "lon": 4.40527,
     "lat": 47.58488,
     "day": 30,
@@ -13403,7 +13793,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1032,
+    "id": 1062,
     "lon": 4.40672,
     "lat": 47.58209,
     "day": 30,
@@ -13416,7 +13806,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1033,
+    "id": 1063,
     "lon": 4.40982,
     "lat": 47.57933,
     "day": 30,
@@ -13429,7 +13819,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1034,
+    "id": 1064,
     "lon": 4.41405,
     "lat": 47.57467,
     "day": 30,
@@ -13442,7 +13832,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1035,
+    "id": 1065,
     "lon": 4.41577,
     "lat": 47.57274,
     "day": 30,
@@ -13455,7 +13845,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1036,
+    "id": 1066,
     "lon": 4.41773,
     "lat": 47.5706,
     "day": 30,
@@ -13468,7 +13858,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1037,
+    "id": 1067,
     "lon": 4.41795,
     "lat": 47.56774,
     "day": 30,
@@ -13481,7 +13871,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1038,
+    "id": 1068,
     "lon": 4.41828,
     "lat": 47.564,
     "day": 30,
@@ -13494,7 +13884,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1039,
+    "id": 1069,
     "lon": 4.41884,
     "lat": 47.56113,
     "day": 30,
@@ -13507,7 +13897,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1040,
+    "id": 1070,
     "lon": 4.41951,
     "lat": 47.5603,
     "day": 30,
@@ -13520,7 +13910,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1041,
+    "id": 1071,
     "lon": 4.422,
     "lat": 47.55835,
     "day": 30,
@@ -13533,7 +13923,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1042,
+    "id": 1072,
     "lon": 4.42353,
     "lat": 47.55567,
     "day": 30,
@@ -13546,7 +13936,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1043,
+    "id": 1073,
     "lon": 4.42469,
     "lat": 47.55253,
     "day": 30,
@@ -13559,7 +13949,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1044,
+    "id": 1074,
     "lon": 4.42618,
     "lat": 47.55033,
     "day": 30,
@@ -13572,7 +13962,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1045,
+    "id": 1075,
     "lon": 4.42998,
     "lat": 47.5477,
     "day": 30,
@@ -13585,7 +13975,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1046,
+    "id": 1076,
     "lon": 4.43879,
     "lat": 47.54099,
     "day": 30,
@@ -13598,7 +13988,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1047,
+    "id": 1077,
     "lon": 4.44009,
     "lat": 47.54057,
     "day": 30,
@@ -13611,7 +14001,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1048,
+    "id": 1078,
     "lon": 4.44371,
     "lat": 47.53882,
     "day": 30,
@@ -13624,7 +14014,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1049,
+    "id": 1079,
     "lon": 4.44837,
     "lat": 47.53581,
     "day": 30,
@@ -13637,7 +14027,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1050,
+    "id": 1080,
     "lon": 4.44963,
     "lat": 47.535,
     "day": 30,
@@ -13650,7 +14040,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1051,
+    "id": 1081,
     "lon": 4.45285,
     "lat": 47.53294,
     "day": 30,
@@ -13663,7 +14053,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1052,
+    "id": 1082,
     "lon": 4.45522,
     "lat": 47.53136,
     "day": 30,
@@ -13676,7 +14066,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1053,
+    "id": 1083,
     "lon": 4.45808,
     "lat": 47.52816,
     "day": 30,
@@ -13689,7 +14079,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1054,
+    "id": 1084,
     "lon": 4.45918,
     "lat": 47.52689,
     "day": 30,
@@ -13702,7 +14092,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1055,
+    "id": 1085,
     "lon": 4.45962,
     "lat": 47.52399,
     "day": 30,
@@ -13715,7 +14105,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1056,
+    "id": 1086,
     "lon": 4.46041,
     "lat": 47.52131,
     "day": 30,
@@ -13728,7 +14118,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1057,
+    "id": 1087,
     "lon": 4.46129,
     "lat": 47.51916,
     "day": 30,
@@ -13741,7 +14131,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1058,
+    "id": 1088,
     "lon": 4.4625,
     "lat": 47.51634,
     "day": 30,
@@ -13754,7 +14144,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1059,
+    "id": 1089,
     "lon": 4.46265,
     "lat": 47.5138,
     "day": 30,
@@ -13767,7 +14157,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1060,
+    "id": 1090,
     "lon": 4.46283,
     "lat": 47.51162,
     "day": 30,
@@ -13780,7 +14170,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1061,
+    "id": 1091,
     "lon": 4.46158,
     "lat": 47.50939,
     "day": 30,
@@ -13793,7 +14183,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1062,
+    "id": 1092,
     "lon": 4.45999,
     "lat": 47.50736,
     "day": 30,
@@ -13806,7 +14196,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1063,
+    "id": 1093,
     "lon": 4.45851,
     "lat": 47.50506,
     "day": 30,
@@ -13819,7 +14209,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1064,
+    "id": 1094,
     "lon": 4.45495,
     "lat": 47.50405,
     "day": 30,
@@ -13832,7 +14222,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1065,
+    "id": 1095,
     "lon": 4.45484,
     "lat": 47.50209,
     "day": 30,
@@ -13845,7 +14235,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1066,
+    "id": 1096,
     "lon": 4.45686,
     "lat": 47.49975,
     "day": 30,
@@ -13858,7 +14248,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1067,
+    "id": 1097,
     "lon": 4.45908,
     "lat": 47.49823,
     "day": 30,
@@ -13871,7 +14261,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1068,
+    "id": 1098,
     "lon": 4.45803,
     "lat": 47.49604,
     "day": 30,
@@ -13884,7 +14274,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1069,
+    "id": 1099,
     "lon": 4.4598,
     "lat": 47.49387,
     "day": 30,
@@ -13897,7 +14287,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1070,
+    "id": 1100,
     "lon": 4.45903,
     "lat": 47.4914,
     "day": 30,
@@ -13910,7 +14300,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1071,
+    "id": 1101,
     "lon": 4.45818,
     "lat": 47.48892,
     "day": 30,
@@ -13923,7 +14313,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1072,
+    "id": 1102,
     "lon": 4.45738,
     "lat": 47.48621,
     "day": 30,
@@ -13936,7 +14326,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1073,
+    "id": 1103,
     "lon": 4.45883,
     "lat": 47.48436,
     "day": 30,
@@ -13949,7 +14339,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1074,
+    "id": 1104,
     "lon": 4.45668,
     "lat": 47.48247,
     "day": 30,
@@ -13962,7 +14352,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1075,
+    "id": 1105,
     "lon": 4.45453,
     "lat": 47.47929,
     "day": 30,
@@ -13975,7 +14365,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1076,
+    "id": 1106,
     "lon": 4.45377,
     "lat": 47.47815,
     "day": 30,
@@ -13988,7 +14378,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1077,
+    "id": 1107,
     "lon": 4.45385,
     "lat": 47.47643,
     "day": 30,
@@ -14001,7 +14391,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1078,
+    "id": 1108,
     "lon": 4.45666,
     "lat": 47.47544,
     "day": 30,
@@ -14014,7 +14404,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1079,
+    "id": 1109,
     "lon": 4.45679,
     "lat": 47.47322,
     "day": 30,
@@ -14027,7 +14417,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1080,
+    "id": 1110,
     "lon": 4.45722,
     "lat": 47.4707,
     "day": 30,
@@ -14040,7 +14430,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1081,
+    "id": 1111,
     "lon": 4.45632,
     "lat": 47.46827,
     "day": 30,
@@ -14053,7 +14443,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1082,
+    "id": 1112,
     "lon": 4.45628,
     "lat": 47.46619,
     "day": 30,
@@ -14066,7 +14456,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1083,
+    "id": 1113,
     "lon": 4.45645,
     "lat": 47.4639,
     "day": 30,
@@ -14079,7 +14469,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1084,
+    "id": 1114,
     "lon": 4.45487,
     "lat": 47.46181,
     "day": 30,
@@ -14092,7 +14482,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1085,
+    "id": 1115,
     "lon": 4.45168,
     "lat": 47.4608,
     "day": 30,
@@ -14105,7 +14495,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1086,
+    "id": 1116,
     "lon": 4.44905,
     "lat": 47.45972,
     "day": 30,
@@ -14118,7 +14508,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1087,
+    "id": 1117,
     "lon": 4.4459,
     "lat": 47.45821,
     "day": 30,
@@ -14131,7 +14521,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1088,
+    "id": 1118,
     "lon": 4.44181,
     "lat": 47.45618,
     "day": 30,
@@ -14144,7 +14534,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1089,
+    "id": 1119,
     "lon": 4.44034,
     "lat": 47.45493,
     "day": 30,
@@ -14157,7 +14547,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1090,
+    "id": 1120,
     "lon": 4.43653,
     "lat": 47.45433,
     "day": 30,
@@ -14170,7 +14560,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1091,
+    "id": 1121,
     "lon": 4.43247,
     "lat": 47.45285,
     "day": 30,
@@ -14183,7 +14573,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1092,
+    "id": 1122,
     "lon": 4.42914,
     "lat": 47.451,
     "day": 30,
@@ -14196,7 +14586,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1093,
+    "id": 1123,
     "lon": 4.42678,
     "lat": 47.44958,
     "day": 30,
@@ -14209,7 +14599,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1094,
+    "id": 1124,
     "lon": 4.42334,
     "lat": 47.44784,
     "day": 30,
@@ -14222,7 +14612,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1095,
+    "id": 1125,
     "lon": 4.42074,
     "lat": 47.44536,
     "day": 30,
@@ -14235,7 +14625,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1096,
+    "id": 1126,
     "lon": 4.41799,
     "lat": 47.44453,
     "day": 30,
@@ -14248,7 +14638,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1097,
+    "id": 1127,
     "lon": 4.41392,
     "lat": 47.4437,
     "day": 30,
@@ -14261,7 +14651,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1098,
+    "id": 1128,
     "lon": 4.41148,
     "lat": 47.44306,
     "day": 30,
@@ -14274,7 +14664,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1099,
+    "id": 1129,
     "lon": 4.40919,
     "lat": 47.44092,
     "day": 30,
@@ -14287,7 +14677,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1100,
+    "id": 1130,
     "lon": 4.40984,
     "lat": 47.43763,
     "day": 30,
@@ -14300,7 +14690,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1101,
+    "id": 1131,
     "lon": 4.40975,
     "lat": 47.43526,
     "day": 30,
@@ -14313,7 +14703,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1102,
+    "id": 1132,
     "lon": 4.408,
     "lat": 47.43286,
     "day": 30,
@@ -14326,7 +14716,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1103,
+    "id": 1133,
     "lon": 4.40706,
     "lat": 47.42979,
     "day": 30,
@@ -14339,7 +14729,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1104,
+    "id": 1134,
     "lon": 4.40683,
     "lat": 47.42683,
     "day": 30,
@@ -14352,7 +14742,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1105,
+    "id": 1135,
     "lon": 4.40711,
     "lat": 47.42436,
     "day": 30,
@@ -14365,7 +14755,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1106,
+    "id": 1136,
     "lon": 4.40666,
     "lat": 47.42168,
     "day": 30,
@@ -14378,7 +14768,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1107,
+    "id": 1137,
     "lon": 4.40582,
     "lat": 47.41932,
     "day": 30,
@@ -14391,7 +14781,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1108,
+    "id": 1138,
     "lon": 4.40746,
     "lat": 47.41681,
     "day": 30,
@@ -14404,7 +14794,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1109,
+    "id": 1139,
     "lon": 4.41057,
     "lat": 47.41444,
     "day": 30,
@@ -14417,7 +14807,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1110,
+    "id": 1140,
     "lon": 4.41283,
     "lat": 47.41233,
     "day": 30,
@@ -14430,7 +14820,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1111,
+    "id": 1141,
     "lon": 4.41512,
     "lat": 47.40983,
     "day": 30,
@@ -14443,7 +14833,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1112,
+    "id": 1142,
     "lon": 4.41704,
     "lat": 47.4075,
     "day": 30,
@@ -14456,7 +14846,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1113,
+    "id": 1143,
     "lon": 4.42358,
     "lat": 47.40635,
     "day": 30,
@@ -14469,7 +14859,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1114,
+    "id": 1144,
     "lon": 4.42551,
     "lat": 47.40598,
     "day": 30,
@@ -14482,7 +14872,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1115,
+    "id": 1145,
     "lon": 4.4287,
     "lat": 47.4052,
     "day": 30,
@@ -14495,7 +14885,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1116,
+    "id": 1146,
     "lon": 4.4309,
     "lat": 47.40278,
     "day": 30,
@@ -14508,7 +14898,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1117,
+    "id": 1147,
     "lon": 4.43592,
     "lat": 47.40192,
     "day": 30,
@@ -14521,7 +14911,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1118,
+    "id": 1148,
     "lon": 4.43918,
     "lat": 47.40162,
     "day": 30,
@@ -14534,7 +14924,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1119,
+    "id": 1149,
     "lon": 4.44142,
     "lat": 47.39986,
     "day": 30,
@@ -14547,7 +14937,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1120,
+    "id": 1150,
     "lon": 4.44307,
     "lat": 47.39781,
     "day": 30,
@@ -14560,7 +14950,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1121,
+    "id": 1151,
     "lon": 4.44138,
     "lat": 47.39518,
     "day": 30,
@@ -14573,7 +14963,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1122,
+    "id": 1152,
     "lon": 4.44266,
     "lat": 47.39274,
     "day": 30,
@@ -14586,7 +14976,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1123,
+    "id": 1153,
     "lon": 4.44369,
     "lat": 47.39282,
     "day": 30,
@@ -14599,7 +14989,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1124,
+    "id": 1154,
     "lon": 4.44372,
     "lat": 47.39089,
     "day": 30,
@@ -14612,7 +15002,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1125,
+    "id": 1155,
     "lon": 4.44689,
     "lat": 47.3888,
     "day": 30,
@@ -14625,7 +15015,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1126,
+    "id": 1156,
     "lon": 4.44859,
     "lat": 47.38214,
     "day": 30,
@@ -14638,7 +15028,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1127,
+    "id": 1157,
     "lon": 4.44843,
     "lat": 47.38188,
     "day": 30,
@@ -14651,7 +15041,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1128,
+    "id": 1158,
     "lon": 4.44925,
     "lat": 47.37851,
     "day": 30,
@@ -14664,7 +15054,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1129,
+    "id": 1159,
     "lon": 4.44978,
     "lat": 47.3758,
     "day": 30,
@@ -14677,7 +15067,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1130,
+    "id": 1160,
     "lon": 4.45397,
     "lat": 47.37363,
     "day": 30,
@@ -14690,7 +15080,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1131,
+    "id": 1161,
     "lon": 4.4569,
     "lat": 47.37331,
     "day": 30,
@@ -14703,7 +15093,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1132,
+    "id": 1162,
     "lon": 4.45981,
     "lat": 47.37129,
     "day": 30,
@@ -14716,7 +15106,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1133,
+    "id": 1163,
     "lon": 4.46368,
     "lat": 47.37073,
     "day": 30,
@@ -14729,7 +15119,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1134,
+    "id": 1164,
     "lon": 4.46695,
     "lat": 47.36883,
     "day": 30,
@@ -14742,7 +15132,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1135,
+    "id": 1165,
     "lon": 4.4687,
     "lat": 47.36705,
     "day": 30,
@@ -14755,7 +15145,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1136,
+    "id": 1166,
     "lon": 4.47278,
     "lat": 47.36295,
     "day": 30,
@@ -14768,7 +15158,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1137,
+    "id": 1167,
     "lon": 4.47339,
     "lat": 47.36235,
     "day": 30,
@@ -14781,7 +15171,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1138,
+    "id": 1168,
     "lon": 4.47534,
     "lat": 47.35872,
     "day": 30,
@@ -14794,7 +15184,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1139,
+    "id": 1169,
     "lon": 4.4765,
     "lat": 47.35536,
     "day": 30,
@@ -14807,7 +15197,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1140,
+    "id": 1170,
     "lon": 4.4774,
     "lat": 47.35425,
     "day": 30,
@@ -14820,7 +15210,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1141,
+    "id": 1171,
     "lon": 4.48084,
     "lat": 47.35309,
     "day": 30,
@@ -14833,7 +15223,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1142,
+    "id": 1172,
     "lon": 4.48469,
     "lat": 47.35248,
     "day": 30,
@@ -14846,7 +15236,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1143,
+    "id": 1173,
     "lon": 4.48835,
     "lat": 47.35106,
     "day": 30,
@@ -14859,7 +15249,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1144,
+    "id": 1174,
     "lon": 4.49031,
     "lat": 47.34879,
     "day": 30,
@@ -14872,7 +15262,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1145,
+    "id": 1175,
     "lon": 4.49026,
     "lat": 47.34581,
     "day": 30,
@@ -14885,7 +15275,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1146,
+    "id": 1176,
     "lon": 4.4902,
     "lat": 47.34393,
     "day": 30,
@@ -14898,7 +15288,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1147,
+    "id": 1177,
     "lon": 4.48929,
     "lat": 47.3411,
     "day": 30,
@@ -14911,7 +15301,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1148,
+    "id": 1178,
     "lon": 4.49058,
     "lat": 47.33848,
     "day": 30,
@@ -14924,7 +15314,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1149,
+    "id": 1179,
     "lon": 4.49211,
     "lat": 47.33561,
     "day": 30,
@@ -14937,7 +15327,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1150,
+    "id": 1180,
     "lon": 4.49169,
     "lat": 47.33323,
     "day": 30,
@@ -14950,7 +15340,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1151,
+    "id": 1181,
     "lon": 4.49198,
     "lat": 47.33055,
     "day": 30,
@@ -14963,7 +15353,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1152,
+    "id": 1182,
     "lon": 4.49188,
     "lat": 47.32767,
     "day": 30,
@@ -14976,7 +15366,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1153,
+    "id": 1183,
     "lon": 4.49455,
     "lat": 47.32488,
     "day": 30,
@@ -14989,7 +15379,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1154,
+    "id": 1184,
     "lon": 4.49669,
     "lat": 47.32287,
     "day": 30,
@@ -15002,7 +15392,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1155,
+    "id": 1185,
     "lon": 4.49879,
     "lat": 47.32035,
     "day": 30,
@@ -15015,7 +15405,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1156,
+    "id": 1186,
     "lon": 4.50122,
     "lat": 47.3188,
     "day": 30,
@@ -15028,7 +15418,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1157,
+    "id": 1187,
     "lon": 4.50331,
     "lat": 47.3163,
     "day": 30,
@@ -15041,7 +15431,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1158,
+    "id": 1188,
     "lon": 4.50476,
     "lat": 47.31411,
     "day": 30,
@@ -15054,7 +15444,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1159,
+    "id": 1189,
     "lon": 4.50587,
     "lat": 47.31121,
     "day": 30,
@@ -15067,7 +15457,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1160,
+    "id": 1190,
     "lon": 4.50611,
     "lat": 47.30763,
     "day": 30,
@@ -15080,7 +15470,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1161,
+    "id": 1191,
     "lon": 4.50625,
     "lat": 47.30566,
     "day": 30,
@@ -15093,7 +15483,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1162,
+    "id": 1192,
     "lon": 4.50688,
     "lat": 47.3032,
     "day": 30,
@@ -15106,7 +15496,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1163,
+    "id": 1193,
     "lon": 4.50788,
     "lat": 47.29996,
     "day": 30,
@@ -15119,7 +15509,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1164,
+    "id": 1194,
     "lon": 4.50877,
     "lat": 47.29699,
     "day": 30,
@@ -15132,7 +15522,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1165,
+    "id": 1195,
     "lon": 4.50955,
     "lat": 47.29402,
     "day": 30,
@@ -15145,7 +15535,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1166,
+    "id": 1196,
     "lon": 4.51027,
     "lat": 47.29105,
     "day": 30,
@@ -15158,7 +15548,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1167,
+    "id": 1197,
     "lon": 4.51057,
     "lat": 47.28945,
     "day": 30,
@@ -15171,7 +15561,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1168,
+    "id": 1198,
     "lon": 4.51105,
     "lat": 47.28691,
     "day": 30,
@@ -15184,7 +15574,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1169,
+    "id": 1199,
     "lon": 4.51174,
     "lat": 47.28429,
     "day": 30,
@@ -15197,7 +15587,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1170,
+    "id": 1200,
     "lon": 4.51234,
     "lat": 47.28203,
     "day": 30,
@@ -15210,7 +15600,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1171,
+    "id": 1201,
     "lon": 4.51384,
     "lat": 47.27882,
     "day": 30,
@@ -15223,7 +15613,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1172,
+    "id": 1202,
     "lon": 4.51506,
     "lat": 47.27661,
     "day": 30,
@@ -15236,7 +15626,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1173,
+    "id": 1203,
     "lon": 4.51633,
     "lat": 47.27431,
     "day": 30,
@@ -15249,7 +15639,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1174,
+    "id": 1204,
     "lon": 4.51776,
     "lat": 47.27174,
     "day": 30,
@@ -15262,7 +15652,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1175,
+    "id": 1205,
     "lon": 4.5191,
     "lat": 47.26926,
     "day": 30,
@@ -15275,7 +15665,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1176,
+    "id": 1206,
     "lon": 4.5208,
     "lat": 47.2676,
     "day": 30,
@@ -15288,7 +15678,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1177,
+    "id": 1207,
     "lon": 4.52436,
     "lat": 47.26729,
     "day": 30,
@@ -15301,7 +15691,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1178,
+    "id": 1208,
     "lon": 4.52848,
     "lat": 47.26738,
     "day": 30,
@@ -15314,7 +15704,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1179,
+    "id": 1209,
     "lon": 4.5323,
     "lat": 47.26747,
     "day": 30,
@@ -15327,7 +15717,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1180,
+    "id": 1210,
     "lon": 4.53584,
     "lat": 47.26755,
     "day": 30,
@@ -15340,7 +15730,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1181,
+    "id": 1211,
     "lon": 4.53849,
     "lat": 47.2685,
     "day": 30,
@@ -15353,7 +15743,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1182,
+    "id": 1212,
     "lon": 4.54197,
     "lat": 47.26799,
     "day": 30,
@@ -15366,7 +15756,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1183,
+    "id": 1213,
     "lon": 4.54569,
     "lat": 47.26759,
     "day": 30,
@@ -15379,7 +15769,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1184,
+    "id": 1214,
     "lon": 4.54877,
     "lat": 47.26629,
     "day": 30,
@@ -15392,7 +15782,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1185,
+    "id": 1215,
     "lon": 4.55144,
     "lat": 47.26447,
     "day": 30,
@@ -15405,7 +15795,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1186,
+    "id": 1216,
     "lon": 4.55338,
     "lat": 47.26292,
     "day": 30,
@@ -15418,7 +15808,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1187,
+    "id": 1217,
     "lon": 4.54991,
     "lat": 47.26479,
     "day": 30,
@@ -15431,7 +15821,7 @@
     "gpxFile": "Bourgogne_Section_2.gpx"
   },
   {
-    "id": 1188,
+    "id": 1218,
     "lon": 4.54689,
     "lat": 47.26621,
     "day": 31,
@@ -15444,7 +15834,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1189,
+    "id": 1219,
     "lon": 4.54991,
     "lat": 47.26479,
     "day": 31,
@@ -15457,7 +15847,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1190,
+    "id": 1220,
     "lon": 4.55287,
     "lat": 47.26273,
     "day": 31,
@@ -15470,7 +15860,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1191,
+    "id": 1221,
     "lon": 4.55393,
     "lat": 47.26251,
     "day": 31,
@@ -15483,7 +15873,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1192,
+    "id": 1222,
     "lon": 4.5561,
     "lat": 47.261,
     "day": 31,
@@ -15496,7 +15886,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1193,
+    "id": 1223,
     "lon": 4.55816,
     "lat": 47.2596,
     "day": 31,
@@ -15509,7 +15899,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1194,
+    "id": 1224,
     "lon": 4.56011,
     "lat": 47.25785,
     "day": 31,
@@ -15522,7 +15912,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1195,
+    "id": 1225,
     "lon": 4.56232,
     "lat": 47.25609,
     "day": 31,
@@ -15535,7 +15925,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1196,
+    "id": 1226,
     "lon": 4.56384,
     "lat": 47.25515,
     "day": 31,
@@ -15548,7 +15938,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1197,
+    "id": 1227,
     "lon": 4.56533,
     "lat": 47.25378,
     "day": 31,
@@ -15561,7 +15951,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1198,
+    "id": 1228,
     "lon": 4.5659,
     "lat": 47.25223,
     "day": 31,
@@ -15574,7 +15964,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1199,
+    "id": 1229,
     "lon": 4.56749,
     "lat": 47.25128,
     "day": 31,
@@ -15587,7 +15977,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1200,
+    "id": 1230,
     "lon": 4.57211,
     "lat": 47.24999,
     "day": 31,
@@ -15600,7 +15990,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1201,
+    "id": 1231,
     "lon": 4.57583,
     "lat": 47.24741,
     "day": 31,
@@ -15613,7 +16003,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1202,
+    "id": 1232,
     "lon": 4.5782,
     "lat": 47.24577,
     "day": 31,
@@ -15626,7 +16016,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1203,
+    "id": 1233,
     "lon": 4.58162,
     "lat": 47.24341,
     "day": 31,
@@ -15639,7 +16029,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1204,
+    "id": 1234,
     "lon": 4.58336,
     "lat": 47.24219,
     "day": 31,
@@ -15652,7 +16042,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1205,
+    "id": 1235,
     "lon": 4.58593,
     "lat": 47.24051,
     "day": 31,
@@ -15665,7 +16055,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1206,
+    "id": 1236,
     "lon": 4.58768,
     "lat": 47.23747,
     "day": 31,
@@ -15678,7 +16068,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1207,
+    "id": 1237,
     "lon": 4.58857,
     "lat": 47.23466,
     "day": 31,
@@ -15691,7 +16081,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1208,
+    "id": 1238,
     "lon": 4.58945,
     "lat": 47.23224,
     "day": 31,
@@ -15704,7 +16094,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1209,
+    "id": 1239,
     "lon": 4.59088,
     "lat": 47.23037,
     "day": 31,
@@ -15717,7 +16107,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1210,
+    "id": 1240,
     "lon": 4.5948,
     "lat": 47.22903,
     "day": 31,
@@ -15730,7 +16120,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1211,
+    "id": 1241,
     "lon": 4.59882,
     "lat": 47.22848,
     "day": 31,
@@ -15743,7 +16133,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1212,
+    "id": 1242,
     "lon": 4.60249,
     "lat": 47.22781,
     "day": 31,
@@ -15756,7 +16146,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1213,
+    "id": 1243,
     "lon": 4.60476,
     "lat": 47.22594,
     "day": 31,
@@ -15769,7 +16159,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1214,
+    "id": 1244,
     "lon": 4.60771,
     "lat": 47.22335,
     "day": 31,
@@ -15782,7 +16172,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1215,
+    "id": 1245,
     "lon": 4.60889,
     "lat": 47.2213,
     "day": 31,
@@ -15795,7 +16185,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1216,
+    "id": 1246,
     "lon": 4.613,
     "lat": 47.22025,
     "day": 31,
@@ -15808,7 +16198,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1217,
+    "id": 1247,
     "lon": 4.61592,
     "lat": 47.22007,
     "day": 31,
@@ -15821,7 +16211,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1218,
+    "id": 1248,
     "lon": 4.61956,
     "lat": 47.21978,
     "day": 31,
@@ -15834,7 +16224,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1219,
+    "id": 1249,
     "lon": 4.62359,
     "lat": 47.2187,
     "day": 31,
@@ -15847,7 +16237,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1220,
+    "id": 1250,
     "lon": 4.62666,
     "lat": 47.21685,
     "day": 31,
@@ -15860,7 +16250,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1221,
+    "id": 1251,
     "lon": 4.62949,
     "lat": 47.21424,
     "day": 31,
@@ -15873,7 +16263,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1222,
+    "id": 1252,
     "lon": 4.63142,
     "lat": 47.21191,
     "day": 31,
@@ -15886,7 +16276,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1223,
+    "id": 1253,
     "lon": 4.63255,
     "lat": 47.21004,
     "day": 31,
@@ -15899,7 +16289,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1224,
+    "id": 1254,
     "lon": 4.63387,
     "lat": 47.20787,
     "day": 31,
@@ -15912,7 +16302,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1225,
+    "id": 1255,
     "lon": 4.63511,
     "lat": 47.2057,
     "day": 31,
@@ -15925,7 +16315,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1226,
+    "id": 1256,
     "lon": 4.63643,
     "lat": 47.20366,
     "day": 31,
@@ -15938,7 +16328,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1227,
+    "id": 1257,
     "lon": 4.64264,
     "lat": 47.20121,
     "day": 31,
@@ -15951,7 +16341,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1228,
+    "id": 1258,
     "lon": 4.64338,
     "lat": 47.20095,
     "day": 31,
@@ -15964,7 +16354,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1229,
+    "id": 1259,
     "lon": 4.64827,
     "lat": 47.20081,
     "day": 31,
@@ -15977,7 +16367,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1230,
+    "id": 1260,
     "lon": 4.65119,
     "lat": 47.20019,
     "day": 31,
@@ -15990,7 +16380,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1231,
+    "id": 1261,
     "lon": 4.65381,
     "lat": 47.1993,
     "day": 31,
@@ -16003,7 +16393,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1232,
+    "id": 1262,
     "lon": 4.65809,
     "lat": 47.19788,
     "day": 31,
@@ -16016,7 +16406,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1233,
+    "id": 1263,
     "lon": 4.66002,
     "lat": 47.19683,
     "day": 31,
@@ -16029,7 +16419,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1234,
+    "id": 1264,
     "lon": 4.66335,
     "lat": 47.1948,
     "day": 31,
@@ -16042,7 +16432,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1235,
+    "id": 1265,
     "lon": 4.6654,
     "lat": 47.19317,
     "day": 31,
@@ -16055,7 +16445,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1236,
+    "id": 1266,
     "lon": 4.66825,
     "lat": 47.18874,
     "day": 31,
@@ -16068,7 +16458,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1237,
+    "id": 1267,
     "lon": 4.66869,
     "lat": 47.18804,
     "day": 31,
@@ -16081,7 +16471,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1238,
+    "id": 1268,
     "lon": 4.67081,
     "lat": 47.18646,
     "day": 31,
@@ -16094,7 +16484,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1239,
+    "id": 1269,
     "lon": 4.6747,
     "lat": 47.1858,
     "day": 31,
@@ -16107,7 +16497,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1240,
+    "id": 1270,
     "lon": 4.6777,
     "lat": 47.18516,
     "day": 31,
@@ -16120,7 +16510,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1241,
+    "id": 1271,
     "lon": 4.68131,
     "lat": 47.18523,
     "day": 31,
@@ -16133,7 +16523,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1242,
+    "id": 1272,
     "lon": 4.68508,
     "lat": 47.18362,
     "day": 31,
@@ -16146,7 +16536,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1243,
+    "id": 1273,
     "lon": 4.68668,
     "lat": 47.18233,
     "day": 31,
@@ -16159,7 +16549,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1244,
+    "id": 1274,
     "lon": 4.68551,
     "lat": 47.18029,
     "day": 31,
@@ -16172,7 +16562,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1245,
+    "id": 1275,
     "lon": 4.68847,
     "lat": 47.17861,
     "day": 31,
@@ -16185,7 +16575,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1246,
+    "id": 1276,
     "lon": 4.69083,
     "lat": 47.17696,
     "day": 31,
@@ -16198,7 +16588,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1247,
+    "id": 1277,
     "lon": 4.69174,
     "lat": 47.17431,
     "day": 31,
@@ -16211,7 +16601,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1248,
+    "id": 1278,
     "lon": 4.6928,
     "lat": 47.17223,
     "day": 31,
@@ -16224,7 +16614,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1249,
+    "id": 1279,
     "lon": 4.69475,
     "lat": 47.17031,
     "day": 31,
@@ -16237,7 +16627,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1250,
+    "id": 1280,
     "lon": 4.69791,
     "lat": 47.16911,
     "day": 31,
@@ -16250,7 +16640,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1251,
+    "id": 1281,
     "lon": 4.70102,
     "lat": 47.1675,
     "day": 31,
@@ -16263,7 +16653,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1252,
+    "id": 1282,
     "lon": 4.70409,
     "lat": 47.16679,
     "day": 31,
@@ -16276,7 +16666,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1253,
+    "id": 1283,
     "lon": 4.70788,
     "lat": 47.16654,
     "day": 31,
@@ -16289,7 +16679,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1254,
+    "id": 1284,
     "lon": 4.71126,
     "lat": 47.16815,
     "day": 31,
@@ -16302,7 +16692,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1255,
+    "id": 1285,
     "lon": 4.7139,
     "lat": 47.1712,
     "day": 31,
@@ -16315,7 +16705,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1256,
+    "id": 1286,
     "lon": 4.71521,
     "lat": 47.17271,
     "day": 31,
@@ -16328,7 +16718,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1257,
+    "id": 1287,
     "lon": 4.71659,
     "lat": 47.17478,
     "day": 31,
@@ -16341,7 +16731,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1258,
+    "id": 1288,
     "lon": 4.71495,
     "lat": 47.17717,
     "day": 31,
@@ -16354,7 +16744,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1259,
+    "id": 1289,
     "lon": 4.71365,
     "lat": 47.17918,
     "day": 31,
@@ -16367,7 +16757,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1260,
+    "id": 1290,
     "lon": 4.7151,
     "lat": 47.18209,
     "day": 31,
@@ -16380,7 +16770,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1261,
+    "id": 1291,
     "lon": 4.71684,
     "lat": 47.18396,
     "day": 31,
@@ -16393,7 +16783,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1262,
+    "id": 1292,
     "lon": 4.71827,
     "lat": 47.18629,
     "day": 31,
@@ -16406,7 +16796,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1263,
+    "id": 1293,
     "lon": 4.71659,
     "lat": 47.18919,
     "day": 31,
@@ -16419,7 +16809,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1264,
+    "id": 1294,
     "lon": 4.71703,
     "lat": 47.1916,
     "day": 31,
@@ -16432,7 +16822,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1265,
+    "id": 1295,
     "lon": 4.71903,
     "lat": 47.19328,
     "day": 31,
@@ -16445,7 +16835,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1266,
+    "id": 1296,
     "lon": 4.71903,
     "lat": 47.1958,
     "day": 31,
@@ -16458,7 +16848,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1267,
+    "id": 1297,
     "lon": 4.72067,
     "lat": 47.19819,
     "day": 31,
@@ -16471,7 +16861,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1268,
+    "id": 1298,
     "lon": 4.72353,
     "lat": 47.1997,
     "day": 31,
@@ -16484,7 +16874,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1269,
+    "id": 1299,
     "lon": 4.72509,
     "lat": 47.2023,
     "day": 31,
@@ -16497,7 +16887,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1270,
+    "id": 1300,
     "lon": 4.72622,
     "lat": 47.20459,
     "day": 31,
@@ -16510,7 +16900,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1271,
+    "id": 1301,
     "lon": 4.72773,
     "lat": 47.20633,
     "day": 31,
@@ -16523,7 +16913,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1272,
+    "id": 1302,
     "lon": 4.72837,
     "lat": 47.20953,
     "day": 31,
@@ -16536,7 +16926,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1273,
+    "id": 1303,
     "lon": 4.72673,
     "lat": 47.21057,
     "day": 31,
@@ -16549,7 +16939,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1274,
+    "id": 1304,
     "lon": 4.72292,
     "lat": 47.21119,
     "day": 31,
@@ -16562,7 +16952,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1275,
+    "id": 1305,
     "lon": 4.72351,
     "lat": 47.21339,
     "day": 31,
@@ -16575,7 +16965,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1276,
+    "id": 1306,
     "lon": 4.72654,
     "lat": 47.21492,
     "day": 31,
@@ -16588,7 +16978,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1277,
+    "id": 1307,
     "lon": 4.72814,
     "lat": 47.21726,
     "day": 31,
@@ -16601,7 +16991,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1278,
+    "id": 1308,
     "lon": 4.72954,
     "lat": 47.22046,
     "day": 31,
@@ -16614,7 +17004,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1279,
+    "id": 1309,
     "lon": 4.73189,
     "lat": 47.22338,
     "day": 31,
@@ -16627,7 +17017,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1280,
+    "id": 1310,
     "lon": 4.73268,
     "lat": 47.22446,
     "day": 31,
@@ -16640,7 +17030,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1281,
+    "id": 1311,
     "lon": 4.73401,
     "lat": 47.22694,
     "day": 31,
@@ -16653,7 +17043,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1282,
+    "id": 1312,
     "lon": 4.73725,
     "lat": 47.22998,
     "day": 31,
@@ -16666,7 +17056,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1283,
+    "id": 1313,
     "lon": 4.73912,
     "lat": 47.23129,
     "day": 31,
@@ -16679,7 +17069,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1284,
+    "id": 1314,
     "lon": 4.74202,
     "lat": 47.23265,
     "day": 31,
@@ -16692,7 +17082,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1285,
+    "id": 1315,
     "lon": 4.74474,
     "lat": 47.23386,
     "day": 31,
@@ -16705,7 +17095,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1286,
+    "id": 1316,
     "lon": 4.74832,
     "lat": 47.2366,
     "day": 31,
@@ -16718,7 +17108,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1287,
+    "id": 1317,
     "lon": 4.74978,
     "lat": 47.2378,
     "day": 31,
@@ -16731,7 +17121,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1288,
+    "id": 1318,
     "lon": 4.75339,
     "lat": 47.23929,
     "day": 31,
@@ -16744,7 +17134,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1289,
+    "id": 1319,
     "lon": 4.75574,
     "lat": 47.24071,
     "day": 31,
@@ -16757,7 +17147,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1290,
+    "id": 1320,
     "lon": 4.75634,
     "lat": 47.24349,
     "day": 31,
@@ -16770,7 +17160,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1291,
+    "id": 1321,
     "lon": 4.75645,
     "lat": 47.24584,
     "day": 31,
@@ -16783,7 +17173,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1292,
+    "id": 1322,
     "lon": 4.75717,
     "lat": 47.24853,
     "day": 31,
@@ -16796,7 +17186,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1293,
+    "id": 1323,
     "lon": 4.75946,
     "lat": 47.25018,
     "day": 31,
@@ -16809,7 +17199,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1294,
+    "id": 1324,
     "lon": 4.76221,
     "lat": 47.25204,
     "day": 31,
@@ -16822,7 +17212,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1295,
+    "id": 1325,
     "lon": 4.76222,
     "lat": 47.25462,
     "day": 31,
@@ -16835,7 +17225,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1296,
+    "id": 1326,
     "lon": 4.76182,
     "lat": 47.25716,
     "day": 31,
@@ -16848,7 +17238,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1297,
+    "id": 1327,
     "lon": 4.76308,
     "lat": 47.25954,
     "day": 31,
@@ -16861,7 +17251,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1298,
+    "id": 1328,
     "lon": 4.76658,
     "lat": 47.26151,
     "day": 31,
@@ -16874,7 +17264,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1299,
+    "id": 1329,
     "lon": 4.76927,
     "lat": 47.26259,
     "day": 31,
@@ -16887,7 +17277,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1300,
+    "id": 1330,
     "lon": 4.77278,
     "lat": 47.26324,
     "day": 31,
@@ -16900,7 +17290,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1301,
+    "id": 1331,
     "lon": 4.77625,
     "lat": 47.26429,
     "day": 31,
@@ -16913,7 +17303,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1302,
+    "id": 1332,
     "lon": 4.77918,
     "lat": 47.26573,
     "day": 31,
@@ -16926,7 +17316,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1303,
+    "id": 1333,
     "lon": 4.78078,
     "lat": 47.26884,
     "day": 31,
@@ -16939,7 +17329,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1304,
+    "id": 1334,
     "lon": 4.78061,
     "lat": 47.27091,
     "day": 31,
@@ -16952,7 +17342,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1305,
+    "id": 1335,
     "lon": 4.77863,
     "lat": 47.27455,
     "day": 31,
@@ -16965,7 +17355,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1306,
+    "id": 1336,
     "lon": 4.77859,
     "lat": 47.27572,
     "day": 31,
@@ -16978,7 +17368,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1307,
+    "id": 1337,
     "lon": 4.78209,
     "lat": 47.2773,
     "day": 31,
@@ -16991,7 +17381,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1308,
+    "id": 1338,
     "lon": 4.7847,
     "lat": 47.27839,
     "day": 31,
@@ -17004,7 +17394,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1309,
+    "id": 1339,
     "lon": 4.78801,
     "lat": 47.27997,
     "day": 31,
@@ -17017,7 +17407,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1310,
+    "id": 1340,
     "lon": 4.78747,
     "lat": 47.28238,
     "day": 31,
@@ -17030,7 +17420,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1311,
+    "id": 1341,
     "lon": 4.78854,
     "lat": 47.28573,
     "day": 31,
@@ -17043,7 +17433,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1312,
+    "id": 1342,
     "lon": 4.79078,
     "lat": 47.28644,
     "day": 31,
@@ -17056,7 +17446,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1313,
+    "id": 1343,
     "lon": 4.79425,
     "lat": 47.28575,
     "day": 31,
@@ -17069,7 +17459,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1314,
+    "id": 1344,
     "lon": 4.7976,
     "lat": 47.28469,
     "day": 31,
@@ -17082,7 +17472,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1315,
+    "id": 1345,
     "lon": 4.80069,
     "lat": 47.28605,
     "day": 31,
@@ -17095,7 +17485,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1316,
+    "id": 1346,
     "lon": 4.80191,
     "lat": 47.28896,
     "day": 31,
@@ -17108,7 +17498,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1317,
+    "id": 1347,
     "lon": 4.80368,
     "lat": 47.29059,
     "day": 31,
@@ -17121,7 +17511,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1318,
+    "id": 1348,
     "lon": 4.80678,
     "lat": 47.29093,
     "day": 31,
@@ -17134,7 +17524,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1319,
+    "id": 1349,
     "lon": 4.81061,
     "lat": 47.28891,
     "day": 31,
@@ -17147,7 +17537,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1320,
+    "id": 1350,
     "lon": 4.81389,
     "lat": 47.28996,
     "day": 31,
@@ -17160,7 +17550,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1321,
+    "id": 1351,
     "lon": 4.81566,
     "lat": 47.29139,
     "day": 31,
@@ -17173,7 +17563,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1322,
+    "id": 1352,
     "lon": 4.81464,
     "lat": 47.29341,
     "day": 31,
@@ -17186,7 +17576,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1323,
+    "id": 1353,
     "lon": 4.81419,
     "lat": 47.29587,
     "day": 31,
@@ -17199,7 +17589,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1324,
+    "id": 1354,
     "lon": 4.81502,
     "lat": 47.29822,
     "day": 31,
@@ -17212,7 +17602,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1325,
+    "id": 1355,
     "lon": 4.81891,
     "lat": 47.29936,
     "day": 31,
@@ -17225,7 +17615,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1326,
+    "id": 1356,
     "lon": 4.82305,
     "lat": 47.30046,
     "day": 31,
@@ -17238,7 +17628,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1327,
+    "id": 1357,
     "lon": 4.82501,
     "lat": 47.30147,
     "day": 31,
@@ -17251,7 +17641,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1328,
+    "id": 1358,
     "lon": 4.82767,
     "lat": 47.30283,
     "day": 31,
@@ -17264,7 +17654,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1329,
+    "id": 1359,
     "lon": 4.83148,
     "lat": 47.3036,
     "day": 31,
@@ -17277,7 +17667,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1330,
+    "id": 1360,
     "lon": 4.83482,
     "lat": 47.3045,
     "day": 31,
@@ -17290,7 +17680,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1331,
+    "id": 1361,
     "lon": 4.83914,
     "lat": 47.3063,
     "day": 31,
@@ -17303,7 +17693,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1332,
+    "id": 1362,
     "lon": 4.84612,
     "lat": 47.30958,
     "day": 31,
@@ -17316,7 +17706,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1333,
+    "id": 1363,
     "lon": 4.84763,
     "lat": 47.31044,
     "day": 31,
@@ -17329,7 +17719,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1334,
+    "id": 1364,
     "lon": 4.85294,
     "lat": 47.31278,
     "day": 31,
@@ -17342,7 +17732,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1335,
+    "id": 1365,
     "lon": 4.85631,
     "lat": 47.3134,
     "day": 31,
@@ -17355,7 +17745,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1336,
+    "id": 1366,
     "lon": 4.85889,
     "lat": 47.31376,
     "day": 31,
@@ -17368,7 +17758,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1337,
+    "id": 1367,
     "lon": 4.86101,
     "lat": 47.314,
     "day": 31,
@@ -17381,7 +17771,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1338,
+    "id": 1368,
     "lon": 4.86465,
     "lat": 47.31296,
     "day": 31,
@@ -17394,7 +17784,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1339,
+    "id": 1369,
     "lon": 4.86762,
     "lat": 47.3111,
     "day": 31,
@@ -17407,7 +17797,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1340,
+    "id": 1370,
     "lon": 4.87221,
     "lat": 47.31033,
     "day": 31,
@@ -17420,7 +17810,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1341,
+    "id": 1371,
     "lon": 4.87436,
     "lat": 47.31031,
     "day": 31,
@@ -17433,7 +17823,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1342,
+    "id": 1372,
     "lon": 4.88232,
     "lat": 47.31169,
     "day": 31,
@@ -17446,7 +17836,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1343,
+    "id": 1373,
     "lon": 4.88519,
     "lat": 47.31283,
     "day": 31,
@@ -17459,7 +17849,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1344,
+    "id": 1374,
     "lon": 4.88821,
     "lat": 47.31441,
     "day": 31,
@@ -17472,7 +17862,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1345,
+    "id": 1375,
     "lon": 4.89415,
     "lat": 47.31573,
     "day": 31,
@@ -17485,7 +17875,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1346,
+    "id": 1376,
     "lon": 4.89564,
     "lat": 47.31585,
     "day": 31,
@@ -17498,7 +17888,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1347,
+    "id": 1377,
     "lon": 4.89934,
     "lat": 47.31554,
     "day": 31,
@@ -17511,7 +17901,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1348,
+    "id": 1378,
     "lon": 4.9031,
     "lat": 47.31517,
     "day": 31,
@@ -17524,7 +17914,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1349,
+    "id": 1379,
     "lon": 4.9071,
     "lat": 47.31629,
     "day": 31,
@@ -17537,7 +17927,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1350,
+    "id": 1380,
     "lon": 4.90953,
     "lat": 47.31754,
     "day": 31,
@@ -17550,7 +17940,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1351,
+    "id": 1381,
     "lon": 4.91184,
     "lat": 47.31982,
     "day": 31,
@@ -17563,7 +17953,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1352,
+    "id": 1382,
     "lon": 4.91619,
     "lat": 47.32053,
     "day": 31,
@@ -17576,7 +17966,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1353,
+    "id": 1383,
     "lon": 4.91855,
     "lat": 47.32004,
     "day": 31,
@@ -17589,7 +17979,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1354,
+    "id": 1384,
     "lon": 4.92215,
     "lat": 47.3195,
     "day": 31,
@@ -17602,7 +17992,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1355,
+    "id": 1385,
     "lon": 4.92614,
     "lat": 47.31937,
     "day": 31,
@@ -17615,7 +18005,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1356,
+    "id": 1386,
     "lon": 4.92958,
     "lat": 47.32023,
     "day": 31,
@@ -17628,7 +18018,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1357,
+    "id": 1387,
     "lon": 4.93174,
     "lat": 47.32226,
     "day": 31,
@@ -17641,7 +18031,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1358,
+    "id": 1388,
     "lon": 4.93305,
     "lat": 47.32479,
     "day": 31,
@@ -17654,7 +18044,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1359,
+    "id": 1389,
     "lon": 4.93601,
     "lat": 47.32728,
     "day": 31,
@@ -17667,7 +18057,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1360,
+    "id": 1390,
     "lon": 4.94042,
     "lat": 47.33003,
     "day": 31,
@@ -17680,7 +18070,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1361,
+    "id": 1391,
     "lon": 4.94232,
     "lat": 47.33122,
     "day": 31,
@@ -17693,7 +18083,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1362,
+    "id": 1392,
     "lon": 4.94366,
     "lat": 47.33204,
     "day": 31,
@@ -17706,7 +18096,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1363,
+    "id": 1393,
     "lon": 4.94718,
     "lat": 47.33343,
     "day": 31,
@@ -17719,7 +18109,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1364,
+    "id": 1394,
     "lon": 4.95056,
     "lat": 47.33516,
     "day": 31,
@@ -17732,7 +18122,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1365,
+    "id": 1395,
     "lon": 4.95332,
     "lat": 47.33664,
     "day": 31,
@@ -17745,7 +18135,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1366,
+    "id": 1396,
     "lon": 4.95656,
     "lat": 47.33745,
     "day": 31,
@@ -17758,7 +18148,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1367,
+    "id": 1397,
     "lon": 4.9605,
     "lat": 47.33826,
     "day": 31,
@@ -17771,7 +18161,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1368,
+    "id": 1398,
     "lon": 4.96563,
     "lat": 47.33786,
     "day": 31,
@@ -17784,7 +18174,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1369,
+    "id": 1399,
     "lon": 4.96806,
     "lat": 47.33805,
     "day": 31,
@@ -17797,7 +18187,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1370,
+    "id": 1400,
     "lon": 4.97107,
     "lat": 47.33671,
     "day": 31,
@@ -17810,7 +18200,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1371,
+    "id": 1401,
     "lon": 4.97521,
     "lat": 47.33485,
     "day": 31,
@@ -17823,7 +18213,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1372,
+    "id": 1402,
     "lon": 4.97954,
     "lat": 47.33287,
     "day": 31,
@@ -17836,7 +18226,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1373,
+    "id": 1403,
     "lon": 4.98011,
     "lat": 47.33244,
     "day": 31,
@@ -17849,7 +18239,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1374,
+    "id": 1404,
     "lon": 4.98266,
     "lat": 47.33032,
     "day": 31,
@@ -17862,7 +18252,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1375,
+    "id": 1405,
     "lon": 4.98503,
     "lat": 47.32825,
     "day": 31,
@@ -17875,7 +18265,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1376,
+    "id": 1406,
     "lon": 4.9884,
     "lat": 47.3275,
     "day": 31,
@@ -17888,7 +18278,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1377,
+    "id": 1407,
     "lon": 4.99222,
     "lat": 47.32698,
     "day": 31,
@@ -17901,7 +18291,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1378,
+    "id": 1408,
     "lon": 4.99649,
     "lat": 47.326,
     "day": 31,
@@ -17914,7 +18304,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1379,
+    "id": 1409,
     "lon": 4.99951,
     "lat": 47.32587,
     "day": 31,
@@ -17927,7 +18317,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1380,
+    "id": 1410,
     "lon": 5.0023,
     "lat": 47.32495,
     "day": 31,
@@ -17940,7 +18330,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1381,
+    "id": 1411,
     "lon": 5.0056,
     "lat": 47.32172,
     "day": 31,
@@ -17953,7 +18343,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1382,
+    "id": 1412,
     "lon": 5.00726,
     "lat": 47.32037,
     "day": 31,
@@ -17966,7 +18356,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1383,
+    "id": 1413,
     "lon": 5.00933,
     "lat": 47.31871,
     "day": 31,
@@ -17979,7 +18369,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1384,
+    "id": 1414,
     "lon": 5.01218,
     "lat": 47.31779,
     "day": 31,
@@ -17992,7 +18382,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1385,
+    "id": 1415,
     "lon": 5.01563,
     "lat": 47.31835,
     "day": 31,
@@ -18005,7 +18395,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1386,
+    "id": 1416,
     "lon": 5.01923,
     "lat": 47.31912,
     "day": 31,
@@ -18018,7 +18408,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1387,
+    "id": 1417,
     "lon": 5.02241,
     "lat": 47.31903,
     "day": 31,
@@ -18031,7 +18421,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1388,
+    "id": 1418,
     "lon": 5.02588,
     "lat": 47.31859,
     "day": 31,
@@ -18044,7 +18434,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1389,
+    "id": 1419,
     "lon": 5.02952,
     "lat": 47.31851,
     "day": 31,
@@ -18057,7 +18447,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1390,
+    "id": 1420,
     "lon": 5.03256,
     "lat": 47.31811,
     "day": 31,
@@ -18070,7 +18460,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1391,
+    "id": 1421,
     "lon": 5.03558,
     "lat": 47.31841,
     "day": 31,
@@ -18083,7 +18473,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1392,
+    "id": 1422,
     "lon": 5.0343,
     "lat": 47.31753,
     "day": 31,
@@ -18096,7 +18486,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1393,
+    "id": 1423,
     "lon": 5.03326,
     "lat": 47.31599,
     "day": 31,
@@ -18109,7 +18499,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1394,
+    "id": 1424,
     "lon": 5.03021,
     "lat": 47.31511,
     "day": 31,
@@ -18122,7 +18512,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1395,
+    "id": 1425,
     "lon": 5.02843,
     "lat": 47.31435,
     "day": 31,
@@ -18135,7 +18525,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1396,
+    "id": 1426,
     "lon": 5.02706,
     "lat": 47.31207,
     "day": 31,
@@ -18148,7 +18538,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1397,
+    "id": 1427,
     "lon": 5.02615,
     "lat": 47.30983,
     "day": 31,
@@ -18161,7 +18551,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1398,
+    "id": 1428,
     "lon": 5.02477,
     "lat": 47.30741,
     "day": 31,
@@ -18174,7 +18564,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1399,
+    "id": 1429,
     "lon": 5.02316,
     "lat": 47.30519,
     "day": 31,
@@ -18187,7 +18577,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1400,
+    "id": 1430,
     "lon": 5.02232,
     "lat": 47.30334,
     "day": 31,
@@ -18200,7 +18590,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1401,
+    "id": 1431,
     "lon": 5.02109,
     "lat": 47.30116,
     "day": 31,
@@ -18213,7 +18603,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1402,
+    "id": 1432,
     "lon": 5.01976,
     "lat": 47.29895,
     "day": 31,
@@ -18226,7 +18616,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1403,
+    "id": 1433,
     "lon": 5.01876,
     "lat": 47.29716,
     "day": 31,
@@ -18239,7 +18629,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1404,
+    "id": 1434,
     "lon": 5.01632,
     "lat": 47.29653,
     "day": 31,
@@ -18252,7 +18642,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1405,
+    "id": 1435,
     "lon": 5.01358,
     "lat": 47.29515,
     "day": 31,
@@ -18265,7 +18655,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1406,
+    "id": 1436,
     "lon": 5.01098,
     "lat": 47.29471,
     "day": 31,
@@ -18278,7 +18668,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1407,
+    "id": 1437,
     "lon": 5.00944,
     "lat": 47.29266,
     "day": 31,
@@ -18291,7 +18681,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1408,
+    "id": 1438,
     "lon": 5.00766,
     "lat": 47.29043,
     "day": 31,
@@ -18304,7 +18694,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1409,
+    "id": 1439,
     "lon": 5.00566,
     "lat": 47.2883,
     "day": 31,
@@ -18317,7 +18707,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1410,
+    "id": 1440,
     "lon": 5.0038,
     "lat": 47.28629,
     "day": 31,
@@ -18330,7 +18720,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1411,
+    "id": 1441,
     "lon": 5.00241,
     "lat": 47.2848,
     "day": 31,
@@ -18343,7 +18733,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1412,
+    "id": 1442,
     "lon": 5.00045,
     "lat": 47.28321,
     "day": 31,
@@ -18356,7 +18746,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1413,
+    "id": 1443,
     "lon": 4.99834,
     "lat": 47.28104,
     "day": 31,
@@ -18369,7 +18759,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1414,
+    "id": 1444,
     "lon": 4.99662,
     "lat": 47.27932,
     "day": 31,
@@ -18382,7 +18772,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1415,
+    "id": 1445,
     "lon": 4.99516,
     "lat": 47.27743,
     "day": 31,
@@ -18395,7 +18785,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1416,
+    "id": 1446,
     "lon": 4.99242,
     "lat": 47.2756,
     "day": 31,
@@ -18408,7 +18798,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1417,
+    "id": 1447,
     "lon": 4.99028,
     "lat": 47.27308,
     "day": 31,
@@ -18421,7 +18811,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1418,
+    "id": 1448,
     "lon": 4.98876,
     "lat": 47.27122,
     "day": 31,
@@ -18434,7 +18824,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1419,
+    "id": 1449,
     "lon": 4.9874,
     "lat": 47.26916,
     "day": 31,
@@ -18447,7 +18837,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1420,
+    "id": 1450,
     "lon": 4.98557,
     "lat": 47.26792,
     "day": 31,
@@ -18460,7 +18850,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1421,
+    "id": 1451,
     "lon": 4.98385,
     "lat": 47.26677,
     "day": 31,
@@ -18473,7 +18863,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1422,
+    "id": 1452,
     "lon": 4.98243,
     "lat": 47.26398,
     "day": 31,
@@ -18486,7 +18876,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1423,
+    "id": 1453,
     "lon": 4.9816,
     "lat": 47.26237,
     "day": 31,
@@ -18499,7 +18889,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1424,
+    "id": 1454,
     "lon": 4.98028,
     "lat": 47.26056,
     "day": 31,
@@ -18512,7 +18902,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1425,
+    "id": 1455,
     "lon": 4.97903,
     "lat": 47.25869,
     "day": 31,
@@ -18525,7 +18915,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1426,
+    "id": 1456,
     "lon": 4.97775,
     "lat": 47.25724,
     "day": 31,
@@ -18538,7 +18928,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1427,
+    "id": 1457,
     "lon": 4.97698,
     "lat": 47.25386,
     "day": 31,
@@ -18551,7 +18941,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1428,
+    "id": 1458,
     "lon": 4.9761,
     "lat": 47.2521,
     "day": 31,
@@ -18564,7 +18954,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1429,
+    "id": 1459,
     "lon": 4.97535,
     "lat": 47.24984,
     "day": 31,
@@ -18577,7 +18967,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1430,
+    "id": 1460,
     "lon": 4.97414,
     "lat": 47.24727,
     "day": 31,
@@ -18590,7 +18980,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1431,
+    "id": 1461,
     "lon": 4.9729,
     "lat": 47.24454,
     "day": 31,
@@ -18603,7 +18993,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1432,
+    "id": 1462,
     "lon": 4.97202,
     "lat": 47.24254,
     "day": 31,
@@ -18616,7 +19006,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1433,
+    "id": 1463,
     "lon": 4.97134,
     "lat": 47.24007,
     "day": 31,
@@ -18629,7 +19019,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1434,
+    "id": 1464,
     "lon": 4.97016,
     "lat": 47.23777,
     "day": 31,
@@ -18642,7 +19032,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1435,
+    "id": 1465,
     "lon": 4.969,
     "lat": 47.23419,
     "day": 31,
@@ -18655,7 +19045,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1436,
+    "id": 1466,
     "lon": 4.96822,
     "lat": 47.23275,
     "day": 31,
@@ -18668,7 +19058,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1437,
+    "id": 1467,
     "lon": 4.9671,
     "lat": 47.23106,
     "day": 31,
@@ -18681,7 +19071,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1438,
+    "id": 1468,
     "lon": 4.96537,
     "lat": 47.23065,
     "day": 31,
@@ -18694,7 +19084,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1439,
+    "id": 1469,
     "lon": 4.96371,
     "lat": 47.22828,
     "day": 31,
@@ -18707,7 +19097,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1440,
+    "id": 1470,
     "lon": 4.96191,
     "lat": 47.22609,
     "day": 31,
@@ -18720,7 +19110,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1441,
+    "id": 1471,
     "lon": 4.95872,
     "lat": 47.22481,
     "day": 31,
@@ -18733,7 +19123,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1442,
+    "id": 1472,
     "lon": 4.95657,
     "lat": 47.22406,
     "day": 31,
@@ -18746,7 +19136,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1443,
+    "id": 1473,
     "lon": 4.9537,
     "lat": 47.22354,
     "day": 31,
@@ -18759,7 +19149,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1444,
+    "id": 1474,
     "lon": 4.95082,
     "lat": 47.22293,
     "day": 31,
@@ -18772,7 +19162,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1445,
+    "id": 1475,
     "lon": 4.94927,
     "lat": 47.2226,
     "day": 31,
@@ -18785,7 +19175,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1446,
+    "id": 1476,
     "lon": 4.94698,
     "lat": 47.22171,
     "day": 31,
@@ -18798,7 +19188,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1447,
+    "id": 1477,
     "lon": 4.94491,
     "lat": 47.22136,
     "day": 31,
@@ -18811,7 +19201,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1448,
+    "id": 1478,
     "lon": 4.94311,
     "lat": 47.22132,
     "day": 31,
@@ -18824,7 +19214,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1449,
+    "id": 1479,
     "lon": 4.94148,
     "lat": 47.22037,
     "day": 31,
@@ -18837,7 +19227,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1450,
+    "id": 1480,
     "lon": 4.93997,
     "lat": 47.22004,
     "day": 31,
@@ -18850,7 +19240,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1451,
+    "id": 1481,
     "lon": 4.93801,
     "lat": 47.22071,
     "day": 31,
@@ -18863,7 +19253,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1452,
+    "id": 1482,
     "lon": 4.9365,
     "lat": 47.22186,
     "day": 31,
@@ -18876,7 +19266,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1453,
+    "id": 1483,
     "lon": 4.93525,
     "lat": 47.22264,
     "day": 31,
@@ -18889,7 +19279,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1454,
+    "id": 1484,
     "lon": 4.93338,
     "lat": 47.22363,
     "day": 31,
@@ -18902,7 +19292,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1455,
+    "id": 1485,
     "lon": 4.93177,
     "lat": 47.22411,
     "day": 31,
@@ -18915,7 +19305,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1456,
+    "id": 1486,
     "lon": 4.93084,
     "lat": 47.22411,
     "day": 31,
@@ -18928,7 +19318,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1457,
+    "id": 1487,
     "lon": 4.92965,
     "lat": 47.22352,
     "day": 31,
@@ -18941,7 +19331,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1458,
+    "id": 1488,
     "lon": 4.9282,
     "lat": 47.22367,
     "day": 31,
@@ -18954,7 +19344,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1459,
+    "id": 1489,
     "lon": 4.92659,
     "lat": 47.22383,
     "day": 31,
@@ -18967,7 +19357,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1460,
+    "id": 1490,
     "lon": 4.92549,
     "lat": 47.2237,
     "day": 31,
@@ -18980,7 +19370,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1461,
+    "id": 1491,
     "lon": 4.92374,
     "lat": 47.22337,
     "day": 31,
@@ -18993,7 +19383,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1462,
+    "id": 1492,
     "lon": 4.92163,
     "lat": 47.2241,
     "day": 31,
@@ -19006,7 +19396,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1463,
+    "id": 1493,
     "lon": 4.91981,
     "lat": 47.22453,
     "day": 31,
@@ -19019,7 +19409,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1464,
+    "id": 1494,
     "lon": 4.9173,
     "lat": 47.22525,
     "day": 31,
@@ -19032,7 +19422,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1465,
+    "id": 1495,
     "lon": 4.9161,
     "lat": 47.22593,
     "day": 31,
@@ -19045,7 +19435,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1466,
+    "id": 1496,
     "lon": 4.91286,
     "lat": 47.22701,
     "day": 31,
@@ -19058,7 +19448,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1467,
+    "id": 1497,
     "lon": 4.9107,
     "lat": 47.22759,
     "day": 31,
@@ -19071,7 +19461,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1468,
+    "id": 1498,
     "lon": 4.90863,
     "lat": 47.22793,
     "day": 31,
@@ -19084,7 +19474,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1469,
+    "id": 1499,
     "lon": 4.90571,
     "lat": 47.22861,
     "day": 31,
@@ -19097,7 +19487,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1470,
+    "id": 1500,
     "lon": 4.90561,
     "lat": 47.22996,
     "day": 31,
@@ -19110,7 +19500,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1471,
+    "id": 1501,
     "lon": 4.90458,
     "lat": 47.23116,
     "day": 31,
@@ -19123,7 +19513,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1472,
+    "id": 1502,
     "lon": 4.90417,
     "lat": 47.23156,
     "day": 31,
@@ -19136,7 +19526,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1473,
+    "id": 1503,
     "lon": 4.90338,
     "lat": 47.23183,
     "day": 31,
@@ -19149,7 +19539,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1474,
+    "id": 1504,
     "lon": 4.90452,
     "lat": 47.23255,
     "day": 31,
@@ -19162,7 +19552,7 @@
     "gpxFile": "Bourgogne_Section_3.gpx"
   },
   {
-    "id": 1475,
+    "id": 1505,
     "lon": 4.9061,
     "lat": 47.23284,
     "day": 1,
@@ -19175,7 +19565,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1476,
+    "id": 1506,
     "lon": 4.90345,
     "lat": 47.23177,
     "day": 1,
@@ -19188,7 +19578,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1477,
+    "id": 1507,
     "lon": 4.90571,
     "lat": 47.22974,
     "day": 1,
@@ -19201,7 +19591,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1478,
+    "id": 1508,
     "lon": 4.90467,
     "lat": 47.22751,
     "day": 1,
@@ -19214,7 +19604,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1479,
+    "id": 1509,
     "lon": 4.90532,
     "lat": 47.22568,
     "day": 1,
@@ -19227,7 +19617,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1480,
+    "id": 1510,
     "lon": 4.90881,
     "lat": 47.22434,
     "day": 1,
@@ -19240,7 +19630,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1481,
+    "id": 1511,
     "lon": 4.91087,
     "lat": 47.22346,
     "day": 1,
@@ -19253,7 +19643,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1482,
+    "id": 1512,
     "lon": 4.91404,
     "lat": 47.22265,
     "day": 1,
@@ -19266,7 +19656,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1483,
+    "id": 1513,
     "lon": 4.91642,
     "lat": 47.22129,
     "day": 1,
@@ -19279,7 +19669,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1484,
+    "id": 1514,
     "lon": 4.91897,
     "lat": 47.21992,
     "day": 1,
@@ -19292,7 +19682,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1485,
+    "id": 1515,
     "lon": 4.92007,
     "lat": 47.21825,
     "day": 1,
@@ -19305,7 +19695,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1486,
+    "id": 1516,
     "lon": 4.91888,
     "lat": 47.21549,
     "day": 1,
@@ -19318,7 +19708,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1487,
+    "id": 1517,
     "lon": 4.91737,
     "lat": 47.21368,
     "day": 1,
@@ -19331,7 +19721,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1488,
+    "id": 1518,
     "lon": 4.91689,
     "lat": 47.21129,
     "day": 1,
@@ -19344,7 +19734,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1489,
+    "id": 1519,
     "lon": 4.91666,
     "lat": 47.20925,
     "day": 1,
@@ -19357,7 +19747,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1490,
+    "id": 1520,
     "lon": 4.91727,
     "lat": 47.20775,
     "day": 1,
@@ -19370,7 +19760,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1491,
+    "id": 1521,
     "lon": 4.91988,
     "lat": 47.20909,
     "day": 1,
@@ -19383,7 +19773,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1492,
+    "id": 1522,
     "lon": 4.92195,
     "lat": 47.20993,
     "day": 1,
@@ -19396,7 +19786,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1493,
+    "id": 1523,
     "lon": 4.92503,
     "lat": 47.21071,
     "day": 1,
@@ -19409,7 +19799,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1494,
+    "id": 1524,
     "lon": 4.92763,
     "lat": 47.2115,
     "day": 1,
@@ -19422,7 +19812,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1495,
+    "id": 1525,
     "lon": 4.93094,
     "lat": 47.21202,
     "day": 1,
@@ -19435,7 +19825,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1496,
+    "id": 1526,
     "lon": 4.9348,
     "lat": 47.21299,
     "day": 1,
@@ -19448,7 +19838,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1497,
+    "id": 1527,
     "lon": 4.93984,
     "lat": 47.21425,
     "day": 1,
@@ -19461,7 +19851,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1498,
+    "id": 1528,
     "lon": 4.94107,
     "lat": 47.21458,
     "day": 1,
@@ -19474,7 +19864,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1499,
+    "id": 1529,
     "lon": 4.94582,
     "lat": 47.21541,
     "day": 1,
@@ -19487,7 +19877,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1500,
+    "id": 1530,
     "lon": 4.94804,
     "lat": 47.21539,
     "day": 1,
@@ -19500,7 +19890,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1501,
+    "id": 1531,
     "lon": 4.95158,
     "lat": 47.21466,
     "day": 1,
@@ -19513,7 +19903,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1502,
+    "id": 1532,
     "lon": 4.95463,
     "lat": 47.215,
     "day": 1,
@@ -19526,7 +19916,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1503,
+    "id": 1533,
     "lon": 4.95788,
     "lat": 47.21626,
     "day": 1,
@@ -19539,7 +19929,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1504,
+    "id": 1534,
     "lon": 4.96049,
     "lat": 47.21838,
     "day": 1,
@@ -19552,7 +19942,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1505,
+    "id": 1535,
     "lon": 4.96206,
     "lat": 47.22085,
     "day": 1,
@@ -19565,7 +19955,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1506,
+    "id": 1536,
     "lon": 4.96408,
     "lat": 47.22137,
     "day": 1,
@@ -19578,7 +19968,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1507,
+    "id": 1537,
     "lon": 4.96662,
     "lat": 47.22117,
     "day": 1,
@@ -19591,7 +19981,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1508,
+    "id": 1538,
     "lon": 4.96768,
     "lat": 47.21879,
     "day": 1,
@@ -19604,7 +19994,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1509,
+    "id": 1539,
     "lon": 4.96812,
     "lat": 47.2171,
     "day": 1,
@@ -19617,7 +20007,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1510,
+    "id": 1540,
     "lon": 4.96729,
     "lat": 47.21513,
     "day": 1,
@@ -19630,7 +20020,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1511,
+    "id": 1541,
     "lon": 4.96666,
     "lat": 47.21255,
     "day": 1,
@@ -19643,7 +20033,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1512,
+    "id": 1542,
     "lon": 4.96595,
     "lat": 47.21048,
     "day": 1,
@@ -19656,7 +20046,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1513,
+    "id": 1543,
     "lon": 4.96523,
     "lat": 47.20878,
     "day": 1,
@@ -19669,7 +20059,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1514,
+    "id": 1544,
     "lon": 4.96566,
     "lat": 47.20638,
     "day": 1,
@@ -19682,7 +20072,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1515,
+    "id": 1545,
     "lon": 4.96541,
     "lat": 47.20412,
     "day": 1,
@@ -19695,7 +20085,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1516,
+    "id": 1546,
     "lon": 4.96476,
     "lat": 47.20194,
     "day": 1,
@@ -19708,7 +20098,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1517,
+    "id": 1547,
     "lon": 4.96383,
     "lat": 47.19983,
     "day": 1,
@@ -19721,7 +20111,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1518,
+    "id": 1548,
     "lon": 4.96247,
     "lat": 47.19837,
     "day": 1,
@@ -19734,7 +20124,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1519,
+    "id": 1549,
     "lon": 4.96186,
     "lat": 47.19582,
     "day": 1,
@@ -19747,7 +20137,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1520,
+    "id": 1550,
     "lon": 4.96053,
     "lat": 47.19367,
     "day": 1,
@@ -19760,7 +20150,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1521,
+    "id": 1551,
     "lon": 4.95981,
     "lat": 47.19171,
     "day": 1,
@@ -19773,7 +20163,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1522,
+    "id": 1552,
     "lon": 4.96053,
     "lat": 47.18937,
     "day": 1,
@@ -19786,7 +20176,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1523,
+    "id": 1553,
     "lon": 4.96024,
     "lat": 47.18719,
     "day": 1,
@@ -19799,7 +20189,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1524,
+    "id": 1554,
     "lon": 4.95924,
     "lat": 47.1848,
     "day": 1,
@@ -19812,7 +20202,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1525,
+    "id": 1555,
     "lon": 4.95846,
     "lat": 47.1829,
     "day": 1,
@@ -19825,7 +20215,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1526,
+    "id": 1556,
     "lon": 4.95736,
     "lat": 47.1812,
     "day": 1,
@@ -19838,7 +20228,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1527,
+    "id": 1557,
     "lon": 4.95621,
     "lat": 47.1793,
     "day": 1,
@@ -19851,7 +20241,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1528,
+    "id": 1558,
     "lon": 4.95496,
     "lat": 47.177,
     "day": 1,
@@ -19864,7 +20254,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1529,
+    "id": 1559,
     "lon": 4.95366,
     "lat": 47.1749,
     "day": 1,
@@ -19877,7 +20267,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1530,
+    "id": 1560,
     "lon": 4.95296,
     "lat": 47.17306,
     "day": 1,
@@ -19890,7 +20280,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1531,
+    "id": 1561,
     "lon": 4.95266,
     "lat": 47.17068,
     "day": 1,
@@ -19903,7 +20293,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1532,
+    "id": 1562,
     "lon": 4.95178,
     "lat": 47.16801,
     "day": 1,
@@ -19916,7 +20306,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1533,
+    "id": 1563,
     "lon": 4.95164,
     "lat": 47.16625,
     "day": 1,
@@ -19929,7 +20319,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1534,
+    "id": 1564,
     "lon": 4.95092,
     "lat": 47.16427,
     "day": 1,
@@ -19942,7 +20332,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1535,
+    "id": 1565,
     "lon": 4.95079,
     "lat": 47.16306,
     "day": 1,
@@ -19955,7 +20345,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1536,
+    "id": 1566,
     "lon": 4.95107,
     "lat": 47.16087,
     "day": 1,
@@ -19968,7 +20358,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1537,
+    "id": 1567,
     "lon": 4.95218,
     "lat": 47.15909,
     "day": 1,
@@ -19981,7 +20371,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1538,
+    "id": 1568,
     "lon": 4.95087,
     "lat": 47.15744,
     "day": 1,
@@ -19994,7 +20384,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1539,
+    "id": 1569,
     "lon": 4.94975,
     "lat": 47.155,
     "day": 1,
@@ -20007,7 +20397,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1540,
+    "id": 1570,
     "lon": 4.94912,
     "lat": 47.15282,
     "day": 1,
@@ -20020,7 +20410,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1541,
+    "id": 1571,
     "lon": 4.94847,
     "lat": 47.15095,
     "day": 1,
@@ -20033,7 +20423,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1542,
+    "id": 1572,
     "lon": 4.94663,
     "lat": 47.14872,
     "day": 1,
@@ -20046,7 +20436,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1543,
+    "id": 1573,
     "lon": 4.94511,
     "lat": 47.14697,
     "day": 1,
@@ -20059,7 +20449,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1544,
+    "id": 1574,
     "lon": 4.94346,
     "lat": 47.14513,
     "day": 1,
@@ -20072,7 +20462,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1545,
+    "id": 1575,
     "lon": 4.94619,
     "lat": 47.14354,
     "day": 1,
@@ -20085,7 +20475,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1546,
+    "id": 1576,
     "lon": 4.94511,
     "lat": 47.14228,
     "day": 1,
@@ -20098,7 +20488,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1547,
+    "id": 1577,
     "lon": 4.94405,
     "lat": 47.14087,
     "day": 1,
@@ -20111,7 +20501,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1548,
+    "id": 1578,
     "lon": 4.94285,
     "lat": 47.13926,
     "day": 1,
@@ -20124,7 +20514,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1549,
+    "id": 1579,
     "lon": 4.94397,
     "lat": 47.13721,
     "day": 1,
@@ -20137,7 +20527,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1550,
+    "id": 1580,
     "lon": 4.94437,
     "lat": 47.13528,
     "day": 1,
@@ -20150,7 +20540,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1551,
+    "id": 1581,
     "lon": 4.94405,
     "lat": 47.13339,
     "day": 1,
@@ -20163,7 +20553,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1552,
+    "id": 1582,
     "lon": 4.94368,
     "lat": 47.13121,
     "day": 1,
@@ -20176,7 +20566,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1553,
+    "id": 1583,
     "lon": 4.94293,
     "lat": 47.12898,
     "day": 1,
@@ -20189,7 +20579,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1554,
+    "id": 1584,
     "lon": 4.94166,
     "lat": 47.12623,
     "day": 1,
@@ -20202,7 +20592,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1555,
+    "id": 1585,
     "lon": 4.94057,
     "lat": 47.12483,
     "day": 1,
@@ -20215,7 +20605,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1556,
+    "id": 1586,
     "lon": 4.93822,
     "lat": 47.12522,
     "day": 1,
@@ -20228,7 +20618,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1557,
+    "id": 1587,
     "lon": 4.93668,
     "lat": 47.12356,
     "day": 1,
@@ -20241,7 +20631,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1558,
+    "id": 1588,
     "lon": 4.93589,
     "lat": 47.12111,
     "day": 1,
@@ -20254,7 +20644,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1559,
+    "id": 1589,
     "lon": 4.93494,
     "lat": 47.1195,
     "day": 1,
@@ -20267,7 +20657,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1560,
+    "id": 1590,
     "lon": 4.9329,
     "lat": 47.11781,
     "day": 1,
@@ -20280,7 +20670,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1561,
+    "id": 1591,
     "lon": 4.93201,
     "lat": 47.1157,
     "day": 1,
@@ -20293,7 +20683,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1562,
+    "id": 1592,
     "lon": 4.93066,
     "lat": 47.11388,
     "day": 1,
@@ -20306,7 +20696,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1563,
+    "id": 1593,
     "lon": 4.92939,
     "lat": 47.11179,
     "day": 1,
@@ -20319,7 +20709,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1564,
+    "id": 1594,
     "lon": 4.92708,
     "lat": 47.11083,
     "day": 1,
@@ -20332,7 +20722,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1565,
+    "id": 1595,
     "lon": 4.9248,
     "lat": 47.10907,
     "day": 1,
@@ -20345,7 +20735,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1566,
+    "id": 1596,
     "lon": 4.92257,
     "lat": 47.10744,
     "day": 1,
@@ -20358,7 +20748,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1567,
+    "id": 1597,
     "lon": 4.9219,
     "lat": 47.1051,
     "day": 1,
@@ -20371,7 +20761,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1568,
+    "id": 1598,
     "lon": 4.92172,
     "lat": 47.10311,
     "day": 1,
@@ -20384,7 +20774,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1569,
+    "id": 1599,
     "lon": 4.9208,
     "lat": 47.10073,
     "day": 1,
@@ -20397,7 +20787,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1570,
+    "id": 1600,
     "lon": 4.92189,
     "lat": 47.09904,
     "day": 1,
@@ -20410,7 +20800,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1571,
+    "id": 1601,
     "lon": 4.92039,
     "lat": 47.09688,
     "day": 1,
@@ -20423,7 +20813,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1572,
+    "id": 1602,
     "lon": 4.9189,
     "lat": 47.09519,
     "day": 1,
@@ -20436,7 +20826,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1573,
+    "id": 1603,
     "lon": 4.91662,
     "lat": 47.09338,
     "day": 1,
@@ -20449,7 +20839,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1574,
+    "id": 1604,
     "lon": 4.91397,
     "lat": 47.09147,
     "day": 1,
@@ -20462,7 +20852,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1575,
+    "id": 1605,
     "lon": 4.91301,
     "lat": 47.08964,
     "day": 1,
@@ -20475,7 +20865,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1576,
+    "id": 1606,
     "lon": 4.91153,
     "lat": 47.08778,
     "day": 1,
@@ -20488,7 +20878,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1577,
+    "id": 1607,
     "lon": 4.90896,
     "lat": 47.08636,
     "day": 1,
@@ -20501,7 +20891,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1578,
+    "id": 1608,
     "lon": 4.907,
     "lat": 47.08462,
     "day": 1,
@@ -20514,7 +20904,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1579,
+    "id": 1609,
     "lon": 4.90501,
     "lat": 47.08258,
     "day": 1,
@@ -20527,7 +20917,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1580,
+    "id": 1610,
     "lon": 4.902,
     "lat": 47.08113,
     "day": 1,
@@ -20540,7 +20930,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1581,
+    "id": 1611,
     "lon": 4.89961,
     "lat": 47.08017,
     "day": 1,
@@ -20553,7 +20943,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1582,
+    "id": 1612,
     "lon": 4.89659,
     "lat": 47.07875,
     "day": 1,
@@ -20566,7 +20956,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1583,
+    "id": 1613,
     "lon": 4.8937,
     "lat": 47.07803,
     "day": 1,
@@ -20579,7 +20969,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1584,
+    "id": 1614,
     "lon": 4.8912,
     "lat": 47.07697,
     "day": 1,
@@ -20592,7 +20982,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1585,
+    "id": 1615,
     "lon": 4.88781,
     "lat": 47.07614,
     "day": 1,
@@ -20605,7 +20995,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1586,
+    "id": 1616,
     "lon": 4.88408,
     "lat": 47.07518,
     "day": 1,
@@ -20618,7 +21008,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1587,
+    "id": 1617,
     "lon": 4.88107,
     "lat": 47.07408,
     "day": 1,
@@ -20631,7 +21021,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1588,
+    "id": 1618,
     "lon": 4.87863,
     "lat": 47.07323,
     "day": 1,
@@ -20644,7 +21034,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1589,
+    "id": 1619,
     "lon": 4.87686,
     "lat": 47.07449,
     "day": 1,
@@ -20657,7 +21047,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1590,
+    "id": 1620,
     "lon": 4.87519,
     "lat": 47.0752,
     "day": 1,
@@ -20670,7 +21060,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1591,
+    "id": 1621,
     "lon": 4.87295,
     "lat": 47.07464,
     "day": 1,
@@ -20683,7 +21073,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1592,
+    "id": 1622,
     "lon": 4.87089,
     "lat": 47.07289,
     "day": 1,
@@ -20696,7 +21086,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1593,
+    "id": 1623,
     "lon": 4.8681,
     "lat": 47.07101,
     "day": 1,
@@ -20709,7 +21099,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1594,
+    "id": 1624,
     "lon": 4.86595,
     "lat": 47.07022,
     "day": 1,
@@ -20722,7 +21112,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1595,
+    "id": 1625,
     "lon": 4.86317,
     "lat": 47.06868,
     "day": 1,
@@ -20735,7 +21125,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1596,
+    "id": 1626,
     "lon": 4.86147,
     "lat": 47.06714,
     "day": 1,
@@ -20748,7 +21138,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1597,
+    "id": 1627,
     "lon": 4.85939,
     "lat": 47.06561,
     "day": 1,
@@ -20761,7 +21151,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1598,
+    "id": 1628,
     "lon": 4.85925,
     "lat": 47.06401,
     "day": 1,
@@ -20774,7 +21164,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1599,
+    "id": 1629,
     "lon": 4.85654,
     "lat": 47.06448,
     "day": 1,
@@ -20787,7 +21177,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1600,
+    "id": 1630,
     "lon": 4.85439,
     "lat": 47.06613,
     "day": 1,
@@ -20800,7 +21190,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1601,
+    "id": 1631,
     "lon": 4.85235,
     "lat": 47.06747,
     "day": 1,
@@ -20813,7 +21203,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1602,
+    "id": 1632,
     "lon": 4.85132,
     "lat": 47.06954,
     "day": 1,
@@ -20826,7 +21216,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1603,
+    "id": 1633,
     "lon": 4.8498,
     "lat": 47.07162,
     "day": 1,
@@ -20839,7 +21229,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1604,
+    "id": 1634,
     "lon": 4.85001,
     "lat": 47.07333,
     "day": 1,
@@ -20852,7 +21242,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1605,
+    "id": 1635,
     "lon": 4.84946,
     "lat": 47.07534,
     "day": 1,
@@ -20865,7 +21255,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1606,
+    "id": 1636,
     "lon": 4.84846,
     "lat": 47.07314,
     "day": 1,
@@ -20878,7 +21268,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1607,
+    "id": 1637,
     "lon": 4.84791,
     "lat": 47.07094,
     "day": 1,
@@ -20891,7 +21281,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1608,
+    "id": 1638,
     "lon": 4.84671,
     "lat": 47.06956,
     "day": 1,
@@ -20904,7 +21294,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1609,
+    "id": 1639,
     "lon": 4.84496,
     "lat": 47.06776,
     "day": 1,
@@ -20917,7 +21307,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1610,
+    "id": 1640,
     "lon": 4.84339,
     "lat": 47.06607,
     "day": 1,
@@ -20930,7 +21320,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1611,
+    "id": 1641,
     "lon": 4.84172,
     "lat": 47.06405,
     "day": 1,
@@ -20943,7 +21333,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1612,
+    "id": 1642,
     "lon": 4.83838,
     "lat": 47.06394,
     "day": 1,
@@ -20956,7 +21346,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1613,
+    "id": 1643,
     "lon": 4.83545,
     "lat": 47.06445,
     "day": 1,
@@ -20969,7 +21359,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1614,
+    "id": 1644,
     "lon": 4.83211,
     "lat": 47.06468,
     "day": 1,
@@ -20982,7 +21372,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1615,
+    "id": 1645,
     "lon": 4.82931,
     "lat": 47.06474,
     "day": 1,
@@ -20995,7 +21385,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1616,
+    "id": 1646,
     "lon": 4.82612,
     "lat": 47.06486,
     "day": 1,
@@ -21008,7 +21398,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1617,
+    "id": 1647,
     "lon": 4.82131,
     "lat": 47.06374,
     "day": 1,
@@ -21021,7 +21411,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1618,
+    "id": 1648,
     "lon": 4.81999,
     "lat": 47.06291,
     "day": 1,
@@ -21034,7 +21424,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1619,
+    "id": 1649,
     "lon": 4.82018,
     "lat": 47.06184,
     "day": 1,
@@ -21047,7 +21437,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1620,
+    "id": 1650,
     "lon": 4.82349,
     "lat": 47.06013,
     "day": 1,
@@ -21060,7 +21450,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1621,
+    "id": 1651,
     "lon": 4.82388,
     "lat": 47.05938,
     "day": 1,
@@ -21073,7 +21463,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1622,
+    "id": 1652,
     "lon": 4.82699,
     "lat": 47.05804,
     "day": 1,
@@ -21086,7 +21476,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1623,
+    "id": 1653,
     "lon": 4.82897,
     "lat": 47.057,
     "day": 1,
@@ -21099,7 +21489,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1624,
+    "id": 1654,
     "lon": 4.83107,
     "lat": 47.05507,
     "day": 1,
@@ -21112,7 +21502,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1625,
+    "id": 1655,
     "lon": 4.83215,
     "lat": 47.05304,
     "day": 1,
@@ -21125,7 +21515,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1626,
+    "id": 1656,
     "lon": 4.83326,
     "lat": 47.05061,
     "day": 1,
@@ -21138,7 +21528,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1627,
+    "id": 1657,
     "lon": 4.83386,
     "lat": 47.04846,
     "day": 1,
@@ -21151,7 +21541,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1628,
+    "id": 1658,
     "lon": 4.83545,
     "lat": 47.04682,
     "day": 1,
@@ -21164,7 +21554,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1629,
+    "id": 1659,
     "lon": 4.83855,
     "lat": 47.04559,
     "day": 1,
@@ -21177,7 +21567,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1630,
+    "id": 1660,
     "lon": 4.83948,
     "lat": 47.04382,
     "day": 1,
@@ -21190,7 +21580,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1631,
+    "id": 1661,
     "lon": 4.8395,
     "lat": 47.04276,
     "day": 1,
@@ -21203,7 +21593,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1632,
+    "id": 1662,
     "lon": 4.83833,
     "lat": 47.04247,
     "day": 1,
@@ -21216,7 +21606,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1633,
+    "id": 1663,
     "lon": 4.83622,
     "lat": 47.04205,
     "day": 1,
@@ -21229,7 +21619,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1634,
+    "id": 1664,
     "lon": 4.83315,
     "lat": 47.04268,
     "day": 1,
@@ -21242,7 +21632,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1635,
+    "id": 1665,
     "lon": 4.83083,
     "lat": 47.04236,
     "day": 1,
@@ -21255,7 +21645,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1636,
+    "id": 1666,
     "lon": 4.83097,
     "lat": 47.0398,
     "day": 1,
@@ -21268,7 +21658,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1637,
+    "id": 1667,
     "lon": 4.83058,
     "lat": 47.03767,
     "day": 1,
@@ -21281,7 +21671,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1638,
+    "id": 1668,
     "lon": 4.82969,
     "lat": 47.03614,
     "day": 1,
@@ -21294,7 +21684,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1639,
+    "id": 1669,
     "lon": 4.82765,
     "lat": 47.03676,
     "day": 1,
@@ -21307,7 +21697,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1640,
+    "id": 1670,
     "lon": 4.82748,
     "lat": 47.03419,
     "day": 1,
@@ -21320,7 +21710,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1641,
+    "id": 1671,
     "lon": 4.82776,
     "lat": 47.03208,
     "day": 1,
@@ -21333,7 +21723,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1642,
+    "id": 1672,
     "lon": 4.82658,
     "lat": 47.03074,
     "day": 1,
@@ -21346,7 +21736,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1643,
+    "id": 1673,
     "lon": 4.82784,
     "lat": 47.0288,
     "day": 1,
@@ -21359,7 +21749,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1644,
+    "id": 1674,
     "lon": 4.83066,
     "lat": 47.0275,
     "day": 1,
@@ -21372,7 +21762,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1645,
+    "id": 1675,
     "lon": 4.83336,
     "lat": 47.02612,
     "day": 1,
@@ -21385,7 +21775,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1646,
+    "id": 1676,
     "lon": 4.83438,
     "lat": 47.02491,
     "day": 1,
@@ -21398,7 +21788,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1647,
+    "id": 1677,
     "lon": 4.83617,
     "lat": 47.02291,
     "day": 1,
@@ -21411,7 +21801,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1648,
+    "id": 1678,
     "lon": 4.8383,
     "lat": 47.02395,
     "day": 1,
@@ -21424,7 +21814,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1649,
+    "id": 1679,
     "lon": 4.83669,
     "lat": 47.02518,
     "day": 1,
@@ -21437,7 +21827,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1650,
+    "id": 1680,
     "lon": 4.8356,
     "lat": 47.02632,
     "day": 1,
@@ -21450,7 +21840,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1651,
+    "id": 1681,
     "lon": 4.83261,
     "lat": 47.02579,
     "day": 1,
@@ -21463,7 +21853,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1652,
+    "id": 1682,
     "lon": 4.82842,
     "lat": 47.026,
     "day": 1,
@@ -21476,7 +21866,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1653,
+    "id": 1683,
     "lon": 4.82733,
     "lat": 47.02503,
     "day": 1,
@@ -21489,7 +21879,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1654,
+    "id": 1684,
     "lon": 4.82579,
     "lat": 47.02327,
     "day": 1,
@@ -21502,7 +21892,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1655,
+    "id": 1685,
     "lon": 4.82265,
     "lat": 47.02403,
     "day": 1,
@@ -21515,7 +21905,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1656,
+    "id": 1686,
     "lon": 4.82047,
     "lat": 47.02368,
     "day": 1,
@@ -21528,7 +21918,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1657,
+    "id": 1687,
     "lon": 4.81854,
     "lat": 47.02189,
     "day": 1,
@@ -21541,7 +21931,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1658,
+    "id": 1688,
     "lon": 4.81689,
     "lat": 47.02012,
     "day": 1,
@@ -21554,7 +21944,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1659,
+    "id": 1689,
     "lon": 4.81511,
     "lat": 47.01835,
     "day": 1,
@@ -21567,7 +21957,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1660,
+    "id": 1690,
     "lon": 4.81243,
     "lat": 47.01722,
     "day": 1,
@@ -21580,7 +21970,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1661,
+    "id": 1691,
     "lon": 4.80983,
     "lat": 47.01656,
     "day": 1,
@@ -21593,7 +21983,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1662,
+    "id": 1692,
     "lon": 4.80753,
     "lat": 47.01513,
     "day": 1,
@@ -21606,7 +21996,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1663,
+    "id": 1693,
     "lon": 4.80471,
     "lat": 47.01427,
     "day": 1,
@@ -21619,7 +22009,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1664,
+    "id": 1694,
     "lon": 4.80175,
     "lat": 47.01367,
     "day": 1,
@@ -21632,7 +22022,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1665,
+    "id": 1695,
     "lon": 4.79916,
     "lat": 47.01293,
     "day": 1,
@@ -21645,7 +22035,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1666,
+    "id": 1696,
     "lon": 4.79665,
     "lat": 47.01129,
     "day": 1,
@@ -21658,7 +22048,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1667,
+    "id": 1697,
     "lon": 4.79441,
     "lat": 47.00947,
     "day": 1,
@@ -21671,7 +22061,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1668,
+    "id": 1698,
     "lon": 4.79272,
     "lat": 47.00789,
     "day": 1,
@@ -21684,7 +22074,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1669,
+    "id": 1699,
     "lon": 4.79026,
     "lat": 47.0068,
     "day": 1,
@@ -21697,7 +22087,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1670,
+    "id": 1700,
     "lon": 4.78796,
     "lat": 47.00582,
     "day": 1,
@@ -21710,7 +22100,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1671,
+    "id": 1701,
     "lon": 4.78611,
     "lat": 47.00487,
     "day": 1,
@@ -21723,7 +22113,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1672,
+    "id": 1702,
     "lon": 4.78416,
     "lat": 47.00354,
     "day": 1,
@@ -21736,7 +22126,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1673,
+    "id": 1703,
     "lon": 4.78231,
     "lat": 47.00162,
     "day": 1,
@@ -21749,7 +22139,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1674,
+    "id": 1704,
     "lon": 4.78078,
     "lat": 47.00026,
     "day": 1,
@@ -21762,7 +22152,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1675,
+    "id": 1705,
     "lon": 4.78374,
     "lat": 46.99855,
     "day": 1,
@@ -21775,7 +22165,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1676,
+    "id": 1706,
     "lon": 4.78535,
     "lat": 46.99685,
     "day": 1,
@@ -21788,7 +22178,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1677,
+    "id": 1707,
     "lon": 4.78452,
     "lat": 46.99472,
     "day": 1,
@@ -21801,7 +22191,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1678,
+    "id": 1708,
     "lon": 4.78295,
     "lat": 46.99252,
     "day": 1,
@@ -21814,7 +22204,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1679,
+    "id": 1709,
     "lon": 4.78142,
     "lat": 46.99071,
     "day": 1,
@@ -21827,7 +22217,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1680,
+    "id": 1710,
     "lon": 4.7799,
     "lat": 46.98836,
     "day": 1,
@@ -21840,7 +22230,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1681,
+    "id": 1711,
     "lon": 4.77781,
     "lat": 46.98776,
     "day": 1,
@@ -21853,7 +22243,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1682,
+    "id": 1712,
     "lon": 4.77579,
     "lat": 46.98658,
     "day": 1,
@@ -21866,7 +22256,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1683,
+    "id": 1713,
     "lon": 4.77322,
     "lat": 46.98527,
     "day": 1,
@@ -21879,7 +22269,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1684,
+    "id": 1714,
     "lon": 4.77206,
     "lat": 46.98349,
     "day": 1,
@@ -21892,7 +22282,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1685,
+    "id": 1715,
     "lon": 4.77042,
     "lat": 46.98146,
     "day": 1,
@@ -21905,7 +22295,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1686,
+    "id": 1716,
     "lon": 4.76874,
     "lat": 46.98017,
     "day": 1,
@@ -21918,7 +22308,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1687,
+    "id": 1717,
     "lon": 4.76939,
     "lat": 46.97837,
     "day": 1,
@@ -21931,7 +22321,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1688,
+    "id": 1718,
     "lon": 4.76853,
     "lat": 46.9765,
     "day": 1,
@@ -21944,7 +22334,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1689,
+    "id": 1719,
     "lon": 4.76702,
     "lat": 46.97382,
     "day": 1,
@@ -21957,7 +22347,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1690,
+    "id": 1720,
     "lon": 4.76601,
     "lat": 46.97238,
     "day": 1,
@@ -21970,7 +22360,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1691,
+    "id": 1721,
     "lon": 4.76407,
     "lat": 46.97053,
     "day": 1,
@@ -21983,7 +22373,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1692,
+    "id": 1722,
     "lon": 4.76192,
     "lat": 46.96947,
     "day": 1,
@@ -21996,7 +22386,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1693,
+    "id": 1723,
     "lon": 4.76079,
     "lat": 46.96771,
     "day": 1,
@@ -22009,7 +22399,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1694,
+    "id": 1724,
     "lon": 4.75985,
     "lat": 46.96582,
     "day": 1,
@@ -22022,7 +22412,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1695,
+    "id": 1725,
     "lon": 4.75731,
     "lat": 46.96465,
     "day": 1,
@@ -22035,7 +22425,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1696,
+    "id": 1726,
     "lon": 4.75518,
     "lat": 46.96306,
     "day": 1,
@@ -22048,7 +22438,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1697,
+    "id": 1727,
     "lon": 4.75361,
     "lat": 46.9616,
     "day": 1,
@@ -22061,7 +22451,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1698,
+    "id": 1728,
     "lon": 4.75191,
     "lat": 46.95969,
     "day": 1,
@@ -22074,7 +22464,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1699,
+    "id": 1729,
     "lon": 4.75024,
     "lat": 46.95776,
     "day": 1,
@@ -22087,7 +22477,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1700,
+    "id": 1730,
     "lon": 4.74771,
     "lat": 46.95584,
     "day": 1,
@@ -22100,7 +22490,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1701,
+    "id": 1731,
     "lon": 4.74626,
     "lat": 46.95431,
     "day": 1,
@@ -22113,7 +22503,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1702,
+    "id": 1732,
     "lon": 4.74696,
     "lat": 46.95208,
     "day": 1,
@@ -22126,7 +22516,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1703,
+    "id": 1733,
     "lon": 4.74994,
     "lat": 46.95092,
     "day": 1,
@@ -22139,7 +22529,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1704,
+    "id": 1734,
     "lon": 4.75143,
     "lat": 46.94941,
     "day": 1,
@@ -22152,7 +22542,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1705,
+    "id": 1735,
     "lon": 4.75324,
     "lat": 46.94773,
     "day": 1,
@@ -22165,7 +22555,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1706,
+    "id": 1736,
     "lon": 4.75255,
     "lat": 46.94591,
     "day": 1,
@@ -22178,7 +22568,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1707,
+    "id": 1737,
     "lon": 4.75004,
     "lat": 46.94575,
     "day": 1,
@@ -22191,7 +22581,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1708,
+    "id": 1738,
     "lon": 4.7458,
     "lat": 46.94626,
     "day": 1,
@@ -22204,7 +22594,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1709,
+    "id": 1739,
     "lon": 4.74376,
     "lat": 46.94645,
     "day": 1,
@@ -22217,7 +22607,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1710,
+    "id": 1740,
     "lon": 4.74251,
     "lat": 46.94447,
     "day": 1,
@@ -22230,7 +22620,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1711,
+    "id": 1741,
     "lon": 4.74062,
     "lat": 46.94291,
     "day": 1,
@@ -22243,7 +22633,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1712,
+    "id": 1742,
     "lon": 4.7398,
     "lat": 46.94112,
     "day": 1,
@@ -22256,7 +22646,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1713,
+    "id": 1743,
     "lon": 4.74452,
     "lat": 46.93925,
     "day": 1,
@@ -22269,7 +22659,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1714,
+    "id": 1744,
     "lon": 4.74466,
     "lat": 46.93797,
     "day": 1,
@@ -22282,7 +22672,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1715,
+    "id": 1745,
     "lon": 4.74273,
     "lat": 46.93752,
     "day": 1,
@@ -22295,7 +22685,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1716,
+    "id": 1746,
     "lon": 4.74014,
     "lat": 46.93798,
     "day": 1,
@@ -22308,7 +22698,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1717,
+    "id": 1747,
     "lon": 4.73738,
     "lat": 46.93879,
     "day": 1,
@@ -22321,7 +22711,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1718,
+    "id": 1748,
     "lon": 4.73461,
     "lat": 46.93809,
     "day": 1,
@@ -22334,7 +22724,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1719,
+    "id": 1749,
     "lon": 4.7316,
     "lat": 46.93809,
     "day": 1,
@@ -22347,7 +22737,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1720,
+    "id": 1750,
     "lon": 4.72939,
     "lat": 46.93761,
     "day": 1,
@@ -22360,7 +22750,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1721,
+    "id": 1751,
     "lon": 4.72692,
     "lat": 46.93604,
     "day": 1,
@@ -22373,7 +22763,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1722,
+    "id": 1752,
     "lon": 4.72499,
     "lat": 46.93541,
     "day": 1,
@@ -22386,7 +22776,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1723,
+    "id": 1753,
     "lon": 4.72685,
     "lat": 46.93382,
     "day": 1,
@@ -22399,7 +22789,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1724,
+    "id": 1754,
     "lon": 4.72791,
     "lat": 46.93232,
     "day": 1,
@@ -22412,7 +22802,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1725,
+    "id": 1755,
     "lon": 4.7308,
     "lat": 46.93028,
     "day": 1,
@@ -22425,7 +22815,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1726,
+    "id": 1756,
     "lon": 4.72964,
     "lat": 46.92862,
     "day": 1,
@@ -22438,7 +22828,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1727,
+    "id": 1757,
     "lon": 4.7283,
     "lat": 46.92684,
     "day": 1,
@@ -22451,7 +22841,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1728,
+    "id": 1758,
     "lon": 4.72597,
     "lat": 46.92467,
     "day": 1,
@@ -22464,7 +22854,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1729,
+    "id": 1759,
     "lon": 4.72519,
     "lat": 46.92304,
     "day": 1,
@@ -22477,7 +22867,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1730,
+    "id": 1760,
     "lon": 4.72385,
     "lat": 46.92113,
     "day": 1,
@@ -22490,7 +22880,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1731,
+    "id": 1761,
     "lon": 4.72257,
     "lat": 46.91883,
     "day": 1,
@@ -22503,7 +22893,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1732,
+    "id": 1762,
     "lon": 4.72279,
     "lat": 46.9165,
     "day": 1,
@@ -22516,7 +22906,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1733,
+    "id": 1763,
     "lon": 4.71997,
     "lat": 46.91556,
     "day": 1,
@@ -22529,7 +22919,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1734,
+    "id": 1764,
     "lon": 4.71596,
     "lat": 46.91527,
     "day": 1,
@@ -22542,7 +22932,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1735,
+    "id": 1765,
     "lon": 4.71346,
     "lat": 46.91501,
     "day": 1,
@@ -22555,7 +22945,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1736,
+    "id": 1766,
     "lon": 4.71088,
     "lat": 46.91416,
     "day": 1,
@@ -22568,7 +22958,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1737,
+    "id": 1767,
     "lon": 4.70801,
     "lat": 46.91411,
     "day": 1,
@@ -22581,7 +22971,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1738,
+    "id": 1768,
     "lon": 4.70443,
     "lat": 46.91394,
     "day": 1,
@@ -22594,7 +22984,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1739,
+    "id": 1769,
     "lon": 4.7015,
     "lat": 46.91374,
     "day": 1,
@@ -22607,7 +22997,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1740,
+    "id": 1770,
     "lon": 4.70073,
     "lat": 46.91165,
     "day": 1,
@@ -22620,7 +23010,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1741,
+    "id": 1771,
     "lon": 4.69771,
     "lat": 46.91207,
     "day": 1,
@@ -22633,7 +23023,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1742,
+    "id": 1772,
     "lon": 4.69631,
     "lat": 46.9117,
     "day": 1,
@@ -22646,7 +23036,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1743,
+    "id": 1773,
     "lon": 4.69827,
     "lat": 46.91179,
     "day": 1,
@@ -22659,7 +23049,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1744,
+    "id": 1774,
     "lon": 4.69883,
     "lat": 46.9106,
     "day": 1,
@@ -22672,7 +23062,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1745,
+    "id": 1775,
     "lon": 4.69592,
     "lat": 46.9088,
     "day": 1,
@@ -22685,7 +23075,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1746,
+    "id": 1776,
     "lon": 4.69466,
     "lat": 46.90745,
     "day": 1,
@@ -22698,7 +23088,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1747,
+    "id": 1777,
     "lon": 4.69577,
     "lat": 46.90517,
     "day": 1,
@@ -22711,7 +23101,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1748,
+    "id": 1778,
     "lon": 4.69462,
     "lat": 46.90357,
     "day": 1,
@@ -22724,7 +23114,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1749,
+    "id": 1779,
     "lon": 4.69517,
     "lat": 46.90387,
     "day": 1,
@@ -22737,7 +23127,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1750,
+    "id": 1780,
     "lon": 4.69793,
     "lat": 46.90497,
     "day": 1,
@@ -22750,7 +23140,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1751,
+    "id": 1781,
     "lon": 4.70054,
     "lat": 46.9052,
     "day": 1,
@@ -22763,7 +23153,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1752,
+    "id": 1782,
     "lon": 4.70372,
     "lat": 46.90486,
     "day": 1,
@@ -22776,7 +23166,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1753,
+    "id": 1783,
     "lon": 4.70681,
     "lat": 46.9047,
     "day": 1,
@@ -22789,7 +23179,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1754,
+    "id": 1784,
     "lon": 4.70988,
     "lat": 46.90485,
     "day": 1,
@@ -22802,7 +23192,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1755,
+    "id": 1785,
     "lon": 4.71359,
     "lat": 46.90569,
     "day": 1,
@@ -22815,7 +23205,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1756,
+    "id": 1786,
     "lon": 4.7161,
     "lat": 46.90666,
     "day": 1,
@@ -22828,7 +23218,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1757,
+    "id": 1787,
     "lon": 4.71896,
     "lat": 46.90743,
     "day": 1,
@@ -22841,7 +23231,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1758,
+    "id": 1788,
     "lon": 4.72084,
     "lat": 46.90631,
     "day": 1,
@@ -22854,7 +23244,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1759,
+    "id": 1789,
     "lon": 4.7241,
     "lat": 46.90663,
     "day": 1,
@@ -22867,7 +23257,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1760,
+    "id": 1790,
     "lon": 4.72736,
     "lat": 46.90731,
     "day": 1,
@@ -22880,7 +23270,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1761,
+    "id": 1791,
     "lon": 4.73027,
     "lat": 46.90822,
     "day": 1,
@@ -22893,7 +23283,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1762,
+    "id": 1792,
     "lon": 4.73299,
     "lat": 46.90887,
     "day": 1,
@@ -22906,7 +23296,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1763,
+    "id": 1793,
     "lon": 4.73637,
     "lat": 46.91019,
     "day": 1,
@@ -22919,7 +23309,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1764,
+    "id": 1794,
     "lon": 4.73896,
     "lat": 46.9105,
     "day": 1,
@@ -22932,7 +23322,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1765,
+    "id": 1795,
     "lon": 4.74183,
     "lat": 46.91098,
     "day": 1,
@@ -22945,7 +23335,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1766,
+    "id": 1796,
     "lon": 4.74364,
     "lat": 46.90925,
     "day": 1,
@@ -22958,7 +23348,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1767,
+    "id": 1797,
     "lon": 4.74557,
     "lat": 46.9076,
     "day": 1,
@@ -22971,7 +23361,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1768,
+    "id": 1798,
     "lon": 4.74776,
     "lat": 46.90734,
     "day": 1,
@@ -22984,7 +23374,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1769,
+    "id": 1799,
     "lon": 4.74834,
     "lat": 46.90864,
     "day": 1,
@@ -22997,7 +23387,7 @@
     "gpxFile": "Bourgogne_Section_4.gpx"
   },
   {
-    "id": 1770,
+    "id": 1800,
     "lon": 4.74978,
     "lat": 46.90749,
     "day": 1,
