@@ -193,21 +193,32 @@
     .manage-thumb-wrap.selected::after { content: ''; position: absolute; inset: 0; border: 2px solid #f0c060; border-radius: 3px; pointer-events: none; }
     .manage-thumb-wrap.hidden-ph { outline: 1px dashed rgba(255,200,60,.35); }
     .manage-thumb-wrap.hidden-ph img { opacity: .25; filter: grayscale(.5); }
-    /* Liste photos */
-    .manage-photo-list { display: flex; flex-direction: column; gap: 2px; max-height: 440px; overflow-y: auto; margin-top: 8px; }
-    .manage-photo-row { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 4px; cursor: pointer; transition: background .1s; }
-    .manage-photo-row:hover { background: rgba(255,255,255,.05); }
+    /* Liste photos — disposition horizontale pleine largeur */
+    .manage-photo-list { display: flex; flex-direction: column; gap: 1px; max-height: clamp(300px, 60vh, 700px); overflow-y: auto; margin-top: 8px; }
+    .manage-photo-row {
+      display: grid;
+      grid-template-columns: 18px 64px 130px 1fr 1fr minmax(120px,1.2fr);
+      align-items: center; gap: 10px;
+      padding: 5px 8px; border-radius: 4px; cursor: pointer;
+      transition: background .1s; border-bottom: 1px solid rgba(255,255,255,.03);
+    }
+    .manage-photo-row:hover { background: rgba(255,255,255,.04); }
     .manage-photo-row.selected { background: rgba(240,192,96,.10); }
-    .manage-photo-row.hidden-ph { opacity: .45; }
-    .manage-photo-row input[type=checkbox] { flex-shrink: 0; width: 15px; height: 15px; accent-color: #f0c060; cursor: pointer; }
-    .manage-photo-row .row-thumb { flex-shrink: 0; width: 64px; height: 44px; object-fit: cover; border-radius: 3px; background: #111; display: block; }
-    .manage-photo-row .row-thumb-wrap { flex-shrink: 0; width: 64px; height: 44px; position: relative; }
-    .manage-photo-row .row-thumb-wrap .play-badge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: .9rem; pointer-events: none; }
-    .manage-photo-row .row-meta { flex: 1; min-width: 0; }
-    .manage-photo-row .row-date { font-size: .72rem; color: rgba(255,255,255,.75); white-space: nowrap; }
-    .manage-photo-row .row-city { font-size: .68rem; color: rgba(240,192,96,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .manage-photo-row .row-voyage { font-size: .65rem; color: rgba(255,255,255,.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .manage-photo-row .row-filename { font-size: .62rem; color: rgba(255,255,255,.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .manage-photo-row.hidden-ph { opacity: .4; }
+    .manage-photo-row input[type=checkbox] { flex-shrink: 0; width: 15px; height: 15px; accent-color: #f0c060; cursor: pointer; justify-self: center; }
+    .manage-photo-row .row-thumb { width: 64px; height: 44px; object-fit: cover; border-radius: 3px; background: #111; display: block; }
+    .manage-photo-row .row-thumb-wrap { width: 64px; height: 44px; position: relative; flex-shrink: 0; }
+    .manage-photo-row .row-date { font-size: .73rem; color: rgba(255,255,255,.78); white-space: nowrap; }
+    .manage-photo-row .row-city { font-size: .73rem; color: rgba(240,192,96,.88); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .manage-photo-row .row-voyage-badge {
+      display: inline-block; max-width: 100%;
+      font-size: .68rem; color: #f0c060;
+      background: rgba(240,192,96,.10); border: 1px solid rgba(240,192,96,.28);
+      border-radius: 3px; padding: 1px 7px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .manage-photo-row .row-voyage-badge:empty { visibility: hidden; }
+    .manage-photo-row .row-filename { font-size: .62rem; color: rgba(255,255,255,.22); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right; }
     .btn.danger { border-color: rgba(255,100,80,.5); color: rgba(255,140,120,.9); }
     .btn.danger:hover:not(:disabled) { background: rgba(255,70,50,.15); border-color: rgba(255,100,80,.8); }
 
@@ -330,7 +341,9 @@
       .seg-focus { font-size: 0.62rem; padding: 2px 6px; }
       .manage-thumb-wrap { width: 56px; height: 42px; }
       .manage-photo-grid { gap: 4px; max-height: 200px; }
-      .manage-photo-list { max-height: 260px; }
+      .manage-photo-list { max-height: 300px; }
+      .manage-photo-row { grid-template-columns: 16px 48px auto auto; gap: 6px; }
+      .manage-photo-row .row-voyage-badge, .manage-photo-row .row-filename { display: none; }
       .manage-photo-row .row-thumb { width: 48px; height: 34px; }
       .manage-photo-row .row-thumb-wrap { width: 48px; height: 34px; }
       .btn-row { gap: 6px; }
@@ -457,6 +470,10 @@
           title="Ajouter un voyage"
           style="padding:3px 10px;font-size:.72rem;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.35);border-radius:4px;color:#f0c060;cursor:pointer"
           onclick="toggleAddVoyageForm()">+ Nouveau</button>
+        <button type="button" id="btn-del-voyage"
+          title="Supprimer le voyage sélectionné"
+          style="padding:3px 8px;font-size:.72rem;background:rgba(255,80,60,.08);border:1px solid rgba(255,80,60,.3);border-radius:4px;color:rgba(255,120,100,.8);cursor:pointer"
+          onclick="const v=$('photo-voyage').value;if(v)deleteVoyage(v);else setStatus('manage-status','Sélectionnez un voyage à supprimer.','warn')">🗑</button>
       </div>
       <div id="add-voyage-form" style="display:none;align-items:center;gap:6px;margin-bottom:8px;padding:6px 8px;background:rgba(240,192,96,.05);border:1px solid rgba(240,192,96,.2);border-radius:6px">
         <input id="add-voyage-input" type="text" placeholder="Ex : Bretagne 2026"
@@ -590,7 +607,6 @@
 
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/gif.js@0.2.0/dist/gif.js"></script>
 <script type="module">
 import Exifr from 'https://cdn.jsdelivr.net/npm/exifr@7/dist/full.esm.js';
 
@@ -869,10 +885,8 @@ function buildUrlWith(filename, type, subfolder) {
 function jpgName(filename) {
   return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
 }
-// Normalise l'extension vers .gif (vignettes vidéo animées)
-function gifName(filename) {
-  return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v|jpe?g)$/i, '.gif');
-}
+// Vignette vidéo : pour l'instant on stocke en .jpg (GIF sera généré côté serveur à terme)
+function gifName(filename) { return jpgName(filename); }
 
 // Redimensionne une image (File/Blob) côté navigateur via canvas → Blob JPEG
 async function resizeImage(file, maxSide, quality = 0.88) {
@@ -957,73 +971,8 @@ function buildPhotoEntries() {
   $('stat-matched').textContent = photoEntries.length;
 }
 
-// ── Génération vignette GIF animé 50 frames (sans icône play) ────────
+// ── Vignette vidéo JPEG statique (frame centrale) ───────────────────
 async function generateVideoGif(file) {
-  // Charger le worker gif.js en blob local (contourne les restrictions CORS)
-  let workerBlobUrl = null;
-  try {
-    const txt = await fetch('https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js').then(r => r.text());
-    workerBlobUrl = URL.createObjectURL(new Blob([txt], { type: 'application/javascript' }));
-  } catch (e) {
-    console.warn('gif.js worker indisponible — fallback JPEG statique', e);
-    return _videoFallbackJpeg(file);
-  }
-
-  return new Promise((resolve, reject) => {
-    const video = document.createElement('video');
-    const objUrl = URL.createObjectURL(file);
-    video.src = objUrl; video.muted = true; video.playsInline = true; video.preload = 'auto';
-
-    video.addEventListener('loadedmetadata', async () => {
-      const dur = video.duration > 0 ? video.duration : 5;
-      const FRAMES = 50;
-      const W = 240;
-      const H = video.videoHeight > 0 ? Math.round(video.videoHeight * W / video.videoWidth) : 135;
-
-      const canvas = document.createElement('canvas');
-      canvas.width = W; canvas.height = H;
-      const ctx = canvas.getContext('2d');
-
-      const gif = new window.GIF({ workers: 1, quality: 10, width: W, height: H, workerScript: workerBlobUrl, repeat: 0 });
-
-      for (let i = 0; i < FRAMES; i++) {
-        await new Promise(res => {
-          const drawFrame = () => {
-            ctx.clearRect(0, 0, W, H);
-            ctx.drawImage(video, 0, 0, W, H);
-            gif.addFrame(canvas, { copy: true, delay: 80 });
-            res();
-          };
-          video.addEventListener('seeked', () => {
-            if (typeof video.requestVideoFrameCallback === 'function') {
-              video.requestVideoFrameCallback(drawFrame);
-            } else {
-              setTimeout(drawFrame, 60);
-            }
-          }, { once: true });
-          video.currentTime = (i + 0.5) / FRAMES * dur;
-        });
-      }
-
-      gif.on('finished', blob => {
-        URL.revokeObjectURL(objUrl); URL.revokeObjectURL(workerBlobUrl); resolve(blob);
-      });
-      gif.on('error', err => {
-        URL.revokeObjectURL(objUrl); URL.revokeObjectURL(workerBlobUrl); reject(err);
-      });
-      gif.render();
-    }, { once: true });
-
-    video.addEventListener('error', () => {
-      URL.revokeObjectURL(objUrl);
-      reject(new Error('Erreur chargement vidéo'));
-    }, { once: true });
-    video.load();
-  });
-}
-
-// Fallback JPEG statique si gif.js est indisponible
-async function _videoFallbackJpeg(file) {
   return new Promise(resolve => {
     const video = document.createElement('video');
     const objUrl = URL.createObjectURL(file);
@@ -1038,7 +987,7 @@ async function _videoFallbackJpeg(file) {
     video.addEventListener('seeked', () => {
       if (typeof video.requestVideoFrameCallback === 'function') video.requestVideoFrameCallback(draw); else setTimeout(draw, 80);
     }, { once: true });
-    video.addEventListener('error', () => { URL.revokeObjectURL(objUrl); resolve(new Blob()); }, { once: true });
+    video.addEventListener('error', () => { URL.revokeObjectURL(objUrl); resolve(new Blob([], {type:'image/jpeg'})); }, { once: true });
     video.load();
   });
 }
@@ -1759,6 +1708,45 @@ function confirmAddVoyage() {
 
 function openAddVoyageModal() { toggleAddVoyageForm(); }
 
+async function deleteVoyage(voyId) {
+  const v = voyageEntries.find(e => e.id === voyId);
+  if (!v) return;
+  const affected = photoEntries.filter(p => p.voyage === voyId).length;
+  const msg = `Supprimer le voyage « ${v.label} » ?`
+    + (affected ? `\n${affected} photo(s) perdront ce voyage.` : '');
+  // Confirmation inline dans le status
+  const status = $('manage-status');
+  status.innerHTML = `<span style="color:#f0a060">${msg.replace('\n','<br>')}</span>
+    <button id="_del-voy-ok" style="margin-left:10px;padding:2px 10px;font-size:.72rem;background:rgba(255,80,60,.2);border:1px solid rgba(255,80,60,.5);border-radius:4px;color:#ff8070;cursor:pointer">Oui, supprimer</button>
+    <button id="_del-voy-no" style="margin-left:6px;padding:2px 10px;font-size:.72rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">Annuler</button>`;
+  const cleanup = () => status.innerHTML = '';
+  $('_del-voy-no').addEventListener('click', cleanup);
+  $('_del-voy-ok').addEventListener('click', async () => {
+    cleanup();
+    voyageEntries = voyageEntries.filter(e => e.id !== voyId);
+    // Retirer le voyage des photos (remettre sans voyage)
+    let photosChanged = 0;
+    photoEntries.forEach(p => { if (p.voyage === voyId) { delete p.voyage; photosChanged++; } });
+    setStatus('manage-status', 'Commit voyages.json…');
+    try {
+      await commitVoyagesJson();
+      if (photosChanged) {
+        setStatus('manage-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
+        await commitPhotosJson();
+      }
+      // Mettre à jour les deux sélecteurs
+      ['photo-voyage','ph-voyage-assign'].forEach(sid => {
+        const sel = $(sid); if (!sel) return;
+        const opt = sel.querySelector(`option[value="${voyId}"]`);
+        if (opt) opt.remove();
+        if (sel.value === voyId) sel.value = '';
+      });
+      renderManagePhotos();
+      setStatus('manage-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
+    } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+  });
+}
+
 async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
   form.append('path', relPath);
@@ -2036,6 +2024,14 @@ function renderManagePhotos() {
       voyageSel.appendChild(opt);
     });
   }
+  // En-tête colonnes
+  list.insertAdjacentHTML('beforeend', `<div class="manage-photo-row" style="pointer-events:none;opacity:.4;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:4px;margin-bottom:2px">
+    <span></span><span></span>
+    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Horodatage</span>
+    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Lieu</span>
+    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Voyage</span>
+    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-align:right">Fichier</span>
+  </div>`);
 
   photoEntries.forEach(p => {
     const row = document.createElement('div');
@@ -2053,7 +2049,6 @@ function renderManagePhotos() {
     twrap.appendChild(img);
 
     // Méta
-    const meta = document.createElement('div'); meta.className = 'row-meta';
     const filename = decodeURIComponent((p.src || '').split('/').pop());
     const dateStr = p.caption ? p.caption.slice(0, 10) : '';
     const timeStr = p.photoMs ? (() => {
@@ -2061,13 +2056,13 @@ function renderManagePhotos() {
       return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
     })() : '';
     const voyLabel = p.voyage ? (voyageEntries.find(v => v.id === p.voyage)?.label || p.voyage) : '';
-    meta.innerHTML = `
-      <div class="row-date">${dateStr}${timeStr ? ' ' + timeStr : ''}</div>
-      <div class="row-city">${p.city || ''}</div>
-      <div class="row-voyage">${voyLabel ? '🗺 ' + voyLabel : ''}</div>
-      <div class="row-filename">${filename}</div>`;
 
-    row.append(cb, twrap, meta);
+    const dateEl  = Object.assign(document.createElement('div'), { className: 'row-date',         textContent: dateStr + (timeStr ? ' ' + timeStr : '') });
+    const cityEl  = Object.assign(document.createElement('div'), { className: 'row-city',         textContent: p.city || '' });
+    const voyEl   = Object.assign(document.createElement('span'),{ className: 'row-voyage-badge', textContent: voyLabel });
+    const fileEl  = Object.assign(document.createElement('div'), { className: 'row-filename',     textContent: filename });
+
+    row.append(cb, twrap, dateEl, cityEl, voyEl, fileEl);
     row.addEventListener('click', e => {
       if (e.target === cb) return;
       p._selected = !p._selected; cb.checked = !!p._selected;
@@ -2417,6 +2412,7 @@ $('photos-mobile-btn').addEventListener('click', () => $('photos-input').click()
 // Exposer au scope global les fonctions appelées depuis les attributs onclick
 window.toggleAddVoyageForm = toggleAddVoyageForm;
 window.confirmAddVoyage    = confirmAddVoyage;
+window.deleteVoyage        = deleteVoyage;
 </script>
 </body>
 </html>
