@@ -1377,12 +1377,7 @@ function renderPhotoMarkers() {
   });
 }
 
-// ── CDN input changes → rebuild photo URLs ─────────────────────────────
-['photo-subfolder'].forEach(id => {
-  $(id).addEventListener('input', () => {
-    if (rawPhotos.length) buildPhotoEntries();
-  });
-});
+
 
 function updateExport() { /* no-op — tout est auto-commité */ }
 
