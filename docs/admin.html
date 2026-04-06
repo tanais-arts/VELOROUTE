@@ -590,6 +590,7 @@
 
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/gif.js@0.2.0/dist/gif.js"></script>
 <script type="module">
 import Exifr from 'https://cdn.jsdelivr.net/npm/exifr@7/dist/full.esm.js';
 
@@ -868,6 +869,10 @@ function buildUrlWith(filename, type, subfolder) {
 function jpgName(filename) {
   return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
 }
+// Normalise l'extension vers .gif (vignettes vidéo animées)
+function gifName(filename) {
+  return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v|jpe?g)$/i, '.gif');
+}
 
 // Redimensionne une image (File/Blob) côté navigateur via canvas → Blob JPEG
 async function resizeImage(file, maxSide, quality = 0.88) {
@@ -935,7 +940,7 @@ function buildPhotoEntries() {
     .sort((a, b) => a.photoMs - b.photoMs)
     .map(p => {
       const name = p.type === 'video' ? p.file.name : jpgName(p.file.name);
-      const thumbName = p.type === 'video' ? jpgName(p.file.name) : name;
+      const thumbName = p.type === 'video' ? gifName(p.file.name) : name;
       return {
         src:      buildUrl(name, 'Photos'),
         thumb:    buildUrl(thumbName, 'Thumbs'),
@@ -952,68 +957,88 @@ function buildPhotoEntries() {
   $('stat-matched').textContent = photoEntries.length;
 }
 
-// ── Génération vignette vidéo avec icône PLAY ─────────────────────────
-async function generateVideoThumbnail(file) {
-  return new Promise((resolve) => {
+// ── Génération vignette GIF animé 50 frames (sans icône play) ────────
+async function generateVideoGif(file) {
+  // Charger le worker gif.js en blob local (contourne les restrictions CORS)
+  let workerBlobUrl = null;
+  try {
+    const txt = await fetch('https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js').then(r => r.text());
+    workerBlobUrl = URL.createObjectURL(new Blob([txt], { type: 'application/javascript' }));
+  } catch (e) {
+    console.warn('gif.js worker indisponible — fallback JPEG statique', e);
+    return _videoFallbackJpeg(file);
+  }
+
+  return new Promise((resolve, reject) => {
     const video = document.createElement('video');
     const objUrl = URL.createObjectURL(file);
-    video.src = objUrl;
-    video.muted = true;
-    video.playsInline = true;
+    video.src = objUrl; video.muted = true; video.playsInline = true; video.preload = 'auto';
 
-    const draw = () => {
-      const W = 320;
-      const H = video.videoHeight > 0
-        ? Math.round(video.videoHeight * W / video.videoWidth)
-        : 240;
+    video.addEventListener('loadedmetadata', async () => {
+      const dur = video.duration > 0 ? video.duration : 5;
+      const FRAMES = 50;
+      const W = 240;
+      const H = video.videoHeight > 0 ? Math.round(video.videoHeight * W / video.videoWidth) : 135;
+
       const canvas = document.createElement('canvas');
       canvas.width = W; canvas.height = H;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, W, H);
-      ctx.fillStyle = 'rgba(0,0,0,0.28)';
-      ctx.fillRect(0, 0, W, H);
-      const cx = W / 2, cy = H / 2, r = Math.min(W, H) * 0.17;
-      ctx.beginPath();
-      ctx.arc(cx, cy, r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255,255,255,0.90)';
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(cx - r * 0.28, cy - r * 0.50);
-      ctx.lineTo(cx + r * 0.52, cy);
-      ctx.lineTo(cx - r * 0.28, cy + r * 0.50);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(10,10,20,0.85)';
-      ctx.fill();
-      canvas.toBlob(blob => { URL.revokeObjectURL(objUrl); resolve(blob); }, 'image/jpeg', 0.82);
-    };
 
-    video.addEventListener('loadedmetadata', () => {
-      video.currentTime = video.duration > 0 ? video.duration / 2 : 0.5;
-    }, { once: true });
-    video.addEventListener('seeked', () => {
-      // Attendre que le frame soit réellement rendu avant de dessiner
-      if (typeof video.requestVideoFrameCallback === 'function') {
-        video.requestVideoFrameCallback(draw);
-      } else {
-        setTimeout(draw, 80);
+      const gif = new window.GIF({ workers: 1, quality: 10, width: W, height: H, workerScript: workerBlobUrl, repeat: 0 });
+
+      for (let i = 0; i < FRAMES; i++) {
+        await new Promise(res => {
+          const drawFrame = () => {
+            ctx.clearRect(0, 0, W, H);
+            ctx.drawImage(video, 0, 0, W, H);
+            gif.addFrame(canvas, { copy: true, delay: 80 });
+            res();
+          };
+          video.addEventListener('seeked', () => {
+            if (typeof video.requestVideoFrameCallback === 'function') {
+              video.requestVideoFrameCallback(drawFrame);
+            } else {
+              setTimeout(drawFrame, 60);
+            }
+          }, { once: true });
+          video.currentTime = (i + 0.5) / FRAMES * dur;
+        });
       }
+
+      gif.on('finished', blob => {
+        URL.revokeObjectURL(objUrl); URL.revokeObjectURL(workerBlobUrl); resolve(blob);
+      });
+      gif.on('error', err => {
+        URL.revokeObjectURL(objUrl); URL.revokeObjectURL(workerBlobUrl); reject(err);
+      });
+      gif.render();
     }, { once: true });
+
     video.addEventListener('error', () => {
       URL.revokeObjectURL(objUrl);
-      const W = 320, H = 240;
-      const canvas = document.createElement('canvas');
-      canvas.width = W; canvas.height = H;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#111827'; ctx.fillRect(0, 0, W, H);
-      const cx = W/2, cy = H/2, r = 42;
-      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(cx-12, cy-18); ctx.lineTo(cx+22, cy); ctx.lineTo(cx-12, cy+18);
-      ctx.closePath(); ctx.fillStyle = '#111'; ctx.fill();
-      canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.82);
+      reject(new Error('Erreur chargement vidéo'));
     }, { once: true });
+    video.load();
+  });
+}
 
+// Fallback JPEG statique si gif.js est indisponible
+async function _videoFallbackJpeg(file) {
+  return new Promise(resolve => {
+    const video = document.createElement('video');
+    const objUrl = URL.createObjectURL(file);
+    video.src = objUrl; video.muted = true; video.playsInline = true;
+    const draw = () => {
+      const W = 320, H = video.videoHeight > 0 ? Math.round(video.videoHeight * W / video.videoWidth) : 240;
+      const c = document.createElement('canvas'); c.width = W; c.height = H;
+      c.getContext('2d').drawImage(video, 0, 0, W, H);
+      c.toBlob(blob => { URL.revokeObjectURL(objUrl); resolve(blob); }, 'image/jpeg', 0.82);
+    };
+    video.addEventListener('loadedmetadata', () => { video.currentTime = video.duration > 0 ? video.duration / 2 : 0.5; }, { once: true });
+    video.addEventListener('seeked', () => {
+      if (typeof video.requestVideoFrameCallback === 'function') video.requestVideoFrameCallback(draw); else setTimeout(draw, 80);
+    }, { once: true });
+    video.addEventListener('error', () => { URL.revokeObjectURL(objUrl); resolve(new Blob()); }, { once: true });
     video.load();
   });
 }
@@ -1793,11 +1818,11 @@ async function uploadToServer() {
         try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; }
         tick();
 
-        // ③ Vignette vidéo JPEG (Thumbs)
-        const thumbOutName = jpgName(outName);
-        setStatus('pcloud-status', `↑ Vignette vidéo : ${thumbOutName}…`);
+        // ③ Vignette vidéo GIF animé (Thumbs)
+        const thumbOutName = gifName(outName);
+        setStatus('pcloud-status', `↑ Vignette GIF animée : ${thumbOutName}…`);
         try {
-          const thumbBlob = await generateVideoThumbnail(p.file);
+          const thumbBlob = await generateVideoGif(p.file);
           await serverUploadFile(`Thumbs${sub}/${thumbOutName}`, thumbBlob, thumbOutName);
         } catch (e) { console.warn(e); errors++; }
         tick();
@@ -2026,10 +2051,6 @@ function renderManagePhotos() {
     img.src = p.thumb || ''; img.alt = ''; img.loading = 'lazy';
     img.onerror = () => { img.style.visibility = 'hidden'; };
     twrap.appendChild(img);
-    if (p.type === 'video') {
-      const badge = document.createElement('div'); badge.className = 'play-badge'; badge.textContent = '▶';
-      twrap.appendChild(badge);
-    }
 
     // Méta
     const meta = document.createElement('div'); meta.className = 'row-meta';
@@ -2393,6 +2414,9 @@ setupDropZone($('gpx-drop'), $('gpx-input'), '.gpx', handleGPX);
 // ── Mobile file picker buttons ───────────────────────────────────────
 $('gpx-mobile-btn').addEventListener('click', () => $('gpx-input').click());
 $('photos-mobile-btn').addEventListener('click', () => $('photos-input').click());
+// Exposer au scope global les fonctions appelées depuis les attributs onclick
+window.toggleAddVoyageForm = toggleAddVoyageForm;
+window.confirmAddVoyage    = confirmAddVoyage;
 </script>
 </body>
 </html>
