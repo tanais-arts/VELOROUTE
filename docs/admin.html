@@ -387,41 +387,7 @@
     <button id="btn-server-login">🔑 Se connecter</button>
     <div class="status" id="login-status"></div>
 
-    <div style="text-align:center;margin-top:14px">
-      <button type="button" id="btn-show-chgpw"
-        style="background:none;border:none;color:rgba(255,255,255,.3);font-size:.65rem;cursor:pointer;text-decoration:underline;padding:0"
-        >Changer le mot de passe</button>
-    </div>
 
-    <!-- ── Formulaire changement de mot de passe ── -->
-    <div id="chgpw-form" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)">
-      <div style="font-size:.66rem;letter-spacing:.08em;color:rgba(240,192,96,.5);text-transform:uppercase;margin-bottom:10px">Changer le mot de passe</div>
-      <div class="field">
-        <label>Login</label>
-        <input type="text" id="chgpw-login" placeholder="ex : tom" autocomplete="username" spellcheck="false">
-      </div>
-      <div class="field">
-        <label>Mot de passe actuel</label>
-        <input type="password" id="chgpw-current" placeholder="••••••••" autocomplete="current-password">
-      </div>
-      <div class="field">
-        <label>Nouveau mot de passe</label>
-        <input type="password" id="chgpw-new" placeholder="••••••••" autocomplete="new-password">
-      </div>
-      <div class="field">
-        <label>Confirmer le nouveau mot de passe</label>
-        <input type="password" id="chgpw-confirm" placeholder="••••••••" autocomplete="new-password">
-      </div>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
-        <button type="button" id="btn-chgpw-submit"
-          style="flex:1;padding:9px;background:rgba(240,192,96,.15);border:1px solid rgba(240,192,96,.4);border-radius:5px;color:#f0c060;font-size:.75rem;cursor:pointer;letter-spacing:.06em"
-          >🔐 Valider</button>
-        <button type="button" id="btn-chgpw-cancel"
-          style="padding:9px 14px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.35);font-size:.72rem;cursor:pointer"
-          >✕</button>
-      </div>
-      <div class="status" id="chgpw-status" style="margin-top:8px"></div>
-    </div>
   </div>
 </div>
 
@@ -1723,58 +1689,6 @@ $('btn-server-login').addEventListener('click', serverLogin);
 $('btn-logout-header').addEventListener('click', serverLogout);
 $('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
 if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
-
-// ── Changement de mot de passe ────────────────────────────────────────
-$('btn-show-chgpw').addEventListener('click', () => {
-  const f = $('chgpw-form');
-  const visible = f.style.display !== 'none';
-  f.style.display = visible ? 'none' : 'block';
-  if (!visible) {
-    // pré-remplir le login depuis le champ de connexion
-    const l = ($('server-login')?.value || '').trim();
-    if (l) $('chgpw-login').value = l;
-    $('chgpw-current').focus();
-    setStatus('chgpw-status', '');
-  }
-});
-
-$('btn-chgpw-cancel').addEventListener('click', () => {
-  $('chgpw-form').style.display = 'none';
-  setStatus('chgpw-status', '');
-});
-
-async function changePassword() {
-  const login           = $('chgpw-login').value.trim();
-  const currentPassword = $('chgpw-current').value;
-  const newPassword     = $('chgpw-new').value;
-  const confirmPassword = $('chgpw-confirm').value;
-  if (!login || !currentPassword || !newPassword)
-    return setStatus('chgpw-status', 'Tous les champs sont requis.', 'error');
-  if (newPassword !== confirmPassword)
-    return setStatus('chgpw-status', 'Les nouveaux mots de passe ne correspondent pas.', 'error');
-  if (newPassword.length < 6)
-    return setStatus('chgpw-status', 'Le mot de passe doit contenir au moins 6 caractères.', 'error');
-  $('btn-chgpw-submit').disabled = true;
-  setStatus('chgpw-status', 'Mise à jour…');
-  try {
-    const r = await fetch(`${serverBase()}/auth/change-password`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, currentPassword, newPassword })
-    });
-    const j = await r.json();
-    if (!r.ok) throw new Error(j.error);
-    setStatus('chgpw-status', '✓ Mot de passe modifié avec succès.', 'ok');
-    $('chgpw-current').value = ''; $('chgpw-new').value = ''; $('chgpw-confirm').value = '';
-    setTimeout(() => { $('chgpw-form').style.display = 'none'; setStatus('chgpw-status', ''); }, 2000);
-  } catch (err) {
-    setStatus('chgpw-status', err.message || 'Erreur.', 'error');
-  }
-  $('btn-chgpw-submit').disabled = false;
-}
-
-$('btn-chgpw-submit').addEventListener('click', changePassword);
-$('chgpw-confirm').addEventListener('keydown', e => { if (e.key === 'Enter') changePassword(); });
 
 // ── Super-admin : gestion des utilisateurs ────────────────────────────────────
 async function loadSaUsers() {
