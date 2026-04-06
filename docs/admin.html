@@ -193,6 +193,21 @@
     .manage-thumb-wrap.selected::after { content: ''; position: absolute; inset: 0; border: 2px solid #f0c060; border-radius: 3px; pointer-events: none; }
     .manage-thumb-wrap.hidden-ph { outline: 1px dashed rgba(255,200,60,.35); }
     .manage-thumb-wrap.hidden-ph img { opacity: .25; filter: grayscale(.5); }
+    /* Liste photos */
+    .manage-photo-list { display: flex; flex-direction: column; gap: 2px; max-height: 440px; overflow-y: auto; margin-top: 8px; }
+    .manage-photo-row { display: flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: 4px; cursor: pointer; transition: background .1s; }
+    .manage-photo-row:hover { background: rgba(255,255,255,.05); }
+    .manage-photo-row.selected { background: rgba(240,192,96,.10); }
+    .manage-photo-row.hidden-ph { opacity: .45; }
+    .manage-photo-row input[type=checkbox] { flex-shrink: 0; width: 15px; height: 15px; accent-color: #f0c060; cursor: pointer; }
+    .manage-photo-row .row-thumb { flex-shrink: 0; width: 64px; height: 44px; object-fit: cover; border-radius: 3px; background: #111; display: block; }
+    .manage-photo-row .row-thumb-wrap { flex-shrink: 0; width: 64px; height: 44px; position: relative; }
+    .manage-photo-row .row-thumb-wrap .play-badge { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: .9rem; pointer-events: none; }
+    .manage-photo-row .row-meta { flex: 1; min-width: 0; }
+    .manage-photo-row .row-date { font-size: .72rem; color: rgba(255,255,255,.75); white-space: nowrap; }
+    .manage-photo-row .row-city { font-size: .68rem; color: rgba(240,192,96,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .manage-photo-row .row-voyage { font-size: .65rem; color: rgba(255,255,255,.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .manage-photo-row .row-filename { font-size: .62rem; color: rgba(255,255,255,.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .btn.danger { border-color: rgba(255,100,80,.5); color: rgba(255,140,120,.9); }
     .btn.danger:hover:not(:disabled) { background: rgba(255,70,50,.15); border-color: rgba(255,100,80,.8); }
 
@@ -315,6 +330,9 @@
       .seg-focus { font-size: 0.62rem; padding: 2px 6px; }
       .manage-thumb-wrap { width: 56px; height: 42px; }
       .manage-photo-grid { gap: 4px; max-height: 200px; }
+      .manage-photo-list { max-height: 260px; }
+      .manage-photo-row .row-thumb { width: 48px; height: 34px; }
+      .manage-photo-row .row-thumb-wrap { width: 48px; height: 34px; }
       .btn-row { gap: 6px; }
       .btn { font-size: 0.62rem; padding: 6px 12px; }
 
@@ -522,14 +540,22 @@
     </div>
     <!-- Photos panel -->
     <div id="manage-photos-panel" style="display:none">
-      <div class="btn-row" style="margin-bottom:12px">
+      <div class="btn-row" style="margin-bottom:8px;flex-wrap:wrap;gap:6px">
         <button class="btn" id="btn-ph-select-all">Tout sélectionner</button>
         <button class="btn" id="btn-ph-hide">👁 Masquer</button>
         <button class="btn danger" id="btn-ph-delete">🗑 Supprimer</button>
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
         <button class="btn" id="btn-retro-enrich" style="margin-left:auto">🌍 Enrichir villes manquantes</button>
       </div>
-      <div class="manage-photo-grid" id="manage-photo-grid"></div>
+      <div style="display:flex;align-items:center;gap:6px;padding:6px 8px;margin-bottom:6px;background:rgba(240,192,96,.06);border:1px solid rgba(240,192,96,.18);border-radius:6px">
+        <span style="font-size:.72rem;color:#f0c060;white-space:nowrap">🗺 Voyage :</span>
+        <select id="ph-voyage-assign"
+          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.2);border-radius:4px;color:#eee;padding:3px 6px;font-size:.75rem">
+          <option value="">— Aucun voyage —</option>
+        </select>
+        <button class="btn" id="btn-ph-assign-voyage">Appliquer à la sélection</button>
+      </div>
+      <div class="manage-photo-list" id="manage-photo-list"></div>
     </div>
     <!-- Étapes panel -->
     <div id="manage-escales-panel" style="display:none">
@@ -1964,35 +1990,89 @@ $('btn-seg-delete').addEventListener('click', async () => {
 });
 
 // ── Gestion photos ────────────────────────────────────────────────────
-function updateManagePhotoWrap(wrap, p) {
-  wrap.classList.toggle('selected', !!p._selected); wrap.classList.toggle('hidden-ph', !!p.hidden);
-}
 function updatePhSelCount() {
   const n = photoEntries.filter(p => p._selected).length;
   $('ph-selection-count').textContent = n > 0 ? `${n} sélectionnée${n > 1 ? 's' : ''}` : '';
 }
+
 function renderManagePhotos() {
-  const grid = $('manage-photo-grid'); grid.innerHTML = '';
+  const list = $('manage-photo-list'); list.innerHTML = '';
   $('mtab-ph-count').textContent = `(${photoEntries.length})`;
-  if (!photoEntries.length) { grid.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune photo dans photos.json.</p>'; return; }
+  if (!photoEntries.length) {
+    list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune photo dans photos.json.</p>';
+    return;
+  }
+  // Peupler le sélecteur voyage si nécessaire
+  const voyageSel = $('ph-voyage-assign');
+  if (voyageSel && voyageSel.options.length <= 1) {
+    voyageEntries.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.id; opt.textContent = v.label;
+      voyageSel.appendChild(opt);
+    });
+  }
+
   photoEntries.forEach(p => {
-    const wrap = document.createElement('div');
-    wrap.className = 'manage-thumb-wrap' + (p._selected ? ' selected' : '') + (p.hidden ? ' hidden-ph' : '');
-    wrap.title = `${decodeURIComponent(p.src.split('/').pop())}${p.hidden ? ' · masqué' : ''}`;
-    const img = document.createElement('img'); img.src = p.thumb || p.src; img.alt = ''; img.loading = 'lazy';
-    img.onerror = () => { img.style.display = 'none'; };
-    if (p.type === 'video') img.style.outline = '1.5px solid rgba(240,192,96,.5)';
-    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!p._selected;
-    cb.addEventListener('change', e => { e.stopPropagation(); p._selected = cb.checked; updateManagePhotoWrap(wrap, p); updatePhSelCount(); });
-    wrap.appendChild(img); wrap.appendChild(cb);
-    wrap.addEventListener('click', e => { if (e.target === cb) return; p._selected = !p._selected; cb.checked = !!p._selected; updateManagePhotoWrap(wrap, p); updatePhSelCount(); });
-    grid.appendChild(wrap);
+    const row = document.createElement('div');
+    row.className = 'manage-photo-row' + (p._selected ? ' selected' : '') + (p.hidden ? ' hidden-ph' : '');
+
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = !!p._selected;
+    cb.addEventListener('change', e => { e.stopPropagation(); p._selected = cb.checked; row.classList.toggle('selected', !!p._selected); updatePhSelCount(); });
+
+    // Vignette
+    const twrap = document.createElement('div'); twrap.className = 'row-thumb-wrap';
+    const img = document.createElement('img'); img.className = 'row-thumb';
+    img.src = p.thumb || ''; img.alt = ''; img.loading = 'lazy';
+    img.onerror = () => { img.style.visibility = 'hidden'; };
+    twrap.appendChild(img);
+    if (p.type === 'video') {
+      const badge = document.createElement('div'); badge.className = 'play-badge'; badge.textContent = '▶';
+      twrap.appendChild(badge);
+    }
+
+    // Méta
+    const meta = document.createElement('div'); meta.className = 'row-meta';
+    const filename = decodeURIComponent((p.src || '').split('/').pop());
+    const dateStr = p.caption ? p.caption.slice(0, 10) : '';
+    const timeStr = p.photoMs ? (() => {
+      const d = new Date(p.photoMs); const pad = n => String(n).padStart(2,'0');
+      return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    })() : '';
+    const voyLabel = p.voyage ? (voyageEntries.find(v => v.id === p.voyage)?.label || p.voyage) : '';
+    meta.innerHTML = `
+      <div class="row-date">${dateStr}${timeStr ? ' ' + timeStr : ''}</div>
+      <div class="row-city">${p.city || ''}</div>
+      <div class="row-voyage">${voyLabel ? '🗺 ' + voyLabel : ''}</div>
+      <div class="row-filename">${filename}</div>`;
+
+    row.append(cb, twrap, meta);
+    row.addEventListener('click', e => {
+      if (e.target === cb) return;
+      p._selected = !p._selected; cb.checked = !!p._selected;
+      row.classList.toggle('selected', !!p._selected);
+      updatePhSelCount();
+    });
+    list.appendChild(row);
   });
   updatePhSelCount();
 }
 $('btn-ph-select-all').addEventListener('click', () => {
   const allSel = photoEntries.length > 0 && photoEntries.every(p => p._selected);
   photoEntries.forEach(p => p._selected = !allSel); renderManagePhotos();
+});
+$('btn-ph-assign-voyage').addEventListener('click', async () => {
+  const sel = photoEntries.filter(p => p._selected);
+  if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
+  const voyId = $('ph-voyage-assign').value;
+  sel.forEach(p => { if (voyId) p.voyage = voyId; else delete p.voyage; p._selected = false; });
+  setStatus('manage-status', 'Commit photos.json…');
+  try {
+    await commitPhotosJson();
+    renderManagePhotos();
+    const label = voyId ? (voyageEntries.find(v => v.id === voyId)?.label || voyId) : '(aucun voyage)';
+    setStatus('manage-status', `✓ ${sel.length} photo(s) assignée(s) à « ${label} »`, 'ok');
+  } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
 $('btn-ph-hide').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
