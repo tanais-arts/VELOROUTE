@@ -402,7 +402,7 @@ app.get('/ping', (req, res) => {
   const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
   const sess = token ? sessions.get(token) : null;
   if (sess && sess.expiry > Date.now()) {
-    return res.json({ ok: true, time: new Date().toISOString(), isSuperAdmin: sess.isSuperAdmin, ghToken: sess.ghToken || '' });
+    return res.json({ ok: true, time: new Date().toISOString(), isSuperAdmin: sess.isSuperAdmin, ghToken: sess.ghToken || '', canEditGpx: !!sess.canEditGpx, storageDir: sess.storageDir || '' });
   }
   res.json({ ok: true, time: new Date().toISOString() });
 });

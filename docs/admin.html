@@ -1844,36 +1844,47 @@ async function loadSettings() {
         const base = (data.serverUrl || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
         const r = await fetch(`${base}/ping`, {
           headers: { Authorization: `Bearer ${data.serverToken}` }
-        });
-        if (r.ok) {
-          const j = await r.json().catch(() => ({}));
-          serverToken  = data.serverToken;
-          isSuperAdmin = !!j.isSuperAdmin;
-          canEditGpx   = isSuperAdmin || !!j.canEditGpx;
-          $('login-overlay').style.display = 'none';
-          $('site-header').style.display   = 'flex';
-          $('btn-logout-header').style.display = 'inline-block';
-          $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
-          if (j.ghToken) $('gh-token').value = j.ghToken;
-          if (isSuperAdmin) {
-            $('superadmin-panel').style.display = 'block';
-            $('btn-settings-toggle').style.display = 'inline-block';
-            loadSaUsers();
-          } else {
-            $('superadmin-panel').style.display = 'none';
-            $('btn-settings-toggle').style.display = 'none';
-          }
-          $('gpx-card').style.display      = canEditGpx ? '' : 'none';
-          $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
-          $('main-content').style.display = 'flex';
-          setTimeout(() => map.invalidateSize(), 100);
-          loadExistingData(!!$('gh-token').value.trim());
-        } else {
+        }).catch(() => null);
+        // Erreur réseau (null) → on utilise les données en cache (canEditGpx stocké)
+        const j = (r && r.ok) ? await r.json().catch(() => ({})) : null;
+        if (j === null && !r) {
+          // Pas de réseau — on restaure depuis localStorage si possible
+          canEditGpx       = !!(data.canEditGpx);
+          serverStorageDir = data.serverLogin || '';
+        } else if (r && !r.ok) {
+          // Token expiré / invalide → forcer login
           delete data.serverToken;
           localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
+          return;
+        } else {
+          canEditGpx       = !!j.isSuperAdmin || !!j.canEditGpx;
+          serverStorageDir = j.storageDir || data.serverLogin || '';
+          // Mettre à jour le cache canEditGpx pour le prochain rechargement hors réseau
+          data.canEditGpx = canEditGpx;
+          localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
         }
+        serverToken      = data.serverToken;
+        isSuperAdmin     = j ? !!j.isSuperAdmin : false;
+        $('login-overlay').style.display = 'none';
+        $('site-header').style.display   = 'flex';
+        $('btn-logout-header').style.display = 'inline-block';
+        $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
+        if (j?.ghToken) $('gh-token').value = j.ghToken;
+        if (isSuperAdmin) {
+          $('superadmin-panel').style.display = 'block';
+          $('btn-settings-toggle').style.display = 'inline-block';
+          loadSaUsers();
+        } else {
+          $('superadmin-panel').style.display = 'none';
+          $('btn-settings-toggle').style.display = 'none';
+        }
+        $('gpx-card').style.display      = canEditGpx ? '' : 'none';
+        $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
+        $('main-content').style.display = 'flex';
+        setTimeout(() => map.invalidateSize(), 100);
+        loadExistingData(!!$('gh-token').value.trim());
       } catch {
-        // Erreur réseau — on laisse le login s'afficher
+        // Erreur inattendue — on laisse le login s'afficher
       }
     }
   } catch {}
