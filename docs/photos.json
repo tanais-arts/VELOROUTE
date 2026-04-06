@@ -5718,6 +5718,19 @@
     "author": "natayolie"
   },
   {
+    "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20260330_173234.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/natayolie/Thumbs/IMG_20260330_173234.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/natayolie/Sources/IMG_20260330_173234.jpg",
+    "entryIdx": 810,
+    "caption": "2026-03-30",
+    "photoMs": 1774891954000,
+    "lat": 48.85336,
+    "lon": 2.38465,
+    "city": "Paris",
+    "voyage": "test-2-a-supprimer",
+    "author": "natayolie"
+  },
+  {
     "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3761.jpg",
     "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3761.jpg",
     "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3761.HEIC",
@@ -5729,6 +5742,29 @@
     "city": "Vitry-sur-Seine",
     "voyage": "test",
     "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG-20260403-WA0000.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/natayolie/Thumbs/IMG-20260403-WA0000.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/natayolie/Sources/IMG-20260403-WA0000.jpeg",
+    "entryIdx": null,
+    "caption": "2026-04-03",
+    "photoMs": 1775247890000,
+    "voyage": "test-2-a-supprimer",
+    "author": "natayolie"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20260404_173428.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/natayolie/Thumbs/IMG_20260404_173428.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/natayolie/Sources/IMG_20260404_173428.jpg",
+    "entryIdx": 829,
+    "caption": "2026-04-04",
+    "photoMs": 1775324070000,
+    "lat": 47.57787,
+    "lon": 2.91966,
+    "city": "Faverelles",
+    "voyage": "test-2-a-supprimer",
+    "author": "natayolie"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3773.MOV",
