@@ -1134,8 +1134,10 @@ async function handlePhotos(files, clearGrid = true) {
 
   // Déduplication : ignorer fichiers déjà uploadés dans le même dossier cible
   const currentSub = $('photo-subfolder').value.trim();
+  // Utilise jpgName pour correspondre aux clés CDN stockées dans photos.json
   const newFiles = files.filter(f => {
-    const key = currentSub ? `${currentSub}/${f.name}` : f.name;
+    const normalizedName = f.name.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
+    const key = currentSub ? `${currentSub}/${normalizedName}` : normalizedName;
     return !existingPhotoFilenames.has(key);
   });
   const skipped  = files.length - newFiles.length;
@@ -1257,10 +1259,11 @@ async function handlePhotos(files, clearGrid = true) {
   matchPhotosToTravel();
   _enrichCitiesPromise = enrichPhotoCities(); // démarre en parallèle de l'upload
 
-  // Enregistrer les nouveaux noms pour éviter re-upload
+  // Enregistrer les nouveaux noms pour éviter re-upload dans la même session
   const sub = $('photo-subfolder').value.trim();
   rawPhotos.forEach(p => {
-    const key = sub ? `${sub}/${p.file.name}` : p.file.name;
+    const normalizedName = p.file.name.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
+    const key = sub ? `${sub}/${normalizedName}` : normalizedName;
     existingPhotoFilenames.add(key);
   });
 
@@ -1384,7 +1387,10 @@ async function loadExistingData(useApi = false) {
     existingPhotoFilenames = new Set(photoEntries.map(p => {
       const dec = decodeURIComponent(p.src);
       const m = dec.match(/\/Photos\/(.+)$/);
-      return m ? m[1] : dec.split('/').pop();
+      if (m) return m[1]; // ex: 'Normandie/IMG_0001.jpg'
+      // Fallback: normalise le nom de fichier pour matcher même si extension changée
+      const base = dec.split('/').pop();
+      return base.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
     }));
   } catch {}
   try {
@@ -1843,11 +1849,16 @@ async function uploadToServer() {
       return;
     }
     const msg = errors
-      ? `⚠ ${errors} erreur(s) — ${photos.length - errors} photo(s) traitées`
+      ? `⚠ ${errors} erreur(s) sur ${photos.length} — ${photos.length - errors} uploadé(s)`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
     setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
     await _awaitEnrichAndRebuild('pcloud-status');
-    await commitPhotosJsonMerged();
+    // Ne pas commiter photos.json si TOUS les uploads ont échoué (les fichiers ne sont pas sur le CDN)
+    if (errors < photos.length) {
+      await commitPhotosJsonMerged();
+    } else {
+      setStatus('pcloud-status', `⚠ Aucun fichier n’a été envoyé au serveur — vérifiez la connexion. photos.json non commité.`, 'error');
+    }
   } catch (err) {
     btnStop.style.display = 'none';
     progWrap.style.display = 'none';
