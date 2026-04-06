@@ -438,7 +438,16 @@
         <button type="button" id="btn-add-voyage"
           title="Ajouter un voyage"
           style="padding:3px 10px;font-size:.72rem;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.35);border-radius:4px;color:#f0c060;cursor:pointer"
-          onclick="openAddVoyageModal()">+ Nouveau</button>
+          onclick="toggleAddVoyageForm()">+ Nouveau</button>
+      </div>
+      <div id="add-voyage-form" style="display:none;align-items:center;gap:6px;margin-bottom:8px;padding:6px 8px;background:rgba(240,192,96,.05);border:1px solid rgba(240,192,96,.2);border-radius:6px">
+        <input id="add-voyage-input" type="text" placeholder="Ex : Bretagne 2026"
+          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.2);border-radius:4px;color:#eee;padding:4px 8px;font-size:.78rem"
+          onkeydown="if(event.key==='Enter')confirmAddVoyage();if(event.key==='Escape')toggleAddVoyageForm(false)">
+        <button type="button" onclick="confirmAddVoyage()"
+          style="padding:3px 10px;font-size:.72rem;background:rgba(240,192,96,.2);border:1px solid rgba(240,192,96,.5);border-radius:4px;color:#f0c060;cursor:pointer">✓ Créer</button>
+        <button type="button" onclick="toggleAddVoyageForm(false)"
+          style="padding:3px 8px;font-size:.72rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">✕</button>
       </div>
 
       <div class="drop-zone" id="photos-drop">
@@ -1668,24 +1677,36 @@ async function commitVoyagesJson() {
   );
 }
 
-function openAddVoyageModal() {
-  const label = prompt('Nom du voyage (ex : Bretagne 2026) :');
-  if (!label || !label.trim()) return;
-  const id = label.trim().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function toggleAddVoyageForm(show) {
+  const form = $('add-voyage-form');
+  const visible = show !== undefined ? show : form.style.display === 'none';
+  form.style.display = visible ? 'flex' : 'none';
+  if (visible) { $('add-voyage-input').value = ''; $('add-voyage-input').focus(); }
+}
+
+function confirmAddVoyage() {
+  const label = ($('add-voyage-input').value || '').trim();
+  if (!label) return;
+  const id = label.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   if (voyageEntries.find(v => v.id === id)) {
-    alert(`Le voyage "${label}" existe déjà.`); return;
+    $('add-voyage-input').style.borderColor = '#f06060';
+    $('add-voyage-input').title = 'Ce voyage existe déjà';
+    return;
   }
-  voyageEntries.push({ id, label: label.trim(), gpxFiles: [] });
+  voyageEntries.push({ id, label, gpxFiles: [] });
   const sel = $('photo-voyage');
   if (sel) {
     const opt = document.createElement('option');
-    opt.value = id; opt.textContent = label.trim();
+    opt.value = id; opt.textContent = label;
     sel.appendChild(opt);
     sel.value = id;
     localStorage.setItem('veloroute_last_voyage', id);
   }
+  toggleAddVoyageForm(false);
   commitVoyagesJson().catch(e => console.warn('Erreur commit voyages.json:', e));
 }
+
+function openAddVoyageModal() { toggleAddVoyageForm(); }
 
 async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
