@@ -1765,7 +1765,7 @@ async function uploadToServer() {
 
   const photos = rawPhotos.filter(p => p.file);
   const total = photos.reduce((n, p) => n + 3, 0); // Source + Photos/Thumbs + Thumb pour tous
-  let done = 0, errors = 0;
+  let done = 0, errors = 0, srcSuccesses = 0, firstError = null;
   const tick = () => { done++; progBar.style.width = `${(done / total) * 100}%`; };
 
   try {
@@ -1777,7 +1777,7 @@ async function uploadToServer() {
       // ① Source originale
       setStatus('pcloud-status', `↑ Source : ${p.file.name}…`);
       let srcOk = false;
-      try { await serverUploadFile(`Sources${sub}/${p.file.name}`, p.file, p.file.name); srcOk = true; } catch (e) { console.warn(e); errors++; }
+      try { await serverUploadFile(`Sources${sub}/${p.file.name}`, p.file, p.file.name); srcOk = true; srcSuccesses++; } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
       tick();
       // Marquer comme traité seulement si la source a été uploadée (dédup fiable sans bloquer les retries)
       if (srcOk) {
@@ -1788,7 +1788,7 @@ async function uploadToServer() {
       if (isVideo) {
         // ② Fichier vidéo (Photos)
         setStatus('pcloud-status', `↑ Vidéo : ${outName}…`);
-        try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; }
+        try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
         tick();
 
         // ③ Vignette vidéo MP4 2s/240px — générée par ffmpeg côté serveur
@@ -1805,7 +1805,7 @@ async function uploadToServer() {
           });
           const j = await r.json();
           if (!j.ok) throw new Error(j.error || 'Erreur génération thumb');
-        } catch (e) { console.warn('video-thumb:', e); errors++; }
+        } catch (e) { console.warn('video-thumb:', e); errors++; if (!firstError) firstError = e.message; }
         tick();
       } else {
         // ② Photo 2500px (Photos)
@@ -1813,7 +1813,7 @@ async function uploadToServer() {
         try {
           const photoBlob = await resizeImage(p.file, 2500, 0.88);
           await serverUploadFile(`Photos${sub}/${outName}`, photoBlob, outName);
-        } catch (e) { console.warn(e); errors++; }
+        } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
         tick();
 
         // ③ Vignette 400px (Thumbs)
@@ -1821,7 +1821,7 @@ async function uploadToServer() {
         try {
           const thumbBlob = await resizeImage(p.file, 400, 0.82);
           await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
-        } catch (e) { console.warn(e); errors++; }
+        } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
         tick();
       }
     }
@@ -1836,15 +1836,16 @@ async function uploadToServer() {
       return;
     }
     const msg = errors
-      ? `⚠ ${errors} erreur(s) sur ${photos.length} — ${photos.length - errors} uploadé(s)`
+      ? `⚠ ${errors} erreur(s) — ${srcSuccesses}/${photos.length} source(s) envoyée(s)`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
     setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
     await _awaitEnrichAndRebuild('pcloud-status');
-    // Ne pas commiter photos.json si TOUS les uploads ont échoué (les fichiers ne sont pas sur le CDN)
-    if (errors < photos.length) {
+    // Ne commiter photos.json que si au moins 1 source a été uploadée avec succès
+    if (srcSuccesses > 0) {
       await commitPhotosJsonMerged();
     } else {
-      setStatus('pcloud-status', `⚠ Aucun fichier n’a été envoyé au serveur — vérifiez la connexion. photos.json non commité.`, 'error');
+      const errDetail = firstError ? ` (${firstError})` : '';
+      setStatus('pcloud-status', `⚠ Aucun fichier n’a été envoyé au serveur${errDetail} — photos.json non commité.`, 'error');
     }
   } catch (err) {
     btnStop.style.display = 'none';
