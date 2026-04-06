@@ -4916,8 +4916,7 @@
     "entryIdx": null,
     "caption": "2026-04-06",
     "photoMs": 1775476090000,
-    "type": "video",
-    "voyage": "test2"
+    "type": "video"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_3777.jpeg",
@@ -4928,7 +4927,6 @@
     "photoMs": 1775476695000,
     "lat": 48.76553,
     "lon": 2.36441,
-    "city": "Chevilly-Larue",
-    "voyage": "test2"
+    "city": "Chevilly-Larue"
   }
 ]
