@@ -885,8 +885,10 @@ function buildUrlWith(filename, type, subfolder) {
 function jpgName(filename) {
   return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v)$/i, '.jpg');
 }
-// Vignette vidéo : pour l'instant on stocke en .jpg (GIF sera généré côté serveur à terme)
-function gifName(filename) { return jpgName(filename); }
+// Vignette vidéo : clip MP4 2s généré côté serveur par ffmpeg
+function gifName(filename) {
+  return filename.replace(/\.(heic|heif|png|webp|tiff?|bmp|mov|mp4|m4v|jpe?g)$/i, '.mp4');
+}
 
 // Redimensionne une image (File/Blob) côté navigateur via canvas → Blob JPEG
 async function resizeImage(file, maxSide, quality = 0.88) {
@@ -969,27 +971,6 @@ function buildPhotoEntries() {
       };
     });
   $('stat-matched').textContent = photoEntries.length;
-}
-
-// ── Vignette vidéo JPEG statique (frame centrale) ───────────────────
-async function generateVideoGif(file) {
-  return new Promise(resolve => {
-    const video = document.createElement('video');
-    const objUrl = URL.createObjectURL(file);
-    video.src = objUrl; video.muted = true; video.playsInline = true;
-    const draw = () => {
-      const W = 320, H = video.videoHeight > 0 ? Math.round(video.videoHeight * W / video.videoWidth) : 240;
-      const c = document.createElement('canvas'); c.width = W; c.height = H;
-      c.getContext('2d').drawImage(video, 0, 0, W, H);
-      c.toBlob(blob => { URL.revokeObjectURL(objUrl); resolve(blob); }, 'image/jpeg', 0.82);
-    };
-    video.addEventListener('loadedmetadata', () => { video.currentTime = video.duration > 0 ? video.duration / 2 : 0.5; }, { once: true });
-    video.addEventListener('seeked', () => {
-      if (typeof video.requestVideoFrameCallback === 'function') video.requestVideoFrameCallback(draw); else setTimeout(draw, 80);
-    }, { once: true });
-    video.addEventListener('error', () => { URL.revokeObjectURL(objUrl); resolve(new Blob([], {type:'image/jpeg'})); }, { once: true });
-    video.load();
-  });
 }
 
 // ── Photos handler ─────────────────────────────────────────────────────
@@ -1812,13 +1793,21 @@ async function uploadToServer() {
         try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; }
         tick();
 
-        // ③ Vignette vidéo GIF animé (Thumbs)
-        const thumbOutName = gifName(outName);
-        setStatus('pcloud-status', `↑ Vignette GIF animée : ${thumbOutName}…`);
+        // ③ Vignette vidéo MP4 2s/240px — générée par ffmpeg côté serveur
+        const thumbOutName = gifName(outName); // .mp4
+        setStatus('pcloud-status', `⚖ Vignette MP4 : ${thumbOutName}…`);
         try {
-          const thumbBlob = await generateVideoGif(p.file);
-          await serverUploadFile(`Thumbs${sub}/${thumbOutName}`, thumbBlob, thumbOutName);
-        } catch (e) { console.warn(e); errors++; }
+          const r = await fetch(`${serverBase()}/video-thumb`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              videoPath: `Photos${sub}/${outName}`,
+              thumbPath: `Thumbs${sub}/${thumbOutName}`
+            })
+          });
+          const j = await r.json();
+          if (!j.ok) throw new Error(j.error || 'Erreur génération thumb');
+        } catch (e) { console.warn('video-thumb:', e); errors++; }
         tick();
       } else {
         // ② Photo 2500px (Photos)
@@ -2054,10 +2043,20 @@ function renderManagePhotos() {
 
     // Vignette
     const twrap = document.createElement('div'); twrap.className = 'row-thumb-wrap';
-    const img = document.createElement('img'); img.className = 'row-thumb';
-    img.src = p.thumb || ''; img.alt = ''; img.loading = 'lazy';
-    img.onerror = () => { img.style.visibility = 'hidden'; };
-    twrap.appendChild(img);
+    const isVideoThumb = (p.thumb || '').endsWith('.mp4');
+    if (isVideoThumb) {
+      const vid = document.createElement('video');
+      vid.className = 'row-thumb'; vid.src = p.thumb;
+      vid.autoplay = true; vid.muted = true; vid.loop = true;
+      vid.setAttribute('playsinline', ''); vid.setAttribute('preload', 'metadata');
+      vid.style.display = 'block';
+      twrap.appendChild(vid);
+    } else {
+      const img = document.createElement('img'); img.className = 'row-thumb';
+      img.src = p.thumb || ''; img.alt = ''; img.loading = 'lazy';
+      img.onerror = () => { img.style.visibility = 'hidden'; };
+      twrap.appendChild(img);
+    }
 
     // Méta
     const filename = decodeURIComponent((p.src || '').split('/').pop());

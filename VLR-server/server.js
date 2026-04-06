@@ -1,12 +1,13 @@
 'use strict';
-const express = require('express');
-const multer  = require('multer');
-const bcrypt  = require('bcrypt');
-const crypto  = require('crypto');
-const fs      = require('fs');
-const path    = require('path');
-const https   = require('https');
-const http    = require('http');
+const express  = require('express');
+const multer   = require('multer');
+const bcrypt   = require('bcrypt');
+const crypto   = require('crypto');
+const fs       = require('fs');
+const path     = require('path');
+const https    = require('https');
+const http     = require('http');
+const { execFile } = require('child_process');
 require('dotenv').config();
 
 const app  = express();
@@ -114,6 +115,46 @@ app.get('/list', requireAuth, (req, res) => {
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
+});
+
+// ── Video thumbnail via FFmpeg ─────────────────────────────────────
+app.post('/video-thumb', requireAuth, (req, res) => {
+  const { videoPath, thumbPath } = req.body || {};
+  if (!videoPath || !thumbPath)
+    return res.status(400).json({ error: 'videoPath et thumbPath requis' });
+
+  const videoAbs = path.join(STORAGE_ROOT, videoPath.replace(/^\/+/, ''));
+  const thumbAbs = path.join(STORAGE_ROOT, thumbPath.replace(/^\/+/, ''));
+
+  // Path traversal guard
+  const root = STORAGE_ROOT + path.sep;
+  if (!videoAbs.startsWith(root) || !thumbAbs.startsWith(root))
+    return res.status(400).json({ error: 'Chemin invalide' });
+  if (!fs.existsSync(videoAbs))
+    return res.status(404).json({ error: 'Vidéo introuvable sur le serveur' });
+
+  fs.mkdirSync(path.dirname(thumbAbs), { recursive: true });
+
+  // Vérifier la disponibilité de ffmpeg
+  execFile('ffmpeg', ['-version'], (errCheck) => {
+    if (errCheck)
+      return res.status(500).json({ error: 'ffmpeg non disponible sur ce serveur' });
+
+    execFile('ffmpeg', [
+      '-i', videoAbs,
+      '-t', '2',            // 2 premières secondes
+      '-vf', 'scale=240:-2', // 240px de large, hauteur proportionnelle
+      '-an',                 // pas d’audio
+      '-movflags', '+faststart',
+      '-crf', '28',
+      '-preset', 'fast',
+      '-y',
+      thumbAbs
+    ], (err, _stdout, stderr) => {
+      if (err) return res.status(500).json({ error: err.message, stderr: stderr?.slice(0, 400) });
+      res.json({ ok: true });
+    });
+  });
 });
 
 // ── Serve stored files (public, no auth) ─────────────────────────────

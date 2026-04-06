@@ -864,22 +864,32 @@ async function init() {
       if (t) labelText += ` ${t}`;
     }
 
-    const img = document.createElement('img');
-    if (p.type === 'video' && !p.thumb) {
-      // Pas de vignette : fond gris, juste le badge ▶
-      img.style.visibility = 'hidden';
-    } else if (i < 10) {
-      img.src = p.thumb || p.src;
+    // Élément vignette : <video> si thumb mp4 animée, sinon <img>
+    const isMp4Thumb = p.type === 'video' && (p.thumb || '').endsWith('.mp4');
+    let thumbEl;
+    if (isMp4Thumb) {
+      thumbEl = document.createElement('video');
+      thumbEl.autoplay = true; thumbEl.muted = true; thumbEl.loop = true;
+      thumbEl.setAttribute('playsinline', ''); thumbEl.setAttribute('preload', 'metadata');
+      if (i < 6) { thumbEl.src = p.thumb; }
+      else        { thumbEl.dataset.src = p.thumb; }
     } else {
-      img.dataset.src = p.thumb || p.src;
+      thumbEl = document.createElement('img');
+      if (p.type === 'video' && !p.thumb) {
+        thumbEl.style.visibility = 'hidden';
+      } else if (i < 10) {
+        thumbEl.src = p.thumb || p.src;
+      } else {
+        thumbEl.dataset.src = p.thumb || p.src;
+      }
+      if (p.type === 'video') {
+        thumbEl.onerror = () => { thumbEl.removeAttribute('src'); thumbEl.style.visibility = 'hidden'; };
+      } else {
+        thumbEl.onerror = () => { if (thumbEl.src.includes('/Thumbs/') && p.src) thumbEl.src = p.src; };
+      }
     }
-    img.className = 'photo-thumb';
-    img.draggable = false;
-    if (p.type === 'video') {
-      img.onerror = () => { img.removeAttribute('src'); img.style.visibility = 'hidden'; };
-    } else {
-      img.onerror = () => { if (img.src.includes('/Thumbs/') && p.src) img.src = p.src; };
-    }
+    thumbEl.className = 'photo-thumb';
+    thumbEl.draggable = false;
 
     const outer = document.createElement('div');
     outer.className = 'thumb-cell';
@@ -888,15 +898,18 @@ async function init() {
       const wrap = document.createElement('div');
       wrap.className = 'video-thumb-wrap';
       wrap.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
-      const badge = document.createElement('div');
-      badge.className = 'play-badge';
-      badge.setAttribute('aria-hidden', 'true');
-      wrap.appendChild(img);
-      wrap.appendChild(badge);
+      wrap.appendChild(thumbEl);
+      // Icône play seulement si pas de vignette animée mp4
+      if (!isMp4Thumb) {
+        const badge = document.createElement('div');
+        badge.className = 'play-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        wrap.appendChild(badge);
+      }
       outer.appendChild(wrap);
     } else {
-      img.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
-      outer.appendChild(img);
+      thumbEl.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
+      outer.appendChild(thumbEl);
     }
 
     if (labelText) {
