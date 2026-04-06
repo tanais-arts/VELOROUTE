@@ -5809,7 +5809,6 @@
     "lat": 48.76558,
     "lon": 2.36448,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5820,7 +5819,6 @@
     "caption": "2026-04-06",
     "photoMs": 1775469500000,
     "type": "video",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5831,7 +5829,6 @@
     "caption": "2026-04-06",
     "photoMs": 1775508957000,
     "type": "video",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5844,7 +5841,6 @@
     "lat": 48.75837,
     "lon": 2.34947,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5857,7 +5853,6 @@
     "lat": 48.75812,
     "lon": 2.34913,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5870,7 +5865,6 @@
     "lat": 48.75818,
     "lon": 2.34911,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5883,7 +5877,6 @@
     "lat": 48.75782,
     "lon": 2.34849,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5896,7 +5889,6 @@
     "lat": 48.75767,
     "lon": 2.34821,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5909,7 +5901,6 @@
     "lat": 48.75771,
     "lon": 2.34804,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5922,7 +5913,6 @@
     "lat": 48.75857,
     "lon": 2.34946,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5935,7 +5925,6 @@
     "lat": 48.75849,
     "lon": 2.3495,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5948,7 +5937,6 @@
     "lat": 48.75849,
     "lon": 2.34952,
     "city": "Rungis",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5961,7 +5949,6 @@
     "lat": 48.76664,
     "lon": 2.34932,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5974,7 +5961,6 @@
     "lat": 48.76667,
     "lon": 2.34951,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -5987,7 +5973,6 @@
     "lat": 48.76645,
     "lon": 2.35246,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -6000,7 +5985,6 @@
     "lat": 48.76262,
     "lon": 2.35806,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -6013,7 +5997,6 @@
     "lat": 48.76553,
     "lon": 2.36441,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   },
   {
@@ -6026,7 +6009,6 @@
     "lat": 48.75809,
     "lon": 2.36092,
     "city": "Chevilly-Larue",
-    "voyage": "test",
     "author": "test"
   }
 ]
