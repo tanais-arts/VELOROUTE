@@ -376,7 +376,7 @@
 
     <div class="field">
       <label>Login</label>
-      <input type="text" id="server-login" placeholder="ex : tom" autocomplete="username" spellcheck="false">
+      <input type="text" id="server-login" placeholder="admin  ou  tom…" autocomplete="username" spellcheck="false">
     </div>
 
     <div class="field">
@@ -386,6 +386,42 @@
 
     <button id="btn-server-login">🔑 Se connecter</button>
     <div class="status" id="login-status"></div>
+
+    <div style="text-align:center;margin-top:14px">
+      <button type="button" id="btn-show-chgpw"
+        style="background:none;border:none;color:rgba(255,255,255,.3);font-size:.65rem;cursor:pointer;text-decoration:underline;padding:0"
+        >Changer le mot de passe</button>
+    </div>
+
+    <!-- ── Formulaire changement de mot de passe ── -->
+    <div id="chgpw-form" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)">
+      <div style="font-size:.66rem;letter-spacing:.08em;color:rgba(240,192,96,.5);text-transform:uppercase;margin-bottom:10px">Changer le mot de passe</div>
+      <div class="field">
+        <label>Login</label>
+        <input type="text" id="chgpw-login" placeholder="ex : tom" autocomplete="username" spellcheck="false">
+      </div>
+      <div class="field">
+        <label>Mot de passe actuel</label>
+        <input type="password" id="chgpw-current" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div class="field">
+        <label>Nouveau mot de passe</label>
+        <input type="password" id="chgpw-new" placeholder="••••••••" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label>Confirmer le nouveau mot de passe</label>
+        <input type="password" id="chgpw-confirm" placeholder="••••••••" autocomplete="new-password">
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+        <button type="button" id="btn-chgpw-submit"
+          style="flex:1;padding:9px;background:rgba(240,192,96,.15);border:1px solid rgba(240,192,96,.4);border-radius:5px;color:#f0c060;font-size:.75rem;cursor:pointer;letter-spacing:.06em"
+          >🔐 Valider</button>
+        <button type="button" id="btn-chgpw-cancel"
+          style="padding:9px 14px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.35);font-size:.72rem;cursor:pointer"
+          >✕</button>
+      </div>
+      <div class="status" id="chgpw-status" style="margin-top:8px"></div>
+    </div>
   </div>
 </div>
 
@@ -396,12 +432,39 @@
   <a href="index.html">← Retour carte</a>
   <button id="btn-settings-toggle"
     onclick="const p=document.getElementById('settings-panel');p.style.display=p.style.display==='none'?'block':'none'"
-    style="font-size:.7rem;letter-spacing:.08em;color:rgba(240,192,96,.5);background:none;border:1px solid rgba(240,192,96,.2);padding:5px 12px;border-radius:4px;cursor:pointer">⚙ Réglages</button>
+    style="display:none;font-size:.7rem;letter-spacing:.08em;color:rgba(240,192,96,.5);background:none;border:1px solid rgba(240,192,96,.2);padding:5px 12px;border-radius:4px;cursor:pointer">⚙ Réglages</button>
+  <button id="btn-header-chgpw"
+    style="font-size:.7rem;letter-spacing:.08em;color:rgba(255,255,255,.4);background:none;border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;cursor:pointer"
+    onclick="toggleHeaderChgpw()">🔑 MDP</button>
   <button id="btn-logout-header">Déconnexion</button>
 </header>
 
 <div id="settings-panel" style="display:none">
   <div id="settings-grid">
+
+<!-- ── Panneau changement de mot de passe (header) ── -->
+<div id="header-chgpw-panel" style="display:none;background:rgba(6,9,18,.98);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 32px">
+  <div style="max-width:380px;margin:0 auto">
+    <div style="font-size:.66rem;letter-spacing:.1em;color:rgba(240,192,96,.6);text-transform:uppercase;margin-bottom:12px">Changer mon mot de passe</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <input type="password" id="hchgpw-current" placeholder="Mot de passe actuel" autocomplete="current-password"
+        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
+      <input type="password" id="hchgpw-new" placeholder="Nouveau mot de passe (min. 6 car.)" autocomplete="new-password"
+        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
+      <input type="password" id="hchgpw-confirm" placeholder="Confirmer le nouveau mot de passe" autocomplete="new-password"
+        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
+      <div style="display:flex;gap:8px;margin-top:2px">
+        <button type="button" onclick="submitHeaderChgpw()"
+          style="flex:1;padding:8px;background:rgba(240,192,96,.15);border:1px solid rgba(240,192,96,.4);border-radius:5px;color:#f0c060;font-size:.74rem;cursor:pointer">
+          ✓ Valider</button>
+        <button type="button" onclick="toggleHeaderChgpw()"
+          style="padding:8px 14px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.35);font-size:.72rem;cursor:pointer">
+          ✕</button>
+      </div>
+      <div id="hchgpw-status" style="font-size:.7rem;min-height:1em"></div>
+    </div>
+  </div>
+</div>
     <div class="field" style="margin:0">
       <label>Base URL CDN</label>
       <input type="text" id="cdn-base" value="https://hub.studios-voa.com:1666/files" readonly style="opacity:.5;cursor:default">
@@ -411,10 +474,6 @@
         <a href="https://github.com/settings/tokens/new?scopes=workflow,contents&amp;description=VELOROUTE+Admin"
           target="_blank" style="color:#f0c060;font-size:.65rem;margin-left:6px">générer</a></label>
       <input type="password" id="gh-token" placeholder="ghp_…">
-    </div>
-    <div class="field" style="margin:0">
-      <label>Étape (sous-dossier)</label>
-      <input type="text" id="photo-subfolder" placeholder="ex : Tokyo">
     </div>
   </div>
   <div style="padding:10px 0 4px;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:10px">
@@ -440,11 +499,18 @@
       <label>Mot de passe</label>
       <input type="password" id="sa-new-password" placeholder="••••••••" autocomplete="new-password">
     </div>
-    <div class="field" style="margin:0">
-      <label>Token GitHub (optionnel)</label>
-      <input type="password" id="sa-new-ghtoken" placeholder="ghp_…">
+    <div class="field" style="margin:0;display:flex;align-items:center;gap:8px">
+      <div style="flex:1">
+        <label>Token GitHub (optionnel)</label>
+        <input type="password" id="sa-new-ghtoken" placeholder="ghp_…" style="width:100%">
+      </div>
+      <button id="btn-sa-gen-pat" type="button" style="font-size:.68rem;padding:6px 10px;background:rgba(100,180,240,.06);border:1px solid rgba(100,180,240,.18);border-radius:4px;color:rgba(140,200,255,.85);cursor:pointer;white-space:nowrap">🧾 Générer PAT</button>
+      <label style="display:flex;align-items:center;gap:5px;font-size:.68rem;color:rgba(255,200,100,.8);white-space:nowrap;cursor:pointer" title="Autoriser l'import de fichiers GPX et l'édition de travel.json">
+        <input type="checkbox" id="sa-new-can-gpx" style="accent-color:#f0c060;width:14px;height:14px">
+        GPX
+      </label>
+      <button id="btn-sa-create-user" style="font-size:.7rem;padding:7px 14px;background:rgba(80,210,120,.1);border:1px solid rgba(80,210,120,.3);border-radius:4px;color:rgba(80,210,120,.8);cursor:pointer;white-space:nowrap">+ Créer</button>
     </div>
-    <button id="btn-sa-create-user" style="font-size:.7rem;padding:7px 14px;background:rgba(80,210,120,.1);border:1px solid rgba(80,210,120,.3);border-radius:4px;color:rgba(80,210,120,.8);cursor:pointer;white-space:nowrap">+ Créer</button>
   </div>
   <div id="sa-users-list" style="font-size:.72rem;color:rgba(255,255,255,.6)">Chargement…</div>
   <div class="status" id="sa-status" style="margin-top:10px"></div>
@@ -1545,23 +1611,24 @@ function serverSuccess(token, data = {}) {
   $('btn-logout-header').style.display = 'inline-block';
   $('header-user').textContent = data.login ? `· ${data.login}` : '· VLR-server';
   setStatus('login-status', '');
+  if (data.ghToken) $('gh-token').value = data.ghToken;
   if (isSuperAdmin) {
     $('superadmin-panel').style.display = 'block';
-    $('main-content').style.display = 'none';
+    $('btn-settings-toggle').style.display = 'inline-block';
     loadSaUsers();
   } else {
-    if (data.ghToken) $('gh-token').value = data.ghToken;
     $('superadmin-panel').style.display = 'none';
-    $('main-content').style.display = 'flex';
-    setTimeout(() => map.invalidateSize(), 100);
+    $('btn-settings-toggle').style.display = 'none';
   }
+  $('main-content').style.display = 'flex';
+  setTimeout(() => map.invalidateSize(), 100);
   try {
     const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     _s.serverToken = token;
     _s.serverLogin = data.login || '';
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   } catch {}
-  if (!isSuperAdmin) loadExistingData(!!$('gh-token').value.trim());
+  loadExistingData(!!$('gh-token').value.trim());
 }
 
 async function serverLogin() {
@@ -1620,10 +1687,94 @@ async function serverLogout() {
   } catch {}
 }
 
+function toggleHeaderChgpw() {
+  const p = $('header-chgpw-panel');
+  const visible = p.style.display !== 'none';
+  p.style.display = visible ? 'none' : 'block';
+  if (!visible) { $('hchgpw-current').focus(); setStatus('hchgpw-status', ''); }
+}
+
+async function submitHeaderChgpw() {
+  const currentPassword = $('hchgpw-current').value;
+  const newPassword     = $('hchgpw-new').value;
+  const confirmPassword = $('hchgpw-confirm').value;
+  const login = (JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}').serverLogin || '').trim();
+  if (!currentPassword || !newPassword) return setStatus('hchgpw-status', 'Champs requis.', 'error');
+  if (newPassword !== confirmPassword) return setStatus('hchgpw-status', 'Les mots de passe ne correspondent pas.', 'error');
+  if (newPassword.length < 6) return setStatus('hchgpw-status', 'Min. 6 caractères.', 'error');
+  setStatus('hchgpw-status', 'Mise à jour…');
+  try {
+    const r = await fetch(`${serverBase()}/auth/change-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login, currentPassword, newPassword })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('hchgpw-status', '✓ Mot de passe modifié.', 'ok');
+    $('hchgpw-current').value = ''; $('hchgpw-new').value = ''; $('hchgpw-confirm').value = '';
+    setTimeout(() => { $('header-chgpw-panel').style.display = 'none'; setStatus('hchgpw-status', ''); }, 2000);
+  } catch (err) {
+    setStatus('hchgpw-status', err.message || 'Erreur.', 'error');
+  }
+}
+
 $('btn-server-login').addEventListener('click', serverLogin);
 $('btn-logout-header').addEventListener('click', serverLogout);
 $('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
 if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
+
+// ── Changement de mot de passe ────────────────────────────────────────
+$('btn-show-chgpw').addEventListener('click', () => {
+  const f = $('chgpw-form');
+  const visible = f.style.display !== 'none';
+  f.style.display = visible ? 'none' : 'block';
+  if (!visible) {
+    // pré-remplir le login depuis le champ de connexion
+    const l = ($('server-login')?.value || '').trim();
+    if (l) $('chgpw-login').value = l;
+    $('chgpw-current').focus();
+    setStatus('chgpw-status', '');
+  }
+});
+
+$('btn-chgpw-cancel').addEventListener('click', () => {
+  $('chgpw-form').style.display = 'none';
+  setStatus('chgpw-status', '');
+});
+
+async function changePassword() {
+  const login           = $('chgpw-login').value.trim();
+  const currentPassword = $('chgpw-current').value;
+  const newPassword     = $('chgpw-new').value;
+  const confirmPassword = $('chgpw-confirm').value;
+  if (!login || !currentPassword || !newPassword)
+    return setStatus('chgpw-status', 'Tous les champs sont requis.', 'error');
+  if (newPassword !== confirmPassword)
+    return setStatus('chgpw-status', 'Les nouveaux mots de passe ne correspondent pas.', 'error');
+  if (newPassword.length < 6)
+    return setStatus('chgpw-status', 'Le mot de passe doit contenir au moins 6 caractères.', 'error');
+  $('btn-chgpw-submit').disabled = true;
+  setStatus('chgpw-status', 'Mise à jour…');
+  try {
+    const r = await fetch(`${serverBase()}/auth/change-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login, currentPassword, newPassword })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('chgpw-status', '✓ Mot de passe modifié avec succès.', 'ok');
+    $('chgpw-current').value = ''; $('chgpw-new').value = ''; $('chgpw-confirm').value = '';
+    setTimeout(() => { $('chgpw-form').style.display = 'none'; setStatus('chgpw-status', ''); }, 2000);
+  } catch (err) {
+    setStatus('chgpw-status', err.message || 'Erreur.', 'error');
+  }
+  $('btn-chgpw-submit').disabled = false;
+}
+
+$('btn-chgpw-submit').addEventListener('click', changePassword);
+$('chgpw-confirm').addEventListener('keydown', e => { if (e.key === 'Enter') changePassword(); });
 
 // ── Super-admin : gestion des utilisateurs ────────────────────────────────────
 async function loadSaUsers() {
@@ -1636,11 +1787,30 @@ async function loadSaUsers() {
       `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
       + `<span style="min-width:80px;font-weight:600;color:#eee">${u.login}</span>`
       + `<span style="color:rgba(255,255,255,.35);font-size:.66rem">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
-      + `<button onclick="deleteSaUser('${u.login}')" style="margin-left:auto;font-size:.65rem;padding:2px 8px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
+      + (u.canEditGpx ? `<span style="font-size:.62rem;padding:1px 6px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.3);border-radius:10px;color:rgba(240,192,96,.8)">GPX</span>` : '')
+      + `<button onclick="resetSaUserPassword('${u.login}')" style="margin-left:auto;font-size:.65rem;padding:2px 8px;background:rgba(100,180,240,.07);border:1px solid rgba(100,180,240,.22);border-radius:3px;color:rgba(140,200,255,.75);cursor:pointer">🔑 MDP</button>`
+      + `<button onclick="deleteSaUser('${u.login}')" style="font-size:.65rem;padding:2px 8px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
       + `</div>`
     ).join('');
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 }
+
+async function resetSaUserPassword(login) {
+  const newPw = prompt(`Nouveau mot de passe pour « ${login} » (min 6 caractères) :`);
+  if (newPw === null) return; // annulé
+  if (newPw.length < 6) { setStatus('sa-status', 'Mot de passe trop court (min 6 caractères).', 'error'); return; }
+  try {
+    const r = await fetch(`${serverBase()}/users/${encodeURIComponent(login)}/password`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ newPassword: newPw })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('sa-status', `✓ Mot de passe de « ${login} » modifié.`, 'ok');
+  } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
+}
+window.resetSaUserPassword = resetSaUserPassword;
 
 async function deleteSaUser(login) {
   if (!confirm(`Supprimer l'utilisateur « ${login} » ?\nSes données sur le serveur ne seront PAS supprimées.`)) return;
@@ -1657,23 +1827,34 @@ async function deleteSaUser(login) {
 window.deleteSaUser = deleteSaUser;
 
 $('btn-sa-create-user').addEventListener('click', async () => {
-  const login    = $('sa-new-login').value.trim();
-  const password = $('sa-new-password').value.trim();
-  const ghToken  = $('sa-new-ghtoken').value.trim();
+  const login      = $('sa-new-login').value.trim();
+  const password   = $('sa-new-password').value.trim();
+  const ghToken    = $('sa-new-ghtoken').value.trim();
+  const canEditGpx = $('sa-new-can-gpx').checked;
   if (!login || !password) { setStatus('sa-status', 'Login et mot de passe requis.', 'error'); return; }
   try {
     const r = await fetch(`${serverBase()}/users`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password, ghToken })
+      body: JSON.stringify({ login, password, ghToken, canEditGpx })
     });
     const j = await r.json();
     if (!r.ok) throw new Error(j.error);
-    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/)`, 'ok');
-    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = '';
+    const gpxLabel = canEditGpx ? ' · peut importer GPX' : '';
+    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/${gpxLabel})`, 'ok');
+    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = ''; $('sa-new-can-gpx').checked = false;
     loadSaUsers();
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 });
+
+// Ouvre la page GitHub pour générer un PAT pré-rempli avec le login
+if ($('btn-sa-gen-pat')) {
+  $('btn-sa-gen-pat').addEventListener('click', () => {
+    const login = ($('sa-new-login').value || '').trim() || 'user';
+    const url = `https://github.com/settings/tokens/new?scopes=workflow,contents&description=VELOROUTE+${encodeURIComponent(login)}`;
+    window.open(url, '_blank');
+  });
+}
 
 // Sauvegarder le token GitHub sur le serveur
 $('btn-save-ghtoken').addEventListener('click', async () => {
@@ -1726,16 +1907,18 @@ async function loadSettings() {
           $('site-header').style.display   = 'flex';
           $('btn-logout-header').style.display = 'inline-block';
           $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
+          if (j.ghToken) $('gh-token').value = j.ghToken;
           if (isSuperAdmin) {
             $('superadmin-panel').style.display = 'block';
-            $('main-content').style.display = 'none';
+            $('btn-settings-toggle').style.display = 'inline-block';
             loadSaUsers();
           } else {
-            if (j.ghToken) $('gh-token').value = j.ghToken;
-            $('main-content').style.display = 'flex';
-            setTimeout(() => map.invalidateSize(), 100);
-            loadExistingData(!!$('gh-token').value.trim());
+            $('superadmin-panel').style.display = 'none';
+            $('btn-settings-toggle').style.display = 'none';
           }
+          $('main-content').style.display = 'flex';
+          setTimeout(() => map.invalidateSize(), 100);
+          loadExistingData(!!$('gh-token').value.trim());
         } else {
           delete data.serverToken;
           localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
