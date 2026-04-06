@@ -5692,7 +5692,6 @@
     "caption": "2025-12-26",
     "photoMs": 1766766152000,
     "type": "video",
-    "voyage": "test-2-a-supprimer",
     "author": "natayolie"
   },
   {
@@ -5738,7 +5737,6 @@
     "lat": 48.85336,
     "lon": 2.38465,
     "city": "Paris",
-    "voyage": "test-2-a-supprimer",
     "author": "natayolie"
   },
   {
@@ -5751,7 +5749,6 @@
     "lat": 48.77291,
     "lon": 2.377,
     "city": "Vitry-sur-Seine",
-    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
@@ -5761,7 +5758,6 @@
     "entryIdx": null,
     "caption": "2026-04-03",
     "photoMs": 1775247890000,
-    "voyage": "test-2-a-supprimer",
     "author": "natayolie"
   },
   {
@@ -5774,7 +5770,6 @@
     "lat": 47.57787,
     "lon": 2.91966,
     "city": "Faverelles",
-    "voyage": "test-2-a-supprimer",
     "author": "natayolie"
   },
   {
@@ -5785,7 +5780,6 @@
     "caption": "2026-04-05",
     "photoMs": 1775375962000,
     "type": "video",
-    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
@@ -5796,7 +5790,6 @@
     "caption": "2026-04-05",
     "photoMs": 1775375985000,
     "type": "video",
-    "voyage": "test-2-a-supprimer",
     "author": "test"
   },
   {
