@@ -1,15 +1,5 @@
 [
   {
-    "id": "bourgogne",
-    "label": "Bourgogne 2025",
-    "gpxFiles": [
-      "Bourgogne_Section_1.gpx",
-      "Bourgogne_Section_2.gpx",
-      "Bourgogne_Section_3.gpx",
-      "Bourgogne_Section_4.gpx"
-    ]
-  },
-  {
     "id": "test5",
     "label": "Test5",
     "gpxFiles": []
