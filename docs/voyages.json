@@ -27,5 +27,10 @@
     "gpxFiles": [
       "Sortie_vélo_de_nuit.gpx"
     ]
+  },
+  {
+    "id": "test2",
+    "label": "Test2",
+    "gpxFiles": []
   }
 ]
