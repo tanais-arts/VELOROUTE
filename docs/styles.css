@@ -164,7 +164,7 @@ html, body {
   height: 100%; overflow-x: scroll; scroll-behavior: smooth;
   scrollbar-width: none;
   gap: 4px;
-  padding: 10px 50% 0;
+  padding: 12px 50% 0;
   mask-image: linear-gradient(to right, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0, black 64px, black calc(100% - 64px), transparent 100%);
 }
@@ -178,7 +178,7 @@ html, body {
   font-size: 0.5rem; letter-spacing: 0.04em;
   color: rgba(240,192,96,0.65); white-space: nowrap;
   font-weight: 500; line-height: 1;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 .photo-thumb {
   flex-shrink: 0; width: 110px; height: 70px;
