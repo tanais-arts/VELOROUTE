@@ -804,6 +804,7 @@ async function init() {
     state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
     state.photos  = state.photos.filter(p => p.voyage === _activeVoyageId);
     entries = state.entries; // rebind local var → trace + carte ne montrent que le voyage
+    photos  = state.photos;  // rebind local var → marqueurs photo + mediaEntries filtrés
   }
 
   const year = entries[0]?.year || new Date().getFullYear();
