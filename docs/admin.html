@@ -538,7 +538,12 @@
           style="padding:3px 8px;font-size:.72rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">✕</button>
       </div>
 
-      <input type="hidden" id="photo-subfolder">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:5px 8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:6px">
+        <span style="font-size:.72rem;color:rgba(255,255,255,.45);white-space:nowrap">📁 Sous-dossier&nbsp;:</span>
+        <input type="text" id="photo-subfolder" placeholder="ex : bretagne-2025" autocomplete="off" spellcheck="false"
+          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#eee;padding:3px 8px;font-size:.76rem"
+          title="Rempli automatiquement depuis le nom du dossier droppé · Modifiable manuellement">
+      </div>
       <div class="drop-zone" id="photos-drop">
         <input type="file" id="photos-input" accept="image/*,.mov,.mp4,.m4v" multiple>
         <input type="file" id="photos-folder-input" accept="image/*,.mov,.mp4,.m4v" multiple webkitdirectory style="display:none">
@@ -929,18 +934,20 @@ function nearestEntryIdxByPos(lat, lon) {
 // ── Photo URL helpers ─────────────────────────────────────────────────
 const CDN_BASE = 'https://hub.studios-voa.com:1666/files';
 function buildUrl(filename, type) {
-  const base = CDN_BASE;
-  const sub  = $('photo-subfolder').value.trim();
-  const name = encodeURIComponent(filename);
+  const base   = CDN_BASE;
+  const sub    = $('photo-subfolder').value.trim();
+  const name   = encodeURIComponent(filename);
   const folder = sub ? `/${encodeURIComponent(sub)}` : '';
-  return `${base}/${type}${folder}/${name}`;
+  const udir   = serverStorageDir ? `/${serverStorageDir}` : '';
+  return `${base}${udir}/${type}${folder}/${name}`;
 }
 
 // Variante avec subfolder explicite
 function buildUrlWith(filename, type, subfolder) {
-  const base = CDN_BASE;
+  const base   = CDN_BASE;
   const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
-  return `${base}/${type}${folder}/${encodeURIComponent(filename)}`;
+  const udir   = serverStorageDir ? `/${serverStorageDir}` : '';
+  return `${base}${udir}/${type}${folder}/${encodeURIComponent(filename)}`;
 }
 
 // Normalise l'extension vers .jpg (HEIC, PNG… → toujours JPEG après resize)
@@ -1545,9 +1552,10 @@ async function uploadAndProcess() {
   await uploadToServer();
 }
 
-let serverToken  = null;
-let isSuperAdmin = false;
-let canEditGpx   = false;
+let serverToken      = null;
+let isSuperAdmin     = false;
+let canEditGpx       = false;
+let serverStorageDir = '';
 let pendingSyncAfterLogin = false;
 
 function serverBase() {
@@ -1561,9 +1569,10 @@ function serverBase() {
 })();
 
 function serverSuccess(token, data = {}) {
-  serverToken  = token;
-  isSuperAdmin = !!data.isSuperAdmin;
-  canEditGpx   = isSuperAdmin || !!data.canEditGpx;
+  serverToken      = token;
+  isSuperAdmin     = !!data.isSuperAdmin;
+  canEditGpx       = isSuperAdmin || !!data.canEditGpx;
+  serverStorageDir = data.storageDir || '';
   $('server-password').value = '';
   if ($('server-login')) $('server-login').value = '';
   $('login-overlay').style.display = 'none';
