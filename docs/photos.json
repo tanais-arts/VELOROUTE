@@ -8,7 +8,8 @@
     "photoMs": 1746104757000,
     "lat": 49.1845,
     "lon": -0.35649,
-    "city": "Caen"
+    "city": "Caen",
+    "voyage": "normandie"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250501_135929.jpg",
@@ -19,7 +20,8 @@
     "photoMs": 1746107971000,
     "lat": 49.18542,
     "lon": -0.3335,
-    "city": "Mondeville"
+    "city": "Mondeville",
+    "voyage": "normandie"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250510_173006.jpg",
@@ -30,7 +32,8 @@
     "photoMs": 1746107971000,
     "lat": 49.18542,
     "lon": -0.3335,
-    "city": "Mondeville"
+    "city": "Mondeville",
+    "voyage": "normandie"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_20250501_145518.jpg",
