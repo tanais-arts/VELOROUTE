@@ -8,5 +8,10 @@
     "id": "bourgogne",
     "label": "Bourgogne",
     "gpxFiles": []
+  },
+  {
+    "id": "alpes-2025",
+    "label": "Alpes 2025",
+    "gpxFiles": []
   }
 ]
