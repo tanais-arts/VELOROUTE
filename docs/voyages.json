@@ -8,5 +8,10 @@
     "id": "normandie",
     "label": "Normandie",
     "gpxFiles": []
+  },
+  {
+    "id": "paris",
+    "label": "Paris",
+    "gpxFiles": []
   }
 ]
