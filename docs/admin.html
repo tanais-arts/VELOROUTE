@@ -564,6 +564,14 @@
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
         <button class="btn" id="btn-retro-enrich" style="margin-left:auto">🌍 Enrichir villes manquantes</button>
       </div>
+      <div style="display:flex;align-items:center;gap:6px;padding:5px 8px;margin-bottom:4px;background:rgba(240,192,96,.04);border:1px solid rgba(240,192,96,.14);border-radius:6px">
+        <span style="font-size:.72rem;color:rgba(240,192,96,.6);white-space:nowrap">🔍 Filtre :</span>
+        <select id="ph-manage-voyage-filter"
+          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.2);border-radius:4px;color:#eee;padding:3px 6px;font-size:.75rem">
+          <option value="">— Toutes —</option>
+          <option value="__none__">Non classées</option>
+        </select>
+      </div>
       <div style="display:flex;align-items:center;gap:6px;padding:6px 8px;margin-bottom:6px;background:rgba(240,192,96,.06);border:1px solid rgba(240,192,96,.18);border-radius:6px">
         <span style="font-size:.72rem;color:#f0c060;white-space:nowrap">🗺 Voyage :</span>
         <select id="ph-voyage-assign"
@@ -1691,41 +1699,29 @@ async function deleteVoyage(voyId) {
   const v = voyageEntries.find(e => e.id === voyId);
   if (!v) return;
   const affected = photoEntries.filter(p => p.voyage === voyId).length;
-  const msg = `Supprimer le voyage « ${v.label} » ?`
-    + (affected ? `\n${affected} photo(s) perdront ce voyage.` : '');
-  // Confirmation inline dans le status
-  const status = $('manage-status');
-  status.innerHTML = `<span style="color:#f0a060">${msg.replace('\n','<br>')}</span>
-    <button id="_del-voy-ok" style="margin-left:10px;padding:2px 10px;font-size:.72rem;background:rgba(255,80,60,.2);border:1px solid rgba(255,80,60,.5);border-radius:4px;color:#ff8070;cursor:pointer">Oui, supprimer</button>
-    <button id="_del-voy-no" style="margin-left:6px;padding:2px 10px;font-size:.72rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">Annuler</button>`;
-  const cleanup = () => status.innerHTML = '';
-  $('_del-voy-no').addEventListener('click', cleanup);
-  $('_del-voy-ok').addEventListener('click', async () => {
-    cleanup();
-    voyageEntries = voyageEntries.filter(e => e.id !== voyId);
-    // Retirer le voyage des photos (remettre sans voyage)
-    let photosChanged = 0;
-    photoEntries.forEach(p => { if (p.voyage === voyId) { delete p.voyage; photosChanged++; } });
-    setStatus('manage-status', 'Commit voyages.json…');
-    try {
-      await commitVoyagesJson();
-      if (photosChanged) {
-        setStatus('manage-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
-        await commitPhotosJson();
-      }
-      // Mettre à jour les deux sélecteurs
-      ['photo-voyage','ph-voyage-assign'].forEach(sid => {
-        const sel = $(sid); if (!sel) return;
-        const opt = sel.querySelector(`option[value="${voyId}"]`);
-        if (opt) opt.remove();
-        if (sel.value === voyId) sel.value = '';
-      });
-      renderManagePhotos();
-      setStatus('manage-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
-    } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
-  });
+  const msg = `Supprimer le voyage « ${v.label} » ?`
+    + (affected ? `\n${affected} photo(s) perdront leur voyage.` : '');
+  if (!confirm(msg)) return;
+  voyageEntries = voyageEntries.filter(e => e.id !== voyId);
+  let photosChanged = 0;
+  photoEntries.forEach(p => { if (p.voyage === voyId) { delete p.voyage; photosChanged++; } });
+  setStatus('pcloud-status', 'Commit voyages.json…');
+  try {
+    await commitVoyagesJson();
+    if (photosChanged) {
+      setStatus('pcloud-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
+      await commitPhotosJson();
+    }
+    ['photo-voyage', 'ph-voyage-assign', 'ph-manage-voyage-filter'].forEach(sid => {
+      const sel = $(sid); if (!sel) return;
+      const opt = sel.querySelector(`option[value="${voyId}"]`);
+      if (opt) opt.remove();
+      if (sel.value === voyId) sel.value = '';
+    });
+    renderManagePhotos();
+    setStatus('pcloud-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
+  } catch (err) { setStatus('pcloud-status', `Erreur : ${err.message}`, 'error'); }
 }
-
 async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
   form.append('path', relPath);
@@ -2007,6 +2003,22 @@ function updatePhSelCount() {
   $('ph-selection-count').textContent = n > 0 ? `${n} sélectionnée${n > 1 ? 's' : ''}` : '';
 }
 
+function populateVoyageSelectors() {
+  ['ph-voyage-assign', 'ph-manage-voyage-filter'].forEach(sid => {
+    const sel = $(sid); if (!sel) return;
+    // Conserver la valeur courante
+    const cur = sel.value;
+    // Supprimer toutes les options sauf les permanentes (les 2 premières dans le filtre, 1 dans assign)
+    while (sel.options.length > (sid === 'ph-manage-voyage-filter' ? 2 : 1)) sel.remove(sid === 'ph-manage-voyage-filter' ? 2 : 1);
+    voyageEntries.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.id; opt.textContent = v.label;
+      sel.appendChild(opt);
+    });
+    if (cur) sel.value = cur;
+  });
+}
+
 function renderManagePhotos() {
   const list = $('manage-photo-list'); list.innerHTML = '';
   $('mtab-ph-count').textContent = `(${photoEntries.length})`;
@@ -2014,15 +2026,16 @@ function renderManagePhotos() {
     list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune photo dans photos.json.</p>';
     return;
   }
-  // Peupler le sélecteur voyage si nécessaire
-  const voyageSel = $('ph-voyage-assign');
-  if (voyageSel && voyageSel.options.length <= 1) {
-    voyageEntries.forEach(v => {
-      const opt = document.createElement('option');
-      opt.value = v.id; opt.textContent = v.label;
-      voyageSel.appendChild(opt);
-    });
-  }
+  populateVoyageSelectors();
+
+  // Filtre actif
+  const filterVal = $('ph-manage-voyage-filter')?.value || '';
+  const visibleEntries = filterVal === '__none__'
+    ? photoEntries.filter(p => !p.voyage)
+    : filterVal
+      ? photoEntries.filter(p => p.voyage === filterVal)
+      : photoEntries;
+
   // En-tête colonnes
   list.insertAdjacentHTML('beforeend', `<div class="manage-photo-row" style="pointer-events:none;opacity:.4;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:4px;margin-bottom:2px">
     <span></span><span></span>
@@ -2032,7 +2045,7 @@ function renderManagePhotos() {
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-align:right">Fichier</span>
   </div>`);
 
-  photoEntries.forEach(p => {
+  visibleEntries.forEach(p => {
     const row = document.createElement('div');
     row.className = 'manage-photo-row' + (p._selected ? ' selected' : '') + (p.hidden ? ' hidden-ph' : '');
 
@@ -2083,9 +2096,13 @@ function renderManagePhotos() {
   updatePhSelCount();
 }
 $('btn-ph-select-all').addEventListener('click', () => {
-  const allSel = photoEntries.length > 0 && photoEntries.every(p => p._selected);
-  photoEntries.forEach(p => p._selected = !allSel); renderManagePhotos();
+  const filterVal = $('ph-manage-voyage-filter')?.value || '';
+  const visible = filterVal === '__none__' ? photoEntries.filter(p => !p.voyage)
+    : filterVal ? photoEntries.filter(p => p.voyage === filterVal) : photoEntries;
+  const allSel = visible.length > 0 && visible.every(p => p._selected);
+  visible.forEach(p => p._selected = !allSel); renderManagePhotos();
 });
+$('ph-manage-voyage-filter').addEventListener('change', renderManagePhotos);
 $('btn-ph-assign-voyage').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
