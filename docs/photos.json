@@ -4908,5 +4908,27 @@
     "lon": 2.377,
     "city": "Vitry-sur-Seine",
     "voyage": "test3"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_3778.mov",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_3778.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_3778.mov",
+    "entryIdx": null,
+    "caption": "2026-04-06",
+    "photoMs": 1775476090000,
+    "type": "video",
+    "voyage": "test2"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_3777.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_3777.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_3777.jpeg",
+    "entryIdx": 795,
+    "caption": "2026-04-06",
+    "photoMs": 1775476695000,
+    "lat": 48.76553,
+    "lon": 2.36441,
+    "city": "Chevilly-Larue",
+    "voyage": "test2"
   }
 ]
