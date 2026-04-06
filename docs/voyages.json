@@ -3,5 +3,10 @@
     "id": "bourgogne",
     "label": "Bourgogne",
     "gpxFiles": []
+  },
+  {
+    "id": "normandie",
+    "label": "Normandie",
+    "gpxFiles": []
   }
 ]
