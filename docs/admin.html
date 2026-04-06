@@ -371,12 +371,13 @@
     <div id="login-logo">VÉLOROUTE</div>
     <div id="login-sub">· administration · VLR-server</div>
 
-    <div class="field" style="margin-bottom:6px">
-      <label style="font-size:.6rem;color:rgba(255,255,255,.25);letter-spacing:.1em">SERVEUR</label>
-      <input type="url" id="server-url" autocomplete="off" spellcheck="false">
-    </div>
+    <!-- URL serveur cachée (pré-remplie) -->
+    <input type="hidden" id="server-url" value="https://hub.studios-voa.com:1666">
 
-    <div style="border-top:1px solid rgba(255,255,255,.06);margin:18px 0 16px"></div>
+    <div class="field">
+      <label>Login</label>
+      <input type="text" id="server-login" placeholder="ex : tom" autocomplete="username" spellcheck="false">
+    </div>
 
     <div class="field">
       <label>Mot de passe</label>
@@ -416,12 +417,37 @@
       <input type="text" id="photo-subfolder" placeholder="ex : Tokyo">
     </div>
   </div>
-  <div style="padding:10px 0 4px;text-align:right">
+  <div style="padding:10px 0 4px;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:10px">
+    <button id="btn-save-ghtoken" style="font-size:.7rem;padding:6px 16px;background:rgba(100,180,240,.08);border:1px solid rgba(100,180,240,.3);border-radius:4px;color:rgba(140,200,255,.7);cursor:pointer;letter-spacing:.08em">
+      ☁ Sauvegarder token GitHub
+    </button>
     <button id="btn-save-settings" style="font-size:.7rem;padding:6px 16px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.4);border-radius:4px;color:#f0c060;cursor:pointer;letter-spacing:.08em">
       💾 Sauvegarder les réglages
     </button>
-    <span id="settings-saved" style="font-size:.68rem;color:rgba(80,210,120,.8);margin-left:10px;display:none">✓ sauvegardé</span>
+    <span id="settings-saved" style="font-size:.68rem;color:rgba(80,210,120,.8);display:none">✓ sauvegardé</span>
   </div>
+</div>
+
+<!-- ── Super-admin : gestion des utilisateurs ── -->
+<div id="superadmin-panel" style="display:none;max-width:600px;margin:24px auto;padding:20px 24px;background:rgba(0,0,0,.35);border:1px solid rgba(240,192,96,.15);border-radius:8px">
+  <div style="font-size:.75rem;letter-spacing:.12em;color:rgba(240,192,96,.6);text-transform:uppercase;margin-bottom:16px">⚙ Super-admin — Gestion des utilisateurs</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;margin-bottom:16px">
+    <div class="field" style="margin:0">
+      <label>Login</label>
+      <input type="text" id="sa-new-login" placeholder="tom" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="field" style="margin:0">
+      <label>Mot de passe</label>
+      <input type="password" id="sa-new-password" placeholder="••••••••" autocomplete="new-password">
+    </div>
+    <div class="field" style="margin:0">
+      <label>Token GitHub (optionnel)</label>
+      <input type="password" id="sa-new-ghtoken" placeholder="ghp_…">
+    </div>
+    <button id="btn-sa-create-user" style="font-size:.7rem;padding:7px 14px;background:rgba(80,210,120,.1);border:1px solid rgba(80,210,120,.3);border-radius:4px;color:rgba(80,210,120,.8);cursor:pointer;white-space:nowrap">+ Créer</button>
+  </div>
+  <div id="sa-users-list" style="font-size:.72rem;color:rgba(255,255,255,.6)">Chargement…</div>
+  <div class="status" id="sa-status" style="margin-top:10px"></div>
 </div>
 
 <main id="main-content" style="display:none">
@@ -1495,39 +1521,51 @@ async function uploadAndProcess() {
   await uploadToServer();
 }
 
-let serverToken = null;
+let serverToken  = null;
+let isSuperAdmin = false;
 let pendingSyncAfterLogin = false;
 
 function serverBase() {
-  return ($('server-url').value.trim() || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
+  return ($('server-url').value.trim() || 'https://hub.studios-voa.com:1666').replace(/\/$/,'');
 }
 
 // Pré-remplir l'URL serveur si pas encore sauvegardée
 (function initServerUrl() {
   const saved = (() => { try { return JSON.parse(localStorage.getItem('veloroute_admin_settings') || '{}').serverUrl; } catch { return null; } })();
-  if (!saved) $('server-url').value = 'https://hub.studios-voa.com:1666';
+  if (saved) $('server-url').value = saved;
 })();
 
-function serverSuccess(token) {
-  serverToken = token;
+function serverSuccess(token, data = {}) {
+  serverToken  = token;
+  isSuperAdmin = !!data.isSuperAdmin;
   $('server-password').value = '';
+  if ($('server-login')) $('server-login').value = '';
   $('login-overlay').style.display = 'none';
   $('site-header').style.display   = 'flex';
-  $('main-content').style.display  = 'flex';
   $('btn-logout-header').style.display = 'inline-block';
-  $('header-user').textContent = '· VLR-server';
+  $('header-user').textContent = data.login ? `· ${data.login}` : '· VLR-server';
   setStatus('login-status', '');
-  setTimeout(() => map.invalidateSize(), 100);
+  if (isSuperAdmin) {
+    $('superadmin-panel').style.display = 'block';
+    $('main-content').style.display = 'none';
+    loadSaUsers();
+  } else {
+    if (data.ghToken) $('gh-token').value = data.ghToken;
+    $('superadmin-panel').style.display = 'none';
+    $('main-content').style.display = 'flex';
+    setTimeout(() => map.invalidateSize(), 100);
+  }
   try {
     const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     _s.serverToken = token;
-    _s.serverUrl   = serverBase();
+    _s.serverLogin = data.login || '';
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   } catch {}
-  loadExistingData(!!$('gh-token').value.trim());
+  if (!isSuperAdmin) loadExistingData(!!$('gh-token').value.trim());
 }
 
 async function serverLogin() {
+  const login    = ($('server-login')?.value || '').trim();
   const password = $('server-password').value.trim();
   if (!password) { setStatus('login-status', 'Mot de passe requis.', 'error'); return; }
   $('btn-server-login').disabled = true;
@@ -1536,11 +1574,11 @@ async function serverLogin() {
     const r = await fetch(`${serverBase()}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password })
+      body: JSON.stringify({ login, password })
     });
     const j = await r.json();
     if (r.ok && j.token) {
-      serverSuccess(j.token);
+      serverSuccess(j.token, j);
     } else {
       setStatus('login-status', j.error || 'Connexion échouée.', 'error');
     }
@@ -1568,10 +1606,12 @@ async function serverLogout() {
       });
     } catch {}
   }
-  serverToken = null;
-  $('login-overlay').style.display = 'flex';
-  $('site-header').style.display   = 'none';
-  $('main-content').style.display  = 'none';
+  serverToken  = null;
+  isSuperAdmin = false;
+  $('login-overlay').style.display    = 'flex';
+  $('site-header').style.display      = 'none';
+  $('main-content').style.display     = 'none';
+  $('superadmin-panel').style.display = 'none';
   setStatus('login-status', '');
   try {
     const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
@@ -1583,6 +1623,76 @@ async function serverLogout() {
 $('btn-server-login').addEventListener('click', serverLogin);
 $('btn-logout-header').addEventListener('click', serverLogout);
 $('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
+if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
+
+// ── Super-admin : gestion des utilisateurs ────────────────────────────────────
+async function loadSaUsers() {
+  try {
+    const r = await fetch(`${serverBase()}/users`, { headers: { Authorization: `Bearer ${serverToken}` } });
+    const j = await r.json();
+    const list = $('sa-users-list');
+    if (!j.users?.length) { list.textContent = 'Aucun utilisateur.'; return; }
+    list.innerHTML = j.users.map(u =>
+      `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
+      + `<span style="min-width:80px;font-weight:600;color:#eee">${u.login}</span>`
+      + `<span style="color:rgba(255,255,255,.35);font-size:.66rem">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
+      + `<button onclick="deleteSaUser('${u.login}')" style="margin-left:auto;font-size:.65rem;padding:2px 8px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
+      + `</div>`
+    ).join('');
+  } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
+}
+
+async function deleteSaUser(login) {
+  if (!confirm(`Supprimer l'utilisateur « ${login} » ?\nSes données sur le serveur ne seront PAS supprimées.`)) return;
+  try {
+    const r = await fetch(`${serverBase()}/users/${encodeURIComponent(login)}`, {
+      method: 'DELETE', headers: { Authorization: `Bearer ${serverToken}` }
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('sa-status', `✓ ${login} supprimé`, 'ok');
+    loadSaUsers();
+  } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
+}
+window.deleteSaUser = deleteSaUser;
+
+$('btn-sa-create-user').addEventListener('click', async () => {
+  const login    = $('sa-new-login').value.trim();
+  const password = $('sa-new-password').value.trim();
+  const ghToken  = $('sa-new-ghtoken').value.trim();
+  if (!login || !password) { setStatus('sa-status', 'Login et mot de passe requis.', 'error'); return; }
+  try {
+    const r = await fetch(`${serverBase()}/users`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login, password, ghToken })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/)`, 'ok');
+    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = '';
+    loadSaUsers();
+  } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
+});
+
+// Sauvegarder le token GitHub sur le serveur
+$('btn-save-ghtoken').addEventListener('click', async () => {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) return;
+  try {
+    const r = await fetch(`${serverBase()}/users/me/ghtoken`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ghToken })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    $('settings-saved').textContent = '✓ token sauvegardé';
+    $('settings-saved').style.display = 'inline';
+    setTimeout(() => { $('settings-saved').style.display = 'none'; }, 2000);
+  } catch (e) { alert('Erreur : ' + e.message); }
+});
+
 
 // ── Settings persistence ──────────────────────────────────────────────
 const SETTINGS_KEY = 'veloroute_admin_settings';
@@ -1593,6 +1703,7 @@ function saveSettings() {
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
   const saved = $('settings-saved');
+  saved.textContent = '✓ sauvegardé';
   saved.style.display = 'inline';
   setTimeout(() => { saved.style.display = 'none'; }, 2000);
 }
@@ -1608,14 +1719,23 @@ async function loadSettings() {
           headers: { Authorization: `Bearer ${data.serverToken}` }
         });
         if (r.ok) {
-          serverToken = data.serverToken;
+          const j = await r.json().catch(() => ({}));
+          serverToken  = data.serverToken;
+          isSuperAdmin = !!j.isSuperAdmin;
           $('login-overlay').style.display = 'none';
           $('site-header').style.display   = 'flex';
-          $('main-content').style.display  = 'flex';
           $('btn-logout-header').style.display = 'inline-block';
-          $('header-user').textContent = '· VLR-server';
-          setTimeout(() => map.invalidateSize(), 100);
-          loadExistingData(!!data.ghToken);
+          $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
+          if (isSuperAdmin) {
+            $('superadmin-panel').style.display = 'block';
+            $('main-content').style.display = 'none';
+            loadSaUsers();
+          } else {
+            if (j.ghToken) $('gh-token').value = j.ghToken;
+            $('main-content').style.display = 'flex';
+            setTimeout(() => map.invalidateSize(), 100);
+            loadExistingData(!!$('gh-token').value.trim());
+          }
         } else {
           delete data.serverToken;
           localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
