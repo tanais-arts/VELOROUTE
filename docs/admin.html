@@ -471,10 +471,6 @@
         <input type="password" id="sa-new-ghtoken" placeholder="ghp_…" style="width:100%">
       </div>
       <button id="btn-sa-gen-pat" type="button" style="font-size:.68rem;padding:6px 10px;background:rgba(100,180,240,.06);border:1px solid rgba(100,180,240,.18);border-radius:4px;color:rgba(140,200,255,.85);cursor:pointer;white-space:nowrap">🧾 Générer PAT</button>
-      <label style="display:flex;align-items:center;gap:5px;font-size:.68rem;color:rgba(255,200,100,.8);white-space:nowrap;cursor:pointer" title="Autoriser l'import de fichiers GPX et l'édition de travel.json">
-        <input type="checkbox" id="sa-new-can-gpx" style="accent-color:#f0c060;width:14px;height:14px">
-        GPX
-      </label>
       <button id="btn-sa-create-user" style="font-size:.7rem;padding:7px 14px;background:rgba(80,210,120,.1);border:1px solid rgba(80,210,120,.3);border-radius:4px;color:rgba(80,210,120,.8);cursor:pointer;white-space:nowrap">+ Créer</button>
     </div>
   </div>
@@ -1768,22 +1764,20 @@ async function deleteSaUser(login) {
 window.deleteSaUser = deleteSaUser;
 
 $('btn-sa-create-user').addEventListener('click', async () => {
-  const login      = $('sa-new-login').value.trim();
-  const password   = $('sa-new-password').value.trim();
-  const ghToken    = $('sa-new-ghtoken').value.trim();
-  const canEditGpx = $('sa-new-can-gpx').checked;
+  const login    = $('sa-new-login').value.trim();
+  const password = $('sa-new-password').value.trim();
+  const ghToken  = $('sa-new-ghtoken').value.trim();
   if (!login || !password) { setStatus('sa-status', 'Login et mot de passe requis.', 'error'); return; }
   try {
     const r = await fetch(`${serverBase()}/users`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password, ghToken, canEditGpx })
+      body: JSON.stringify({ login, password, ghToken, canEditGpx: false })
     });
     const j = await r.json();
     if (!r.ok) throw new Error(j.error);
-    const gpxLabel = canEditGpx ? ' · peut importer GPX' : '';
-    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/${gpxLabel})`, 'ok');
-    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = ''; $('sa-new-can-gpx').checked = false;
+    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/)`, 'ok');
+    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = '';
     loadSaUsers();
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 });
