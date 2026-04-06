@@ -5716,5 +5716,77 @@
     "caption": "2026-02-04",
     "photoMs": 1770238480000,
     "author": "natayolie"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3761.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3761.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3761.HEIC",
+    "entryIdx": 795,
+    "caption": "2026-04-01",
+    "photoMs": 1775082264000,
+    "lat": 48.77291,
+    "lon": 2.377,
+    "city": "Vitry-sur-Seine",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3773.MOV",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3773.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3773.MOV",
+    "entryIdx": null,
+    "caption": "2026-04-05",
+    "photoMs": 1775375962000,
+    "type": "video",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3774.MOV",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3774.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3774.MOV",
+    "entryIdx": null,
+    "caption": "2026-04-05",
+    "photoMs": 1775375985000,
+    "type": "video",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3775.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3775.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3775.HEIC",
+    "entryIdx": 795,
+    "caption": "2026-04-05",
+    "photoMs": 1775388660000,
+    "lat": 48.76558,
+    "lon": 2.36448,
+    "city": "Chevilly-Larue",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3778.MOV",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3778.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3778.MOV",
+    "entryIdx": null,
+    "caption": "2026-04-06",
+    "photoMs": 1775469500000,
+    "type": "video",
+    "voyage": "test",
+    "author": "test"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/test/Photos/IMG_3777.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/test/Thumbs/IMG_3777.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/test/Sources/IMG_3777.HEIC",
+    "entryIdx": 795,
+    "caption": "2026-04-06",
+    "photoMs": 1775476695000,
+    "lat": 48.76553,
+    "lon": 2.36441,
+    "city": "Chevilly-Larue",
+    "voyage": "test",
+    "author": "test"
   }
 ]
