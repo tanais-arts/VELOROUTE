@@ -115,7 +115,7 @@ app.post('/auth/login', async (req, res) => {
   } catch (e) { return res.status(500).json({ error: e.message }); }
 });
 
-app.post('/auth/logout', requireAuth, (req, res) => {
+app.post('/auth/logout', (req, res) => {
   const token = (req.headers['authorization'] || '').slice(7);
   sessions.delete(token);
   res.json({ ok: true });
@@ -168,6 +168,18 @@ app.post('/users/:login/password', requireSuperAdmin, async (req, res) => {
     saveUsers(users);
     return res.json({ ok: true });
   } catch (e) { return res.status(500).json({ error: e.message }); }
+});
+
+// Super-admin : modifier le flag canEditGpx d'un user
+app.patch('/users/:login/gpx', requireSuperAdmin, (req, res) => {
+  const target = req.params.login.toLowerCase();
+  const { canEditGpx } = req.body || {};
+  const users = loadUsers();
+  const user  = users.find(u => u.login.toLowerCase() === target);
+  if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
+  user.canEditGpx = !!canEditGpx;
+  saveUsers(users);
+  return res.json({ ok: true, login: user.login, canEditGpx: user.canEditGpx });
 });
 
 // Changement de mot de passe (sans token, authentifié par l'ancien mot de passe)

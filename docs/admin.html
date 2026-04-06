@@ -454,7 +454,7 @@
 </div>
 
 <!-- ── Super-admin : gestion des utilisateurs ── -->
-<div id="superadmin-panel" style="display:none;max-width:600px;margin:24px auto;padding:20px 24px;background:rgba(0,0,0,.35);border:1px solid rgba(240,192,96,.15);border-radius:8px">
+<div id="superadmin-panel" style="display:none;max-width:960px;margin:24px auto;padding:20px 24px;background:rgba(0,0,0,.35);border:1px solid rgba(240,192,96,.15);border-radius:8px">
   <div style="font-size:.75rem;letter-spacing:.12em;color:rgba(240,192,96,.6);text-transform:uppercase;margin-bottom:16px">⚙ Super-admin — Gestion des utilisateurs</div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;margin-bottom:16px">
     <div class="field" style="margin:0">
@@ -488,7 +488,7 @@
   <div class="row-2">
 
     <!-- ① GPX -->
-    <div class="card">
+    <div class="card" id="gpx-card">
       <div class="card-title"><span class="step-num">1</span> Tracé GPS — fichier GPX</div>
 
       <div class="drop-zone" id="gpx-drop">
@@ -1550,6 +1550,7 @@ async function uploadAndProcess() {
 
 let serverToken  = null;
 let isSuperAdmin = false;
+let canEditGpx   = false;
 let pendingSyncAfterLogin = false;
 
 function serverBase() {
@@ -1565,6 +1566,7 @@ function serverBase() {
 function serverSuccess(token, data = {}) {
   serverToken  = token;
   isSuperAdmin = !!data.isSuperAdmin;
+  canEditGpx   = isSuperAdmin || !!data.canEditGpx;
   $('server-password').value = '';
   if ($('server-login')) $('server-login').value = '';
   $('login-overlay').style.display = 'none';
@@ -1581,6 +1583,9 @@ function serverSuccess(token, data = {}) {
     $('superadmin-panel').style.display = 'none';
     $('btn-settings-toggle').style.display = 'none';
   }
+  // Masquer les zones GPX si non autorisé
+  $('gpx-card').style.display     = canEditGpx ? '' : 'none';
+  $('mtab-segments').style.display = canEditGpx ? '' : 'none';
   $('main-content').style.display = 'flex';
   setTimeout(() => map.invalidateSize(), 100);
   try {
@@ -1685,6 +1690,9 @@ $('btn-logout-header').addEventListener('click', serverLogout);
 $('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
 if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
 
+window.toggleHeaderChgpw = toggleHeaderChgpw;
+window.submitHeaderChgpw = submitHeaderChgpw;
+
 // ── Super-admin : gestion des utilisateurs ────────────────────────────────────
 async function loadSaUsers() {
   try {
@@ -1692,15 +1700,17 @@ async function loadSaUsers() {
     const j = await r.json();
     const list = $('sa-users-list');
     if (!j.users?.length) { list.textContent = 'Aucun utilisateur.'; return; }
-    list.innerHTML = j.users.map(u =>
-      `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
-      + `<span style="min-width:80px;font-weight:600;color:#eee">${u.login}</span>`
-      + `<span style="color:rgba(255,255,255,.35);font-size:.66rem">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
-      + (u.canEditGpx ? `<span style="font-size:.62rem;padding:1px 6px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.3);border-radius:10px;color:rgba(240,192,96,.8)">GPX</span>` : '')
-      + `<button onclick="resetSaUserPassword('${u.login}')" style="margin-left:auto;font-size:.65rem;padding:2px 8px;background:rgba(100,180,240,.07);border:1px solid rgba(100,180,240,.22);border-radius:3px;color:rgba(140,200,255,.75);cursor:pointer">🔑 MDP</button>`
-      + `<button onclick="deleteSaUser('${u.login}')" style="font-size:.65rem;padding:2px 8px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
-      + `</div>`
-    ).join('');
+    list.innerHTML = j.users.map(u => {
+      const chk = u.canEditGpx ? 'checked' : '';
+      return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
+        + `<span style="min-width:90px;font-weight:600;color:#eee">${u.login}</span>`
+        + `<span style="color:rgba(255,255,255,.3);font-size:.64rem;flex:1">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
+        + `<label style="display:flex;align-items:center;gap:5px;font-size:.7rem;color:rgba(240,192,96,.85);cursor:pointer;white-space:nowrap" title="Autoriser GPX">`
+        +   `<input type="checkbox" ${chk} style="accent-color:#f0c060;width:14px;height:14px" onchange="toggleUserGpx('${u.login}', this)"> GPX</label>`
+        + `<button onclick="resetSaUserPassword('${u.login}')" style="font-size:.65rem;padding:3px 10px;background:rgba(100,180,240,.07);border:1px solid rgba(100,180,240,.22);border-radius:3px;color:rgba(140,200,255,.75);cursor:pointer">🔑 MDP</button>`
+        + `<button onclick="deleteSaUser('${u.login}')" style="font-size:.65rem;padding:3px 10px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
+        + `</div>`;
+    }).join('');
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 }
 
@@ -1720,6 +1730,28 @@ async function resetSaUserPassword(login) {
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 }
 window.resetSaUserPassword = resetSaUserPassword;
+
+async function toggleUserGpx(login, checkbox) {
+  const canEditGpx = checkbox.checked;
+  if (!confirm(`${canEditGpx ? 'Autoriser' : 'Retirer'} l'accès GPX pour « ${login} » ?`)) {
+    checkbox.checked = !canEditGpx; // annulé → revenir à l'état précédent
+    return;
+  }
+  try {
+    const r = await fetch(`${serverBase()}/users/${encodeURIComponent(login)}/gpx`, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ canEditGpx })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error);
+    setStatus('sa-status', `✓ GPX de « ${login} » : ${canEditGpx ? 'autorisé' : 'retiré'}`, 'ok');
+  } catch (e) {
+    checkbox.checked = !canEditGpx; // erreur → revert
+    setStatus('sa-status', `Erreur : ${e.message}`, 'error');
+  }
+}
+window.toggleUserGpx = toggleUserGpx;
 
 async function deleteSaUser(login) {
   if (!confirm(`Supprimer l'utilisateur « ${login} » ?\nSes données sur le serveur ne seront PAS supprimées.`)) return;
@@ -1812,6 +1844,7 @@ async function loadSettings() {
           const j = await r.json().catch(() => ({}));
           serverToken  = data.serverToken;
           isSuperAdmin = !!j.isSuperAdmin;
+          canEditGpx   = isSuperAdmin || !!j.canEditGpx;
           $('login-overlay').style.display = 'none';
           $('site-header').style.display   = 'flex';
           $('btn-logout-header').style.display = 'inline-block';
@@ -1825,6 +1858,8 @@ async function loadSettings() {
             $('superadmin-panel').style.display = 'none';
             $('btn-settings-toggle').style.display = 'none';
           }
+          $('gpx-card').style.display      = canEditGpx ? '' : 'none';
+          $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
           $('main-content').style.display = 'flex';
           setTimeout(() => map.invalidateSize(), 100);
           loadExistingData(!!$('gh-token').value.trim());
@@ -2518,7 +2553,13 @@ function switchManageTab(tab) {
 function refreshManagePanel() {
   const card = $('manage-card');
   if (!travelEntries.length && !photoEntries.length) { card.style.display = 'none'; return; }
-  card.style.display = 'block'; renderSegments();
+  card.style.display = 'block';
+  // Si GPX non autorisé, basculer sur l'onglet Photos par défaut
+  if (!canEditGpx) {
+    switchManageTab('photos');
+  } else {
+    renderSegments();
+  }
   $('mtab-ph-count').textContent  = `(${photoEntries.length})`;
   $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
 }
