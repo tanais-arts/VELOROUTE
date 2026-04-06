@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // ── Fichier utilisateurs ──────────────────────────────────────────────
-// Structure : [{ login, hash, ghToken, storageDir }]
+// Structure : [{ login, hash, ghToken, storageDir, canEditGpx }]
 const USERS_FILE = path.join(__dirname, 'users.json');
 function loadUsers() {
   try { return JSON.parse(fs.readFileSync(USERS_FILE, 'utf8')); } catch { return []; }
@@ -110,8 +110,8 @@ app.post('/auth/login', async (req, res) => {
     const ok = await bcrypt.compare(String(password), user.hash);
     if (!ok) return res.status(401).json({ error: 'Login ou mot de passe incorrect' });
     const token = crypto.randomBytes(32).toString('hex');
-    sessions.set(token, { expiry: Date.now() + TOKEN_TTL, login: user.login, storageDir: user.storageDir, ghToken: user.ghToken || '', isSuperAdmin: false });
-    return res.json({ token, login: user.login, ghToken: user.ghToken || '', storageDir: user.storageDir, isSuperAdmin: false });
+    sessions.set(token, { expiry: Date.now() + TOKEN_TTL, login: user.login, storageDir: user.storageDir, ghToken: user.ghToken || '', isSuperAdmin: false, canEditGpx: !!user.canEditGpx });
+    return res.json({ token, login: user.login, ghToken: user.ghToken || '', storageDir: user.storageDir, isSuperAdmin: false, canEditGpx: !!user.canEditGpx });
   } catch (e) { return res.status(500).json({ error: e.message }); }
 });
 
@@ -123,12 +123,12 @@ app.post('/auth/logout', requireAuth, (req, res) => {
 
 // ── Gestion utilisateurs (super-admin) ───────────────────────────────
 app.get('/users', requireSuperAdmin, (_req, res) => {
-  const users = loadUsers().map(({ login, storageDir }) => ({ login, storageDir }));
+  const users = loadUsers().map(({ login, storageDir, canEditGpx }) => ({ login, storageDir, canEditGpx: !!canEditGpx }));
   res.json({ users });
 });
 
 app.post('/users', requireSuperAdmin, async (req, res) => {
-  const { login, password, ghToken } = req.body || {};
+  const { login, password, ghToken, canEditGpx } = req.body || {};
   if (!login || !password) return res.status(400).json({ error: 'login et password requis' });
   const slug = login.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-').replace(/^-+|-+$/g, '');
   if (!slug) return res.status(400).json({ error: 'Login invalide' });
@@ -137,7 +137,7 @@ app.post('/users', requireSuperAdmin, async (req, res) => {
   try {
     const hash = await bcrypt.hash(String(password), 12);
     const storageDir = slug;
-    users.push({ login: slug, hash, ghToken: (ghToken || '').trim(), storageDir });
+    users.push({ login: slug, hash, ghToken: (ghToken || '').trim(), storageDir, canEditGpx: !!canEditGpx });
     saveUsers(users);
     fs.mkdirSync(path.join(STORAGE_ROOT, storageDir), { recursive: true });
     res.json({ ok: true, login: slug, storageDir });
@@ -154,6 +154,41 @@ app.delete('/users/:login', requireSuperAdmin, (req, res) => {
   res.json({ ok: true });
 });
 
+// Super-admin : réinitialiser le mot de passe d'un user sans connaître l'ancien
+app.post('/users/:login/password', requireSuperAdmin, async (req, res) => {
+  const target = req.params.login.toLowerCase();
+  const { newPassword } = req.body || {};
+  if (!newPassword || newPassword.length < 6)
+    return res.status(400).json({ error: 'newPassword requis (min 6 caractères)' });
+  const users = loadUsers();
+  const user  = users.find(u => u.login.toLowerCase() === target);
+  if (!user) return res.status(404).json({ error: 'Utilisateur introuvable' });
+  try {
+    user.hash = await bcrypt.hash(String(newPassword), 12);
+    saveUsers(users);
+    return res.json({ ok: true });
+  } catch (e) { return res.status(500).json({ error: e.message }); }
+});
+
+// Changement de mot de passe (sans token, authentifié par l'ancien mot de passe)
+app.post('/auth/change-password', async (req, res) => {
+  const { login, currentPassword, newPassword } = req.body || {};
+  if (!login || !currentPassword || !newPassword)
+    return res.status(400).json({ error: 'login, currentPassword et newPassword sont requis' });
+  if (newPassword.length < 6)
+    return res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 6 caractères' });
+  const users = loadUsers();
+  const user  = users.find(u => u.login.toLowerCase() === login.toLowerCase());
+  if (!user) return res.status(401).json({ error: 'Login ou mot de passe incorrect' });
+  try {
+    const ok = await bcrypt.compare(String(currentPassword), user.hash);
+    if (!ok) return res.status(401).json({ error: 'Login ou mot de passe incorrect' });
+    user.hash = await bcrypt.hash(String(newPassword), 12);
+    saveUsers(users);
+    return res.json({ ok: true });
+  } catch (e) { return res.status(500).json({ error: e.message }); }
+});
+
 // Mise à jour du token GitHub par l'utilisateur lui-même
 app.post('/users/me/ghtoken', requireAuth, (req, res) => {
   if (req.session.isSuperAdmin) return res.status(400).json({ error: 'Super-admin ne stocke pas de token GitHub' });
@@ -167,6 +202,55 @@ app.post('/users/me/ghtoken', requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
+// ── Admin: save arbitrary docs JSON (super-admin only)
+app.post('/admin/save-json', requireSuperAdmin, (req, res) => {
+  const { filename, content } = req.body || {};
+  const allowed = ['photos.json','voyages.json','travel.json','visited.json','escales.json','cities.json','gap_routes.json'];
+  if (!filename || !allowed.includes(filename)) return res.status(400).json({ error: 'Filename non autorisé' });
+  try {
+    const target = path.join(__dirname, '..', 'docs', filename);
+    fs.writeFileSync(target, JSON.stringify(content, null, 2), 'utf8');
+    return res.json({ ok: true, filename });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
+// ── Users: save photos.json but only for photos/videos belonging to the user
+app.post('/users/me/photosjson', requireAuth, (req, res) => {
+  const { photos } = req.body || {};
+  if (!Array.isArray(photos)) return res.status(400).json({ error: 'photos must be an array' });
+  const userStorage = req.session.storageDir || '';
+  // helper to extract path after /files/
+  function pathForUrl(u) {
+    try {
+      const p = new URL(u).pathname; // /files/....
+      const idx = p.indexOf('/files/');
+      if (idx === -1) return null;
+      return p.slice(idx + '/files/'.length).replace(/^\/+/, '');
+    } catch { return null; }
+  }
+  // validate ownership
+  for (const p of photos) {
+    for (const key of ['src','thumb','src_orig']) {
+      if (!p[key]) continue;
+      const rel = pathForUrl(p[key]);
+      if (!rel) return res.status(400).json({ error: `URL invalide pour ${key}` });
+      if (!req.session.isSuperAdmin) {
+        if (!userStorage) return res.status(400).json({ error: 'Utilisateur sans storage configuré' });
+        if (!rel.startsWith(userStorage + '/')) return res.status(403).json({ error: 'Ownership violation: you may only reference your own files' });
+      }
+    }
+  }
+  try {
+    const target = path.join(__dirname, '..', 'docs', 'photos.json');
+    fs.writeFileSync(target, JSON.stringify(photos, null, 2), 'utf8');
+    return res.json({ ok: true });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
 // ── Upload ───────────────────────────────────────────────────────────
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -178,6 +262,10 @@ app.post('/upload', requireAuth, upload.single('file'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'Aucun fichier fourni' });
     const userRoot = userStorageRoot(req.session.storageDir);
     const rel = (req.body.path || req.file.originalname).replace(/^\/+/, '');
+    // forbid .gpx upload unless user has canEditGpx or is super-admin
+    if (rel.toLowerCase().endsWith('.gpx') && !req.session.isSuperAdmin && !req.session.canEditGpx) {
+      return res.status(403).json({ error: 'Upload GPX non autorisé pour cet utilisateur' });
+    }
     const abs = path.join(userRoot, rel);
     // Path traversal guard
     if (!abs.startsWith(userRoot + path.sep) && abs !== userRoot) {
@@ -191,6 +279,37 @@ app.post('/upload', requireAuth, upload.single('file'), (req, res) => {
     res.json({ ok: true, url: `${proto}://${host}/files/${urlPath}` });
   } catch (e) {
     res.status(500).json({ error: e.message });
+  }
+});
+
+// ── Users: save travel.json (GPX-derived entries) — requires canEditGpx or super-admin
+app.post('/users/me/traveljson', requireAuth, (req, res) => {
+  const { entries } = req.body || {};
+  if (!Array.isArray(entries)) return res.status(400).json({ error: 'entries must be an array' });
+  if (!req.session.isSuperAdmin && !req.session.canEditGpx) return res.status(403).json({ error: 'Permission GPX requise' });
+  try {
+    const target = path.join(__dirname, '..', 'docs', 'travel.json');
+    fs.writeFileSync(target, JSON.stringify(entries, null, 2), 'utf8');
+    return res.json({ ok: true });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
+// ── Users: create a new voyage (append-only for non-super-admins)
+app.post('/users/me/voyages', requireAuth, (req, res) => {
+  const { id, label } = req.body || {};
+  if (!id || !label) return res.status(400).json({ error: 'id et label requis' });
+  try {
+    const vfile = path.join(__dirname, '..', 'docs', 'voyages.json');
+    const voyages = JSON.parse(fs.readFileSync(vfile, 'utf8')) || [];
+    if (voyages.find(v => v.id === id)) return res.status(409).json({ error: 'Voyage existe déjà' });
+    // Non-super-admins may only append; super-admins can also append via this route
+    voyages.push({ id, label, gpxFiles: [] });
+    fs.writeFileSync(vfile, JSON.stringify(voyages, null, 2), 'utf8');
+    return res.json({ ok: true, id });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
   }
 });
 

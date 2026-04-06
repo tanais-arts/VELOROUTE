@@ -253,7 +253,7 @@ RS
 <plist version="1.0"><dict>
   <key>Label</key><string>com.vlr-server</string>
   <key>ProgramArguments</key><array>
-    <string>$NODEBIN</string><string>$SCRIPTDIR/server.js</string>
+    <string>$NODEBIN</string><string>$SCRIPTDIR/veloroute.js</string>
   </array>
   <key>WorkingDirectory</key><string>$SCRIPTDIR</string>
   <key>EnvironmentVariables</key><dict>
@@ -279,7 +279,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=$SCRIPTDIR
-ExecStart=$NODEBIN server.js
+ExecStart=$NODEBIN veloroute.js
 EnvironmentFile=$ENV_FILE
 Restart=always
 RestartSec=5
@@ -330,14 +330,14 @@ EOF
   # PM2 si disponible
   elif command -v pm2 >/dev/null 2>&1; then
     pm2 delete "$SERVICE_NAME" 2>/dev/null || true
-    pm2 start server.js --name "$SERVICE_NAME"
+    pm2 start veloroute.js --name "$SERVICE_NAME"
     echo "✓ Serveur démarré avec PM2."
   # Fallback : background pid
   else
     if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
       kill "$(cat "$PIDFILE")" && sleep 1
     fi
-    nohup node server.js >> "$LOGFILE" 2>&1 &
+    nohup node veloroute.js >> "$LOGFILE" 2>&1 &
     echo $! > "$PIDFILE"
     sleep 1
     if kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
