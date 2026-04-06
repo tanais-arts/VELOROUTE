@@ -573,7 +573,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 /* ── INFO BAS CENTRÉ (lieu + date de la photo active) ─── */
 #photo-info {
   position: fixed;
-  bottom: 36px;
+  bottom: 42px;
   left: 50%; transform: translateX(-50%);
   text-align: center;
   pointer-events: none; z-index: 401;

@@ -898,7 +898,15 @@ async function init() {
     if (p.type === 'video') {
       const wrap = document.createElement('div');
       wrap.className = 'video-thumb-wrap';
-      wrap.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
+      let clickTimer = null;
+      wrap.addEventListener('click', () => {
+        if (clickTimer) return; // ignore second click of dblclick
+        clickTimer = setTimeout(() => { clickTimer = null; selectPhotoEntry(p); scrollCarouselTo(i, true); }, 220);
+      });
+      wrap.addEventListener('dblclick', () => {
+        if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
+        selectPhotoEntry(p); openLightbox(state.photos, i);
+      });
       wrap.appendChild(thumbEl);
       // Icône play seulement si pas de vignette animée mp4
       if (!isMp4Thumb) {
@@ -909,7 +917,15 @@ async function init() {
       }
       outer.appendChild(wrap);
     } else {
-      thumbEl.addEventListener('click', () => { selectPhotoEntry(p); openLightbox(state.photos, i); });
+      let clickTimer = null;
+      thumbEl.addEventListener('click', () => {
+        if (clickTimer) return;
+        clickTimer = setTimeout(() => { clickTimer = null; selectPhotoEntry(p); scrollCarouselTo(i, true); }, 220);
+      });
+      thumbEl.addEventListener('dblclick', () => {
+        if (clickTimer) { clearTimeout(clickTimer); clickTimer = null; }
+        selectPhotoEntry(p); openLightbox(state.photos, i);
+      });
       outer.appendChild(thumbEl);
     }
 
