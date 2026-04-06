@@ -267,6 +267,20 @@ html, body {
   letter-spacing: 0.18em; color: var(--text4);
   text-transform: uppercase;
 }
+#voyage-filter {
+  pointer-events: all;
+  margin-top: 8px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(8,18,28,0.18);
+  border-radius: 5px;
+  color: var(--text1);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  cursor: pointer;
+  max-width: 160px;
+}
 
 
 /* ── PANEL ──────────────────────────────────────────── */

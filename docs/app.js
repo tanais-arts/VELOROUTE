@@ -23,6 +23,7 @@ const state = {
   cities:         [],
   visited:        [],
   escales:        [],
+  voyages:        [],
   activeIdx:      null,
   ringMarker:     null,
   markers:        [],
@@ -645,14 +646,15 @@ async function fetchRepoJson(filename, fallback) {
 }
 
 async function init() {
-  let entries, photos, cities, visited, escales, gapRoutes;
+  let entries, photos, cities, visited, escales, voyages, gapRoutes;
   try {
-    [entries, photos, cities, visited, escales, gapRoutes] = await Promise.all([
+    [entries, photos, cities, visited, escales, voyages, gapRoutes] = await Promise.all([
       fetchRepoJson('travel.json'),
       fetchRepoJson('photos.json',    []),
       fetchRepoJson('cities.json',    []),
       fetchRepoJson('visited.json',   []),
       fetchRepoJson('escales.json',   []),
+      fetchRepoJson('voyages.json',    []),
       fetchRepoJson('gap_routes.json',[]),
     ]);
   } catch (err) {
@@ -774,6 +776,34 @@ async function init() {
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
+  state.voyages = voyages || [];
+
+  // ── Filtre voyage ────────────────────────────────────
+  const _activeVoyageId = sessionStorage.getItem('voyageFilter') || '';
+  const _activeVoyage = state.voyages.find(v => v.id === _activeVoyageId) || null;
+
+  // Peupler le sélecteur
+  const voyageSel = document.getElementById('voyage-filter');
+  if (voyageSel) {
+    while (voyageSel.options.length > 1) voyageSel.remove(1);
+    state.voyages.forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.id; opt.textContent = v.label;
+      voyageSel.appendChild(opt);
+    });
+    voyageSel.value = _activeVoyageId;
+    voyageSel.addEventListener('change', () => {
+      sessionStorage.setItem('voyageFilter', voyageSel.value);
+      location.reload();
+    });
+  }
+
+  // Appliquer le filtre
+  if (_activeVoyage) {
+    const gpxSet = new Set(_activeVoyage.gpxFiles || []);
+    state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
+    state.photos  = state.photos.filter(p => p.voyage === _activeVoyageId);
+  }
 
   const year = entries[0]?.year || new Date().getFullYear();
   travelYear = year;

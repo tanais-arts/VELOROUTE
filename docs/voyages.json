@@ -1,0 +1,31 @@
+[
+  {
+    "id": "normandie",
+    "label": "Normandie 2025",
+    "gpxFiles": [
+      "Normandie_Section_0.gpx",
+      "Normandie_Section_1.gpx",
+      "Normandie_Section_2.gpx",
+      "Normandie_Section_3.gpx",
+      "Normandie_Section_4.gpx",
+      "Normandie_Section_5.gpx"
+    ]
+  },
+  {
+    "id": "bourgogne",
+    "label": "Bourgogne 2025",
+    "gpxFiles": [
+      "Bourgogne_Section_1.gpx",
+      "Bourgogne_Section_2.gpx",
+      "Bourgogne_Section_3.gpx",
+      "Bourgogne_Section_4.gpx"
+    ]
+  },
+  {
+    "id": "sortie-nuit",
+    "label": "Sortie de nuit",
+    "gpxFiles": [
+      "Sortie_vélo_de_nuit.gpx"
+    ]
+  }
+]
