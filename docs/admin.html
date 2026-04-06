@@ -1037,6 +1037,7 @@ function buildPhotoEntries() {
         ...(p.city ? { city: p.city } : {}),
         ...(p.type === 'video' ? { type: 'video' } : {}),
         ...(currentVoyageId ? { voyage: currentVoyageId } : {}),
+        ...(serverStorageDir ? { author: serverStorageDir } : {}),
       };
     });
   $('stat-matched').textContent = photoEntries.length;
@@ -2292,6 +2293,7 @@ function renderManagePhotos() {
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Horodatage</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Lieu</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Voyage</span>
+    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Auteur</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-align:right">Fichier</span>
   </div>`);
 
@@ -2329,12 +2331,18 @@ function renderManagePhotos() {
     })() : '';
     const voyLabel = p.voyage ? (voyageEntries.find(v => v.id === p.voyage)?.label || p.voyage) : '';
 
-    const dateEl  = Object.assign(document.createElement('div'), { className: 'row-date',         textContent: dateStr + (timeStr ? ' ' + timeStr : '') });
-    const cityEl  = Object.assign(document.createElement('div'), { className: 'row-city',         textContent: p.city || '' });
-    const voyEl   = Object.assign(document.createElement('span'),{ className: 'row-voyage-badge', textContent: voyLabel });
-    const fileEl  = Object.assign(document.createElement('div'), { className: 'row-filename',     textContent: filename });
+    const dateEl   = Object.assign(document.createElement('div'),  { className: 'row-date',         textContent: dateStr + (timeStr ? ' ' + timeStr : '') });
+    const cityEl   = Object.assign(document.createElement('div'),  { className: 'row-city',         textContent: p.city || '' });
+    const voyEl    = Object.assign(document.createElement('span'), { className: 'row-voyage-badge', textContent: voyLabel });
+    const isOwner  = !p.author || p.author === serverStorageDir || isSuperAdmin;
+    const authorEl = document.createElement('span');
+    authorEl.textContent = p.author || '—';
+    authorEl.title = p.author || '';
+    authorEl.style.cssText = `font-size:.65rem;padding:1px 6px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70px;background:${isOwner ? 'rgba(80,210,120,.12)' : 'rgba(200,120,255,.12)'};color:${isOwner ? 'rgba(80,210,120,.8)' : 'rgba(200,120,255,.8)'};border:1px solid ${isOwner ? 'rgba(80,210,120,.25)' : 'rgba(200,120,255,.25)'}`;
+    const fileEl   = Object.assign(document.createElement('div'),  { className: 'row-filename',     textContent: filename });
+    if (!isOwner) { row.style.opacity = '.65'; cb.disabled = true; row.title = `Photo de ${p.author} — non modifiable`; }
 
-    row.append(cb, twrap, dateEl, cityEl, voyEl, fileEl);
+    row.append(cb, twrap, dateEl, cityEl, voyEl, authorEl, fileEl);
     row.addEventListener('click', e => {
       if (e.target === cb) return;
       p._selected = !p._selected; cb.checked = !!p._selected;
@@ -2369,6 +2377,8 @@ $('btn-ph-assign-voyage').addEventListener('click', async () => {
 $('btn-ph-hide').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
+  const forbidden = sel.filter(p => p.author && p.author !== serverStorageDir && !isSuperAdmin);
+  if (forbidden.length) { setStatus('manage-status', `⛔ ${forbidden.length} photo(s) appartiennent à d'autres utilisateurs.`, 'error'); return; }
   const allHidden = sel.every(p => p.hidden);
   sel.forEach(p => { if (allHidden) delete p.hidden; else p.hidden = true; p._selected = false; });
   setStatus('manage-status', 'Commit photos.json…');
@@ -2378,6 +2388,8 @@ $('btn-ph-hide').addEventListener('click', async () => {
 $('btn-ph-delete').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
+  const forbidden = sel.filter(p => p.author && p.author !== serverStorageDir && !isSuperAdmin);
+  if (forbidden.length) { setStatus('manage-status', `⛔ ${forbidden.length} photo(s) appartiennent à d'autres utilisateurs.`, 'error'); return; }
   if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur VLR-server seront également supprimés.`)) return;
   // Supprimer les 3 fichiers sur VLR-server (Sources, Photos, Thumbs)
   if (serverToken) {
