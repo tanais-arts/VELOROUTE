@@ -252,9 +252,9 @@ html, body {
 
 #voyage-filter-wrap {
   position: fixed;
-  left: 50px;
+  left: 90px;
   bottom: 42px;
-  z-index: 500;
+  z-index: 1100;
 }
 #voyage-filter {
   -webkit-appearance: none;
