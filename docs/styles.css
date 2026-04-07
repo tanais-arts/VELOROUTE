@@ -118,7 +118,7 @@
 
 @media (orientation: landscape) and (max-height: 500px) {
   /* Masquer les éléments non pertinents sur petit écran paysage */
-  #title-bar, #panel, #btn-immersive,
+  #title-bar, #panel, #btn-immersive, #voyage-filter,
   #mobile-title-bar, #mobile-toggle, #mobile-left { display: none !important; }
 
   /* Photo bar réduit */
@@ -269,8 +269,10 @@ html, body {
   text-transform: uppercase;
 }
 #voyage-filter {
-  pointer-events: all;
-  margin-top: 8px;
+  position: fixed;
+  left: 52px;
+  bottom: 44px;
+  z-index: 500;
   background: rgba(255,255,255,0.88);
   border: 1px solid rgba(8,18,28,0.18);
   border-radius: 5px;
@@ -450,6 +452,7 @@ body.immersive #video-stage video {
 
 body.immersive #panel     { display: none; }
 body.immersive #title-bar { display: none; }
+body.immersive #voyage-filter { display: none; }
 
 body.immersive #map {
   flex: 1 1 0;
