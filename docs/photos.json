@@ -113,7 +113,8 @@
     "lat": 49.30273,
     "lon": -0.31356,
     "voyage": "normandie",
-    "author": "natayolie"
+    "author": "natayolie",
+    "city": "Hermanville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250501_151641.jpg",
@@ -346,7 +347,8 @@
     "lat": 49.34224,
     "lon": -0.58532,
     "voyage": "normandie",
-    "author": "natayolie"
+    "author": "natayolie",
+    "city": "Asnelles"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250501_173512.jpg",
@@ -358,7 +360,8 @@
     "lat": 49.34226,
     "lon": -0.58528,
     "voyage": "normandie",
-    "author": "natayolie"
+    "author": "natayolie",
+    "city": "Asnelles"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250501_180756.jpg",
@@ -884,7 +887,8 @@
     "lat": 49.39527,
     "lon": -0.94404,
     "voyage": "normandie",
-    "author": "natayolie"
+    "author": "natayolie",
+    "city": "Englesqueville-la-Percée"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250502_141945.jpg",
@@ -896,7 +900,8 @@
     "lat": 49.39525,
     "lon": -0.94385,
     "voyage": "normandie",
-    "author": "natayolie"
+    "author": "natayolie",
+    "city": "Englesqueville-la-Percée"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250502_141950.jpg",
@@ -1181,7 +1186,8 @@
     "lat": 49.09853,
     "lon": -1.61361,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2125.jpg",
@@ -1193,7 +1199,8 @@
     "lat": 49.09852,
     "lon": -1.61361,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2126.jpg",
@@ -1205,7 +1212,8 @@
     "lat": 49.09858,
     "lon": -1.61359,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2127.jpg",
@@ -1217,7 +1225,8 @@
     "lat": 49.09858,
     "lon": -1.61359,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2128.jpg",
@@ -1229,7 +1238,8 @@
     "lat": 49.09857,
     "lon": -1.61358,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2129.jpg",
@@ -1241,7 +1251,8 @@
     "lat": 49.09857,
     "lon": -1.61358,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2130.jpg",
@@ -1253,7 +1264,8 @@
     "lat": 49.09863,
     "lon": -1.61367,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2131.jpg",
@@ -1265,7 +1277,8 @@
     "lat": 49.09859,
     "lon": -1.61369,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2132.jpg",
@@ -1277,7 +1290,8 @@
     "lat": 49.09859,
     "lon": -1.6137,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2133.jpg",
@@ -1289,7 +1303,8 @@
     "lat": 49.09859,
     "lon": -1.61371,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2134.jpg",
@@ -1301,7 +1316,8 @@
     "lat": 49.09859,
     "lon": -1.61371,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2135.jpg",
@@ -1313,7 +1329,8 @@
     "lat": 49.09861,
     "lon": -1.61367,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2136.jpg",
@@ -1325,7 +1342,8 @@
     "lat": 49.09862,
     "lon": -1.61368,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "city": "Gouville-sur-Mer"
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250503_184932.jpg",

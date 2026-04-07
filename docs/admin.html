@@ -1347,12 +1347,13 @@ async function enrichPhotoCities() {
     first = false;
     try {
       const r = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
+        `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=14`,
         { headers: { 'Accept-Language': 'fr' } }
       );
       const data = await r.json();
-      const place = data.address?.city || data.address?.town || data.address?.village ||
-                    data.address?.county || '';
+      const a = data.address || {};
+      const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
+                    a.municipality || a.county || '';
       if (place) { _admLocCache[key] = place; p.city = place; }
     } catch {}
   }
@@ -2581,12 +2582,13 @@ async function retroEnrichCities() {
       first = false;
       try {
         const r = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
+          `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=14`,
           { headers: { 'Accept-Language': 'fr' } }
         );
         const data = await r.json();
-        place = data.address?.city || data.address?.town || data.address?.village ||
-                data.address?.county || '';
+        const a = data.address || {};
+        place = a.city || a.town || a.village || a.hamlet || a.city_district ||
+                a.municipality || a.county || '';
         if (place) _admLocCache[key] = place;
       } catch {}
     }

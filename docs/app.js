@@ -164,12 +164,13 @@ async function updateLbLocation(item) {
   if (local) counter.textContent = `\u{1F4CD} ${local.name}`;
   const reqId = ++lbLocReqId;
   try {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=14`;
     const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
     if (reqId !== lbLocReqId) return;
     const data = await r.json();
-    const place = data.address?.city || data.address?.town || data.address?.village ||
-                  data.address?.county || (data.display_name || '').split(',')[0].trim();
+    const a = data.address || {};
+    const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
+                  a.municipality || a.county || '';
     if (place) {
       lbLocCache[key] = place;
       _saveLocCache();
@@ -349,12 +350,13 @@ async function updateDateLoc(pi, photo) {
   _datLocTimer = setTimeout(async () => {
     if (reqId !== _datLocReqId) return;
     try {
-      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=14`;
       const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
       if (reqId !== _datLocReqId) return;
       const data = await r.json();
-      const place = data.address?.city || data.address?.town || data.address?.village ||
-                    data.address?.county || (data.display_name || '').split(',')[0].trim();
+      const a = data.address || {};
+      const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
+                    a.municipality || a.county || '';
       if (place) {
         lbLocCache[key] = place;
         _saveLocCache();
