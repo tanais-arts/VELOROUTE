@@ -94,24 +94,13 @@
   #photo-info { bottom: 46px; font-size: 0.85em; }
 
   /* Slider pleine largeur */
-  #scrubber-wrap {
-    left: 10px; right: 10px; bottom: 8px;
-    height: 32px;
-  }
-
-  /* Dropdown voyage : haut à droite, dans le photo-bar */
-  #voyage-filter-wrap {
-    left: auto; right: 12px;
-    bottom: auto; top: 14px;
-    z-index: 500;
-  }
-  #voyage-filter { font-size: 0.68rem; padding: 4px 24px 4px 8px; min-width: 100px; }
+  #scrubber-wrap { height: 32px; }
 
   /* Cacher le panel et les boutons immersif */
   #panel, #btn-immersive { display: none !important; }
 
-  /* Contrôles zoom Leaflet — repositionnés en bas à gauche */
-  .leaflet-bottom.leaflet-left { bottom: 80px; }
+  /* Contrôles zoom Leaflet — alignés sur le bas de la carte (déjà élevée) */
+  .leaflet-bottom.leaflet-left { bottom: 0; }
 }
 
 /* ── MOBILE LANDSCAPE ───────────────────────────────── */
@@ -253,7 +242,7 @@ html, body {
 
 #voyage-filter-wrap {
   position: fixed;
-  left: 90px;
+  left: 10px;
   bottom: 44px;
   z-index: 1100;
 }
@@ -594,7 +583,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 /* ── SCRUBBER CAROUSEL ──────────────────────────────── */
 #scrubber-wrap {
   position: fixed;
-  bottom: 8px; left: 90px; right: 12px;
+  bottom: 8px; left: 10px; right: 10px;
   height: 28px; z-index: 402;
   display: flex; align-items: center;
   padding: 0 12px;
@@ -812,6 +801,7 @@ body.immersive #photo-info { display: none; }
 }
 .leaflet-control-zoom a:hover { color: var(--text1) !important; }
 .leaflet-control-attribution { font-size: 9px !important; opacity: 0.4; }
+.leaflet-bottom.leaflet-left { bottom: 80px; }
 
 .nk-active-ring {
   border-radius: 50%;
