@@ -1,4 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <rect width="100%" height="100%" fill="#08121c"/>
-  <circle cx="16" cy="16" r="8" fill="#f0c060" />
+  <rect width="32" height="32" rx="6" fill="#08121c"/>
+  <!-- globe base -->
+  <circle cx="16" cy="16" r="11" fill="#0c1e34" stroke="#f0c060" stroke-width="0.8"/>
+  <!-- grid lines -->
+  <ellipse cx="16" cy="16" rx="5" ry="11" fill="none" stroke="#14305a" stroke-width="0.5"/>
+  <line x1="5" y1="16" x2="27" y2="16" stroke="#14305a" stroke-width="0.5"/>
+  <line x1="7" y1="11" x2="25" y2="11" stroke="#14305a" stroke-width="0.4"/>
+  <line x1="7" y1="21" x2="25" y2="21" stroke="#14305a" stroke-width="0.4"/>
+  <!-- continents (simplified) -->
+  <!-- Europe/Africa -->
+  <path d="M14 8 Q16 7 17 9 L17 15 Q15 17 14 15 Q12 13 13 10Z" fill="#f0c060" opacity="0.9"/>
+  <path d="M13 16 Q15 15 16 17 L15 23 Q13 24 12 22 Q11 19 12 17Z" fill="#f0c060" opacity="0.9"/>
+  <!-- Asia -->
+  <path d="M18 8 Q22 8 23 11 L22 15 Q19 16 18 14 Q17 11 18 9Z" fill="#f0c060" opacity="0.9"/>
+  <!-- Americas -->
+  <path d="M7 10 Q9 9 10 11 L10 16 Q8 18 7 16 Q6 13 7 11Z" fill="#f0c060" opacity="0.85"/>
+  <!-- rim highlight -->
+  <circle cx="16" cy="16" r="11" fill="none" stroke="url(#rim)" stroke-width="1.5"/>
+  <defs>
+    <radialGradient id="rim" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#f0c060" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f0c060" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
 </svg>
