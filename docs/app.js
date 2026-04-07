@@ -800,9 +800,25 @@ async function init() {
 
   // Appliquer le filtre
   if (_activeVoyage) {
-    const gpxSet = new Set(_activeVoyage.gpxFiles || []);
-    state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
-    state.photos  = state.photos.filter(p => p.voyage === _activeVoyageId);
+    const gpxSet    = new Set(_activeVoyage.gpxFiles || []);
+    const voyPhotos = state.photos.filter(p => p.voyage === _activeVoyageId);
+
+    if (gpxSet.size > 0) {
+      // Filtrage explicite par nom de fichier GPX
+      state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
+    } else {
+      // Fallback : jours couverts par les photos du voyage
+      const voyageDays = new Set();
+      voyPhotos.forEach(p => {
+        const m = (p.caption || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (m) voyageDays.add(`${m[1]}-${m[2]}-${m[3]}`);
+      });
+      state.entries = voyageDays.size
+        ? entries.filter(e => voyageDays.has(`${e.year}-${String(e.month).padStart(2,'0')}-${String(e.day).padStart(2,'0')}`))
+        : [];
+    }
+
+    state.photos = voyPhotos;
     entries = state.entries; // rebind local var → trace + carte ne montrent que le voyage
     photos  = state.photos;  // rebind local var → marqueurs photo + mediaEntries filtrés
   }

@@ -2195,26 +2195,65 @@ function renderSegments() {
     row.className = 'segment-row'
       + (seg.selected ? ' selected' : '') + (seg.hidden ? ' hidden-seg' : '');
     const sameDay = fmtSegDate(seg.first) === fmtSegDate(seg.last);
+    const segGpxFile = seg.entries[0]?.gpxFile || '';
+    const segVoyId   = segGpxFile
+      ? (voyageEntries.find(v => (v.gpxFiles || []).includes(segGpxFile))?.id || '')
+      : '';
+    const voyOpts = voyageEntries.map(v =>
+      `<option value="${v.id}"${v.id === segVoyId ? ' selected' : ''}>${v.label}</option>`
+    ).join('');
     row.innerHTML = `
       <input type="checkbox" class="seg-check"${seg.selected ? ' checked' : ''}>
       <div class="seg-info">
         <div class="seg-date">${seg.hidden ? '🚫 ' : ''}${fmtSegDate(seg.first)}${sameDay ? '' : ` → ${fmtSegDate(seg.last)}`}</div>
-        <div class="seg-meta">${fmtSegTime(seg.first)} → ${fmtSegTime(seg.last)} · ${seg.entries.length} pts${seg.hidden ? ' · <span style="color:rgba(255,200,60,.65)">masqué</span>' : ''}</div>
+        <div class="seg-meta">${fmtSegTime(seg.first)} → ${fmtSegTime(seg.last)} · ${seg.entries.length} pts${segGpxFile ? ` · <span style="color:rgba(255,255,255,.3);font-size:.65em">${segGpxFile}</span>` : ''}${seg.hidden ? ' · <span style="color:rgba(255,200,60,.65)">masqué</span>' : ''}</div>
       </div>
       <span class="seg-dist">~${seg.dist} km</span>
+      <select class="seg-voyage-sel" title="Associer ce segment à un voyage"
+        style="font-size:.68rem;padding:2px 4px;background:rgba(6,9,18,.95);border:1px solid rgba(240,192,96,.25);border-radius:3px;color:rgba(240,240,240,.75);min-width:90px;cursor:pointer">
+        <option value="">— voyage —</option>
+        ${voyOpts}
+      </select>
       <button class="seg-focus" title="Centrer la carte sur ce segment">⌖</button>
     `;
     const cb = row.querySelector('.seg-check');
     cb.addEventListener('change', e => { e.stopPropagation(); seg.selected = cb.checked; row.classList.toggle('selected', seg.selected); updateSegSelCount(); });
     row.querySelector('.seg-focus').addEventListener('click', e => { e.stopPropagation(); focusSegment(seg); });
+    const voyageSel = row.querySelector('.seg-voyage-sel');
+    if (voyageSel) {
+      voyageSel.addEventListener('change', async e => {
+        e.stopPropagation();
+        const gpxFile = seg.entries[0]?.gpxFile;
+        if (!gpxFile) return;
+        await assignSegmentVoyage(gpxFile, voyageSel.value);
+      });
+      voyageSel.addEventListener('click', e => e.stopPropagation());
+    }
     row.addEventListener('click', e => {
-      if (e.target === cb || e.target.classList.contains('seg-focus')) return;
+      if (e.target === cb || e.target.classList.contains('seg-focus') || e.target.classList.contains('seg-voyage-sel')) return;
       seg.selected = !seg.selected; cb.checked = seg.selected;
       row.classList.toggle('selected', seg.selected); updateSegSelCount(); focusSegment(seg);
     });
     list.appendChild(row);
   });
   updateSegSelCount();
+}
+
+async function assignSegmentVoyage(gpxFile, voyageId) {
+  // Retirer ce gpxFile de tous les voyages
+  voyageEntries.forEach(v => { v.gpxFiles = (v.gpxFiles || []).filter(f => f !== gpxFile); });
+  // Ajouter au voyage choisi
+  if (voyageId) {
+    const v = voyageEntries.find(v => v.id === voyageId);
+    if (v) { v.gpxFiles = v.gpxFiles || []; if (!v.gpxFiles.includes(gpxFile)) v.gpxFiles.push(gpxFile); }
+  }
+  setStatus('manage-status', 'Commit voyages.json…');
+  try {
+    await commitVoyagesJson();
+    setStatus('manage-status', `✓ Segment « ${gpxFile} » → ${voyageId ? voyageEntries.find(v=>v.id===voyageId)?.label : '(sans voyage)'}`, 'ok');
+  } catch (err) {
+    setStatus('manage-status', `Erreur : ${err.message}`, 'error');
+  }
 }
 
 $('btn-seg-select-all').addEventListener('click', () => {

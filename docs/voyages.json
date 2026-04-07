@@ -2,12 +2,24 @@
   {
     "id": "normandie",
     "label": "Normandie",
-    "gpxFiles": []
+    "gpxFiles": [
+      "Normandie_Section_0.gpx",
+      "Normandie_Section_1.gpx",
+      "Normandie_Section_2.gpx",
+      "Normandie_Section_3.gpx",
+      "Normandie_Section_4.gpx",
+      "Normandie_Section_5.gpx"
+    ]
   },
   {
     "id": "bourgogne",
     "label": "Bourgogne",
-    "gpxFiles": []
+    "gpxFiles": [
+      "Bourgogne_Section_1.gpx",
+      "Bourgogne_Section_2.gpx",
+      "Bourgogne_Section_3.gpx",
+      "Bourgogne_Section_4.gpx"
+    ]
   },
   {
     "id": "alpes-2025",
