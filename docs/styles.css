@@ -434,6 +434,9 @@ body.immersive #panel         { display: none; }
 body.immersive #voyage-filter-wrap { display: none; }
 body.immersive #scrubber-wrap { display: none; }
 body.immersive #photo-info { display: none; }
+body.lightbox-open #voyage-filter-wrap,
+body.lightbox-open #scrubber-wrap,
+body.lightbox-open #photo-info { display: none; }
 
 body.immersive #map {
   flex: 1 1 0;

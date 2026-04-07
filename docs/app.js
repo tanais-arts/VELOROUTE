@@ -194,8 +194,9 @@ function openLightbox(photos, startIdx) {
   state.lbIdx    = startIdx;
   lbShowCurrent();
   lightbox.hidden = false;
+  document.body.classList.add('lightbox-open');
 }
-function closeLightbox() { lightbox.hidden = true; }
+function closeLightbox() { lightbox.hidden = true; document.body.classList.remove('lightbox-open'); }
 function lbShowCurrent() {
   const item = state.lbPhotos[state.lbIdx];
   if (!item) return;
