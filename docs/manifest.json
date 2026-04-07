@@ -4,7 +4,7 @@
   "description": "Journal de voyage — Japon",
   "start_url": "/VELOROUTE/",
   "display": "standalone",
-  "orientation": "landscape",
+  "orientation": "any",
   "background_color": "#08121c",
   "theme_color": "#08121c",
   "icons": [
