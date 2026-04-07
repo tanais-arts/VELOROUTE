@@ -90,8 +90,11 @@
   #map { top: 70px !important; bottom: 80px !important;
          left: 0 !important; right: 0 !important; }
 
-  /* Info photo centrée au-dessus du slider */
-  #photo-info { bottom: 46px; font-size: 0.85em; }
+  /* Cartouche ville/date calé à droite au-dessus du slider */
+  #photo-info {
+    bottom: 46px; font-size: 0.85em;
+    left: auto; right: 10px; transform: none;
+  }
 
   /* Slider pleine largeur */
   #scrubber-wrap { height: 32px; }
@@ -121,10 +124,10 @@
   #map { top: 72px !important; bottom: 0 !important;
          left: 0 !important; right: 0 !important; width: auto !important; }
 
-  /* Info bas centrée */
+  /* Cartouche ville/date calé à droite */
   #photo-info {
-    bottom: 8px;
-    font-size: 0.85em;
+    bottom: 8px; font-size: 0.85em;
+    left: auto; right: 10px; transform: none;
   }
 }
 
