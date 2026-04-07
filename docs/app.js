@@ -40,8 +40,28 @@ const state = {
 let travelYear = new Date().getFullYear();
 
 // ── Map ──────────────────────────────────────────────────────────────
-const map = L.map('map', { zoomControl: false, attributionControl: true })
+const map = L.map('map', { zoomControl: false, attributionControl: true, scrollWheelZoom: false })
   .setView([46.5, 3], 6); // France
+
+// Zoom centré sur le point sélectionné (ring) si présent, sinon sur le curseur
+map.getContainer().addEventListener('wheel', function(e) {
+  e.preventDefault();
+  const delta   = e.deltaY || e.detail || 0;
+  const newZoom = map.getZoom() + (delta < 0 ? 1 : -1);
+  if (state.ringMarker) {
+    map.setZoomAround(state.ringMarker.getLatLng(), newZoom);
+  } else {
+    const pt     = map.mouseEventToContainerPoint(e);
+    const latlng = map.containerPointToLatLng(pt);
+    map.setZoomAround(latlng, newZoom);
+  }
+}, { passive: false });
+
+// Boutons +/- : centrer sur le ring si sélectionné
+const _zoomIn  = map.zoomIn.bind(map);
+const _zoomOut = map.zoomOut.bind(map);
+map.zoomIn  = function(d, o) { if (state.ringMarker) { map.setZoomAround(state.ringMarker.getLatLng(), map.getZoom() + (d||1)); return this; } return _zoomIn(d, o); };
+map.zoomOut = function(d, o) { if (state.ringMarker) { map.setZoomAround(state.ringMarker.getLatLng(), map.getZoom() - (d||1)); return this; } return _zoomOut(d, o); };
 
 let tileLayer = L.tileLayer(TILE_LIGHT, {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
