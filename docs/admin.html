@@ -1859,6 +1859,7 @@ async function loadSettings() {
           $('btn-settings-toggle').style.display = 'none';
         }
         $('gpx-card').style.display       = canEditGpx ? '' : 'none';
+        document.querySelector('.row-2').style.gridTemplateColumns = canEditGpx ? '' : '1fr';
         $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
         if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
         $('main-content').style.display = 'flex';
