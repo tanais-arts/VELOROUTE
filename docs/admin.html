@@ -900,12 +900,13 @@ function nearestEntryIdx(photoMs) {
 
 function nearestEntryIdxByPos(lat, lon) {
   if (!travelEntries.length) return null;
-  let best = 0, bestD = Infinity;
+  let best = null, bestD = Infinity;
+  const MAX_DEG = 0.5; // ~55km max — au-delà, pas de match positionnel
   travelEntries.forEach((e, i) => {
     const d = (e.lat - lat) ** 2 + (e.lon - lon) ** 2;
     if (d < bestD) { bestD = d; best = i; }
   });
-  return best;
+  return bestD <= MAX_DEG * MAX_DEG ? best : null;
 }
 
 // ── Photo URL helpers ─────────────────────────────────────────────────
