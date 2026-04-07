@@ -501,7 +501,9 @@
     "caption": "2025-05-02",
     "photoMs": 1746213424000,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "lat": 49.32632,
+    "lon": -1.11306
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2123.jpg",
@@ -511,7 +513,9 @@
     "caption": "2025-05-02",
     "photoMs": 1746213434000,
     "voyage": "normandie",
-    "author": "tom"
+    "author": "tom",
+    "lat": 49.32632,
+    "lon": -1.11306
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250502_093413.jpg",
@@ -1899,7 +1903,9 @@
     "caption": "2025-05-29",
     "photoMs": 1748510651000,
     "voyage": "bourgogne",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 48.76623,
+    "lon": 2.3635
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250529_092419.jpg",
@@ -2429,7 +2435,9 @@
     "caption": "2025-05-30",
     "photoMs": 1748620332000,
     "voyage": "bourgogne",
-    "author": "tom"
+    "author": "tom",
+    "lat": 47.267862,
+    "lon": 4.536649
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_2239.jpg",
@@ -4916,7 +4924,9 @@
     "caption": "2025-07-17",
     "photoMs": 1752768355000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 45.73189,
+    "lon": 6.29884
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250717_160620.jpg",
@@ -4926,7 +4936,9 @@
     "caption": "2025-07-17",
     "photoMs": 1752768381000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 45.73189,
+    "lon": 6.29884
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250717_160901.jpg",
@@ -4936,7 +4948,9 @@
     "caption": "2025-07-17",
     "photoMs": 1752768542000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 45.73189,
+    "lon": 6.29884
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250717_161041.jpg",
@@ -4946,7 +4960,9 @@
     "caption": "2025-07-17",
     "photoMs": 1752768642000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 45.73189,
+    "lon": 6.29884
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250717_161144.jpg",
@@ -4956,7 +4972,9 @@
     "caption": "2025-07-17",
     "photoMs": 1752768706000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 45.73189,
+    "lon": 6.29884
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250717_162332.jpg",
@@ -5161,7 +5179,9 @@
     "caption": "2025-07-19",
     "photoMs": 1752933619000,
     "voyage": "alpes-2025",
-    "author": "natayolie"
+    "author": "natayolie",
+    "lat": 46.024006,
+    "lon": 6.33491
   },
   {
     "src": "https://hub.studios-voa.com:1666/files/natayolie/Photos/IMG_20250719_112254.jpg",

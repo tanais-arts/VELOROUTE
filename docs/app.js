@@ -842,6 +842,37 @@ async function init() {
   state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
   state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
 
+  // ── Interpolation GPS pour photos sans coordonnées ───────────────────
+  // Pour chaque photo sans lat/lon, cherche les voisins temporels avec GPS.
+  // Seuil : 6h. Interpole linéairement si les deux existent, sinon copie le plus proche.
+  (function interpolatePhotoCoords(photos) {
+    const MAX_MS = 6 * 3600 * 1000;
+    const anchors = photos
+      .filter(p => p.lat != null && p.lon != null && p.photoMs != null)
+      .sort((a, b) => a.photoMs - b.photoMs);
+    if (!anchors.length) return;
+    photos.forEach(p => {
+      if (p.lat != null || p.photoMs == null) return;
+      const ms = p.photoMs;
+      let prev = null, next = null;
+      for (let i = anchors.length - 1; i >= 0; i--) { if (anchors[i].photoMs <= ms) { prev = anchors[i]; break; } }
+      for (let i = 0; i < anchors.length; i++)         { if (anchors[i].photoMs >= ms) { next = anchors[i]; break; } }
+      const prevOk = prev && (ms - prev.photoMs) <= MAX_MS;
+      const nextOk = next && (next.photoMs - ms) <= MAX_MS;
+      if (!prevOk && !nextOk) return;
+      if (prevOk && nextOk) {
+        const span = next.photoMs - prev.photoMs;
+        const t = span > 0 ? (ms - prev.photoMs) / span : 0;
+        p.lat = prev.lat + t * (next.lat - prev.lat);
+        p.lon = prev.lon + t * (next.lon - prev.lon);
+      } else {
+        const ref = nextOk ? next : prev;
+        p.lat = ref.lat; p.lon = ref.lon;
+      }
+      p._gpsInterp = true; // coordonnées interpolées, pas EXIF
+    });
+  })(state.photos);
+
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
   const thumbObserver = new IntersectionObserver((entries) => {

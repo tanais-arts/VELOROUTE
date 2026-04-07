@@ -621,7 +621,8 @@
         <button class="btn" id="btn-ph-hide">👁 Masquer</button>
         <button class="btn danger" id="btn-ph-delete">🗑 Supprimer</button>
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
-        <button class="btn" id="btn-retro-enrich" style="margin-left:auto">🌍 Enrichir villes manquantes</button>
+        <button class="btn" id="btn-retro-enrich">🌍 Enrichir villes manquantes</button>
+        <button class="btn" id="btn-retro-interp-gps" style="margin-left:8px" title="Interpoler les coords GPS des photos sans GPS à partir des voisins temporels">📍 GPS manquants → interpoler</button>
       </div>
       <div style="display:flex;align-items:center;gap:6px;padding:5px 8px;margin-bottom:4px;background:rgba(240,192,96,.04);border:1px solid rgba(240,192,96,.14);border-radius:6px">
         <span style="font-size:.72rem;color:rgba(240,192,96,.6);white-space:nowrap">🔍 Filtre :</span>
@@ -2606,6 +2607,48 @@ async function retroEnrichCities() {
 }
 
 $('btn-retro-enrich').addEventListener('click', retroEnrichCities);
+
+// ── Interpolation GPS rétroactive ──────────────────────────────────────
+async function retroInterpolateGps() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) { setStatus('manage-status', '⚠ Token GitHub requis.', 'warn'); return; }
+  const entries = photoEntries;
+  const MAX_MS = 6 * 3600 * 1000;
+  const anchors = entries
+    .filter(p => p.lat != null && p.lon != null && p.photoMs != null)
+    .sort((a, b) => a.photoMs - b.photoMs);
+  if (!anchors.length) { setStatus('manage-status', '⚠ Aucune photo avec GPS trouvée.', 'warn'); return; }
+  const todo = entries.filter(p => p.lat == null && p.photoMs != null);
+  if (!todo.length) { setStatus('manage-status', '✓ Toutes les photos ont déjà un GPS', 'ok'); return; }
+  let updated = 0;
+  todo.forEach(p => {
+    const ms = p.photoMs;
+    let prev = null, next = null;
+    for (let i = anchors.length - 1; i >= 0; i--) { if (anchors[i].photoMs <= ms) { prev = anchors[i]; break; } }
+    for (let i = 0; i < anchors.length; i++)         { if (anchors[i].photoMs >= ms) { next = anchors[i]; break; } }
+    const prevOk = prev && (ms - prev.photoMs) <= MAX_MS;
+    const nextOk = next && (next.photoMs - ms) <= MAX_MS;
+    if (!prevOk && !nextOk) return;
+    if (prevOk && nextOk) {
+      const span = next.photoMs - prev.photoMs;
+      const t = span > 0 ? (ms - prev.photoMs) / span : 0;
+      p.lat = Math.round((prev.lat + t * (next.lat - prev.lat)) * 1e6) / 1e6;
+      p.lon = Math.round((prev.lon + t * (next.lon - prev.lon)) * 1e6) / 1e6;
+    } else {
+      const ref = nextOk ? next : prev;
+      p.lat = ref.lat; p.lon = ref.lon;
+    }
+    updated++;
+  });
+  if (!updated) { setStatus('manage-status', `⚠ Aucune photo interpolable (toutes trop éloignées > 6h)`, 'warn'); return; }
+  setStatus('manage-status', `Commit photos.json (${updated} GPS interpolé(s))…`);
+  try {
+    await githubPutFile('docs/photos.json', JSON.stringify(entries, null, 2),
+      `admin: GPS interpolé pour ${updated} photo(s)`, ghToken);
+    setStatus('manage-status', `✓ ${updated} GPS interpolé(s) — ${todo.length - updated} non résolu(s) (trop loin)`, 'ok');
+  } catch (e) { setStatus('manage-status', `⚠ Commit échoué : ${e.message}`, 'warn'); }
+}
+$('btn-retro-interp-gps').addEventListener('click', retroInterpolateGps);
 
 // ── Tab switching & refresh panel ─────────────────────────────────────
 function switchManageTab(tab) {
