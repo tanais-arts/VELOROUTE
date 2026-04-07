@@ -87,7 +87,7 @@
   .video-thumb-wrap { height: 52px; }
 
   /* Carte sous le bandeau, au-dessus du slots bas */
-  #map { top: calc(70px + env(safe-area-inset-top)) !important; bottom: 80px !important;
+  #map { top: calc(70px + env(safe-area-inset-top)) !important; bottom: calc(80px + env(safe-area-inset-bottom)) !important;
          left: 0 !important; right: 0 !important; }
 
   /* Cartouche ville/date calé à droite au-dessus du slider */
@@ -246,7 +246,7 @@ html, body {
 #voyage-filter-wrap {
   position: fixed;
   left: 10px;
-  bottom: 44px;
+  bottom: calc(44px + env(safe-area-inset-bottom));
   z-index: 1100;
 }
 #voyage-filter {
@@ -409,7 +409,7 @@ body.immersive #video-stage.is-loading #stage-loading-overlay {
 
 #video-stage {
   display: none;
-  position: fixed; top: 100px; left: 0; right: 0; bottom: 0;
+  position: fixed; top: calc(100px + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0;
   background: #000; z-index: 300;
   align-items: center; justify-content: center;
 }
@@ -447,7 +447,7 @@ body.immersive #map {
 body.immersive .leaflet-control-attribution { display: none; }
 
 #stage-controls {
-  position: absolute; top: 14px; right: 16px;
+  position: absolute; top: calc(14px + env(safe-area-inset-top)); right: 16px;
   display: flex; align-items: center; gap: 10px; z-index: 10;
 }
 #stage-rate-btn {
@@ -499,7 +499,7 @@ body.immersive .leaflet-control-attribution { display: none; }
   box-shadow: 0 8px 40px rgba(0,0,0,0.8); background: #000;
 }
 #lightbox-close {
-  position: fixed; top: 20px; right: 24px; z-index: 930;
+  position: fixed; top: calc(20px + env(safe-area-inset-top)); right: 24px; z-index: 930;
   background: rgba(0,0,0,0.45); border: none; color: #fff;
   font-size: 1.4rem; cursor: pointer; padding: 6px 10px; line-height: 1;
   border-radius: 3px; transition: background 0.15s;
@@ -510,7 +510,7 @@ body.immersive .leaflet-control-attribution { display: none; }
   display: flex; align-items: center; justify-content: space-between;
   background: rgba(4,6,14,0.97);
   border-top: 1px solid rgba(255,255,255,0.08);
-  padding: 0 12px; height: 56px;
+  padding: 0 12px calc(env(safe-area-inset-bottom)) 12px; height: calc(56px + env(safe-area-inset-bottom));
 }
 #lb-counter {
   font-size: 0.82rem; letter-spacing: 0.03em;
@@ -556,7 +556,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 /* ── INFO BAS CENTRÉ (lieu + date de la photo active) ─── */
 #photo-info {
   position: fixed;
-  bottom: 42px;
+  bottom: calc(42px + env(safe-area-inset-bottom));
   left: 50%; transform: translateX(-50%);
   text-align: center;
   pointer-events: none; z-index: 401;
@@ -586,7 +586,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 /* ── SCRUBBER CAROUSEL ──────────────────────────────── */
 #scrubber-wrap {
   position: fixed;
-  bottom: 8px; left: 10px; right: 10px;
+  bottom: calc(8px + env(safe-area-inset-bottom)); left: 10px; right: 10px;
   height: 28px; z-index: 402;
   display: flex; align-items: center;
   padding: 0 12px;
