@@ -898,15 +898,18 @@ function nearestEntryIdx(photoMs) {
   return bestDiff <= MATCH_MAX_MS ? best : null;
 }
 
-function nearestEntryIdxByPos(lat, lon) {
+function nearestEntryIdxByPos(lat, lon, photoMs) {
   if (!travelEntries.length) return null;
+  const MAX_DEG_SQ = 0.5 * 0.5;       // ~55km max en degrés²
+  const MAX_TIME_MS = 24 * 3600 * 1000; // 24h — le temps est prioritaire
   let best = null, bestD = Infinity;
-  const MAX_DEG = 0.5; // ~55km max — au-delà, pas de match positionnel
   travelEntries.forEach((e, i) => {
+    // Filtre temporel strict en premier : si photoMs connu, l'entry doit être dans les 24h
+    if (photoMs != null && Math.abs(entryToMs(e) - photoMs) > MAX_TIME_MS) return;
     const d = (e.lat - lat) ** 2 + (e.lon - lon) ** 2;
-    if (d < bestD) { bestD = d; best = i; }
+    if (d < MAX_DEG_SQ && d < bestD) { bestD = d; best = i; }
   });
-  return bestD <= MAX_DEG * MAX_DEG ? best : null;
+  return best;
 }
 
 // ── Photo URL helpers ─────────────────────────────────────────────────
@@ -966,8 +969,8 @@ function matchPhotosToTravel() {
   let matchedCount = 0;
   rawPhotos.forEach(p => {
     if (p.lat != null && p.lon != null) {
-      // Photo avec GPS EXIF → match par position (précis, pas besoin de GPX)
-      p.entryIdx = nearestEntryIdxByPos(p.lat, p.lon);
+      // Photo avec GPS EXIF → match par position + filtre temporel 24h
+      p.entryIdx = nearestEntryIdxByPos(p.lat, p.lon, p.photoMs);
       if (p.entryIdx != null) matchedCount++;
     } else if (p.photoMs != null) {
       // Pas de GPS EXIF → match par temps sur le GPX
