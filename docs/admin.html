@@ -349,11 +349,6 @@
       .btn-row { gap: 6px; }
       .btn { font-size: 0.62rem; padding: 6px 12px; }
 
-      /* Escales compact */
-      #manage-escales-panel > div:first-child { flex-direction: column; gap: 6px; }
-      #manage-escales-panel input[type="text"],
-      #manage-escales-panel input[type="datetime-local"] { font-size: 0.76rem; padding: 6px 8px; }
-
       /* Help text */
       .help { font-size: 0.66rem; }
 
@@ -583,11 +578,11 @@
 
       <div class="photo-grid" id="photo-grid"></div>
 
-      <div class="progress-wrap" id="pcloud-progress-wrap" style="display:none;margin-top:8px">
-        <div class="progress-bar" id="pcloud-progress-bar"></div>
+      <div class="progress-wrap" id="upload-progress-wrap" style="display:none;margin-top:8px">
+        <div class="progress-bar" id="upload-progress-bar"></div>
       </div>
       <button id="btn-stop-upload" style="display:none;margin-top:6px" class="small">⏹ Stopper l'upload</button>
-      <div class="status" id="pcloud-status" style="margin-top:4px"></div>
+      <div class="status" id="upload-status" style="margin-top:4px"></div>
       <div class="status" id="actions-status" style="margin-top:2px"></div>
     </div>
 
@@ -668,7 +663,6 @@ const MONTHS_FR  = ['','janv.','févr.','mars','avr.','mai','juin','juil.','aoû
 let travelEntries = [];  // final travel.json objects
 let photoEntries  = [];  // final photos.json objects
 let visitedCities = [];  // final visited.json objects
-let escaleEntries = [];  // final escales.json objects
 let voyageEntries = [];  // final voyages.json objects
 let rawPhotos     = [];  // { file, photoMs, lat, lon, captionDate, entryIdx, thumb }
 let currentVoyageId = ''; // voyage sélectionné au moment du traitement
@@ -1419,7 +1413,6 @@ async function loadExistingData(useApi = false) {
     visitedCities = await fetchJson('visited.json');
     vCount = visitedCities.length;
   } catch {}
-  try { escaleEntries = await fetchJson('escales.json'); } catch {}
   try {
     voyageEntries = await fetchJson('voyages.json');
     const sel = $('photo-voyage');
@@ -1468,7 +1461,7 @@ async function loadRepoJsonDirect(filename) {
 async function commitPhotosJsonMerged() {
   if (!photoEntries.length) return;
   const ghToken = $('gh-token').value.trim();
-  if (!ghToken) { setStatus('pcloud-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
+  if (!ghToken) { setStatus('upload-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
   try {
     const existing = await loadRepoJsonDirect('photos.json').catch(() => []);
     // Déduplication par photoMs (timestamp unique) — gère les noms de fichiers identiques
@@ -1489,9 +1482,9 @@ async function commitPhotosJsonMerged() {
     });
     await githubPutFile('docs/photos.json', JSON.stringify(merged, null, 2), `admin: photos.json — ${merged.length} entrée(s)`, ghToken);
     photoEntries = merged;
-    setStatus('pcloud-status', `✓ photos.json commité (${merged.length} entrée(s))`, 'ok');
+    setStatus('upload-status', `✓ photos.json commité (${merged.length} entrée(s))`, 'ok');
   } catch (err) {
-    setStatus('pcloud-status', `⚠ Commit photos.json échoué : ${err.message}`, 'warn');
+    setStatus('upload-status', `⚠ Commit photos.json échoué : ${err.message}`, 'warn');
   }
 }
 
@@ -1891,17 +1884,6 @@ async function commitPhotosJson() {
   );
 }
 
-async function commitEscalesJson() {
-  const ghToken = $('gh-token').value.trim();
-  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
-  await githubPutFile(
-    'docs/escales.json',
-    JSON.stringify(escaleEntries, null, 2),
-    `admin: escales.json — ${escaleEntries.length} étape(s)`,
-    ghToken
-  );
-}
-
 async function commitVoyagesJson() {
   const ghToken = $('gh-token').value.trim();
   if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
@@ -1954,11 +1936,11 @@ async function deleteVoyage(voyId) {
   voyageEntries = voyageEntries.filter(e => e.id !== voyId);
   let photosChanged = 0;
   photoEntries.forEach(p => { if (p.voyage === voyId) { delete p.voyage; photosChanged++; } });
-  setStatus('pcloud-status', 'Commit voyages.json…');
+  setStatus('upload-status', 'Commit voyages.json…');
   try {
     await commitVoyagesJson();
     if (photosChanged) {
-      setStatus('pcloud-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
+      setStatus('upload-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
       await commitPhotosJson();
     }
     ['photo-voyage', 'ph-voyage-assign', 'ph-manage-voyage-filter'].forEach(sid => {
@@ -1968,8 +1950,8 @@ async function deleteVoyage(voyId) {
       if (sel.value === voyId) sel.value = '';
     });
     renderManagePhotos();
-    setStatus('pcloud-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
-  } catch (err) { setStatus('pcloud-status', `Erreur : ${err.message}`, 'error'); }
+    setStatus('upload-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
+  } catch (err) { setStatus('upload-status', `Erreur : ${err.message}`, 'error'); }
 }
 async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
@@ -1989,19 +1971,19 @@ let uploadAborted = false;
 $('btn-stop-upload').addEventListener('click', () => {
   uploadAborted = true;
   $('btn-stop-upload').disabled = true;
-  setStatus('pcloud-status', '⏹ Arrêt demandé… fin du fichier en cours', 'warn');
+  setStatus('upload-status', '⏹ Arrêt demandé… fin du fichier en cours', 'warn');
 });
 
 async function uploadToServer() {
-  if (!serverToken) { setStatus('pcloud-status', 'Non connecté au serveur.', 'error'); return; }
-  if (!rawPhotos.length) { setStatus('pcloud-status', 'Aucune photo chargée.', 'error'); return; }
+  if (!serverToken) { setStatus('upload-status', 'Non connecté au serveur.', 'error'); return; }
+  if (!rawPhotos.length) { setStatus('upload-status', 'Aucune photo chargée.', 'error'); return; }
 
   uploadAborted = false;
   const btnStop = $('btn-stop-upload');
   btnStop.style.display = ''; btnStop.disabled = false;
 
-  const progWrap = $('pcloud-progress-wrap');
-  const progBar  = $('pcloud-progress-bar');
+  const progWrap = $('upload-progress-wrap');
+  const progBar  = $('upload-progress-bar');
   progWrap.style.display = 'block';
   progBar.style.width = '0%';
 
@@ -2020,7 +2002,7 @@ async function uploadToServer() {
       const outName = isVideo ? p.file.name : jpgName(p.file.name);
 
       // ① Source originale
-      setStatus('pcloud-status', `↑ Source : ${p.file.name}…`);
+      setStatus('upload-status', `↑ Source : ${p.file.name}…`);
       let srcOk = false;
       try { await serverUploadFile(`Sources${sub}/${p.file.name}`, p.file, p.file.name); srcOk = true; srcSuccesses++; } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
       tick();
@@ -2032,13 +2014,13 @@ async function uploadToServer() {
 
       if (isVideo) {
         // ② Fichier vidéo (Photos)
-        setStatus('pcloud-status', `↑ Vidéo : ${outName}…`);
+        setStatus('upload-status', `↑ Vidéo : ${outName}…`);
         try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
         tick();
 
         // ③ Vignette vidéo MP4 2s/240px — générée par ffmpeg côté serveur
         const thumbOutName = gifName(outName); // .mp4
-        setStatus('pcloud-status', `⚖ Vignette MP4 : ${thumbOutName}…`);
+        setStatus('upload-status', `⚖ Vignette MP4 : ${thumbOutName}…`);
         try {
           const r = await fetch(`${serverBase()}/video-thumb`, {
             method: 'POST',
@@ -2054,7 +2036,7 @@ async function uploadToServer() {
         tick();
       } else {
         // ② Photo 2500px (Photos)
-        setStatus('pcloud-status', `↑ Photo 2500px : ${outName}…`);
+        setStatus('upload-status', `↑ Photo 2500px : ${outName}…`);
         try {
           const photoBlob = await resizeImage(p.file, 2500, 0.88);
           await serverUploadFile(`Photos${sub}/${outName}`, photoBlob, outName);
@@ -2062,7 +2044,7 @@ async function uploadToServer() {
         tick();
 
         // ③ Vignette 400px (Thumbs)
-        setStatus('pcloud-status', `↑ Vignette : ${outName}…`);
+        setStatus('upload-status', `↑ Vignette : ${outName}…`);
         try {
           const thumbBlob = await resizeImage(p.file, 400, 0.82);
           await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
@@ -2075,27 +2057,27 @@ async function uploadToServer() {
     progWrap.style.display = 'none';
     if (uploadAborted) {
       const sent = photos.indexOf(p) >= 0 ? photos.indexOf(p) : done;
-      setStatus('pcloud-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
-      await _awaitEnrichAndRebuild('pcloud-status');
+      setStatus('upload-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
+      await _awaitEnrichAndRebuild('upload-status');
       await commitPhotosJsonMerged();
       return;
     }
     const msg = errors
       ? `⚠ ${errors} erreur(s) — ${srcSuccesses}/${photos.length} source(s) envoyée(s)`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
-    setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
-    await _awaitEnrichAndRebuild('pcloud-status');
+    setStatus('upload-status', msg, errors ? 'warn' : 'ok');
+    await _awaitEnrichAndRebuild('upload-status');
     // Ne commiter photos.json que si au moins 1 source a été uploadée avec succès
     if (srcSuccesses > 0) {
       await commitPhotosJsonMerged();
     } else {
       const errDetail = firstError ? ` (${firstError})` : '';
-      setStatus('pcloud-status', `⚠ Aucun fichier n’a été envoyé au serveur${errDetail} — photos.json non commité.`, 'error');
+      setStatus('upload-status', `⚠ Aucun fichier n’a été envoyé au serveur${errDetail} — photos.json non commité.`, 'error');
     }
   } catch (err) {
     btnStop.style.display = 'none';
     progWrap.style.display = 'none';
-    setStatus('pcloud-status', `Erreur : ${err.message}`, 'error');
+    setStatus('upload-status', `Erreur : ${err.message}`, 'error');
   }
 }
 
@@ -2455,96 +2437,6 @@ $('btn-ph-delete').addEventListener('click', async () => {
   catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
 
-// ── Étapes (escales) editor ──────────────────────────────────────────
-function renderEscales() {
-  const list = $('escales-list'); list.innerHTML = '';
-  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
-  if (!escaleEntries.length) {
-    list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune étape enregistrée.</p>';
-    return;
-  }
-  escaleEntries.forEach((e, idx) => {
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)';
-    const inp = document.createElement('input');
-    inp.type = 'text'; inp.value = e.city;
-    inp.style.cssText = 'flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;font-size:.8rem';
-    const meta = document.createElement('span');
-    meta.style.cssText = 'font-size:.68rem;color:rgba(255,255,255,.35);white-space:nowrap';
-    meta.textContent = e.start?.slice(0,10) || '';
-    const saveBtn = document.createElement('button');
-    saveBtn.className = 'btn'; saveBtn.textContent = '✓';
-    saveBtn.style.cssText = 'padding:3px 10px;font-size:.75rem';
-    saveBtn.title = 'Renommer';
-    const delBtn = document.createElement('button');
-    delBtn.className = 'btn danger'; delBtn.textContent = '🗑';
-    delBtn.style.cssText = 'padding:3px 9px;font-size:.75rem';
-    delBtn.title = 'Supprimer cette étape';
-    saveBtn.addEventListener('click', async () => {
-      const newName = inp.value.trim();
-      if (!newName || newName === e.city) return;
-      e.city = newName;
-      setStatus('manage-status', 'Commit escales.json…');
-      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape renommée en « ${newName} »`, 'ok'); }
-      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
-    });
-    inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') saveBtn.click(); });
-    delBtn.addEventListener('click', async () => {
-      if (!confirm(`Supprimer l'étape « ${e.city} » de escales.json ?\n(Les fichiers sur VLR-server ne sont pas supprimés.)`)) return;
-      escaleEntries.splice(idx, 1);
-      setStatus('manage-status', 'Commit escales.json…');
-      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape supprimée`, 'ok'); }
-      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
-    });
-    row.append(inp, meta, saveBtn, delBtn);
-    list.appendChild(row);
-  });
-}
-
-// ── Ajout manuel d'escale ───────────────────────────────────────────
-$('btn-esc-add').addEventListener('click', async () => {
-  const city     = $('esc-add-city').value.trim();
-  const startVal = $('esc-add-start').value; // YYYY-MM-DDThh:mm
-  const endVal   = $('esc-add-end').value;
-  if (!city)     { setStatus('manage-status', '⚠ Nom de ville requis', 'warn'); return; }
-  if (!startVal) { setStatus('manage-status', '⚠ Date de début requise', 'warn'); return; }
-  if (!endVal)   { setStatus('manage-status', '⚠ Date de fin requise', 'warn'); return; }
-
-  // Géocodage Nominatim du nom de ville
-  let lat = null, lon = null;
-  try {
-    const q = encodeURIComponent(city + ', France');
-    const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`, {
-      headers: { 'Accept-Language': 'fr' }
-    });
-    const results = await r.json();
-    if (results.length) {
-      lat = parseFloat(results[0].lat);
-      lon = parseFloat(results[0].lon);
-    }
-  } catch (e) { console.warn('Géocodage échoué pour', city, e); }
-
-  const normCity = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
-  const newEscale = {
-    city,
-    start: startVal,
-    end: endVal,
-    duration_h: 0,
-    ...(lat != null ? { lat: +lat.toFixed(5), lon: +lon.toFixed(5) } : {}),
-  };
-  const idx = escaleEntries.findIndex(e => normCity(e.city) === normCity(city));
-  if (idx >= 0) escaleEntries[idx] = newEscale; else escaleEntries.push(newEscale);
-  setStatus('manage-status', 'Commit escales.json…');
-  try {
-    await commitEscalesJson();
-    renderEscales();
-    $('esc-add-city').value  = '';
-    $('esc-add-start').value = '';
-    $('esc-add-end').value   = '';
-    setStatus('manage-status', `✓ Étape « ${city} » ajoutée`, 'ok');
-  } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
-});
-
 // ── Enrichissement rétroactif des villes sur photos.json existant ────────────
 async function retroEnrichCities() {
   const ghToken = $('gh-token').value.trim();
@@ -2639,12 +2531,9 @@ $('btn-retro-interp-gps').addEventListener('click', retroInterpolateGps);
 function switchManageTab(tab) {
   $('mtab-segments').classList.toggle('active', tab === 'segments');
   $('mtab-photos').classList.toggle('active',   tab === 'photos');
-  $('mtab-escales').classList.toggle('active',  tab === 'escales');
   $('manage-segments-panel').style.display = tab === 'segments' ? 'block' : 'none';
   $('manage-photos-panel').style.display   = tab === 'photos'   ? 'block' : 'none';
-  $('manage-escales-panel').style.display  = tab === 'escales'  ? 'block' : 'none';
   if (tab === 'photos')  renderManagePhotos();
-  if (tab === 'escales') renderEscales();
 }
 function refreshManagePanel() {
   const card = $('manage-card');
@@ -2657,11 +2546,9 @@ function refreshManagePanel() {
     renderSegments();
   }
   $('mtab-ph-count').textContent  = `(${photoEntries.length})`;
-  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
 }
 $('mtab-segments').addEventListener('click', () => switchManageTab('segments'));
 $('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
-$('mtab-escales').addEventListener('click',  () => switchManageTab('escales'));
 
 $('btn-refresh-manage').addEventListener('click', async () => {
   setStatus('manage-status', 'Actualisation…');
@@ -2686,7 +2573,7 @@ $('photos-reset').addEventListener('click', () => {
   $('photos-stats').style.display = 'none';
   $('unmatched-warning').style.display = 'none';
   setStatus('photos-status', 'Réinitialisé — vous pouvez redéposer les mêmes photos');
-  setStatus('pcloud-status', '');
+  setStatus('upload-status', '');
 });
 
 // Photos drop zone — supporte fichiers individuels ET dossiers

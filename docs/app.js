@@ -757,16 +757,9 @@ async function init() {
   window._refreshTimeline = refreshTimeline;
   window._refreshTimelineEscales = () => renderScrollTrack();
 
-  // Normalise les URLs photos :
-  //  1. Migre les anciennes URLs pCloud (filedn.com) vers hub.studios-voa.com:1666/files
-  //  2. Upgrade http:// → https:// si la page est en HTTPS (évite le mixed-content)
-  const HUB_BASE = 'https://hub.studios-voa.com:1666/files';
+  // Normalise les URLs photos : upgrade http:// → https:// si la page est en HTTPS (évite le mixed-content)
   function normUrl(u) {
     if (!u) return u;
-    // Migration pCloud → hub : extraire le chemin après VELOROUTE/
-    const pcloudMatch = u.match(/filedn\.com\/.+?\/VELOROUTE\/(.+)$/);
-    if (pcloudMatch) return `${HUB_BASE}/${pcloudMatch[1]}`;
-    // Mixed-content : http → https si la page est en https
     if (location.protocol === 'https:' && u.startsWith('http://')) return 'https://' + u.slice(7);
     return u;
   }
