@@ -1430,7 +1430,7 @@ async function init() {
     const btn = document.getElementById(btnId);
     if (!btn) return;
     let intervalId = null;
-    function start() { fn(); intervalId = setInterval(() => fn(), 350); }
+    function start() { fn(); intervalId = setInterval(() => fn(), 175); }
     function stop()  { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
     btn.addEventListener('mousedown', start);
     btn.addEventListener('touchstart', start, { passive: true });
