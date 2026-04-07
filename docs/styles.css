@@ -92,12 +92,18 @@
 
   /* Cartouche ville/date calé à droite au-dessus du slider */
   #photo-info {
-    bottom: 46px; font-size: 0.85em;
+    bottom: calc(46px + env(safe-area-inset-bottom)); font-size: 0.85em;
     left: auto !important; right: 10px !important; transform: none !important;
   }
 
-  /* Slider pleine largeur */
-  #scrubber-wrap { height: 32px; }
+  /* Slider pleine largeur, ancré en bas pour couvrir la home bar */
+  #scrubber-wrap {
+    height: auto;
+    bottom: 0; left: 0; right: 0;
+    border-radius: 0;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  #carousel-scrubber::-webkit-slider-thumb { width: 20px; height: 20px; margin-top: -8.5px; }
 
   /* Cacher le panel, les boutons immersif et les contrôles zoom */
   #panel, #btn-immersive { display: none !important; }
