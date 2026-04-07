@@ -81,13 +81,13 @@
 /* ── MOBILE PORTRAIT ────────────────────────────────── */
 @media (orientation: portrait) and (max-width: 1024px) {
   /* Photo bar réduit */
-  #photo-bar { height: 70px; }
+  #photo-bar { height: calc(70px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); }
   #photo-carousel { height: 70px; padding: 6px 50% 0; }
   .photo-thumb { height: 52px; }
   .video-thumb-wrap { height: 52px; }
 
   /* Carte sous le bandeau, au-dessus du slots bas */
-  #map { top: 70px !important; bottom: 80px !important;
+  #map { top: calc(70px + env(safe-area-inset-top)) !important; bottom: 80px !important;
          left: 0 !important; right: 0 !important; }
 
   /* Cartouche ville/date calé à droite au-dessus du slider */
@@ -113,13 +113,13 @@
   #mobile-title-bar, #mobile-toggle, #mobile-left { display: none !important; }
 
   /* Photo bar réduit */
-  #photo-bar { height: 72px; }
+  #photo-bar { height: calc(72px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); }
   #photo-carousel { height: 56px; padding: 4px 50% 0; }
   .photo-thumb { height: 50px; }
   .video-thumb-wrap { height: 50px; }
 
   /* Carte plein écran sous le bandeau */
-  #map { top: 72px !important; bottom: 0 !important;
+  #map { top: calc(72px + env(safe-area-inset-top)) !important; bottom: 0 !important;
          left: 0 !important; right: 0 !important; width: auto !important; }
 
   /* Cartouche ville/date calé à droite */
@@ -145,7 +145,8 @@ html, body {
 /* ── PHOTO BAR ──────────────────────────────────────── */
 #photo-bar {
   position: fixed; top: 0; left: 0; right: 0;
-  height: 100px; z-index: 400;
+  height: calc(100px + env(safe-area-inset-top)); z-index: 400;
+  padding-top: env(safe-area-inset-top);
   background: var(--banner-bg) !important;
   border-bottom: 1px solid var(--borderf);
   backdrop-filter: blur(10px);
@@ -232,7 +233,7 @@ html, body {
 /* ── MAP ────────────────────────────────────────────── */
 #map {
   position: fixed;
-  top: 100px; left: 0; right: 0; bottom: 0;
+  top: calc(100px + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0;
   z-index: 0;
 }
 
