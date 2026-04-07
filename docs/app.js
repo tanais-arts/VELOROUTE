@@ -1393,14 +1393,14 @@ async function init() {
     const pi = state.activePhotoIdx;
     if (pi > 0) {
       scrollCarouselTo(pi - 1, false);
-      selectPhotoEntry(photos[pi - 1], true);
+      selectPhotoEntry(state.photos[pi - 1], true);
     }
   }
   function navNext() {
     const pi = state.activePhotoIdx;
-    if (pi < photos.length - 1) {
+    if (pi < state.photos.length - 1) {
       scrollCarouselTo(pi + 1, false);
-      selectPhotoEntry(photos[pi + 1], true);
+      selectPhotoEntry(state.photos[pi + 1], true);
     }
   }
 
