@@ -107,7 +107,7 @@
 /* ── MOBILE LANDSCAPE ───────────────────────────────── */
 #mobile-title-bar, #mobile-toggle, #mobile-left, #mobile-teaser { display: none; }
 
-@media (orientation: landscape) and (max-height: 500px) {
+@media (orientation: landscape) and (max-height: 600px) {
   /* Masquer les éléments non pertinents sur petit écran paysage */
   #panel, #btn-immersive, #voyage-filter-wrap,
   #mobile-title-bar, #mobile-toggle, #mobile-left { display: none !important; }
@@ -432,6 +432,8 @@ body.immersive #video-stage video {
 
 body.immersive #panel         { display: none; }
 body.immersive #voyage-filter-wrap { display: none; }
+body.immersive #scrubber-wrap { display: none; }
+body.immersive #photo-info { display: none; }
 
 body.immersive #map {
   flex: 1 1 0;
@@ -618,8 +620,18 @@ body.immersive .leaflet-control-attribution { display: none; }
   height: 3px; border-radius: 2px;
   background: #f0c060;
 }
-body.immersive #scrubber-wrap,
-body.immersive #photo-info { display: none; }
+/* supprimé (déplacé plus haut avec body.immersive) */
+
+/* ── FULLSCREEN natif (bouton plein écran navigateur) ── */
+:fullscreen #voyage-filter-wrap,
+:-webkit-full-screen #voyage-filter-wrap,
+:-moz-full-screen #voyage-filter-wrap { display: none !important; }
+:fullscreen #scrubber-wrap,
+:-webkit-full-screen #scrubber-wrap,
+:-moz-full-screen #scrubber-wrap { display: none !important; }
+:fullscreen #photo-info,
+:-webkit-full-screen #photo-info,
+:-moz-full-screen #photo-info { display: none !important; }
 
 /* ── BOTTOM BAR (supprimé) ───────────────────────── */
 #bottom-bar, #timeline-bar, #panel-date { display: none; }
