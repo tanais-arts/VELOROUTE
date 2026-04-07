@@ -93,7 +93,7 @@
   /* Cartouche ville/date calé à droite au-dessus du slider */
   #photo-info {
     bottom: 46px; font-size: 0.85em;
-    left: auto; right: 10px; transform: none;
+    left: auto !important; right: 10px !important; transform: none !important;
   }
 
   /* Slider pleine largeur */
@@ -127,7 +127,7 @@
   /* Cartouche ville/date calé à droite */
   #photo-info {
     bottom: 8px; font-size: 0.85em;
-    left: auto; right: 10px; transform: none;
+    left: auto !important; right: 10px !important; transform: none !important;
   }
 }
 
