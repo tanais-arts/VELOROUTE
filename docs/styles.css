@@ -253,7 +253,7 @@ html, body {
 #voyage-filter-wrap {
   position: fixed;
   left: 90px;
-  bottom: 42px;
+  bottom: 44px;
   z-index: 1100;
 }
 #voyage-filter {
@@ -593,13 +593,13 @@ body.immersive .leaflet-control-attribution { display: none; }
 /* ── SCRUBBER CAROUSEL ──────────────────────────────── */
 #scrubber-wrap {
   position: fixed;
-  bottom: 6px; left: 50px; right: 12px;
+  bottom: 8px; left: 90px; right: 12px;
   height: 28px; z-index: 402;
   display: flex; align-items: center;
   padding: 0 12px;
-  background: rgba(4,14,32,0.72);
+  background: rgba(4,14,32,0.92);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(240,192,96,0.1);
+  border: 1px solid rgba(240,192,96,0.18);
   border-radius: 4px;
 }
 #carousel-scrubber {
@@ -623,6 +623,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 }
 #carousel-scrubber::-webkit-slider-runnable-track {
   height: 3px; border-radius: 2px;
+  background: #f0c060;
 }
 body.immersive #scrubber-wrap,
 body.immersive #photo-info { display: none; }
