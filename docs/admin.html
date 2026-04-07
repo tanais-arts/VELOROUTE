@@ -602,7 +602,7 @@
     <div class="manage-tabs">
       <button class="mtab active" id="mtab-segments">Segments GPS <span id="mtab-seg-count" style="opacity:.55">(0)</span></button>
       <button class="mtab" id="mtab-photos">Photos &amp; vidéos <span id="mtab-ph-count" style="opacity:.55">(0)</span></button>
-      <button class="mtab" id="mtab-escales">Étapes <span id="mtab-esc-count" style="opacity:.55">(0)</span></button>
+      
     </div>
     <!-- Segments panel -->
     <div id="manage-segments-panel">
@@ -642,30 +642,12 @@
       </div>
       <div class="manage-photo-list" id="manage-photo-list"></div>
     </div>
-    <!-- Étapes panel -->
-    <div id="manage-escales-panel" style="display:none">
-      <div style="display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">
-        <div class="field" style="margin:0;flex:1;min-width:120px">
-          <label>Ville</label>
-          <input type="text" id="esc-add-city" placeholder="ex : Bayeux" style="width:100%">
-        </div>
-        <div class="field" style="margin:0;flex:1;min-width:140px">
-          <label>Début</label>
-          <input type="datetime-local" id="esc-add-start" style="width:100%">
-        </div>
-        <div class="field" style="margin:0;flex:1;min-width:140px">
-          <label>Fin</label>
-          <input type="datetime-local" id="esc-add-end" style="width:100%">
-        </div>
-        <button class="btn" id="btn-esc-add" style="height:32px">+ Ajouter étape</button>
-      </div>
-      <div id="escales-list" style="margin-top:6px"></div>
-    </div>
+    <!-- Étapes panel removed per request -->
     <div class="status" id="manage-status" style="margin-top:12px"></div>
   </div>
 
   <!-- ─────────────────────── MAP PREVIEW ─────────────────────── -->
-  <div class="card">
+  <div class="card" id="preview-card">
     <div class="card-title">Prévisualisation carte</div>
     <div id="preview-map"></div>
     <div style="margin-top:10px;font-size:.72rem;color:rgba(255,255,255,.3)">
@@ -1593,8 +1575,10 @@ function serverSuccess(token, data = {}) {
     $('btn-settings-toggle').style.display = 'none';
   }
   // Masquer les zones GPX si non autorisé
-  $('gpx-card').style.display     = canEditGpx ? '' : 'none';
+  $('gpx-card').style.display      = canEditGpx ? '' : 'none';
   $('mtab-segments').style.display = canEditGpx ? '' : 'none';
+  // Masquer la prévisualisation carte si l'utilisateur ne peut pas utiliser GPX
+  if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
   $('main-content').style.display = 'flex';
   setTimeout(() => map.invalidateSize(), 100);
   try {
@@ -1880,8 +1864,9 @@ async function loadSettings() {
           $('superadmin-panel').style.display = 'none';
           $('btn-settings-toggle').style.display = 'none';
         }
-        $('gpx-card').style.display      = canEditGpx ? '' : 'none';
+        $('gpx-card').style.display       = canEditGpx ? '' : 'none';
         $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
+        if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
         $('main-content').style.display = 'flex';
         setTimeout(() => map.invalidateSize(), 100);
         loadExistingData(!!$('gh-token').value.trim());
