@@ -559,7 +559,7 @@ function previewAtTime(t) {
 function scrollCarouselTo(pi, smooth = false) {
   if (pi === state.activePhotoIdx) return;
   const carousel = document.getElementById('photo-carousel');
-  carousel.scrollTo({ left: pi * THUMB_STEP + THUMB_STEP / 2, behavior: smooth ? 'smooth' : 'instant' });
+  carousel.scrollTo({ left: pi * THUMB_STEP, behavior: smooth ? 'smooth' : 'instant' });
   const prev = state.thumbEls[state.activePhotoIdx];
   if (prev) { prev.classList.remove('active'); prev.fetchPriority = 'low'; }
   const next = state.thumbEls[pi];
