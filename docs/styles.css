@@ -99,11 +99,9 @@
   /* Slider pleine largeur */
   #scrubber-wrap { height: 32px; }
 
-  /* Cacher le panel et les boutons immersif */
+  /* Cacher le panel, les boutons immersif et les contrôles zoom */
   #panel, #btn-immersive { display: none !important; }
-
-  /* Contrôles zoom Leaflet — alignés sur le bas de la carte (déjà élevée) */
-  .leaflet-bottom.leaflet-left { bottom: 0; }
+  .leaflet-control-zoom { display: none !important; }
 }
 
 /* ── MOBILE LANDSCAPE ───────────────────────────────── */
@@ -129,6 +127,7 @@
     bottom: 8px; font-size: 0.85em;
     left: auto !important; right: 10px !important; transform: none !important;
   }
+  .leaflet-control-zoom { display: none !important; }
 }
 
 html, body {
