@@ -750,24 +750,11 @@ async function init() {
     renderScrollTrack();
   }, 0);
 
-  // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
-  function refreshTimeline() {
-    renderScrollTrack();
-  }
-  window._refreshTimeline = refreshTimeline;
-  window._refreshTimelineEscales = () => renderScrollTrack();
-
-  // Normalise les URLs photos : upgrade http:// → https:// si la page est en HTTPS (évite le mixed-content)
-  function normUrl(u) {
-    if (!u) return u;
-    if (location.protocol === 'https:' && u.startsWith('http://')) return 'https://' + u.slice(7);
-    return u;
-  }
+  // Expose pour rappel externe (ex: après import photos depuis admin)
+  window._refreshTimeline = () => renderScrollTrack();
 
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
-  state.photos  = photos
-    .filter(p => !p.hidden)
-    .map(p => ({ ...p, src: normUrl(p.src), thumb: normUrl(p.thumb), webp: normUrl(p.webp), src_orig: normUrl(p.src_orig) }));
+  state.photos  = photos.filter(p => !p.hidden);
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
