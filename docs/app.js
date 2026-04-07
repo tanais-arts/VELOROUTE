@@ -755,7 +755,7 @@ async function init() {
   window._refreshTimeline = () => renderScrollTrack();
 
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
-  state.photos  = photos.filter(p => !p.hidden);
+  state.photos  = photos.filter(p => !p.hidden).sort((a, b) => (a.photoMs ?? 0) - (b.photoMs ?? 0));
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
