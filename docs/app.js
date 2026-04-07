@@ -876,6 +876,7 @@ async function init() {
       const scrubber = document.getElementById('carousel-scrubber');
       if (scrubber) scrubber.value = clamped;
       if (clamped !== state.activePhotoIdx) {
+        state.activePhotoIdx = clamped;
         updateTimelineThumbByPhoto(clamped);
         selectPhotoEntry(state.photos[clamped], true);
       }
