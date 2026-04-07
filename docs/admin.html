@@ -400,9 +400,6 @@
   <button id="btn-logout-header">Déconnexion</button>
 </header>
 
-<div id="settings-panel" style="display:none">
-  <div id="settings-grid">
-
 <!-- ── Panneau changement de mot de passe (header) ── -->
 <div id="header-chgpw-panel" style="display:none;background:rgba(6,9,18,.98);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 32px">
   <div style="max-width:380px;margin:0 auto">
@@ -426,6 +423,9 @@
     </div>
   </div>
 </div>
+
+<div id="settings-panel" style="display:none">
+  <div id="settings-grid">
     <div class="field" style="margin:0">
       <label>Base URL CDN</label>
       <input type="text" id="cdn-base" value="https://hub.studios-voa.com:1666/files" readonly style="opacity:.5;cursor:default">
@@ -1569,6 +1569,7 @@ function serverSuccess(token, data = {}) {
   }
   // Masquer les zones GPX si non autorisé
   $('gpx-card').style.display      = canEditGpx ? '' : 'none';
+  document.querySelector('.row-2').style.gridTemplateColumns = canEditGpx ? '' : '1fr';
   $('mtab-segments').style.display = canEditGpx ? '' : 'none';
   // Masquer la prévisualisation carte si l'utilisateur ne peut pas utiliser GPX
   if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
