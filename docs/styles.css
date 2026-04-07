@@ -118,7 +118,7 @@
 
 @media (orientation: landscape) and (max-height: 500px) {
   /* Masquer les éléments non pertinents sur petit écran paysage */
-  #panel, #btn-immersive, #voyage-filter,
+  #panel, #btn-immersive, #voyage-filter-wrap,
   #mobile-title-bar, #mobile-toggle, #mobile-left { display: none !important; }
 
   /* Photo bar réduit */
@@ -250,21 +250,26 @@ html, body {
   -webkit-filter: url(#nk-blur);
 }
 
-#voyage-filter {
+#voyage-filter-wrap {
   position: fixed;
   left: 10px;
   bottom: 42px;
   z-index: 500;
-  background: rgba(4,14,32,0.82);
-  border: 1px solid rgba(240,192,96,0.35);
+}
+#voyage-filter {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(4,14,32,0.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23f0c060'/%3E%3C/svg%3E") no-repeat right 8px center / 8px 5px;
+  border: 1px solid rgba(240,192,96,0.45);
   border-radius: 5px;
   color: #f0c060;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  padding: 4px 8px;
+  padding: 5px 28px 5px 10px;
   cursor: pointer;
-  max-width: 180px;
+  max-width: 200px;
+  min-width: 120px;
 }
 
 
@@ -433,7 +438,7 @@ body.immersive #video-stage video {
 }
 
 body.immersive #panel         { display: none; }
-body.immersive #voyage-filter { display: none; }
+body.immersive #voyage-filter-wrap { display: none; }
 
 body.immersive #map {
   flex: 1 1 0;
