@@ -1566,6 +1566,12 @@ function serverSuccess(token, data = {}) {
   if (isSuperAdmin) {
     $('superadmin-panel').style.display = 'block';
     $('btn-settings-toggle').style.display = 'inline-block';
+    $('btn-save-ghtoken').style.display = 'none';
+    // Récupérer le PAT GitHub depuis le .env du serveur
+    fetch(`${serverBase()}/config`, { headers: { Authorization: `Bearer ${token}` } })
+      .then(r => r.ok ? r.json() : null)
+      .then(cfg => { if (cfg && cfg.githubPat) $('gh-token').value = cfg.githubPat; })
+      .catch(() => {});
     loadSaUsers();
   } else {
     $('superadmin-panel').style.display = 'none';

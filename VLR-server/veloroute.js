@@ -407,6 +407,12 @@ app.get('/ping', (req, res) => {
   res.json({ ok: true, time: new Date().toISOString() });
 });
 
+// ── Config (super-admin : expose le PAT GitHub stocké dans .env) ─────
+app.get('/config', requireAuth, (req, res) => {
+  if (!req.session.isSuperAdmin) return res.status(403).json({ error: 'Réservé au super-admin' });
+  res.json({ githubPat: process.env.GITHUB_PAT || '' });
+});
+
 // ── Start (HTTPS if certs available, else HTTP) ──────────────────────
 const domain   = process.env.DOMAIN || '';
 const certFile = process.env.SSL_CERT || (domain ? `/etc/letsencrypt/live/${domain}/fullchain.pem` : '');
