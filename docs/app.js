@@ -54,7 +54,7 @@ map.getContainer().addEventListener('wheel', function(e) {
   if (!_wheelTarget) {
     _wheelTarget = state.ringMarker
       ? state.ringMarker.getLatLng()
-      : map.mouseEventToLatLng(e);
+      : map.containerPointToLatLng(map.mouseEventToContainerPoint(e));
   }
   clearTimeout(_wheelTimer);
   _wheelTimer = setTimeout(() => {
