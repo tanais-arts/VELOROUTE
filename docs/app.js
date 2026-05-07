@@ -44,17 +44,25 @@ const map = L.map('map', { zoomControl: false, attributionControl: true, scrollW
   .setView([46.5, 3], 6); // France
 
 // Zoom centré sur le point sélectionné (ring) si présent, sinon sur le curseur
+// Le latlng est capturé à la 1ère molette et réutilisé pendant toute la séquence
+// (debounce 40ms comme Leaflet natif) pour éviter la dérive du centre.
+let _wheelTarget = null, _wheelTimer = null, _wheelDelta = 0;
 map.getContainer().addEventListener('wheel', function(e) {
   e.preventDefault();
-  const delta   = e.deltaY || e.detail || 0;
-  const newZoom = map.getZoom() + (delta < 0 ? 1 : -1);
-  if (state.ringMarker) {
-    map.setZoomAround(state.ringMarker.getLatLng(), newZoom);
-  } else {
-    const pt     = map.mouseEventToContainerPoint(e);
-    const latlng = map.containerPointToLatLng(pt);
-    map.setZoomAround(latlng, newZoom);
+  const delta = e.deltaY || e.detail || 0;
+  _wheelDelta += (delta < 0 ? 1 : -1);
+  if (!_wheelTarget) {
+    _wheelTarget = state.ringMarker
+      ? state.ringMarker.getLatLng()
+      : map.mouseEventToLatLng(e);
   }
+  clearTimeout(_wheelTimer);
+  _wheelTimer = setTimeout(() => {
+    const newZoom = Math.min(map.getMaxZoom(), Math.max(map.getMinZoom(), map.getZoom() + _wheelDelta));
+    map.setZoomAround(_wheelTarget, newZoom);
+    _wheelTarget = null;
+    _wheelDelta  = 0;
+  }, 40);
 }, { passive: false });
 
 // Boutons +/- : centrer sur le ring si sélectionné
