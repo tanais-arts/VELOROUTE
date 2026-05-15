@@ -6561,5 +6561,17 @@
     "city": "Berck",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_20260515_202214.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_20260515_202214.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_20260515_202214.jpg",
+    "entryIdx": 2383,
+    "caption": "2026-05-15",
+    "photoMs": 1778876534000,
+    "lat": 50.40842,
+    "lon": 1.56091,
+    "city": "Berck",
+    "author": "tom"
   }
 ]
