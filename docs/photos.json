@@ -6573,5 +6573,31 @@
     "lon": 1.56091,
     "city": "Berck",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3953.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3953.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3953.jpeg",
+    "entryIdx": 2433,
+    "caption": "2026-05-16",
+    "photoMs": 1778928718000,
+    "lat": 50.46113,
+    "lon": 1.58873,
+    "city": "Merlimont",
+    "voyage": "hauts-de-france",
+    "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3954.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3954.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3954.jpeg",
+    "entryIdx": 2465,
+    "caption": "2026-05-16",
+    "photoMs": 1778930781000,
+    "lat": 50.52036,
+    "lon": 1.58615,
+    "city": "Le Touquet-Paris-Plage",
+    "voyage": "hauts-de-france",
+    "author": "tom"
   }
 ]
