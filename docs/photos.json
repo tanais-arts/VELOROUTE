@@ -6898,5 +6898,18 @@
     "city": "Wimereux",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3970.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3970.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3970.jpeg",
+    "entryIdx": 2707,
+    "caption": "2026-05-16",
+    "photoMs": 1778962251000,
+    "lat": 50.80942,
+    "lon": 1.60734,
+    "city": "Ambleteuse",
+    "voyage": "hauts-de-france",
+    "author": "tom"
   }
 ]
