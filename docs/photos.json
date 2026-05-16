@@ -6911,5 +6911,18 @@
     "city": "Ambleteuse",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_20260516_204353.jpg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_20260516_204353.jpg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_20260516_204353.jpg",
+    "entryIdx": 2707,
+    "caption": "2026-05-16",
+    "photoMs": 1778964235000,
+    "lat": 50.80939,
+    "lon": 1.60733,
+    "city": "Ambleteuse",
+    "voyage": "hauts-de-france",
+    "author": "tom"
   }
 ]
