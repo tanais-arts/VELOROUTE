@@ -6924,5 +6924,44 @@
     "city": "Ambleteuse",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3971.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3971.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3971.jpeg",
+    "entryIdx": 2742,
+    "caption": "2026-05-17",
+    "photoMs": 1779012308000,
+    "lat": 50.83755,
+    "lon": 1.60704,
+    "city": "Audresselles",
+    "voyage": "hauts-de-france",
+    "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3972.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3972.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3972.jpeg",
+    "entryIdx": 2800,
+    "caption": "2026-05-17",
+    "photoMs": 1779015808000,
+    "lat": 50.86148,
+    "lon": 1.63141,
+    "city": "Tardinghen",
+    "voyage": "hauts-de-france",
+    "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3974.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3974.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3974.jpeg",
+    "entryIdx": 2805,
+    "caption": "2026-05-17",
+    "photoMs": 1779016102000,
+    "lat": 50.86456,
+    "lon": 1.63751,
+    "city": "Tardinghen",
+    "voyage": "hauts-de-france",
+    "author": "tom"
   }
 ]
