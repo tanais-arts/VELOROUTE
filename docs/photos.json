@@ -7287,5 +7287,19 @@
     "city": "Calais",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_3985.mov",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_3985.mp4",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_3985.mov",
+    "entryIdx": 3006,
+    "caption": "2026-05-17",
+    "photoMs": 1779053620000,
+    "lat": 48.77292,
+    "lon": 2.3767,
+    "city": "Vitry-sur-Seine",
+    "type": "video",
+    "voyage": "hauts-de-france",
+    "author": "tom"
   }
 ]
