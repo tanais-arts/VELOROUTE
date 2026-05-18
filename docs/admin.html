@@ -549,6 +549,13 @@
           style="padding:3px 8px;font-size:.72rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">✕</button>
       </div>
 
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:5px 8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:6px">
+        <span style="font-size:.72rem;color:rgba(255,255,255,.45);white-space:nowrap">📁 Sous-dossier&nbsp;:</span>
+        <input type="text" id="photo-subfolder" placeholder="ex : bretagne-2025" autocomplete="off" spellcheck="false"
+          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#eee;padding:3px 8px;font-size:.76rem"
+          title="Rempli automatiquement depuis le nom du dossier droppé · Modifiable manuellement">
+      </div>
+
       <div class="drop-zone" id="photos-drop">
         <input type="file" id="photos-input" accept="image/*,.mov,.mp4,.m4v" multiple>
         <input type="file" id="photos-folder-input" accept="image/*,.mov,.mp4,.m4v" multiple webkitdirectory style="display:none">
