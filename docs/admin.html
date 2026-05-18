@@ -1539,7 +1539,7 @@ async function githubPutFile(path, content, message, ghToken, retries = 3) {
       headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ path, content, message })
     });
-    const j = await r.json();
+    const j = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(j.error || `Serveur ${r.status}`);
     try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
     return;
