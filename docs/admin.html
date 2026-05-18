@@ -349,6 +349,11 @@
       .btn-row { gap: 6px; }
       .btn { font-size: 0.62rem; padding: 6px 12px; }
 
+      /* Escales compact */
+      #manage-escales-panel > div:first-child { flex-direction: column; gap: 6px; }
+      #manage-escales-panel input[type="text"],
+      #manage-escales-panel input[type="datetime-local"] { font-size: 0.76rem; padding: 6px 8px; }
+
       /* Help text */
       .help { font-size: 0.66rem; }
 
@@ -382,7 +387,41 @@
     <button id="btn-server-login">🔑 Se connecter</button>
     <div class="status" id="login-status"></div>
 
+    <div style="text-align:center;margin-top:14px">
+      <button type="button" id="btn-show-chgpw"
+        style="background:none;border:none;color:rgba(255,255,255,.3);font-size:.65rem;cursor:pointer;text-decoration:underline;padding:0"
+        >Changer le mot de passe</button>
+    </div>
 
+    <!-- ── Formulaire changement de mot de passe ── -->
+    <div id="chgpw-form" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)">
+      <div style="font-size:.66rem;letter-spacing:.08em;color:rgba(240,192,96,.5);text-transform:uppercase;margin-bottom:10px">Changer le mot de passe</div>
+      <div class="field">
+        <label>Login</label>
+        <input type="text" id="chgpw-login" placeholder="ex : tom" autocomplete="username" spellcheck="false">
+      </div>
+      <div class="field">
+        <label>Mot de passe actuel</label>
+        <input type="password" id="chgpw-current" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <div class="field">
+        <label>Nouveau mot de passe</label>
+        <input type="password" id="chgpw-new" placeholder="••••••••" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label>Confirmer le nouveau mot de passe</label>
+        <input type="password" id="chgpw-confirm" placeholder="••••••••" autocomplete="new-password">
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+        <button type="button" id="btn-chgpw-submit"
+          style="flex:1;padding:9px;background:rgba(240,192,96,.15);border:1px solid rgba(240,192,96,.4);border-radius:5px;color:#f0c060;font-size:.75rem;cursor:pointer;letter-spacing:.06em"
+          >🔐 Valider</button>
+        <button type="button" id="btn-chgpw-cancel"
+          style="padding:9px 14px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.35);font-size:.72rem;cursor:pointer"
+          >✕</button>
+      </div>
+      <div class="status" id="chgpw-status" style="margin-top:8px"></div>
+    </div>
   </div>
 </div>
 
@@ -393,36 +432,9 @@
   <a href="index.html">← Retour carte</a>
   <button id="btn-settings-toggle"
     onclick="const p=document.getElementById('settings-panel');p.style.display=p.style.display==='none'?'block':'none'"
-    style="display:none;font-size:.7rem;letter-spacing:.08em;color:rgba(240,192,96,.5);background:none;border:1px solid rgba(240,192,96,.2);padding:5px 12px;border-radius:4px;cursor:pointer">⚙ Réglages</button>
-  <button id="btn-header-chgpw"
-    style="font-size:.7rem;letter-spacing:.08em;color:rgba(255,255,255,.4);background:none;border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:4px;cursor:pointer"
-    onclick="toggleHeaderChgpw()">🔑 MDP</button>
+    style="font-size:.7rem;letter-spacing:.08em;color:rgba(240,192,96,.5);background:none;border:1px solid rgba(240,192,96,.2);padding:5px 12px;border-radius:4px;cursor:pointer">⚙ Réglages</button>
   <button id="btn-logout-header">Déconnexion</button>
 </header>
-
-<!-- ── Panneau changement de mot de passe (header) ── -->
-<div id="header-chgpw-panel" style="display:none;background:rgba(6,9,18,.98);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 32px">
-  <div style="max-width:380px;margin:0 auto">
-    <div style="font-size:.66rem;letter-spacing:.1em;color:rgba(240,192,96,.6);text-transform:uppercase;margin-bottom:12px">Changer mon mot de passe</div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <input type="password" id="hchgpw-current" placeholder="Mot de passe actuel" autocomplete="current-password"
-        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
-      <input type="password" id="hchgpw-new" placeholder="Nouveau mot de passe (min. 6 car.)" autocomplete="new-password"
-        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
-      <input type="password" id="hchgpw-confirm" placeholder="Confirmer le nouveau mot de passe" autocomplete="new-password"
-        style="padding:8px 10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#fff;font-size:.78rem">
-      <div style="display:flex;gap:8px;margin-top:2px">
-        <button type="button" onclick="submitHeaderChgpw()"
-          style="flex:1;padding:8px;background:rgba(240,192,96,.15);border:1px solid rgba(240,192,96,.4);border-radius:5px;color:#f0c060;font-size:.74rem;cursor:pointer">
-          ✓ Valider</button>
-        <button type="button" onclick="toggleHeaderChgpw()"
-          style="padding:8px 14px;background:none;border:1px solid rgba(255,255,255,.15);border-radius:5px;color:rgba(255,255,255,.35);font-size:.72rem;cursor:pointer">
-          ✕</button>
-      </div>
-      <div id="hchgpw-status" style="font-size:.7rem;min-height:1em"></div>
-    </div>
-  </div>
-</div>
 
 <div id="settings-panel" style="display:none">
   <div id="settings-grid">
@@ -449,7 +461,7 @@
 </div>
 
 <!-- ── Super-admin : gestion des utilisateurs ── -->
-<div id="superadmin-panel" style="display:none;max-width:960px;margin:24px auto;padding:20px 24px;background:rgba(0,0,0,.35);border:1px solid rgba(240,192,96,.15);border-radius:8px">
+<div id="superadmin-panel" style="display:none;max-width:600px;margin:24px auto;padding:20px 24px;background:rgba(0,0,0,.35);border:1px solid rgba(240,192,96,.15);border-radius:8px">
   <div style="font-size:.75rem;letter-spacing:.12em;color:rgba(240,192,96,.6);text-transform:uppercase;margin-bottom:16px">⚙ Super-admin — Gestion des utilisateurs</div>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:end;margin-bottom:16px">
     <div class="field" style="margin:0">
@@ -466,6 +478,10 @@
         <input type="password" id="sa-new-ghtoken" placeholder="ghp_…" style="width:100%">
       </div>
       <button id="btn-sa-gen-pat" type="button" style="font-size:.68rem;padding:6px 10px;background:rgba(100,180,240,.06);border:1px solid rgba(100,180,240,.18);border-radius:4px;color:rgba(140,200,255,.85);cursor:pointer;white-space:nowrap">🧾 Générer PAT</button>
+      <label style="display:flex;align-items:center;gap:5px;font-size:.68rem;color:rgba(255,200,100,.8);white-space:nowrap;cursor:pointer" title="Autoriser l'import de fichiers GPX et l'édition de travel.json">
+        <input type="checkbox" id="sa-new-can-gpx" style="accent-color:#f0c060;width:14px;height:14px">
+        GPX
+      </label>
       <button id="btn-sa-create-user" style="font-size:.7rem;padding:7px 14px;background:rgba(80,210,120,.1);border:1px solid rgba(80,210,120,.3);border-radius:4px;color:rgba(80,210,120,.8);cursor:pointer;white-space:nowrap">+ Créer</button>
     </div>
   </div>
@@ -479,7 +495,7 @@
   <div class="row-2">
 
     <!-- ① GPX -->
-    <div class="card" id="gpx-card">
+    <div class="card">
       <div class="card-title"><span class="step-num">1</span> Tracé GPS — fichier GPX</div>
 
       <div class="drop-zone" id="gpx-drop">
@@ -533,12 +549,6 @@
           style="padding:3px 8px;font-size:.72rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);cursor:pointer">✕</button>
       </div>
 
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:5px 8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:6px">
-        <span style="font-size:.72rem;color:rgba(255,255,255,.45);white-space:nowrap">📁 Sous-dossier&nbsp;:</span>
-        <input type="text" id="photo-subfolder" placeholder="ex : bretagne-2025" autocomplete="off" spellcheck="false"
-          style="flex:1;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#eee;padding:3px 8px;font-size:.76rem"
-          title="Rempli automatiquement depuis le nom du dossier droppé · Modifiable manuellement">
-      </div>
       <div class="drop-zone" id="photos-drop">
         <input type="file" id="photos-input" accept="image/*,.mov,.mp4,.m4v" multiple>
         <input type="file" id="photos-folder-input" accept="image/*,.mov,.mp4,.m4v" multiple webkitdirectory style="display:none">
@@ -578,11 +588,11 @@
 
       <div class="photo-grid" id="photo-grid"></div>
 
-      <div class="progress-wrap" id="upload-progress-wrap" style="display:none;margin-top:8px">
-        <div class="progress-bar" id="upload-progress-bar"></div>
+      <div class="progress-wrap" id="pcloud-progress-wrap" style="display:none;margin-top:8px">
+        <div class="progress-bar" id="pcloud-progress-bar"></div>
       </div>
       <button id="btn-stop-upload" style="display:none;margin-top:6px" class="small">⏹ Stopper l'upload</button>
-      <div class="status" id="upload-status" style="margin-top:4px"></div>
+      <div class="status" id="pcloud-status" style="margin-top:4px"></div>
       <div class="status" id="actions-status" style="margin-top:2px"></div>
     </div>
 
@@ -597,7 +607,7 @@
     <div class="manage-tabs">
       <button class="mtab active" id="mtab-segments">Segments GPS <span id="mtab-seg-count" style="opacity:.55">(0)</span></button>
       <button class="mtab" id="mtab-photos">Photos &amp; vidéos <span id="mtab-ph-count" style="opacity:.55">(0)</span></button>
-      
+      <button class="mtab" id="mtab-escales">Étapes <span id="mtab-esc-count" style="opacity:.55">(0)</span></button>
     </div>
     <!-- Segments panel -->
     <div id="manage-segments-panel">
@@ -616,8 +626,7 @@
         <button class="btn" id="btn-ph-hide">👁 Masquer</button>
         <button class="btn danger" id="btn-ph-delete">🗑 Supprimer</button>
         <span style="font-size:.7rem;color:rgba(255,255,255,.35);margin-left:4px" id="ph-selection-count"></span>
-        <button class="btn" id="btn-retro-enrich">🌍 Enrichir villes manquantes</button>
-        <button class="btn" id="btn-retro-interp-gps" style="margin-left:8px" title="Interpoler les coords GPS des photos sans GPS à partir des voisins temporels">📍 GPS manquants → interpoler</button>
+        <button class="btn" id="btn-retro-enrich" style="margin-left:auto">🌍 Enrichir villes manquantes</button>
       </div>
       <div style="display:flex;align-items:center;gap:6px;padding:5px 8px;margin-bottom:4px;background:rgba(240,192,96,.04);border:1px solid rgba(240,192,96,.14);border-radius:6px">
         <span style="font-size:.72rem;color:rgba(240,192,96,.6);white-space:nowrap">🔍 Filtre :</span>
@@ -637,12 +646,30 @@
       </div>
       <div class="manage-photo-list" id="manage-photo-list"></div>
     </div>
-    <!-- Étapes panel removed per request -->
+    <!-- Étapes panel -->
+    <div id="manage-escales-panel" style="display:none">
+      <div style="display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">
+        <div class="field" style="margin:0;flex:1;min-width:120px">
+          <label>Ville</label>
+          <input type="text" id="esc-add-city" placeholder="ex : Bayeux" style="width:100%">
+        </div>
+        <div class="field" style="margin:0;flex:1;min-width:140px">
+          <label>Début</label>
+          <input type="datetime-local" id="esc-add-start" style="width:100%">
+        </div>
+        <div class="field" style="margin:0;flex:1;min-width:140px">
+          <label>Fin</label>
+          <input type="datetime-local" id="esc-add-end" style="width:100%">
+        </div>
+        <button class="btn" id="btn-esc-add" style="height:32px">+ Ajouter étape</button>
+      </div>
+      <div id="escales-list" style="margin-top:6px"></div>
+    </div>
     <div class="status" id="manage-status" style="margin-top:12px"></div>
   </div>
 
   <!-- ─────────────────────── MAP PREVIEW ─────────────────────── -->
-  <div class="card" id="preview-card">
+  <div class="card">
     <div class="card-title">Prévisualisation carte</div>
     <div id="preview-map"></div>
     <div style="margin-top:10px;font-size:.72rem;color:rgba(255,255,255,.3)">
@@ -663,6 +690,7 @@ const MONTHS_FR  = ['','janv.','févr.','mars','avr.','mai','juin','juil.','aoû
 let travelEntries = [];  // final travel.json objects
 let photoEntries  = [];  // final photos.json objects
 let visitedCities = [];  // final visited.json objects
+let escaleEntries = [];  // final escales.json objects
 let voyageEntries = [];  // final voyages.json objects
 let rawPhotos     = [];  // { file, photoMs, lat, lon, captionDate, entryIdx, thumb }
 let currentVoyageId = ''; // voyage sélectionné au moment du traitement
@@ -898,16 +926,12 @@ function nearestEntryIdx(photoMs) {
   return bestDiff <= MATCH_MAX_MS ? best : null;
 }
 
-function nearestEntryIdxByPos(lat, lon, photoMs) {
+function nearestEntryIdxByPos(lat, lon) {
   if (!travelEntries.length) return null;
-  const MAX_DEG_SQ = 0.5 * 0.5;       // ~55km max en degrés²
-  const MAX_TIME_MS = 24 * 3600 * 1000; // 24h — le temps est prioritaire
-  let best = null, bestD = Infinity;
+  let best = 0, bestD = Infinity;
   travelEntries.forEach((e, i) => {
-    // Filtre temporel strict en premier : si photoMs connu, l'entry doit être dans les 24h
-    if (photoMs != null && Math.abs(entryToMs(e) - photoMs) > MAX_TIME_MS) return;
     const d = (e.lat - lat) ** 2 + (e.lon - lon) ** 2;
-    if (d < MAX_DEG_SQ && d < bestD) { bestD = d; best = i; }
+    if (d < bestD) { bestD = d; best = i; }
   });
   return best;
 }
@@ -915,20 +939,18 @@ function nearestEntryIdxByPos(lat, lon, photoMs) {
 // ── Photo URL helpers ─────────────────────────────────────────────────
 const CDN_BASE = 'https://hub.studios-voa.com:1666/files';
 function buildUrl(filename, type) {
-  const base   = CDN_BASE;
-  const sub    = $('photo-subfolder').value.trim();
-  const name   = encodeURIComponent(filename);
+  const base = CDN_BASE;
+  const sub  = $('photo-subfolder').value.trim();
+  const name = encodeURIComponent(filename);
   const folder = sub ? `/${encodeURIComponent(sub)}` : '';
-  const udir   = serverStorageDir ? `/${serverStorageDir}` : '';
-  return `${base}${udir}/${type}${folder}/${name}`;
+  return `${base}/${type}${folder}/${name}`;
 }
 
 // Variante avec subfolder explicite
 function buildUrlWith(filename, type, subfolder) {
-  const base   = CDN_BASE;
+  const base = CDN_BASE;
   const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
-  const udir   = serverStorageDir ? `/${serverStorageDir}` : '';
-  return `${base}${udir}/${type}${folder}/${encodeURIComponent(filename)}`;
+  return `${base}/${type}${folder}/${encodeURIComponent(filename)}`;
 }
 
 // Normalise l'extension vers .jpg (HEIC, PNG… → toujours JPEG après resize)
@@ -969,8 +991,8 @@ function matchPhotosToTravel() {
   let matchedCount = 0;
   rawPhotos.forEach(p => {
     if (p.lat != null && p.lon != null) {
-      // Photo avec GPS EXIF → match par position + filtre temporel 24h
-      p.entryIdx = nearestEntryIdxByPos(p.lat, p.lon, p.photoMs);
+      // Photo avec GPS EXIF → match par position (précis, pas besoin de GPX)
+      p.entryIdx = nearestEntryIdxByPos(p.lat, p.lon);
       if (p.entryIdx != null) matchedCount++;
     } else if (p.photoMs != null) {
       // Pas de GPS EXIF → match par temps sur le GPX
@@ -1018,7 +1040,6 @@ function buildPhotoEntries() {
         ...(p.city ? { city: p.city } : {}),
         ...(p.type === 'video' ? { type: 'video' } : {}),
         ...(currentVoyageId ? { voyage: currentVoyageId } : {}),
-        ...(serverStorageDir ? { author: serverStorageDir } : {}),
       };
     });
   $('stat-matched').textContent = photoEntries.length;
@@ -1328,13 +1349,12 @@ async function enrichPhotoCities() {
     first = false;
     try {
       const r = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=14`,
+        `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
         { headers: { 'Accept-Language': 'fr' } }
       );
       const data = await r.json();
-      const a = data.address || {};
-      const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
-                    a.municipality || a.county || '';
+      const place = data.address?.city || data.address?.town || data.address?.village ||
+                    data.address?.county || '';
       if (place) { _admLocCache[key] = place; p.city = place; }
     } catch {}
   }
@@ -1364,7 +1384,12 @@ function renderPhotoMarkers() {
   });
 }
 
-
+// ── CDN input changes → rebuild photo URLs ─────────────────────────────
+['photo-subfolder'].forEach(id => {
+  $(id).addEventListener('input', () => {
+    if (rawPhotos.length) buildPhotoEntries();
+  });
+});
 
 function updateExport() { /* no-op — tout est auto-commité */ }
 
@@ -1417,6 +1442,7 @@ async function loadExistingData(useApi = false) {
     visitedCities = await fetchJson('visited.json');
     vCount = visitedCities.length;
   } catch {}
+  try { escaleEntries = await fetchJson('escales.json'); } catch {}
   try {
     voyageEntries = await fetchJson('voyages.json');
     const sel = $('photo-voyage');
@@ -1453,19 +1479,25 @@ function deduplicateTravel(newEntries) {
 // ── Auto-commit travel.json → GitHub ─────────────────────────────────
 async function loadRepoJsonDirect(filename) {
   const ghToken = $('gh-token').value.trim();
-  const r = await fetch(`https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs/${filename}`, {
-    headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
-  });
-  if (!r.ok) throw new Error(`GitHub ${r.status}`);
-  const j = await r.json();
-  const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
-  return JSON.parse(new TextDecoder().decode(bytes));
+  if (ghToken) {
+    const r = await fetch(`https://api.github.com/repos/tanais-arts/VELOROUTE/contents/docs/${filename}`, {
+      headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!r.ok) throw new Error(`GitHub ${r.status}`);
+    const j = await r.json();
+    const bytes = Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+  // Fallback : URL publique (pas de token requis)
+  const r = await fetch(`https://raw.githubusercontent.com/tanais-arts/VELOROUTE/main/docs/${filename}?_=${Date.now()}`);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
 }
 
 async function commitPhotosJsonMerged() {
   if (!photoEntries.length) return;
   const ghToken = $('gh-token').value.trim();
-  if (!ghToken) { setStatus('upload-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
+  if (!ghToken) { setStatus('pcloud-status', '⚠ Token GitHub manquant — photos.json non commité', 'warn'); return; }
   try {
     const existing = await loadRepoJsonDirect('photos.json').catch(() => []);
     // Déduplication par photoMs (timestamp unique) — gère les noms de fichiers identiques
@@ -1486,14 +1518,28 @@ async function commitPhotosJsonMerged() {
     });
     await githubPutFile('docs/photos.json', JSON.stringify(merged, null, 2), `admin: photos.json — ${merged.length} entrée(s)`, ghToken);
     photoEntries = merged;
-    setStatus('upload-status', `✓ photos.json commité (${merged.length} entrée(s))`, 'ok');
+    setStatus('pcloud-status', `✓ photos.json commité (${merged.length} entrée(s))`, 'ok');
   } catch (err) {
-    setStatus('upload-status', `⚠ Commit photos.json échoué : ${err.message}`, 'warn');
+    setStatus('pcloud-status', `⚠ Commit photos.json échoué : ${err.message}`, 'warn');
   }
 }
 
 async function githubPutFile(path, content, message, ghToken, retries = 3) {
+  // ── Proxy via VLR-server (aucun token GitHub requis côté client) ──
+  if (serverToken) {
+    const r = await fetch(`${serverBase()}/github/commit`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path, content, message })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || `Serveur ${r.status}`);
+    try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
+    return;
+  }
+  // ── Fallback : commit direct depuis le navigateur ─────────────────
   const owner = 'tanais-arts', repo = 'VELOROUTE';
+  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
   const b64 = btoa(unescape(encodeURIComponent(content)));
   for (let attempt = 0; attempt < retries; attempt++) {
     const getR = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
@@ -1510,11 +1556,10 @@ async function githubPutFile(path, content, message, ghToken, retries = 3) {
       try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
       return;
     }
-    if (putR.status === 409) continue; // SHA conflict → retry avec SHA frais (toujours)
+    if (putR.status === 409) continue; // SHA conflict → retry avec SHA frais
     const e = await putR.json().catch(() => ({}));
     throw new Error(`GitHub ${putR.status}: ${e.message || ''}`);
   }
-  // Tous les retries épuisés sur 409 : considéré comme commit réussi
   try { localStorage.setItem('veloroute_bust', Date.now()); } catch {}
 }
 
@@ -1534,10 +1579,8 @@ async function uploadAndProcess() {
   await uploadToServer();
 }
 
-let serverToken      = null;
-let isSuperAdmin     = false;
-let canEditGpx       = false;
-let serverStorageDir = '';
+let serverToken  = null;
+let isSuperAdmin = false;
 let pendingSyncAfterLogin = false;
 
 function serverBase() {
@@ -1551,10 +1594,8 @@ function serverBase() {
 })();
 
 function serverSuccess(token, data = {}) {
-  serverToken      = token;
-  isSuperAdmin     = !!data.isSuperAdmin;
-  canEditGpx       = isSuperAdmin || !!data.canEditGpx;
-  serverStorageDir = data.storageDir || '';
+  serverToken  = token;
+  isSuperAdmin = !!data.isSuperAdmin;
   $('server-password').value = '';
   if ($('server-login')) $('server-login').value = '';
   $('login-overlay').style.display = 'none';
@@ -1562,36 +1603,23 @@ function serverSuccess(token, data = {}) {
   $('btn-logout-header').style.display = 'inline-block';
   $('header-user').textContent = data.login ? `· ${data.login}` : '· VLR-server';
   setStatus('login-status', '');
-  if (data.ghToken) $('gh-token').value = data.ghToken;
   if (isSuperAdmin) {
     $('superadmin-panel').style.display = 'block';
-    $('btn-settings-toggle').style.display = 'inline-block';
-    $('btn-save-ghtoken').style.display = 'none';
-    // Récupérer le PAT GitHub depuis le .env du serveur
-    fetch(`${serverBase()}/config`, { headers: { Authorization: `Bearer ${token}` } })
-      .then(r => r.ok ? r.json() : null)
-      .then(cfg => { if (cfg && cfg.githubPat) $('gh-token').value = cfg.githubPat; })
-      .catch(() => {});
+    $('main-content').style.display = 'none';
     loadSaUsers();
   } else {
+    if (data.ghToken) $('gh-token').value = data.ghToken;
     $('superadmin-panel').style.display = 'none';
-    $('btn-settings-toggle').style.display = 'none';
+    $('main-content').style.display = 'flex';
+    setTimeout(() => map.invalidateSize(), 100);
   }
-  // Masquer les zones GPX si non autorisé
-  $('gpx-card').style.display      = canEditGpx ? '' : 'none';
-  document.querySelector('.row-2').style.gridTemplateColumns = canEditGpx ? '' : '1fr';
-  $('mtab-segments').style.display = canEditGpx ? '' : 'none';
-  // Masquer la prévisualisation carte si l'utilisateur ne peut pas utiliser GPX
-  if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
-  $('main-content').style.display = 'flex';
-  setTimeout(() => map.invalidateSize(), 100);
   try {
     const _s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
     _s.serverToken = token;
     _s.serverLogin = data.login || '';
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(_s));
   } catch {}
-  loadExistingData(!!$('gh-token').value.trim());
+  if (!isSuperAdmin) loadExistingData(!!$('gh-token').value.trim());
 }
 
 async function serverLogin() {
@@ -1650,22 +1678,43 @@ async function serverLogout() {
   } catch {}
 }
 
-function toggleHeaderChgpw() {
-  const p = $('header-chgpw-panel');
-  const visible = p.style.display !== 'none';
-  p.style.display = visible ? 'none' : 'block';
-  if (!visible) { $('hchgpw-current').focus(); setStatus('hchgpw-status', ''); }
-}
+$('btn-server-login').addEventListener('click', serverLogin);
+$('btn-logout-header').addEventListener('click', serverLogout);
+$('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
+if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
 
-async function submitHeaderChgpw() {
-  const currentPassword = $('hchgpw-current').value;
-  const newPassword     = $('hchgpw-new').value;
-  const confirmPassword = $('hchgpw-confirm').value;
-  const login = (JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}').serverLogin || '').trim();
-  if (!currentPassword || !newPassword) return setStatus('hchgpw-status', 'Champs requis.', 'error');
-  if (newPassword !== confirmPassword) return setStatus('hchgpw-status', 'Les mots de passe ne correspondent pas.', 'error');
-  if (newPassword.length < 6) return setStatus('hchgpw-status', 'Min. 6 caractères.', 'error');
-  setStatus('hchgpw-status', 'Mise à jour…');
+// ── Changement de mot de passe ────────────────────────────────────────
+$('btn-show-chgpw').addEventListener('click', () => {
+  const f = $('chgpw-form');
+  const visible = f.style.display !== 'none';
+  f.style.display = visible ? 'none' : 'block';
+  if (!visible) {
+    // pré-remplir le login depuis le champ de connexion
+    const l = ($('server-login')?.value || '').trim();
+    if (l) $('chgpw-login').value = l;
+    $('chgpw-current').focus();
+    setStatus('chgpw-status', '');
+  }
+});
+
+$('btn-chgpw-cancel').addEventListener('click', () => {
+  $('chgpw-form').style.display = 'none';
+  setStatus('chgpw-status', '');
+});
+
+async function changePassword() {
+  const login           = $('chgpw-login').value.trim();
+  const currentPassword = $('chgpw-current').value;
+  const newPassword     = $('chgpw-new').value;
+  const confirmPassword = $('chgpw-confirm').value;
+  if (!login || !currentPassword || !newPassword)
+    return setStatus('chgpw-status', 'Tous les champs sont requis.', 'error');
+  if (newPassword !== confirmPassword)
+    return setStatus('chgpw-status', 'Les nouveaux mots de passe ne correspondent pas.', 'error');
+  if (newPassword.length < 6)
+    return setStatus('chgpw-status', 'Le mot de passe doit contenir au moins 6 caractères.', 'error');
+  $('btn-chgpw-submit').disabled = true;
+  setStatus('chgpw-status', 'Mise à jour…');
   try {
     const r = await fetch(`${serverBase()}/auth/change-password`, {
       method: 'POST',
@@ -1674,21 +1723,17 @@ async function submitHeaderChgpw() {
     });
     const j = await r.json();
     if (!r.ok) throw new Error(j.error);
-    setStatus('hchgpw-status', '✓ Mot de passe modifié.', 'ok');
-    $('hchgpw-current').value = ''; $('hchgpw-new').value = ''; $('hchgpw-confirm').value = '';
-    setTimeout(() => { $('header-chgpw-panel').style.display = 'none'; setStatus('hchgpw-status', ''); }, 2000);
+    setStatus('chgpw-status', '✓ Mot de passe modifié avec succès.', 'ok');
+    $('chgpw-current').value = ''; $('chgpw-new').value = ''; $('chgpw-confirm').value = '';
+    setTimeout(() => { $('chgpw-form').style.display = 'none'; setStatus('chgpw-status', ''); }, 2000);
   } catch (err) {
-    setStatus('hchgpw-status', err.message || 'Erreur.', 'error');
+    setStatus('chgpw-status', err.message || 'Erreur.', 'error');
   }
+  $('btn-chgpw-submit').disabled = false;
 }
 
-$('btn-server-login').addEventListener('click', serverLogin);
-$('btn-logout-header').addEventListener('click', serverLogout);
-$('server-password').addEventListener('keydown', e => { if (e.key === 'Enter') serverLogin(); });
-if ($('server-login')) $('server-login').addEventListener('keydown', e => { if (e.key === 'Enter') $('server-password').focus(); });
-
-window.toggleHeaderChgpw = toggleHeaderChgpw;
-window.submitHeaderChgpw = submitHeaderChgpw;
+$('btn-chgpw-submit').addEventListener('click', changePassword);
+$('chgpw-confirm').addEventListener('keydown', e => { if (e.key === 'Enter') changePassword(); });
 
 // ── Super-admin : gestion des utilisateurs ────────────────────────────────────
 async function loadSaUsers() {
@@ -1697,17 +1742,15 @@ async function loadSaUsers() {
     const j = await r.json();
     const list = $('sa-users-list');
     if (!j.users?.length) { list.textContent = 'Aucun utilisateur.'; return; }
-    list.innerHTML = j.users.map(u => {
-      const chk = u.canEditGpx ? 'checked' : '';
-      return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
-        + `<span style="min-width:90px;font-weight:600;color:#eee">${u.login}</span>`
-        + `<span style="color:rgba(255,255,255,.3);font-size:.64rem;flex:1">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
-        + `<label style="display:flex;align-items:center;gap:5px;font-size:.7rem;color:rgba(240,192,96,.85);cursor:pointer;white-space:nowrap" title="Autoriser GPX">`
-        +   `<input type="checkbox" ${chk} style="accent-color:#f0c060;width:14px;height:14px" onchange="toggleUserGpx('${u.login}', this)"> GPX</label>`
-        + `<button onclick="resetSaUserPassword('${u.login}')" style="font-size:.65rem;padding:3px 10px;background:rgba(100,180,240,.07);border:1px solid rgba(100,180,240,.22);border-radius:3px;color:rgba(140,200,255,.75);cursor:pointer">🔑 MDP</button>`
-        + `<button onclick="deleteSaUser('${u.login}')" style="font-size:.65rem;padding:3px 10px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
-        + `</div>`;
-    }).join('');
+    list.innerHTML = j.users.map(u =>
+      `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.06)">`
+      + `<span style="min-width:80px;font-weight:600;color:#eee">${u.login}</span>`
+      + `<span style="color:rgba(255,255,255,.35);font-size:.66rem">${u.storageDir ? `storage/${u.storageDir}/` : 'storage/'}</span>`
+      + (u.canEditGpx ? `<span style="font-size:.62rem;padding:1px 6px;background:rgba(240,192,96,.12);border:1px solid rgba(240,192,96,.3);border-radius:10px;color:rgba(240,192,96,.8)">GPX</span>` : '')
+      + `<button onclick="resetSaUserPassword('${u.login}')" style="margin-left:auto;font-size:.65rem;padding:2px 8px;background:rgba(100,180,240,.07);border:1px solid rgba(100,180,240,.22);border-radius:3px;color:rgba(140,200,255,.75);cursor:pointer">🔑 MDP</button>`
+      + `<button onclick="deleteSaUser('${u.login}')" style="font-size:.65rem;padding:2px 8px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;color:rgba(255,100,80,.8);cursor:pointer">🗑 Supprimer</button>`
+      + `</div>`
+    ).join('');
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 }
 
@@ -1728,28 +1771,6 @@ async function resetSaUserPassword(login) {
 }
 window.resetSaUserPassword = resetSaUserPassword;
 
-async function toggleUserGpx(login, checkbox) {
-  const canEditGpx = checkbox.checked;
-  if (!confirm(`${canEditGpx ? 'Autoriser' : 'Retirer'} l'accès GPX pour « ${login} » ?`)) {
-    checkbox.checked = !canEditGpx; // annulé → revenir à l'état précédent
-    return;
-  }
-  try {
-    const r = await fetch(`${serverBase()}/users/${encodeURIComponent(login)}/gpx`, {
-      method: 'PATCH',
-      headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ canEditGpx })
-    });
-    const j = await r.json();
-    if (!r.ok) throw new Error(j.error);
-    setStatus('sa-status', `✓ GPX de « ${login} » : ${canEditGpx ? 'autorisé' : 'retiré'}`, 'ok');
-  } catch (e) {
-    checkbox.checked = !canEditGpx; // erreur → revert
-    setStatus('sa-status', `Erreur : ${e.message}`, 'error');
-  }
-}
-window.toggleUserGpx = toggleUserGpx;
-
 async function deleteSaUser(login) {
   if (!confirm(`Supprimer l'utilisateur « ${login} » ?\nSes données sur le serveur ne seront PAS supprimées.`)) return;
   try {
@@ -1765,20 +1786,22 @@ async function deleteSaUser(login) {
 window.deleteSaUser = deleteSaUser;
 
 $('btn-sa-create-user').addEventListener('click', async () => {
-  const login    = $('sa-new-login').value.trim();
-  const password = $('sa-new-password').value.trim();
-  const ghToken  = $('sa-new-ghtoken').value.trim();
+  const login      = $('sa-new-login').value.trim();
+  const password   = $('sa-new-password').value.trim();
+  const ghToken    = $('sa-new-ghtoken').value.trim();
+  const canEditGpx = $('sa-new-can-gpx').checked;
   if (!login || !password) { setStatus('sa-status', 'Login et mot de passe requis.', 'error'); return; }
   try {
     const r = await fetch(`${serverBase()}/users`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${serverToken}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password, ghToken, canEditGpx: false })
+      body: JSON.stringify({ login, password, ghToken, canEditGpx })
     });
     const j = await r.json();
     if (!r.ok) throw new Error(j.error);
-    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/)`, 'ok');
-    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = '';
+    const gpxLabel = canEditGpx ? ' · peut importer GPX' : '';
+    setStatus('sa-status', `✓ Utilisateur « ${j.login} » créé (storage/${j.storageDir}/${gpxLabel})`, 'ok');
+    $('sa-new-login').value = ''; $('sa-new-password').value = ''; $('sa-new-ghtoken').value = ''; $('sa-new-can-gpx').checked = false;
     loadSaUsers();
   } catch (e) { setStatus('sa-status', `Erreur : ${e.message}`, 'error'); }
 });
@@ -1814,7 +1837,10 @@ $('btn-save-ghtoken').addEventListener('click', async () => {
 // ── Settings persistence ──────────────────────────────────────────────
 const SETTINGS_KEY = 'veloroute_admin_settings';
 function saveSettings() {
+  let existing = {};
+  try { existing = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); } catch {}
   const data = {
+    ...existing,
     ghToken:   $('gh-token').value.trim(),
     serverUrl: $('server-url').value.trim(),
   };
@@ -1834,49 +1860,31 @@ async function loadSettings() {
         const base = (data.serverUrl || 'https://hub.studios-voa.com:1666').replace(/\/$/, '');
         const r = await fetch(`${base}/ping`, {
           headers: { Authorization: `Bearer ${data.serverToken}` }
-        }).catch(() => null);
-        // Erreur réseau (null) → on utilise les données en cache (canEditGpx stocké)
-        const j = (r && r.ok) ? await r.json().catch(() => ({})) : null;
-        if (j === null && !r) {
-          // Pas de réseau — on restaure depuis localStorage si possible
-          canEditGpx       = !!(data.canEditGpx);
-          serverStorageDir = data.serverLogin || '';
-        } else if (r && !r.ok) {
-          // Token expiré / invalide → forcer login
+        });
+        if (r.ok) {
+          const j = await r.json().catch(() => ({}));
+          serverToken  = data.serverToken;
+          isSuperAdmin = !!j.isSuperAdmin;
+          $('login-overlay').style.display = 'none';
+          $('site-header').style.display   = 'flex';
+          $('btn-logout-header').style.display = 'inline-block';
+          $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
+          if (isSuperAdmin) {
+            $('superadmin-panel').style.display = 'block';
+            $('main-content').style.display = 'none';
+            loadSaUsers();
+          } else {
+            if (j.ghToken) $('gh-token').value = j.ghToken;
+            $('main-content').style.display = 'flex';
+            setTimeout(() => map.invalidateSize(), 100);
+            loadExistingData(!!$('gh-token').value.trim());
+          }
+        } else {
           delete data.serverToken;
           localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
-          return;
-        } else {
-          canEditGpx       = !!j.isSuperAdmin || !!j.canEditGpx;
-          serverStorageDir = j.storageDir || data.serverLogin || '';
-          // Mettre à jour le cache canEditGpx pour le prochain rechargement hors réseau
-          data.canEditGpx = canEditGpx;
-          localStorage.setItem(SETTINGS_KEY, JSON.stringify(data));
         }
-        serverToken      = data.serverToken;
-        isSuperAdmin     = j ? !!j.isSuperAdmin : false;
-        $('login-overlay').style.display = 'none';
-        $('site-header').style.display   = 'flex';
-        $('btn-logout-header').style.display = 'inline-block';
-        $('header-user').textContent = data.serverLogin ? `· ${data.serverLogin}` : '· VLR-server';
-        if (j?.ghToken) $('gh-token').value = j.ghToken;
-        if (isSuperAdmin) {
-          $('superadmin-panel').style.display = 'block';
-          $('btn-settings-toggle').style.display = 'inline-block';
-          loadSaUsers();
-        } else {
-          $('superadmin-panel').style.display = 'none';
-          $('btn-settings-toggle').style.display = 'none';
-        }
-        $('gpx-card').style.display       = canEditGpx ? '' : 'none';
-        document.querySelector('.row-2').style.gridTemplateColumns = canEditGpx ? '' : '1fr';
-        $('mtab-segments').style.display  = canEditGpx ? '' : 'none';
-        if ($('preview-card')) $('preview-card').style.display = canEditGpx ? '' : 'none';
-        $('main-content').style.display = 'flex';
-        setTimeout(() => map.invalidateSize(), 100);
-        loadExistingData(!!$('gh-token').value.trim());
       } catch {
-        // Erreur inattendue — on laisse le login s'afficher
+        // Erreur réseau — on laisse le login s'afficher
       }
     }
   } catch {}
@@ -1892,6 +1900,17 @@ async function commitPhotosJson() {
     'docs/photos.json',
     JSON.stringify(toCommit, null, 2),
     `admin: photos.json — ${toCommit.length} entrées`,
+    ghToken
+  );
+}
+
+async function commitEscalesJson() {
+  const ghToken = $('gh-token').value.trim();
+  if (!ghToken) throw new Error('Token GitHub requis (⚙ Réglages)');
+  await githubPutFile(
+    'docs/escales.json',
+    JSON.stringify(escaleEntries, null, 2),
+    `admin: escales.json — ${escaleEntries.length} étape(s)`,
     ghToken
   );
 }
@@ -1948,11 +1967,11 @@ async function deleteVoyage(voyId) {
   voyageEntries = voyageEntries.filter(e => e.id !== voyId);
   let photosChanged = 0;
   photoEntries.forEach(p => { if (p.voyage === voyId) { delete p.voyage; photosChanged++; } });
-  setStatus('upload-status', 'Commit voyages.json…');
+  setStatus('pcloud-status', 'Commit voyages.json…');
   try {
     await commitVoyagesJson();
     if (photosChanged) {
-      setStatus('upload-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
+      setStatus('pcloud-status', `voyages.json ok — commit photos.json (${photosChanged} photo(s))…`);
       await commitPhotosJson();
     }
     ['photo-voyage', 'ph-voyage-assign', 'ph-manage-voyage-filter'].forEach(sid => {
@@ -1962,8 +1981,8 @@ async function deleteVoyage(voyId) {
       if (sel.value === voyId) sel.value = '';
     });
     renderManagePhotos();
-    setStatus('upload-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
-  } catch (err) { setStatus('upload-status', `Erreur : ${err.message}`, 'error'); }
+    setStatus('pcloud-status', `✓ Voyage « ${v.label} » supprimé`, 'ok');
+  } catch (err) { setStatus('pcloud-status', `Erreur : ${err.message}`, 'error'); }
 }
 async function serverUploadFile(relPath, blob, filename) {
   const form = new FormData();
@@ -1983,19 +2002,19 @@ let uploadAborted = false;
 $('btn-stop-upload').addEventListener('click', () => {
   uploadAborted = true;
   $('btn-stop-upload').disabled = true;
-  setStatus('upload-status', '⏹ Arrêt demandé… fin du fichier en cours', 'warn');
+  setStatus('pcloud-status', '⏹ Arrêt demandé… fin du fichier en cours', 'warn');
 });
 
 async function uploadToServer() {
-  if (!serverToken) { setStatus('upload-status', 'Non connecté au serveur.', 'error'); return; }
-  if (!rawPhotos.length) { setStatus('upload-status', 'Aucune photo chargée.', 'error'); return; }
+  if (!serverToken) { setStatus('pcloud-status', 'Non connecté au serveur.', 'error'); return; }
+  if (!rawPhotos.length) { setStatus('pcloud-status', 'Aucune photo chargée.', 'error'); return; }
 
   uploadAborted = false;
   const btnStop = $('btn-stop-upload');
   btnStop.style.display = ''; btnStop.disabled = false;
 
-  const progWrap = $('upload-progress-wrap');
-  const progBar  = $('upload-progress-bar');
+  const progWrap = $('pcloud-progress-wrap');
+  const progBar  = $('pcloud-progress-bar');
   progWrap.style.display = 'block';
   progBar.style.width = '0%';
 
@@ -2014,7 +2033,7 @@ async function uploadToServer() {
       const outName = isVideo ? p.file.name : jpgName(p.file.name);
 
       // ① Source originale
-      setStatus('upload-status', `↑ Source : ${p.file.name}…`);
+      setStatus('pcloud-status', `↑ Source : ${p.file.name}…`);
       let srcOk = false;
       try { await serverUploadFile(`Sources${sub}/${p.file.name}`, p.file, p.file.name); srcOk = true; srcSuccesses++; } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
       tick();
@@ -2026,13 +2045,13 @@ async function uploadToServer() {
 
       if (isVideo) {
         // ② Fichier vidéo (Photos)
-        setStatus('upload-status', `↑ Vidéo : ${outName}…`);
+        setStatus('pcloud-status', `↑ Vidéo : ${outName}…`);
         try { await serverUploadFile(`Photos${sub}/${outName}`, p.file, outName); } catch (e) { console.warn(e); errors++; if (!firstError) firstError = e.message; }
         tick();
 
         // ③ Vignette vidéo MP4 2s/240px — générée par ffmpeg côté serveur
         const thumbOutName = gifName(outName); // .mp4
-        setStatus('upload-status', `⚖ Vignette MP4 : ${thumbOutName}…`);
+        setStatus('pcloud-status', `⚖ Vignette MP4 : ${thumbOutName}…`);
         try {
           const r = await fetch(`${serverBase()}/video-thumb`, {
             method: 'POST',
@@ -2048,7 +2067,7 @@ async function uploadToServer() {
         tick();
       } else {
         // ② Photo 2500px (Photos)
-        setStatus('upload-status', `↑ Photo 2500px : ${outName}…`);
+        setStatus('pcloud-status', `↑ Photo 2500px : ${outName}…`);
         try {
           const photoBlob = await resizeImage(p.file, 2500, 0.88);
           await serverUploadFile(`Photos${sub}/${outName}`, photoBlob, outName);
@@ -2056,7 +2075,7 @@ async function uploadToServer() {
         tick();
 
         // ③ Vignette 400px (Thumbs)
-        setStatus('upload-status', `↑ Vignette : ${outName}…`);
+        setStatus('pcloud-status', `↑ Vignette : ${outName}…`);
         try {
           const thumbBlob = await resizeImage(p.file, 400, 0.82);
           await serverUploadFile(`Thumbs${sub}/${outName}`, thumbBlob, outName);
@@ -2069,27 +2088,27 @@ async function uploadToServer() {
     progWrap.style.display = 'none';
     if (uploadAborted) {
       const sent = photos.indexOf(p) >= 0 ? photos.indexOf(p) : done;
-      setStatus('upload-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
-      await _awaitEnrichAndRebuild('upload-status');
+      setStatus('pcloud-status', `⏹ Upload interrompu après ${done} fichier(s)`, 'warn');
+      await _awaitEnrichAndRebuild('pcloud-status');
       await commitPhotosJsonMerged();
       return;
     }
     const msg = errors
       ? `⚠ ${errors} erreur(s) — ${srcSuccesses}/${photos.length} source(s) envoyée(s)`
       : `✓ ${photos.length} photo(s) → Sources + Photos (2500px) + Thumbs (400px)${sub}`;
-    setStatus('upload-status', msg, errors ? 'warn' : 'ok');
-    await _awaitEnrichAndRebuild('upload-status');
+    setStatus('pcloud-status', msg, errors ? 'warn' : 'ok');
+    await _awaitEnrichAndRebuild('pcloud-status');
     // Ne commiter photos.json que si au moins 1 source a été uploadée avec succès
     if (srcSuccesses > 0) {
       await commitPhotosJsonMerged();
     } else {
       const errDetail = firstError ? ` (${firstError})` : '';
-      setStatus('upload-status', `⚠ Aucun fichier n’a été envoyé au serveur${errDetail} — photos.json non commité.`, 'error');
+      setStatus('pcloud-status', `⚠ Aucun fichier n’a été envoyé au serveur${errDetail} — photos.json non commité.`, 'error');
     }
   } catch (err) {
     btnStop.style.display = 'none';
     progWrap.style.display = 'none';
-    setStatus('upload-status', `Erreur : ${err.message}`, 'error');
+    setStatus('pcloud-status', `Erreur : ${err.message}`, 'error');
   }
 }
 
@@ -2176,65 +2195,26 @@ function renderSegments() {
     row.className = 'segment-row'
       + (seg.selected ? ' selected' : '') + (seg.hidden ? ' hidden-seg' : '');
     const sameDay = fmtSegDate(seg.first) === fmtSegDate(seg.last);
-    const segGpxFile = seg.entries[0]?.gpxFile || '';
-    const segVoyId   = segGpxFile
-      ? (voyageEntries.find(v => (v.gpxFiles || []).includes(segGpxFile))?.id || '')
-      : '';
-    const voyOpts = voyageEntries.map(v =>
-      `<option value="${v.id}"${v.id === segVoyId ? ' selected' : ''}>${v.label}</option>`
-    ).join('');
     row.innerHTML = `
       <input type="checkbox" class="seg-check"${seg.selected ? ' checked' : ''}>
       <div class="seg-info">
         <div class="seg-date">${seg.hidden ? '🚫 ' : ''}${fmtSegDate(seg.first)}${sameDay ? '' : ` → ${fmtSegDate(seg.last)}`}</div>
-        <div class="seg-meta">${fmtSegTime(seg.first)} → ${fmtSegTime(seg.last)} · ${seg.entries.length} pts${segGpxFile ? ` · <span style="color:rgba(255,255,255,.3);font-size:.65em">${segGpxFile}</span>` : ''}${seg.hidden ? ' · <span style="color:rgba(255,200,60,.65)">masqué</span>' : ''}</div>
+        <div class="seg-meta">${fmtSegTime(seg.first)} → ${fmtSegTime(seg.last)} · ${seg.entries.length} pts${seg.hidden ? ' · <span style="color:rgba(255,200,60,.65)">masqué</span>' : ''}</div>
       </div>
       <span class="seg-dist">~${seg.dist} km</span>
-      <select class="seg-voyage-sel" title="Associer ce segment à un voyage"
-        style="font-size:.68rem;padding:2px 4px;background:rgba(6,9,18,.95);border:1px solid rgba(240,192,96,.25);border-radius:3px;color:rgba(240,240,240,.75);min-width:90px;cursor:pointer">
-        <option value="">— voyage —</option>
-        ${voyOpts}
-      </select>
       <button class="seg-focus" title="Centrer la carte sur ce segment">⌖</button>
     `;
     const cb = row.querySelector('.seg-check');
     cb.addEventListener('change', e => { e.stopPropagation(); seg.selected = cb.checked; row.classList.toggle('selected', seg.selected); updateSegSelCount(); });
     row.querySelector('.seg-focus').addEventListener('click', e => { e.stopPropagation(); focusSegment(seg); });
-    const voyageSel = row.querySelector('.seg-voyage-sel');
-    if (voyageSel) {
-      voyageSel.addEventListener('change', async e => {
-        e.stopPropagation();
-        const gpxFile = seg.entries[0]?.gpxFile;
-        if (!gpxFile) return;
-        await assignSegmentVoyage(gpxFile, voyageSel.value);
-      });
-      voyageSel.addEventListener('click', e => e.stopPropagation());
-    }
     row.addEventListener('click', e => {
-      if (e.target === cb || e.target.classList.contains('seg-focus') || e.target.classList.contains('seg-voyage-sel')) return;
+      if (e.target === cb || e.target.classList.contains('seg-focus')) return;
       seg.selected = !seg.selected; cb.checked = seg.selected;
       row.classList.toggle('selected', seg.selected); updateSegSelCount(); focusSegment(seg);
     });
     list.appendChild(row);
   });
   updateSegSelCount();
-}
-
-async function assignSegmentVoyage(gpxFile, voyageId) {
-  // Retirer ce gpxFile de tous les voyages
-  voyageEntries.forEach(v => { v.gpxFiles = (v.gpxFiles || []).filter(f => f !== gpxFile); });
-  // Ajouter au voyage choisi
-  if (voyageId) {
-    const v = voyageEntries.find(v => v.id === voyageId);
-    if (v) { v.gpxFiles = v.gpxFiles || []; if (!v.gpxFiles.includes(gpxFile)) v.gpxFiles.push(gpxFile); }
-  }
-  setStatus('manage-status', 'Commit voyages.json…');
-  try {
-    await commitVoyagesJson();
-    setStatus('manage-status', `✓ Segment « ${gpxFile} » → ${voyageId ? voyageEntries.find(v=>v.id===voyageId)?.label : '(sans voyage)'}`, 'ok');
-  } catch (err) {
-    setStatus('manage-status', `Erreur : ${err.message}`, 'error');
-  }
 }
 
 $('btn-seg-select-all').addEventListener('click', () => {
@@ -2324,7 +2304,6 @@ function renderManagePhotos() {
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Horodatage</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Lieu</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Voyage</span>
-    <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase">Auteur</span>
     <span style="font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;text-align:right">Fichier</span>
   </div>`);
 
@@ -2362,18 +2341,12 @@ function renderManagePhotos() {
     })() : '';
     const voyLabel = p.voyage ? (voyageEntries.find(v => v.id === p.voyage)?.label || p.voyage) : '';
 
-    const dateEl   = Object.assign(document.createElement('div'),  { className: 'row-date',         textContent: dateStr + (timeStr ? ' ' + timeStr : '') });
-    const cityEl   = Object.assign(document.createElement('div'),  { className: 'row-city',         textContent: p.city || '' });
-    const voyEl    = Object.assign(document.createElement('span'), { className: 'row-voyage-badge', textContent: voyLabel });
-    const isOwner  = !p.author || p.author === serverStorageDir || isSuperAdmin;
-    const authorEl = document.createElement('span');
-    authorEl.textContent = p.author || '—';
-    authorEl.title = p.author || '';
-    authorEl.style.cssText = `font-size:.65rem;padding:1px 6px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70px;background:${isOwner ? 'rgba(80,210,120,.12)' : 'rgba(200,120,255,.12)'};color:${isOwner ? 'rgba(80,210,120,.8)' : 'rgba(200,120,255,.8)'};border:1px solid ${isOwner ? 'rgba(80,210,120,.25)' : 'rgba(200,120,255,.25)'}`;
-    const fileEl   = Object.assign(document.createElement('div'),  { className: 'row-filename',     textContent: filename });
-    if (!isOwner) { row.style.opacity = '.65'; cb.disabled = true; row.title = `Photo de ${p.author} — non modifiable`; }
+    const dateEl  = Object.assign(document.createElement('div'), { className: 'row-date',         textContent: dateStr + (timeStr ? ' ' + timeStr : '') });
+    const cityEl  = Object.assign(document.createElement('div'), { className: 'row-city',         textContent: p.city || '' });
+    const voyEl   = Object.assign(document.createElement('span'),{ className: 'row-voyage-badge', textContent: voyLabel });
+    const fileEl  = Object.assign(document.createElement('div'), { className: 'row-filename',     textContent: filename });
 
-    row.append(cb, twrap, dateEl, cityEl, voyEl, authorEl, fileEl);
+    row.append(cb, twrap, dateEl, cityEl, voyEl, fileEl);
     row.addEventListener('click', e => {
       if (e.target === cb) return;
       p._selected = !p._selected; cb.checked = !!p._selected;
@@ -2408,8 +2381,6 @@ $('btn-ph-assign-voyage').addEventListener('click', async () => {
 $('btn-ph-hide').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
-  const forbidden = sel.filter(p => p.author && p.author !== serverStorageDir && !isSuperAdmin);
-  if (forbidden.length) { setStatus('manage-status', `⛔ ${forbidden.length} photo(s) appartiennent à d'autres utilisateurs.`, 'error'); return; }
   const allHidden = sel.every(p => p.hidden);
   sel.forEach(p => { if (allHidden) delete p.hidden; else p.hidden = true; p._selected = false; });
   setStatus('manage-status', 'Commit photos.json…');
@@ -2419,8 +2390,6 @@ $('btn-ph-hide').addEventListener('click', async () => {
 $('btn-ph-delete').addEventListener('click', async () => {
   const sel = photoEntries.filter(p => p._selected);
   if (!sel.length) { setStatus('manage-status', 'Aucune photo sélectionnée.', 'warn'); return; }
-  const forbidden = sel.filter(p => p.author && p.author !== serverStorageDir && !isSuperAdmin);
-  if (forbidden.length) { setStatus('manage-status', `⛔ ${forbidden.length} photo(s) appartiennent à d'autres utilisateurs.`, 'error'); return; }
   if (!confirm(`Supprimer définitivement ${sel.length} entrée(s) de photos.json ?\n\n⚠ Les fichiers sources sur VLR-server seront également supprimés.`)) return;
   // Supprimer les 3 fichiers sur VLR-server (Sources, Photos, Thumbs)
   if (serverToken) {
@@ -2449,6 +2418,96 @@ $('btn-ph-delete').addEventListener('click', async () => {
   catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
 });
 
+// ── Étapes (escales) editor ──────────────────────────────────────────
+function renderEscales() {
+  const list = $('escales-list'); list.innerHTML = '';
+  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
+  if (!escaleEntries.length) {
+    list.innerHTML = '<p style="font-size:.76rem;color:rgba(255,255,255,.3);padding:8px 0">Aucune étape enregistrée.</p>';
+    return;
+  }
+  escaleEntries.forEach((e, idx) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)';
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.value = e.city;
+    inp.style.cssText = 'flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:4px 8px;font-size:.8rem';
+    const meta = document.createElement('span');
+    meta.style.cssText = 'font-size:.68rem;color:rgba(255,255,255,.35);white-space:nowrap';
+    meta.textContent = e.start?.slice(0,10) || '';
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'btn'; saveBtn.textContent = '✓';
+    saveBtn.style.cssText = 'padding:3px 10px;font-size:.75rem';
+    saveBtn.title = 'Renommer';
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn danger'; delBtn.textContent = '🗑';
+    delBtn.style.cssText = 'padding:3px 9px;font-size:.75rem';
+    delBtn.title = 'Supprimer cette étape';
+    saveBtn.addEventListener('click', async () => {
+      const newName = inp.value.trim();
+      if (!newName || newName === e.city) return;
+      e.city = newName;
+      setStatus('manage-status', 'Commit escales.json…');
+      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape renommée en « ${newName} »`, 'ok'); }
+      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+    });
+    inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') saveBtn.click(); });
+    delBtn.addEventListener('click', async () => {
+      if (!confirm(`Supprimer l'étape « ${e.city} » de escales.json ?\n(Les fichiers sur VLR-server ne sont pas supprimés.)`)) return;
+      escaleEntries.splice(idx, 1);
+      setStatus('manage-status', 'Commit escales.json…');
+      try { await commitEscalesJson(); renderEscales(); setStatus('manage-status', `✓ Étape supprimée`, 'ok'); }
+      catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+    });
+    row.append(inp, meta, saveBtn, delBtn);
+    list.appendChild(row);
+  });
+}
+
+// ── Ajout manuel d'escale ───────────────────────────────────────────
+$('btn-esc-add').addEventListener('click', async () => {
+  const city     = $('esc-add-city').value.trim();
+  const startVal = $('esc-add-start').value; // YYYY-MM-DDThh:mm
+  const endVal   = $('esc-add-end').value;
+  if (!city)     { setStatus('manage-status', '⚠ Nom de ville requis', 'warn'); return; }
+  if (!startVal) { setStatus('manage-status', '⚠ Date de début requise', 'warn'); return; }
+  if (!endVal)   { setStatus('manage-status', '⚠ Date de fin requise', 'warn'); return; }
+
+  // Géocodage Nominatim du nom de ville
+  let lat = null, lon = null;
+  try {
+    const q = encodeURIComponent(city + ', France');
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json&limit=1`, {
+      headers: { 'Accept-Language': 'fr' }
+    });
+    const results = await r.json();
+    if (results.length) {
+      lat = parseFloat(results[0].lat);
+      lon = parseFloat(results[0].lon);
+    }
+  } catch (e) { console.warn('Géocodage échoué pour', city, e); }
+
+  const normCity = s => (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+  const newEscale = {
+    city,
+    start: startVal,
+    end: endVal,
+    duration_h: 0,
+    ...(lat != null ? { lat: +lat.toFixed(5), lon: +lon.toFixed(5) } : {}),
+  };
+  const idx = escaleEntries.findIndex(e => normCity(e.city) === normCity(city));
+  if (idx >= 0) escaleEntries[idx] = newEscale; else escaleEntries.push(newEscale);
+  setStatus('manage-status', 'Commit escales.json…');
+  try {
+    await commitEscalesJson();
+    renderEscales();
+    $('esc-add-city').value  = '';
+    $('esc-add-start').value = '';
+    $('esc-add-end').value   = '';
+    setStatus('manage-status', `✓ Étape « ${city} » ajoutée`, 'ok');
+  } catch (err) { setStatus('manage-status', `Erreur : ${err.message}`, 'error'); }
+});
+
 // ── Enrichissement rétroactif des villes sur photos.json existant ────────────
 async function retroEnrichCities() {
   const ghToken = $('gh-token').value.trim();
@@ -2472,13 +2531,12 @@ async function retroEnrichCities() {
       first = false;
       try {
         const r = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=14`,
+          `https://nominatim.openstreetmap.org/reverse?lat=${p.lat}&lon=${p.lon}&format=json&zoom=10`,
           { headers: { 'Accept-Language': 'fr' } }
         );
         const data = await r.json();
-        const a = data.address || {};
-        place = a.city || a.town || a.village || a.hamlet || a.city_district ||
-                a.municipality || a.county || '';
+        place = data.address?.city || data.address?.town || data.address?.village ||
+                data.address?.county || '';
         if (place) _admLocCache[key] = place;
       } catch {}
     }
@@ -2497,70 +2555,27 @@ async function retroEnrichCities() {
 
 $('btn-retro-enrich').addEventListener('click', retroEnrichCities);
 
-// ── Interpolation GPS rétroactive ──────────────────────────────────────
-async function retroInterpolateGps() {
-  const ghToken = $('gh-token').value.trim();
-  if (!ghToken) { setStatus('manage-status', '⚠ Token GitHub requis.', 'warn'); return; }
-  const entries = photoEntries;
-  const MAX_MS = 6 * 3600 * 1000;
-  const anchors = entries
-    .filter(p => p.lat != null && p.lon != null && p.photoMs != null)
-    .sort((a, b) => a.photoMs - b.photoMs);
-  if (!anchors.length) { setStatus('manage-status', '⚠ Aucune photo avec GPS trouvée.', 'warn'); return; }
-  const todo = entries.filter(p => p.lat == null && p.photoMs != null);
-  if (!todo.length) { setStatus('manage-status', '✓ Toutes les photos ont déjà un GPS', 'ok'); return; }
-  let updated = 0;
-  todo.forEach(p => {
-    const ms = p.photoMs;
-    let prev = null, next = null;
-    for (let i = anchors.length - 1; i >= 0; i--) { if (anchors[i].photoMs <= ms) { prev = anchors[i]; break; } }
-    for (let i = 0; i < anchors.length; i++)         { if (anchors[i].photoMs >= ms) { next = anchors[i]; break; } }
-    const prevOk = prev && (ms - prev.photoMs) <= MAX_MS;
-    const nextOk = next && (next.photoMs - ms) <= MAX_MS;
-    if (!prevOk && !nextOk) return;
-    if (prevOk && nextOk) {
-      const span = next.photoMs - prev.photoMs;
-      const t = span > 0 ? (ms - prev.photoMs) / span : 0;
-      p.lat = Math.round((prev.lat + t * (next.lat - prev.lat)) * 1e6) / 1e6;
-      p.lon = Math.round((prev.lon + t * (next.lon - prev.lon)) * 1e6) / 1e6;
-    } else {
-      const ref = nextOk ? next : prev;
-      p.lat = ref.lat; p.lon = ref.lon;
-    }
-    updated++;
-  });
-  if (!updated) { setStatus('manage-status', `⚠ Aucune photo interpolable (toutes trop éloignées > 6h)`, 'warn'); return; }
-  setStatus('manage-status', `Commit photos.json (${updated} GPS interpolé(s))…`);
-  try {
-    await githubPutFile('docs/photos.json', JSON.stringify(entries, null, 2),
-      `admin: GPS interpolé pour ${updated} photo(s)`, ghToken);
-    setStatus('manage-status', `✓ ${updated} GPS interpolé(s) — ${todo.length - updated} non résolu(s) (trop loin)`, 'ok');
-  } catch (e) { setStatus('manage-status', `⚠ Commit échoué : ${e.message}`, 'warn'); }
-}
-$('btn-retro-interp-gps').addEventListener('click', retroInterpolateGps);
-
 // ── Tab switching & refresh panel ─────────────────────────────────────
 function switchManageTab(tab) {
   $('mtab-segments').classList.toggle('active', tab === 'segments');
   $('mtab-photos').classList.toggle('active',   tab === 'photos');
+  $('mtab-escales').classList.toggle('active',  tab === 'escales');
   $('manage-segments-panel').style.display = tab === 'segments' ? 'block' : 'none';
   $('manage-photos-panel').style.display   = tab === 'photos'   ? 'block' : 'none';
+  $('manage-escales-panel').style.display  = tab === 'escales'  ? 'block' : 'none';
   if (tab === 'photos')  renderManagePhotos();
+  if (tab === 'escales') renderEscales();
 }
 function refreshManagePanel() {
   const card = $('manage-card');
   if (!travelEntries.length && !photoEntries.length) { card.style.display = 'none'; return; }
-  card.style.display = 'block';
-  // Si GPX non autorisé, basculer sur l'onglet Photos par défaut
-  if (!canEditGpx) {
-    switchManageTab('photos');
-  } else {
-    renderSegments();
-  }
+  card.style.display = 'block'; renderSegments();
   $('mtab-ph-count').textContent  = `(${photoEntries.length})`;
+  $('mtab-esc-count').textContent = `(${escaleEntries.length})`;
 }
 $('mtab-segments').addEventListener('click', () => switchManageTab('segments'));
 $('mtab-photos').addEventListener('click',   () => switchManageTab('photos'));
+$('mtab-escales').addEventListener('click',  () => switchManageTab('escales'));
 
 $('btn-refresh-manage').addEventListener('click', async () => {
   setStatus('manage-status', 'Actualisation…');
@@ -2585,7 +2600,7 @@ $('photos-reset').addEventListener('click', () => {
   $('photos-stats').style.display = 'none';
   $('unmatched-warning').style.display = 'none';
   setStatus('photos-status', 'Réinitialisé — vous pouvez redéposer les mêmes photos');
-  setStatus('upload-status', '');
+  setStatus('pcloud-status', '');
 });
 
 // Photos drop zone — supporte fichiers individuels ET dossiers
