@@ -28,5 +28,10 @@
     "id": "hauts-de-france",
     "label": "Hauts de France",
     "gpxFiles": []
+  },
+  {
+    "id": "test",
+    "label": "test",
+    "gpxFiles": []
   }
 ]
