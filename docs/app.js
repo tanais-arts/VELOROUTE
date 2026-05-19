@@ -839,7 +839,7 @@ async function init() {
       authorBtn.addEventListener('click', e => { e.stopPropagation(); authorPanel.hidden = !authorPanel.hidden; });
       document.addEventListener('click', e => { if (!authorWrap.contains(e.target)) authorPanel.hidden = true; });
       if (_activeAuthors && _activeAuthors.length < _allAuthors.length) {
-        authorBtn.textContent = _activeAuthors.join(', ');
+        authorBtn.textContent = _activeAuthors.length === 0 ? 'Aucun auteur' : _activeAuthors.join(', ');
         authorBtn.classList.add('active');
       }
     }
