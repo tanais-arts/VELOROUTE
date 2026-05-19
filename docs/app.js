@@ -149,6 +149,17 @@ async function updateLbLocation(item) {
   const counter = document.getElementById('lb-counter');
   if (!counter) return;
   counter.removeAttribute('hidden');
+
+  const datePart = item.photoMs
+    ? new Date(item.photoMs).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })
+    : '';
+  const authorPart = item.author || '';
+
+  function renderCounter(location) {
+    const parts = [location, datePart, authorPart].filter(Boolean);
+    counter.textContent = parts.join(' · ');
+  }
+
   // Priorité : coordonnées propres de la photo (GPS EXIF), sinon entrée GPX
   let lat, lon;
   if (item.lat != null && item.lon != null) {
@@ -157,11 +168,11 @@ async function updateLbLocation(item) {
     const entry = state.entries[item.entryIdx];
     if (entry && entry.lat != null && entry.lon != null) { lat = entry.lat; lon = entry.lon; }
   }
-  if (lat == null || lon == null) { counter.textContent = ''; return; }
+  if (lat == null || lon == null) { renderCounter(''); return; }
   const key = `${Math.round(lat * 100) / 100},${Math.round(lon * 100) / 100}`;
-  if (lbLocCache[key]) { counter.textContent = `\u{1F4CD} ${lbLocCache[key]}`; return; }
+  if (lbLocCache[key]) { renderCounter(`\u{1F4CD} ${lbLocCache[key]}`); return; }
   const local = nearestNamedPlace(lat, lon);
-  if (local) counter.textContent = `\u{1F4CD} ${local.name}`;
+  if (local) renderCounter(`\u{1F4CD} ${local.name}`);
   const reqId = ++lbLocReqId;
   try {
     const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
@@ -173,7 +184,7 @@ async function updateLbLocation(item) {
     if (place) {
       lbLocCache[key] = place;
       _saveLocCache();
-      if (reqId === lbLocReqId) counter.textContent = `\u{1F4CD} ${place}`;
+      if (reqId === lbLocReqId) renderCounter(`\u{1F4CD} ${place}`);
     }
   } catch { /* keep local result */ }
 }
