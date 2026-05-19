@@ -777,6 +777,7 @@ async function init() {
   state.visited = visited;
   state.escales = escales || [];
   state.voyages = voyages || [];
+  const _photosAll = [...state.photos]; // référence avant tout filtre
 
   // ── Filtre voyage ────────────────────────────────────
   const _activeVoyageId = sessionStorage.getItem('voyageFilter') || '';
@@ -808,7 +809,7 @@ async function init() {
   }
 
   // ── Filtre auteur (multi-sélection) ─────────────────────────────────
-  const _allAuthors = [...new Set(state.photos.map(p => p.author).filter(Boolean))].sort();
+  const _allAuthors = [...new Set(_photosAll.map(p => p.author).filter(Boolean))].sort();
   const _activeAuthors = (() => {
     try { const v = JSON.parse(sessionStorage.getItem('authorFilter') || 'null'); return Array.isArray(v) ? v : null; } catch { return null; }
   })();
@@ -836,7 +837,7 @@ async function init() {
         authorPanel.appendChild(lbl);
       });
       authorBtn.addEventListener('click', e => { e.stopPropagation(); authorPanel.hidden = !authorPanel.hidden; });
-      document.addEventListener('click', () => { authorPanel.hidden = true; });
+      document.addEventListener('click', e => { if (!authorWrap.contains(e.target)) authorPanel.hidden = true; });
       if (_activeAuthors && _activeAuthors.length < _allAuthors.length) {
         authorBtn.textContent = _activeAuthors.join(', ');
         authorBtn.classList.add('active');
