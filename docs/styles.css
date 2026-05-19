@@ -285,6 +285,7 @@ html, body {
 #author-filter-wrap {
   position: relative;
   margin-top: 6px;
+  pointer-events: all;
 }
 #author-filter-btn {
   pointer-events: all;
@@ -316,6 +317,7 @@ html, body {
   min-width: 130px;
   z-index: 600;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  pointer-events: all;
 }
 #author-filter-panel label {
   display: flex;
