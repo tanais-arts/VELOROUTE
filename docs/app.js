@@ -40,36 +40,8 @@ const state = {
 let travelYear = new Date().getFullYear();
 
 // ── Map ──────────────────────────────────────────────────────────────
-const map = L.map('map', { zoomControl: false, attributionControl: true, scrollWheelZoom: false })
+const map = L.map('map', { zoomControl: false, attributionControl: true })
   .setView([46.5, 3], 6); // France
-
-// Zoom centré sur le point sélectionné (ring) si présent, sinon sur le curseur
-// Le latlng est capturé à la 1ère molette et réutilisé pendant toute la séquence
-// (debounce 40ms comme Leaflet natif) pour éviter la dérive du centre.
-let _wheelTarget = null, _wheelTimer = null, _wheelDelta = 0;
-map.getContainer().addEventListener('wheel', function(e) {
-  e.preventDefault();
-  const delta = e.deltaY || e.detail || 0;
-  _wheelDelta += (delta < 0 ? 1 : -1);
-  if (!_wheelTarget) {
-    _wheelTarget = state.ringMarker
-      ? state.ringMarker.getLatLng()
-      : map.containerPointToLatLng(map.mouseEventToContainerPoint(e));
-  }
-  clearTimeout(_wheelTimer);
-  _wheelTimer = setTimeout(() => {
-    const newZoom = Math.min(map.getMaxZoom(), Math.max(map.getMinZoom(), map.getZoom() + _wheelDelta));
-    map.setZoomAround(_wheelTarget, newZoom);
-    _wheelTarget = null;
-    _wheelDelta  = 0;
-  }, 40);
-}, { passive: false });
-
-// Boutons +/- : centrer sur le ring si sélectionné
-const _zoomIn  = map.zoomIn.bind(map);
-const _zoomOut = map.zoomOut.bind(map);
-map.zoomIn  = function(d, o) { if (state.ringMarker) { map.setZoomAround(state.ringMarker.getLatLng(), map.getZoom() + (d||1)); return this; } return _zoomIn(d, o); };
-map.zoomOut = function(d, o) { if (state.ringMarker) { map.setZoomAround(state.ringMarker.getLatLng(), map.getZoom() - (d||1)); return this; } return _zoomOut(d, o); };
 
 let tileLayer = L.tileLayer(TILE_LIGHT, {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -192,13 +164,12 @@ async function updateLbLocation(item) {
   if (local) counter.textContent = `\u{1F4CD} ${local.name}`;
   const reqId = ++lbLocReqId;
   try {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=14`;
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
     const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
     if (reqId !== lbLocReqId) return;
     const data = await r.json();
-    const a = data.address || {};
-    const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
-                  a.municipality || a.county || '';
+    const place = data.address?.city || data.address?.town || data.address?.village ||
+                  data.address?.county || (data.display_name || '').split(',')[0].trim();
     if (place) {
       lbLocCache[key] = place;
       _saveLocCache();
@@ -222,9 +193,8 @@ function openLightbox(photos, startIdx) {
   state.lbIdx    = startIdx;
   lbShowCurrent();
   lightbox.hidden = false;
-  document.body.classList.add('lightbox-open');
 }
-function closeLightbox() { lightbox.hidden = true; document.body.classList.remove('lightbox-open'); }
+function closeLightbox() { lightbox.hidden = true; }
 function lbShowCurrent() {
   const item = state.lbPhotos[state.lbIdx];
   if (!item) return;
@@ -379,13 +349,12 @@ async function updateDateLoc(pi, photo) {
   _datLocTimer = setTimeout(async () => {
     if (reqId !== _datLocReqId) return;
     try {
-      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=14`;
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=10`;
       const r = await fetch(url, { headers: { 'Accept-Language': 'fr' } });
       if (reqId !== _datLocReqId) return;
       const data = await r.json();
-      const a = data.address || {};
-      const place = a.city || a.town || a.village || a.hamlet || a.city_district ||
-                    a.municipality || a.county || '';
+      const place = data.address?.city || data.address?.town || data.address?.village ||
+                    data.address?.county || (data.display_name || '').split(',')[0].trim();
       if (place) {
         lbLocCache[key] = place;
         _saveLocCache();
@@ -587,7 +556,7 @@ function previewAtTime(t) {
 function scrollCarouselTo(pi, smooth = false) {
   if (pi === state.activePhotoIdx) return;
   const carousel = document.getElementById('photo-carousel');
-  carousel.scrollTo({ left: pi * THUMB_STEP, behavior: smooth ? 'smooth' : 'instant' });
+  carousel.scrollTo({ left: pi * THUMB_STEP + THUMB_STEP / 2, behavior: smooth ? 'smooth' : 'instant' });
   const prev = state.thumbEls[state.activePhotoIdx];
   if (prev) { prev.classList.remove('active'); prev.fetchPriority = 'low'; }
   const next = state.thumbEls[pi];
@@ -779,11 +748,31 @@ async function init() {
     renderScrollTrack();
   }, 0);
 
-  // Expose pour rappel externe (ex: après import photos depuis admin)
-  window._refreshTimeline = () => renderScrollTrack();
+  // Expose pour rappel externe (ex: après commit escales/photos depuis admin)
+  function refreshTimeline() {
+    renderScrollTrack();
+  }
+  window._refreshTimeline = refreshTimeline;
+  window._refreshTimelineEscales = () => renderScrollTrack();
+
+  // Normalise les URLs photos :
+  //  1. Migre les anciennes URLs pCloud (filedn.com) vers hub.studios-voa.com:1666/files
+  //  2. Upgrade http:// → https:// si la page est en HTTPS (évite le mixed-content)
+  const HUB_BASE = 'https://hub.studios-voa.com:1666/files';
+  function normUrl(u) {
+    if (!u) return u;
+    // Migration pCloud → hub : extraire le chemin après VELOROUTE/
+    const pcloudMatch = u.match(/filedn\.com\/.+?\/VELOROUTE\/(.+)$/);
+    if (pcloudMatch) return `${HUB_BASE}/${pcloudMatch[1]}`;
+    // Mixed-content : http → https si la page est en https
+    if (location.protocol === 'https:' && u.startsWith('http://')) return 'https://' + u.slice(7);
+    return u;
+  }
 
   state.entries = entries;                        // keep all (hidden flag preserved for entryIdx compat)
-  state.photos  = photos.filter(p => !p.hidden).sort((a, b) => (a.photoMs ?? 0) - (b.photoMs ?? 0));
+  state.photos  = photos
+    .filter(p => !p.hidden)
+    .map(p => ({ ...p, src: normUrl(p.src), thumb: normUrl(p.thumb), webp: normUrl(p.webp), src_orig: normUrl(p.src_orig) }));
   state.cities  = cities;
   state.visited = visited;
   state.escales = escales || [];
@@ -811,27 +800,53 @@ async function init() {
 
   // Appliquer le filtre
   if (_activeVoyage) {
-    const gpxSet    = new Set(_activeVoyage.gpxFiles || []);
-    const voyPhotos = state.photos.filter(p => p.voyage === _activeVoyageId);
-
-    if (gpxSet.size > 0) {
-      // Filtrage explicite par nom de fichier GPX
-      state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
-    } else {
-      // Fallback : jours couverts par les photos du voyage
-      const voyageDays = new Set();
-      voyPhotos.forEach(p => {
-        const m = (p.caption || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
-        if (m) voyageDays.add(`${m[1]}-${m[2]}-${m[3]}`);
-      });
-      state.entries = voyageDays.size
-        ? entries.filter(e => voyageDays.has(`${e.year}-${String(e.month).padStart(2,'0')}-${String(e.day).padStart(2,'0')}`))
-        : [];
-    }
-
-    state.photos = voyPhotos;
+    const gpxSet = new Set(_activeVoyage.gpxFiles || []);
+    state.entries = entries.filter(e => !e.gpxFile || gpxSet.has(e.gpxFile));
+    state.photos  = state.photos.filter(p => p.voyage === _activeVoyageId);
     entries = state.entries; // rebind local var → trace + carte ne montrent que le voyage
     photos  = state.photos;  // rebind local var → marqueurs photo + mediaEntries filtrés
+  }
+
+  // ── Filtre auteur (multi-sélection) ─────────────────────────────────
+  const _allAuthors = [...new Set(state.photos.map(p => p.author).filter(Boolean))].sort();
+  const _activeAuthors = (() => {
+    try { const v = JSON.parse(sessionStorage.getItem('authorFilter') || 'null'); return Array.isArray(v) ? v : null; } catch { return null; }
+  })();
+  const _authorSet = _activeAuthors ? new Set(_activeAuthors) : null;
+
+  const authorWrap  = document.getElementById('author-filter-wrap');
+  const authorBtn   = document.getElementById('author-filter-btn');
+  const authorPanel = document.getElementById('author-filter-panel');
+  if (authorWrap) {
+    if (_allAuthors.length <= 1) {
+      authorWrap.style.display = 'none';
+    } else {
+      const _sel = _authorSet || new Set(_allAuthors);
+      _allAuthors.forEach(a => {
+        const lbl = document.createElement('label');
+        const cb  = document.createElement('input');
+        cb.type = 'checkbox'; cb.value = a; cb.checked = _sel.has(a);
+        cb.addEventListener('change', () => {
+          const checked = [...authorPanel.querySelectorAll('input:checked')].map(i => i.value);
+          if (checked.length === _allAuthors.length) sessionStorage.removeItem('authorFilter');
+          else sessionStorage.setItem('authorFilter', JSON.stringify(checked));
+          location.reload();
+        });
+        lbl.append(cb, document.createTextNode(a));
+        authorPanel.appendChild(lbl);
+      });
+      authorBtn.addEventListener('click', e => { e.stopPropagation(); authorPanel.hidden = !authorPanel.hidden; });
+      document.addEventListener('click', () => { authorPanel.hidden = true; });
+      if (_activeAuthors && _activeAuthors.length < _allAuthors.length) {
+        authorBtn.textContent = _activeAuthors.join(', ');
+        authorBtn.classList.add('active');
+      }
+    }
+  }
+  // Appliquer le filtre auteur
+  if (_authorSet) {
+    state.photos = state.photos.filter(p => !p.author || _authorSet.has(p.author));
+    photos = state.photos;
   }
 
   const year = entries[0]?.year || new Date().getFullYear();
@@ -850,37 +865,6 @@ async function init() {
   });
   state.tMin = Math.min(...state.photoTimes.filter(t => t != null));
   state.tMax = Math.max(...state.photoTimes.filter(t => t != null));
-
-  // ── Interpolation GPS pour photos sans coordonnées ───────────────────
-  // Pour chaque photo sans lat/lon, cherche les voisins temporels avec GPS.
-  // Seuil : 6h. Interpole linéairement si les deux existent, sinon copie le plus proche.
-  (function interpolatePhotoCoords(photos) {
-    const MAX_MS = 6 * 3600 * 1000;
-    const anchors = photos
-      .filter(p => p.lat != null && p.lon != null && p.photoMs != null)
-      .sort((a, b) => a.photoMs - b.photoMs);
-    if (!anchors.length) return;
-    photos.forEach(p => {
-      if (p.lat != null || p.photoMs == null) return;
-      const ms = p.photoMs;
-      let prev = null, next = null;
-      for (let i = anchors.length - 1; i >= 0; i--) { if (anchors[i].photoMs <= ms) { prev = anchors[i]; break; } }
-      for (let i = 0; i < anchors.length; i++)         { if (anchors[i].photoMs >= ms) { next = anchors[i]; break; } }
-      const prevOk = prev && (ms - prev.photoMs) <= MAX_MS;
-      const nextOk = next && (next.photoMs - ms) <= MAX_MS;
-      if (!prevOk && !nextOk) return;
-      if (prevOk && nextOk) {
-        const span = next.photoMs - prev.photoMs;
-        const t = span > 0 ? (ms - prev.photoMs) / span : 0;
-        p.lat = prev.lat + t * (next.lat - prev.lat);
-        p.lon = prev.lon + t * (next.lon - prev.lon);
-      } else {
-        const ref = nextOk ? next : prev;
-        p.lat = ref.lat; p.lon = ref.lon;
-      }
-      p._gpsInterp = true; // coordonnées interpolées, pas EXIF
-    });
-  })(state.photos);
 
   // ── Carousel ──
   const carousel = document.getElementById('photo-carousel');
@@ -904,7 +888,6 @@ async function init() {
       const scrubber = document.getElementById('carousel-scrubber');
       if (scrubber) scrubber.value = clamped;
       if (clamped !== state.activePhotoIdx) {
-        state.activePhotoIdx = clamped;
         updateTimelineThumbByPhoto(clamped);
         selectPhotoEntry(state.photos[clamped], true);
       }
@@ -1420,15 +1403,15 @@ async function init() {
   function navPrev() {
     const pi = state.activePhotoIdx;
     if (pi > 0) {
-      scrollCarouselTo(pi - 1, false);
-      selectPhotoEntry(state.photos[pi - 1], true);
+      scrollCarouselTo(pi - 1, true);
+      selectPhotoEntry(photos[pi - 1], true);
     }
   }
   function navNext() {
     const pi = state.activePhotoIdx;
-    if (pi < state.photos.length - 1) {
-      scrollCarouselTo(pi + 1, false);
-      selectPhotoEntry(state.photos[pi + 1], true);
+    if (pi < photos.length - 1) {
+      scrollCarouselTo(pi + 1, true);
+      selectPhotoEntry(photos[pi + 1], true);
     }
   }
 
@@ -1438,7 +1421,7 @@ async function init() {
     const btn = document.getElementById(btnId);
     if (!btn) return;
     let intervalId = null;
-    function start() { fn(); intervalId = setInterval(() => fn(), 175); }
+    function start() { fn(); intervalId = setInterval(() => fn(), 350); }
     function stop()  { if (intervalId) { clearInterval(intervalId); intervalId = null; } }
     btn.addEventListener('mousedown', start);
     btn.addEventListener('touchstart', start, { passive: true });
