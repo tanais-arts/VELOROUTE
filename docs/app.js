@@ -614,13 +614,13 @@ function selectPhotoEntry(photo, skipCarousel) {
     if (m) {
       if (dateDay)   dateDay.textContent   = parseInt(m[3]);
       if (dateMonth) dateMonth.textContent = MONTHS_FR[parseInt(m[2])];
-      if (dateYear)  dateYear.textContent  = m[1];
+      if (dateYear)  dateYear.textContent  = String(m[1]).slice(-2);
       if (dateTime)  dateTime.textContent  = t;
     } else if (photo.entryIdx != null && state.entries[photo.entryIdx]) {
       const e = state.entries[photo.entryIdx];
       if (dateDay)   dateDay.textContent   = e.day;
       if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
-      if (dateYear)  dateYear.textContent  = e.year || (photo.photoMs ? new Date(photo.photoMs).getFullYear() : '');
+      if (dateYear)  dateYear.textContent  = e.year ? String(e.year).slice(-2) : (photo.photoMs ? String(new Date(photo.photoMs).getFullYear()).slice(-2) : '');
       if (dateTime)  dateTime.textContent  = t;
     }
   }
@@ -641,7 +641,7 @@ function selectEntry(idx, skipCarousel, skipSlider) {
 
   if (dateDay)   dateDay.textContent   = e.day;
   if (dateMonth) dateMonth.textContent = MONTHS_FR[e.month];
-  if (dateYear)  dateYear.textContent  = e.year || '';
+  if (dateYear)  dateYear.textContent  = e.year ? String(e.year).slice(-2) : '';
   if (dateTime)  dateTime.textContent  = `${e.hour}h${String(e.minute).padStart(2, '0')}`;
 
   updateTimelineThumbByPhoto(pi);
