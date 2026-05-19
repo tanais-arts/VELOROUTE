@@ -613,7 +613,7 @@ body.immersive .leaflet-control-attribution { display: none; }
 }
 #date-day   { font-weight: 600; }
 #date-month { font-weight: 300; text-transform: lowercase; }
-#date-year  { font-weight: 300; opacity: 0.65; }
+#date-year  { font-weight: 300; }
 #date-year::before  { content: '\00a0'; }
 #date-time  { font-weight: 300; letter-spacing: 0.1em; }
 #date-time::before { content: '·\00a0'; }
