@@ -78,40 +78,6 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── ROTATE OVERLAY ─────────────────────────────────── */
-#rotate-overlay {
-  display: none;
-  position: fixed; inset: 0; z-index: 9999;
-  background: var(--bg);
-  align-items: center; justify-content: center;
-}
-#rotate-content { text-align: center; padding: 0 32px; }
-#rotate-title {
-  font-size: 2.2rem; font-weight: 900; letter-spacing: 0.3em;
-  color: rgba(240,192,96,1); text-transform: uppercase; line-height: 1;
-  margin-bottom: 6px;
-}
-#rotate-dates {
-  font-size: 0.75rem; letter-spacing: 0.18em; color: rgba(240,192,96,0.5);
-  text-transform: uppercase; margin-bottom: 36px;
-}
-#rotate-icon {
-  font-size: 2.5rem;
-  display: block; margin-bottom: 16px;
-  animation: rotate-hint 2.5s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes rotate-hint {
-  0%        { transform: rotate(0deg); }
-  35%, 65%  { transform: rotate(90deg); }
-  100%      { transform: rotate(0deg); }
-}
-#rotate-msg { font-size: 1.1rem; font-weight: 600; color: rgba(240,192,96,1); letter-spacing: 0.05em; margin-bottom: 8px; }
-#rotate-sub { font-size: 0.75rem; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; }
-
-@media (orientation: portrait) and (max-width: 1024px) {
-  #rotate-overlay { display: flex; }
-}
 
 /* ── MOBILE LANDSCAPE ───────────────────────────────── */
 #mobile-title-bar, #mobile-toggle, #mobile-left, #mobile-teaser { display: none; }
