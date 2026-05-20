@@ -701,6 +701,8 @@ let escaleEntries = [];  // final escales.json objects
 let voyageEntries = [];  // final voyages.json objects
 let rawPhotos     = [];  // { file, photoMs, lat, lon, captionDate, entryIdx, thumb }
 let currentVoyageId = ''; // voyage sélectionné au moment du traitement
+let currentStorageDir = ''; // storageDir de l'utilisateur connecté
+let currentUserLogin  = ''; // login de l'utilisateur connecté
 let existingPhotoFilenames = new Set(); // filenames déjà dans photos.json
 
 // ── Leaflet ──────────────────────────────────────────────────────────
@@ -944,9 +946,9 @@ function nearestEntryIdxByPos(lat, lon) {
 }
 
 // ── Photo URL helpers ─────────────────────────────────────────────────
-const CDN_BASE = 'https://hub.studios-voa.com:1666/files';
+function cdnBase() { return `https://hub.studios-voa.com:1666/files${currentStorageDir ? '/' + currentStorageDir : ''}`; }
 function buildUrl(filename, type) {
-  const base = CDN_BASE;
+  const base = cdnBase();
   const sub  = $('photo-subfolder').value.trim();
   const name = encodeURIComponent(filename);
   const folder = sub ? `/${encodeURIComponent(sub)}` : '';
@@ -955,7 +957,7 @@ function buildUrl(filename, type) {
 
 // Variante avec subfolder explicite
 function buildUrlWith(filename, type, subfolder) {
-  const base = CDN_BASE;
+  const base = cdnBase();
   const folder = subfolder ? `/${encodeURIComponent(subfolder)}` : '';
   return `${base}/${type}${folder}/${encodeURIComponent(filename)}`;
 }
@@ -1047,6 +1049,7 @@ function buildPhotoEntries() {
         ...(p.city ? { city: p.city } : {}),
         ...(p.type === 'video' ? { type: 'video' } : {}),
         ...(currentVoyageId ? { voyage: currentVoyageId } : {}),
+        ...(currentUserLogin ? { author: currentUserLogin } : {}),
       };
     });
   $('stat-matched').textContent = photoEntries.length;
@@ -1596,6 +1599,8 @@ function serverSuccess(token, data = {}) {
   $('site-header').style.display   = 'flex';
   $('btn-logout-header').style.display = 'inline-block';
   $('header-user').textContent = data.login ? `· ${data.login}` : '· VLR-server';
+  currentStorageDir = data.storageDir || '';
+  currentUserLogin  = data.login || '';
   setStatus('login-status', '');
   if (isSuperAdmin) {
     $('superadmin-panel').style.display = 'block';
