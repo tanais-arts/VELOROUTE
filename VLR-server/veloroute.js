@@ -37,7 +37,7 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 
 // ── Fichier utilisateurs ──────────────────────────────────────────────
 // Structure : [{ login, hash, ghToken, storageDir, canEditGpx }]
@@ -137,7 +137,8 @@ app.post('/users', requireSuperAdmin, async (req, res) => {
   try {
     const hash = await bcrypt.hash(String(password), 12);
     const storageDir = slug;
-    users.push({ login: slug, hash, ghToken: (ghToken || '').trim(), storageDir, canEditGpx: !!canEditGpx });
+    const defaultToken = process.env.GITHUB_PAT || '';
+    users.push({ login: slug, hash, ghToken: (ghToken || '').trim() || defaultToken, storageDir, canEditGpx: !!canEditGpx });
     saveUsers(users);
     fs.mkdirSync(path.join(STORAGE_ROOT, storageDir), { recursive: true });
     res.json({ ok: true, login: slug, storageDir });
@@ -308,6 +309,7 @@ app.post('/users/me/traveljson', requireAuth, (req, res) => {
   }
 });
 
+
 // ── Users: create a new voyage (append-only for non-super-admins)
 app.post('/users/me/voyages', requireAuth, (req, res) => {
   const { id, label } = req.body || {};
@@ -404,6 +406,8 @@ app.get('/ping', (req, res) => {
   if (sess && sess.expiry > Date.now()) {
     return res.json({ ok: true, time: new Date().toISOString(), isSuperAdmin: sess.isSuperAdmin, ghToken: sess.ghToken || '', canEditGpx: !!sess.canEditGpx, storageDir: sess.storageDir || '' });
   }
+  // Token fourni mais session expirée ou inconnue → 401 pour que le client relance le login
+  if (token) return res.status(401).json({ ok: false, error: 'Session expirée' });
   res.json({ ok: true, time: new Date().toISOString() });
 });
 
