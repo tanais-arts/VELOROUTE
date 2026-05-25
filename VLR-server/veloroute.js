@@ -413,6 +413,70 @@ app.get('/config', requireAuth, (req, res) => {
   res.json({ githubPat: process.env.GITHUB_PAT || '' });
 });
 
+// ── NIHON — proxy uMap sync ───────────────────────────────────────────
+// Récupère tous les datalayers de la carte uMap privée via l'URL d'édition
+// anonyme (le secret reste côté serveur, jamais exposé au client).
+const NIHON_UMAP_ANON_URL = process.env.NIHON_UMAP_ANON_URL || '';
+const NIHON_UMAP_MAP_ID   = 1337267;
+const NIHON_UMAP_UUIDS = [
+  '5dbcf34b-2144-4d8b-be8e-3ec12f6f17df',
+  '2d4d61f3-3f16-490b-8830-85ef19e7e89e',
+  '7355f167-f8d4-46c7-827f-c3d1ccd43995',
+  'dece274a-ae6e-4ab3-ba84-c05ddbd282fa',
+  'f2879287-bedd-43e0-9982-365d0550d5b9',
+  'cc5d36c5-3fcd-4722-b152-c66a0486b1d6',
+  'ef265376-5d64-4d31-ab61-b10560af2c46',
+  '2f4a75c4-03bb-4019-ba67-49a159729e8d',
+  '51086f30-2028-4097-b185-88a261ed6ad9',
+  'a2641f4d-bf1a-4cb2-9924-e437c9f893da',
+  'db1d0136-6111-46bc-8a7e-2b5eb341f72e',
+];
+
+app.post('/nihon/umap-sync', requireAuth, async (req, res) => {
+  if (!NIHON_UMAP_ANON_URL) {
+    return res.status(500).json({ error: 'NIHON_UMAP_ANON_URL non configuré dans .env' });
+  }
+  try {
+    // 1. Obtenir le cookie d'auth depuis l'URL d'édition anonyme uMap
+    const editResp = await fetch(NIHON_UMAP_ANON_URL, { redirect: 'manual' });
+    const setCookies = typeof editResp.headers.getSetCookie === 'function'
+      ? editResp.headers.getSetCookie()
+      : [editResp.headers.get('set-cookie')].filter(Boolean);
+    const cookieStr = setCookies.map(c => c.split(';')[0]).join('; ');
+    if (!cookieStr) {
+      return res.status(502).json({ error: 'Impossible d\'obtenir le cookie uMap (URL invalide ?)' });
+    }
+
+    // 2. Télécharger chaque datalayer avec le cookie
+    const layers = [];
+    for (const uuid of NIHON_UMAP_UUIDS) {
+      const url = `https://umap.openstreetmap.fr/fr/datalayer/${NIHON_UMAP_MAP_ID}/${uuid}/`;
+      const r = await fetch(url, {
+        headers: { 'Cookie': cookieStr, 'Accept': 'application/json' },
+      });
+      if (!r.ok) {
+        return res.status(502).json({ error: `Datalayer ${uuid.slice(0, 8)}… : HTTP ${r.status}` });
+      }
+      const data = await r.json();
+      data._uuid = uuid;
+      layers.push(data);
+    }
+
+    const total = layers.reduce((n, l) => n + (l.features?.length ?? 0), 0);
+    console.log(`[nihon/umap-sync] ✓ ${layers.length} couches, ${total} éléments`);
+    return res.json({
+      type: 'umap_export',
+      mapId: NIHON_UMAP_MAP_ID,
+      mapName: 'Nihon 2026',
+      exportDate: new Date().toISOString(),
+      layers,
+    });
+  } catch (e) {
+    console.error('[nihon/umap-sync] ✗', e.message);
+    return res.status(500).json({ error: e.message });
+  }
+});
+
 // ── Start (HTTPS if certs available, else HTTP) ──────────────────────
 const domain   = process.env.DOMAIN || '';
 const certFile = process.env.SSL_CERT || (domain ? `/etc/letsencrypt/live/${domain}/fullchain.pem` : '');
