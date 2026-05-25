@@ -436,16 +436,26 @@ const NIHON_UMAP_UUIDS = [
   'db1d0136-6111-46bc-8a7e-2b5eb341f72e',
 ];
 
+// Helper GET https sans fetch natif (compatible Node < 18)
+// Ne suit pas les redirects (intentionnel pour capturer Set-Cookie sur l'URL anonyme)
+function nihonHttpsGet(url, reqHeaders) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers: reqHeaders || {} }, res => {
+      let body = '';
+      res.on('data', chunk => { body += chunk; });
+      res.on('end', () => resolve({ statusCode: res.statusCode, headers: res.headers, body }));
+    }).on('error', reject);
+  });
+}
+
 app.post('/nihon/umap-sync', requireAuth, async (req, res) => {
   if (!NIHON_UMAP_ANON_URL) {
     return res.status(500).json({ error: 'NIHON_UMAP_ANON_URL non configuré dans .env' });
   }
   try {
     // 1. Obtenir le cookie d'auth depuis l'URL d'édition anonyme uMap
-    const editResp = await fetch(NIHON_UMAP_ANON_URL, { redirect: 'manual' });
-    const setCookies = typeof editResp.headers.getSetCookie === 'function'
-      ? editResp.headers.getSetCookie()
-      : [editResp.headers.get('set-cookie')].filter(Boolean);
+    const editResp = await nihonHttpsGet(NIHON_UMAP_ANON_URL, {});
+    const setCookies = editResp.headers['set-cookie'] || [];
     const cookieStr = setCookies.map(c => c.split(';')[0]).join('; ');
     if (!cookieStr) {
       return res.status(502).json({ error: 'Impossible d\'obtenir le cookie uMap (URL invalide ?)' });
@@ -455,13 +465,11 @@ app.post('/nihon/umap-sync', requireAuth, async (req, res) => {
     const layers = [];
     for (const uuid of NIHON_UMAP_UUIDS) {
       const url = `https://umap.openstreetmap.fr/fr/datalayer/${NIHON_UMAP_MAP_ID}/${uuid}/`;
-      const r = await fetch(url, {
-        headers: { 'Cookie': cookieStr, 'Accept': 'application/json' },
-      });
-      if (!r.ok) {
-        return res.status(502).json({ error: `Datalayer ${uuid.slice(0, 8)}… : HTTP ${r.status}` });
+      const r = await nihonHttpsGet(url, { 'Cookie': cookieStr, 'Accept': 'application/json' });
+      if (r.statusCode !== 200) {
+        return res.status(502).json({ error: `Datalayer ${uuid.slice(0, 8)}… : HTTP ${r.statusCode}` });
       }
-      const data = await r.json();
+      const data = JSON.parse(r.body);
       data._uuid = uuid;
       layers.push(data);
     }
