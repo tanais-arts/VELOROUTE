@@ -7275,5 +7275,27 @@
     "city": "Calais",
     "voyage": "hauts-de-france",
     "author": "tom"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_4089.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_4089.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_4089.jpeg",
+    "entryIdx": 3,
+    "caption": "2026-06-13",
+    "photoMs": 1781356962000,
+    "lat": 48.56241,
+    "lon": 3.28826,
+    "city": "Provins"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/Photos/IMG_4090.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/Thumbs/IMG_4090.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/Sources/IMG_4090.jpeg",
+    "entryIdx": 3,
+    "caption": "2026-06-13",
+    "photoMs": 1781360980000,
+    "lat": 48.56126,
+    "lon": 3.28922,
+    "city": "Provins"
   }
 ]
