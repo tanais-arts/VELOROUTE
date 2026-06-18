@@ -7297,5 +7297,17 @@
     "lat": 48.56126,
     "lon": 3.28922,
     "city": "Provins"
+  },
+  {
+    "src": "https://hub.studios-voa.com:1666/files/tom/Photos/IMG_4104.jpeg",
+    "thumb": "https://hub.studios-voa.com:1666/files/tom/Thumbs/IMG_4104.jpeg",
+    "src_orig": "https://hub.studios-voa.com:1666/files/tom/Sources/IMG_4104.jpeg",
+    "entryIdx": 2993,
+    "caption": "2026-06-18",
+    "photoMs": 1781811734000,
+    "lat": 48.7729,
+    "lon": 2.37696,
+    "city": "Vitry-sur-Seine",
+    "author": "tom"
   }
 ]
