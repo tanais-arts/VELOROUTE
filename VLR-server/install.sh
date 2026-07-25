@@ -147,19 +147,6 @@ while true; do
   fi
 
   if command -v certbot >/dev/null 2>&1; then
-    echo ""
-    echo "  ┌─────────────────────────────────────────────────────────────┐"
-    echo "  │  Challenge DNS — ajoutez cet enregistrement dans votre DNS  │"
-    echo "  │                                                              │"
-    echo "  │  Nom   : _acme-challenge.$DOMAIN"
-    echo "  │  Type  : TXT                                                 │"
-    echo "  │  Valeur: (certbot vous l'affichera ci-dessous)               │"
-    echo "  │                                                              │"
-    echo "  │  OVH : Espace client → Zone DNS → Ajouter → TXT             │"
-    echo "  │  Attendez ~2 min après ajout avant d'appuyer Entrée.        │"
-    echo "  └─────────────────────────────────────────────────────────────┘"
-    echo ""
-
     # If not running as root, instruct certbot to use writable local dirs
     CERTBOT_EXTRA_OPTS=""
     LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
@@ -170,8 +157,66 @@ while true; do
       echo "Note: exécution sans privilèges — certbot utilisera des répertoires locaux: $LOCAL_LE_DIR"
     fi
 
-    # Run certbot (manual DNS). If non-root, certs will be created under local config dir.
-    if certbot certonly --manual --preferred-challenges dns -d "$DOMAIN" --agree-tos --email "admin@$DOMAIN" $CERTBOT_EXTRA_OPTS; then
+    echo ""
+    echo "  ┌─────────────────────────────────────────────────────────────┐"
+    echo "  │  Le renouvellement automatique (cron) ne peut fonctionner   │"
+    echo "  │  sans intervention que si le challenge DNS est automatisé.  │"
+    echo "  └─────────────────────────────────────────────────────────────┘"
+    read -rp "  DNS géré chez OVH ? Utiliser le plugin certbot-dns-ovh pour un renouvellement 100% automatique ? (o/n) : " USE_OVH
+
+    CERTBOT_AUTH_OPTS="--manual --preferred-challenges dns"
+    if [[ "$USE_OVH" =~ ^[oO]$ ]]; then
+      echo "Installation du plugin certbot-dns-ovh..."
+      CERTBOT_PIP=""
+      if [[ "$(uname)" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then
+        BREW_PREFIX="$(brew --prefix)"
+        [ -x "$BREW_PREFIX/opt/certbot/libexec/bin/pip" ] && CERTBOT_PIP="$BREW_PREFIX/opt/certbot/libexec/bin/pip"
+      fi
+      if [ -n "$CERTBOT_PIP" ]; then
+        "$CERTBOT_PIP" install --quiet certbot-dns-ovh
+      else
+        pip3 install --user --quiet certbot-dns-ovh 2>/dev/null || pip install --user --quiet certbot-dns-ovh
+      fi
+
+      echo ""
+      echo "  Créez un jeton API OVH (droits GET/PUT/POST/DELETE sur /domain/zone/*) :"
+      echo "  https://api.ovh.com/createToken/?GET=/domain/zone/*&PUT=/domain/zone/*&POST=/domain/zone/*&DELETE=/domain/zone/*"
+      echo ""
+      read -rp "  Endpoint OVH        [ovh-eu] : " OVH_ENDPOINT
+      OVH_ENDPOINT="${OVH_ENDPOINT:-ovh-eu}"
+      read -rp "  Application Key      : " OVH_AK
+      read -rp "  Application Secret   : " OVH_AS
+      read -rp "  Consumer Key         : " OVH_CK
+
+      mkdir -p "$SCRIPTDIR/.secrets"
+      chmod 700 "$SCRIPTDIR/.secrets"
+      OVH_INI="$SCRIPTDIR/.secrets/ovh.ini"
+      cat > "$OVH_INI" << EOF
+dns_ovh_endpoint = $OVH_ENDPOINT
+dns_ovh_application_key = $OVH_AK
+dns_ovh_application_secret = $OVH_AS
+dns_ovh_consumer_key = $OVH_CK
+EOF
+      chmod 600 "$OVH_INI"
+      CERTBOT_AUTH_OPTS="--dns-ovh --dns-ovh-credentials $OVH_INI --non-interactive"
+    else
+      echo ""
+      echo "  ┌─────────────────────────────────────────────────────────────┐"
+      echo "  │  Challenge DNS — ajoutez cet enregistrement dans votre DNS  │"
+      echo "  │                                                              │"
+      echo "  │  Nom   : _acme-challenge.$DOMAIN"
+      echo "  │  Type  : TXT                                                 │"
+      echo "  │  Valeur: (certbot vous l'affichera ci-dessous)               │"
+      echo "  │                                                              │"
+      echo "  │  OVH : Espace client → Zone DNS → Ajouter → TXT             │"
+      echo "  │  Attendez ~2 min après ajout avant d'appuyer Entrée.        │"
+      echo "  │  ⚠  Ce mode manuel ne pourra PAS être renouvelé auto.       │"
+      echo "  └─────────────────────────────────────────────────────────────┘"
+      echo ""
+    fi
+
+    # Run certbot. If non-root, certs will be created under local config dir.
+    if certbot certonly $CERTBOT_AUTH_OPTS -d "$DOMAIN" --agree-tos --email "admin@$DOMAIN" $CERTBOT_EXTRA_OPTS; then
       # Determine source live dir depending on whether certbot wrote system-wide or local
       if [ -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ] && [ "$(id -u)" -eq 0 ]; then
         SRC_LIVE_DIR="/etc/letsencrypt/live/$DOMAIN"
@@ -206,12 +251,28 @@ HOOK
           RENEW_SCRIPT="$SCRIPTDIR/renew_letsencrypt.sh"
           cat > "$RENEW_SCRIPT" << RS
 #!/usr/bin/env bash
+set -e
 SCRIPTDIR="\$(cd "\$(dirname "\$0")" && pwd)"
 DOMAIN="${DOMAIN}"
 LOCAL_LE_DIR="\$SCRIPTDIR/.letsencrypt"
-certbot renew --config-dir "\$LOCAL_LE_DIR" --work-dir "\$SCRIPTDIR/.letsencrypt-work" --logs-dir "\$SCRIPTDIR/.letsencrypt-logs"
 SRC_LIVE="\$LOCAL_LE_DIR/live/${DOMAIN}"
-if [ -f "\$SRC_LIVE/fullchain.pem" ]; then
+
+# Empreinte de la date d'expiration AVANT renouvellement (certbot renew peut
+# retourner un code 0 même en cas d'échec — on vérifie donc le résultat réel).
+BEFORE_ENDDATE=""
+[ -f "\$SRC_LIVE/fullchain.pem" ] && BEFORE_ENDDATE="\$(openssl x509 -enddate -noout -in "\$SRC_LIVE/fullchain.pem" 2>/dev/null)"
+
+RENEW_EXIT=0
+certbot renew --config-dir "\$LOCAL_LE_DIR" --work-dir "\$SCRIPTDIR/.letsencrypt-work" --logs-dir "\$SCRIPTDIR/.letsencrypt-logs" || RENEW_EXIT=\$?
+
+AFTER_ENDDATE=""
+[ -f "\$SRC_LIVE/fullchain.pem" ] && AFTER_ENDDATE="\$(openssl x509 -enddate -noout -in "\$SRC_LIVE/fullchain.pem" 2>/dev/null)"
+
+if [ \$RENEW_EXIT -ne 0 ] || [ -z "\$AFTER_ENDDATE" ] || { [ -n "\$BEFORE_ENDDATE" ] && [ "\$BEFORE_ENDDATE" = "\$AFTER_ENDDATE" ]; }; then
+  echo "✗ certbot renew a échoué (ou n'a rien renouvelé) — certificat NON renouvelé, ancien certificat conservé (pas de redémarrage)." >&2
+  exit 1
+fi
+if [ -f "\$SRC_LIVE/fullchain.pem" ] && [ -f "\$SRC_LIVE/privkey.pem" ]; then
   cp "\$SRC_LIVE/fullchain.pem" "\$SCRIPTDIR/certs/server.crt"
   cp "\$SRC_LIVE/privkey.pem" "\$SCRIPTDIR/certs/server.key"
   chmod 600 "\$SCRIPTDIR/certs/server.key" || true
@@ -222,6 +283,9 @@ if [ -f "\$SRC_LIVE/fullchain.pem" ]; then
   elif command -v systemctl >/dev/null 2>&1 && systemctl is-active vlr-server >/dev/null 2>&1; then
     systemctl restart vlr-server
   fi
+else
+  echo "✗ Certificat introuvable après renew — abandon (pas de redémarrage)." >&2
+  exit 1
 fi
 RS
           chmod +x "$RENEW_SCRIPT" || true
@@ -405,22 +469,39 @@ EOF
     domain_val="$(grep '^DOMAIN=' "$ENV_FILE" | cut -d= -f2)"
     if command -v certbot >/dev/null 2>&1 && [ -n "$domain_val" ]; then
       LOCAL_LE_DIR="$SCRIPTDIR/.letsencrypt"
-      if [ -d "$LOCAL_LE_DIR" ]; then
-        certbot renew --config-dir "$LOCAL_LE_DIR" --work-dir "$SCRIPTDIR/.letsencrypt-work" --logs-dir "$SCRIPTDIR/.letsencrypt-logs"
-      else
-        certbot renew
-      fi
-      # Copier les certs mis à jour
       SRC_LIVE="/etc/letsencrypt/live/$domain_val"
       [ -d "$LOCAL_LE_DIR/live/$domain_val" ] && SRC_LIVE="$LOCAL_LE_DIR/live/$domain_val"
-      if [ -f "$SRC_LIVE/fullchain.pem" ]; then
-        mkdir -p "$SCRIPTDIR/certs"
-        cp "$SRC_LIVE/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
-        cp "$SRC_LIVE/privkey.pem" "$SCRIPTDIR/certs/server.key"
-        chmod 600 "$SCRIPTDIR/certs/server.key" || true
-        echo "✓ Certificats copiés."
-        echo "Redémarrage du serveur…"
-        bash "$0" 3 2>/dev/null || true
+      BEFORE_ENDDATE=""
+      [ -f "$SRC_LIVE/fullchain.pem" ] && BEFORE_ENDDATE="$(openssl x509 -enddate -noout -in "$SRC_LIVE/fullchain.pem" 2>/dev/null)"
+
+      RENEW_OK=1
+      if [ -d "$LOCAL_LE_DIR" ]; then
+        certbot renew --config-dir "$LOCAL_LE_DIR" --work-dir "$SCRIPTDIR/.letsencrypt-work" --logs-dir "$SCRIPTDIR/.letsencrypt-logs" || RENEW_OK=0
+      else
+        certbot renew || RENEW_OK=0
+      fi
+
+      AFTER_ENDDATE=""
+      [ -f "$SRC_LIVE/fullchain.pem" ] && AFTER_ENDDATE="$(openssl x509 -enddate -noout -in "$SRC_LIVE/fullchain.pem" 2>/dev/null)"
+      if [ -z "$AFTER_ENDDATE" ] || { [ -n "$BEFORE_ENDDATE" ] && [ "$BEFORE_ENDDATE" = "$AFTER_ENDDATE" ]; }; then
+        RENEW_OK=0
+      fi
+
+      if [ "$RENEW_OK" -eq 0 ]; then
+        echo "⚠  certbot renew a échoué (ou n'a rien renouvelé) — certificat NON renouvelé (voir logs certbot ci-dessus)."
+      else
+        # Copier les certs mis à jour
+        if [ -f "$SRC_LIVE/fullchain.pem" ] && [ -f "$SRC_LIVE/privkey.pem" ]; then
+          mkdir -p "$SCRIPTDIR/certs"
+          cp "$SRC_LIVE/fullchain.pem" "$SCRIPTDIR/certs/server.crt"
+          cp "$SRC_LIVE/privkey.pem" "$SCRIPTDIR/certs/server.key"
+          chmod 600 "$SCRIPTDIR/certs/server.key" || true
+          echo "✓ Certificats copiés."
+          echo "Redémarrage du serveur…"
+          bash "$0" 3 2>/dev/null || true
+        else
+          echo "⚠  Certificat introuvable après renew — abandon."
+        fi
       fi
     else
       echo "⚠  certbot introuvable ou DOMAIN non configuré."

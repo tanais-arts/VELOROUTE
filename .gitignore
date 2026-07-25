@@ -1,1 +1,14 @@
 .DS_Store
+
+# VLR-server — secrets et artefacts locaux
+VLR-server/.env
+VLR-server/.secrets/
+VLR-server/certs/
+VLR-server/.letsencrypt/
+VLR-server/.letsencrypt-work/
+VLR-server/.letsencrypt-logs/
+VLR-server/server.log
+VLR-server/server.pid
+VLR-server/node_modules/
+VLR-server/storage/
+
