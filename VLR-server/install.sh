@@ -246,52 +246,23 @@ HOOK
           echo "✓ Hook de renouvellement automatique installé (system-wide)."
         fi
 
-        # If non-root, install a user cron job to run renew and copy certs
+        # Renouvellement : géré par renew_letsencrypt.sh, versionné dans le dépôt
+        # (pas régénéré ici pour ne pas écraser le script). Il détecte lui-même
+        # l'authenticator (dns-ovh = 100% automatique, manual = interactif avec
+        # vérification anti faux-succès) et vérifie que la date d'expiration a
+        # bien changé avant de copier les certs / redémarrer le serveur.
         if [ "$(id -u)" -ne 0 ]; then
           RENEW_SCRIPT="$SCRIPTDIR/renew_letsencrypt.sh"
-          cat > "$RENEW_SCRIPT" << RS
-#!/usr/bin/env bash
-set -e
-SCRIPTDIR="\$(cd "\$(dirname "\$0")" && pwd)"
-DOMAIN="${DOMAIN}"
-LOCAL_LE_DIR="\$SCRIPTDIR/.letsencrypt"
-SRC_LIVE="\$LOCAL_LE_DIR/live/${DOMAIN}"
-
-# Empreinte de la date d'expiration AVANT renouvellement (certbot renew peut
-# retourner un code 0 même en cas d'échec — on vérifie donc le résultat réel).
-BEFORE_ENDDATE=""
-[ -f "\$SRC_LIVE/fullchain.pem" ] && BEFORE_ENDDATE="\$(openssl x509 -enddate -noout -in "\$SRC_LIVE/fullchain.pem" 2>/dev/null)"
-
-RENEW_EXIT=0
-certbot renew --config-dir "\$LOCAL_LE_DIR" --work-dir "\$SCRIPTDIR/.letsencrypt-work" --logs-dir "\$SCRIPTDIR/.letsencrypt-logs" || RENEW_EXIT=\$?
-
-AFTER_ENDDATE=""
-[ -f "\$SRC_LIVE/fullchain.pem" ] && AFTER_ENDDATE="\$(openssl x509 -enddate -noout -in "\$SRC_LIVE/fullchain.pem" 2>/dev/null)"
-
-if [ \$RENEW_EXIT -ne 0 ] || [ -z "\$AFTER_ENDDATE" ] || { [ -n "\$BEFORE_ENDDATE" ] && [ "\$BEFORE_ENDDATE" = "\$AFTER_ENDDATE" ]; }; then
-  echo "✗ certbot renew a échoué (ou n'a rien renouvelé) — certificat NON renouvelé, ancien certificat conservé (pas de redémarrage)." >&2
-  exit 1
-fi
-if [ -f "\$SRC_LIVE/fullchain.pem" ] && [ -f "\$SRC_LIVE/privkey.pem" ]; then
-  cp "\$SRC_LIVE/fullchain.pem" "\$SCRIPTDIR/certs/server.crt"
-  cp "\$SRC_LIVE/privkey.pem" "\$SCRIPTDIR/certs/server.key"
-  chmod 600 "\$SCRIPTDIR/certs/server.key" || true
-  # Redémarrer le serveur pour charger le nouveau certificat
-  if [[ "\$(uname)" == "Darwin" ]] && [ -f "\$HOME/Library/LaunchAgents/com.vlr-server.plist" ]; then
-    launchctl unload "\$HOME/Library/LaunchAgents/com.vlr-server.plist" 2>/dev/null || true
-    launchctl load "\$HOME/Library/LaunchAgents/com.vlr-server.plist"
-  elif command -v systemctl >/dev/null 2>&1 && systemctl is-active vlr-server >/dev/null 2>&1; then
-    systemctl restart vlr-server
-  fi
-else
-  echo "✗ Certificat introuvable après renew — abandon (pas de redémarrage)." >&2
-  exit 1
-fi
-RS
-          chmod +x "$RENEW_SCRIPT" || true
+          chmod +x "$RENEW_SCRIPT" 2>/dev/null || true
           # add to user crontab if not present
           (crontab -l 2>/dev/null | grep -v -F "$RENEW_SCRIPT" || true; echo "0 3 * * * $RENEW_SCRIPT >/dev/null 2>&1") | crontab -
           echo "✓ Cron de renouvellement installé (user crontab)."
+          if [[ "$USE_OVH" =~ ^[oO]$ ]]; then
+            echo "  → Renouvellement 100% automatique activé (certbot-dns-ovh)."
+          else
+            echo "  ℹ  Mode manuel : le cron échouera tant que vous n'aurez pas renouvelé"
+            echo "     à la main (menu → option 6) ou activé le plugin OVH ci-dessus."
+          fi
         fi
       else
         echo "⚠  Certificats introuvables après certbot — vérifiez l'emplacement." 
